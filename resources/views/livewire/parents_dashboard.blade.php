@@ -13,7 +13,10 @@
                                 {{ session('message') }}
                             </div>
                         @endif
+                        
                         @livewire('parents-l')
+                        
+                      
             </div>
         </div>
     </div>

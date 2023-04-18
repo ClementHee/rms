@@ -130,8 +130,7 @@
                 
                 <div class="mb-3 form-group col">
                     <label for="mother">Mother: </label>
-                    <button wire:click="redirectParent('{{$this->mother}}')" class="form-control pb-2 btn btn-primary">{{$this->mother}}</button>
-                   
+                    <input required type="text" id="mother" name="mother" readonly wire:keyup="searchResult" class="form-control"  readonly wire:model="mother">
                     @error('mother') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>

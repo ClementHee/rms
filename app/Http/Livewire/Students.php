@@ -18,6 +18,8 @@ class Students extends Component
     public $showcreatenew=false;
     public $showcreatenew2= false;
 
+   //
+
     public function create_new(){
         $this->resetInputFields();
         $this->mode = 'create';

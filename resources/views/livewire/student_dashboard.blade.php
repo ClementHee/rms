@@ -13,7 +13,9 @@
                                 {{ session('message') }}
                             </div>
                         @endif
+ 
                         @livewire('students')
+              
             </div>
         </div>
     </div>
