@@ -88,6 +88,30 @@
             @error('home_add') <span class="text-danger">{{ $message }}</span>@enderror
         </div>
 
+        <div class="row">
+            <div class="mb-3 form-group col">
+                <label for="poscode">Poscode: </label>
+                <input type="text" id="home_add" name="poscode" required class="form-control pb-2" placeholder="Poscode" wire:model="poscode">
+                @error('poscode') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col">
+                <label for="district">District: </label>
+                <input type="text" id="district" name="district" required class="form-control pb-2" placeholder="State" wire:model="district">
+                @error('district') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col">
+                <label for="state">State: </label>
+                <input type="text" id="state" name="state" required class="form-control pb-2" placeholder="State" wire:model="state" default="Sarawak">
+                @error('state') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col">
+                <label for="country">Country: </label>
+                <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Country" wire:model="country">
+                @error('country') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
+
+
         <div class='row'>
             <div class="mb-3 form-group col">
                 <label for="home_lang">Home Language: </label>
@@ -132,8 +156,7 @@
                             @endif
                         </ul>
                 
-                        <ul >                     
-                        </ul>
+                        
                     @elseif($showcreatenew)
             
                             <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
@@ -143,24 +166,29 @@
 
                     @error('father') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
-
+            
                 
                 <div class="mb-3 form-group col">
                     <label for="mother">Mother: </label>
                     <input required type="text" id="mother" name="mother" wire:keyup="searchResult2" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+        
                     @if($showdiv2)
-                    <ul >
-                        @if(!empty($parents))
-                            @foreach($parents as $record2)
+                        <ul >
+                            @if(!empty($parents2))
+                                @foreach($parents2 as $record2)
 
-                                <li  wire:click="fetchMother({{ $record2->parent_id }})">{{ $record2->name}}</li>
+                                    <li  wire:click="fetchMother({{ $record2->parent_id }})" >{{ $record2->name}}</li>
 
-                            @endforeach
-                        @endif
-                    </ul>
+                                @endforeach
+                            @endif
+                        </ul>
+                
+                        
                     @elseif($showcreatenew2)
-                        <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
-
+            
+                            <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
+                    
+                    
                     @endif
                     @error('mother') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
@@ -169,7 +197,7 @@
         
         <div class="row">
             <div class="mb-3 form-group col">
-                <label for="e_contact">Emergency Contact (other than parents): </label>
+                <label for="e_contact">Emergency Contact 1 (other than parents): </label>
                 <input type="text" id="e_contact" name="e_contact" required class="form-control pb-2" placeholder="Name" wire:model="e_contact">
                 @error('e_contact') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
@@ -180,12 +208,31 @@
                 @error('e_contact_hp') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         </div>
+        <div class="row">
+            <div class="mb-3 form-group col">
+                <label for="e_contact2">Emergency Contact (other than parents): </label>
+                <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name" wire:model="e_contact2">
+                @error('e_contact2') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col">
+                <label for="e_contact2_hp">Emergency Contact 2 (other than parents): </label>
+                <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact2_hp">
+                @error('e_contact2_hp') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
 
         <div class='row'>
             <div class="mb-3 form-group col">
                 <label for="fam_doc">Family Doctor: </label>
                 <input type="text" id="fam_doc" name="fam_doc"  class="form-control pb-2" placeholder="Family Doctor" wire:model="fam_doc">
                 @error('fam_doc') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col">
+                <label for="fam_doc_hp">Family Doctor Tel: </label>
+                <input type="text" id="fam_doc_hp" name="fam_doc_hp"  class="form-control pb-2" placeholder="Family Doctor Tel" wire:model="fam_doc_hp">
+                @error('fam_doc_hp') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         
             <div class="mb-3 form-group col">
@@ -257,7 +304,7 @@ aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="studentModalLabel">Create Student</h5>
+            <h5 class="modal-title" id="studentModalLabel">Create Parent</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                 wire:click="closeModal()"></button>
         </div>

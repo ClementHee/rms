@@ -88,6 +88,24 @@
             <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Home Address" readonly wire:model="home_add">
             @error('home_add') <span class="text-danger">{{ $message }}</span>@enderror
         </div>
+        <div class="row">
+            <div class="mb-3 form-group col">
+                <label for="poscode">Poscode: </label>
+                <input type="text" id="home_add" name="poscode" required class="form-control pb-2" placeholder="Poscode" wire:model="poscode">
+                @error('poscode') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col">
+                <label for="state">State: </label>
+                <input type="text" id="state" name="state" required class="form-control pb-2" placeholder="State" wire:model="state" default="Sarawak">
+                @error('state') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col">
+                <label for="country">Country: </label>
+                <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Country" wire:model="country">
+                @error('country') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
+
 
         <div class='row'>
             <div class="mb-3 form-group col">
@@ -149,12 +167,31 @@
                 @error('e_contact_hp') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         </div>
+        <div class="row">
+            <div class="mb-3 form-group col">
+                <label for="e_contact2">Emergency Contact (other than parents): </label>
+                <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name" wire:model="e_contact2">
+                @error('e_contact2') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col">
+                <label for="e_contact2_hp">Emergency Contact 2 (other than parents): </label>
+                <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact2_hp">
+                @error('e_contact2_hp') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
 
         <div class='row'>
             <div class="mb-3 form-group col">
                 <label for="fam_doc">Family Doctor: </label>
-                <input type="text" id="fam_doc" name="fam_doc"  class="form-control pb-2" placeholder="Family Doctor" readonly wire:model="fam_doc">
+                <input type="text" id="fam_doc" name="fam_doc"  class="form-control pb-2" placeholder="Family Doctor" wire:model="fam_doc">
                 @error('fam_doc') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col">
+                <label for="fam_doc_hp">Family Doctor Tel: </label>
+                <input type="text" id="fam_doc_hp" name="fam_doc_hp"  class="form-control pb-2" placeholder="Family Doctor Tel" wire:model="fam_doc_hp">
+                @error('fam_doc_hp') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         
             <div class="mb-3 form-group col">

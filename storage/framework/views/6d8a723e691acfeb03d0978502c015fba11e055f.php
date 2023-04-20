@@ -96,7 +96,7 @@
                             </li>
                             <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                             <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
-                            <li><a class="nav-link" href="<?php echo e(route('products.index')); ?>">Manage Product</a></li>
+                            
                            
                             
                         </ul>

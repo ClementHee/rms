@@ -38,16 +38,26 @@
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>
                                         <td>
-                                            @if ( $student->j3_class !="Not Assigned")
+                                            @if ( $student->j3_class !="")
                                                 {{ $student->j3_class}}
-                                            @elseif( $student->j2_class !="Not Assigned")
+                                            @elseif( $student->j2_class !="")
                                                 {{ $student->j2_class}}
-                                            @else
+                                            @elseif($student->j1_class)
                                                 {{ $student->j1_class}}
+                                            @else
+                                                Not Assigned
                                             @endif
                                         </td>
                                    
-                                        <td>{{ $student->aft_j1_class}}</td>
+                                        <td> @if ( $student->aft_j3_class !="")
+                                            {{ $student->aft_j3_class}}
+                                        @elseif( $student->aft_j2_class !="")
+                                            {{ $student->aft_j2_class}}
+                                        @elseif($student->aft_j1_class!="")
+                                            {{ $student->aft_j1_class}}
+                                        @else
+                                            Not Assigned
+                                        @endif</td>
                                         <td>
                                             <button type="button"  wire:click="viewStudent({{$student->student_id}})" class="btn btn-primary">
                                                 View

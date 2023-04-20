@@ -38,19 +38,32 @@
                                         <td><?php echo e($student->dob); ?></td>
                                         <td><?php echo e($student->birth_cert_no); ?></td>
                                         <td>
-                                            <?php if( $student->j3_class !="Not Assigned"): ?>
+                                            <?php if( $student->j3_class !=""): ?>
                                                 <?php echo e($student->j3_class); ?>
 
-                                            <?php elseif( $student->j2_class !="Not Assigned"): ?>
+                                            <?php elseif( $student->j2_class !=""): ?>
                                                 <?php echo e($student->j2_class); ?>
 
-                                            <?php else: ?>
+                                            <?php elseif($student->j1_class): ?>
                                                 <?php echo e($student->j1_class); ?>
 
+                                            <?php else: ?>
+                                                Not Assigned
                                             <?php endif; ?>
                                         </td>
                                    
-                                        <td><?php echo e($student->aft_j1_class); ?></td>
+                                        <td> <?php if( $student->aft_j3_class !=""): ?>
+                                            <?php echo e($student->aft_j3_class); ?>
+
+                                        <?php elseif( $student->aft_j2_class !=""): ?>
+                                            <?php echo e($student->aft_j2_class); ?>
+
+                                        <?php elseif($student->aft_j1_class!=""): ?>
+                                            <?php echo e($student->aft_j1_class); ?>
+
+                                        <?php else: ?>
+                                            Not Assigned
+                                        <?php endif; ?></td>
                                         <td>
                                             <button type="button"  wire:click="viewStudent(<?php echo e($student->student_id); ?>)" class="btn btn-primary">
                                                 View

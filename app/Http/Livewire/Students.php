@@ -10,9 +10,11 @@ class Students extends Component
 {
     public $class,$record_year,$type,$fullname,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality,$prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies,$others,$potential,$father,$mother;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class;
+    public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp;
     public $mode = 'view';
     public $search = '';
     public $parents;
+    public $parents2;
     public $showdiv=false;
     public $showdiv2=false;
     public $showcreatenew=false;
@@ -60,11 +62,18 @@ class Students extends Component
         $this->no_years=$students->no_years;
         $this->religion=$students->religion;
         $this->home_add=$students->home_add;
+        $this->poscode=$students->poscode;
+        $this->state=$students->state;
+        $this->country=$students->country;
+        $this->country=$students->district;
         $this->home_lang=$students->home_lang;
         $this->home_tel=$students->home_tel;
         $this->e_contact=$students->e_contact;
         $this->e_contact_hp=$students->e_contact_hp;
+        $this->e_contact2=$students->e_contact2;
+        $this->e_contact2_hp=$students->e_contact2_hp;
         $this->fam_doc=$students->fam_doc;
+        $this->fam_doc_hp=$students->fam_doc_hp;
         $this-> allergies=$students->allergies;
         $this->others=$students->others;
         $this->potential=$students->potential;
@@ -81,18 +90,20 @@ class Students extends Component
     }
 
     public function searchResult(){
-        
+
         if(!empty($this->father)){
             
-            $this->parents = Parents::orderby('name','asc')
-                      ->select('*')
+            $this->parents = Parents::select('*')
                       ->where('name','like','%'.$this->father.'%')
                       ->limit(5)
                       ->get();
 
             
             if(count($this->parents)==0){
+                $this->showdiv = false;
                 $this->showcreatenew = true;
+           
+                
             }else{
                 $this->showdiv = true;
             }
@@ -100,27 +111,31 @@ class Students extends Component
             $this->showdiv = false;
             $this->showcreatenew = false;
         }
+      
     }
 
     public function searchResult2(){
-        
+    
         if(!empty($this->mother)){
             
-            $this->parents = Parents::orderby('name','asc')
-                      ->select('*')
+            $this->parents2 = Parents::select('*')
                       ->where('name','like','%'.$this->mother.'%')
                       ->limit(5)
                       ->get();
 
-            if(count($this->parents)==0){
+            if(count($this->parents2)==0){
+                $this->showdiv2 = false;
                 $this->showcreatenew2 = true;
+       
             }else{
                 $this->showdiv2 = true;
             }
         }else{
-            $this->showcreatenew2 = false;
+            
             $this->showdiv2 = false;
+            $this->showcreatenew2 = false;
         }
+        
     }
 
     public function fetchFather($id = 0){
@@ -132,6 +147,7 @@ class Students extends Component
         $this->father = $record->name;
         
         $this->showdiv = false;
+        $this->showcreatenew = false;
     }
 
     public function fetchMother($id = 0){
@@ -143,17 +159,14 @@ class Students extends Component
         $this->mother = $record2->name;
         
         $this->showdiv2 = false;
+        $this->showcreatenew2 = false;
     }
 
     public function render()
     {
        
         $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('student_id','DESC')->paginate(10);
-        $parents=  Parents::orderby('name','asc')
-        ->select('*')
-        ->where('name','like','%'.$this->father.'%')
-        ->limit(5)
-        ->get();
+        
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     
      
@@ -174,11 +187,18 @@ class Students extends Component
         $this->no_years='';
         $this->religion='';
         $this->home_add='';
+        $this->poscode='';
+        $this->state='';
+        $this->country='';
+        $this->district='';
         $this->home_lang='';
         $this->home_tel='';
         $this->e_contact='';
         $this->e_contact_hp='';
         $this->fam_doc='';
+        $this->e_contact2='';
+        $this->e_contact2_hp='';
+        $this->fam_doc_hp='';
         $this->allergies='';
         $this->others='';
         $this->potential='';
@@ -222,11 +242,18 @@ class Students extends Component
         $this->no_years=$students->no_years;
         $this->religion=$students->religion;
         $this->home_add=$students->home_add;
+        $this->poscode=$students->poscode;
+        $this->state=$students->state;
+        $this->country=$students->country;
+        $this->country=$students->district;
         $this->home_lang=$students->home_lang;
         $this->home_tel=$students->home_tel;
         $this->e_contact=$students->e_contact;
         $this->e_contact_hp=$students->e_contact_hp;
         $this->fam_doc=$students->fam_doc;
+        $this->e_contact2=$students->e_contact2;
+        $this->e_contact2_hp=$students->e_contact2_hp;
+        $this->fam_doc_hp=$students->fam_doc_hp;
         $this-> allergies=$students->allergies;
         $this->others=$students->others;
         $this->potential=$students->potential;
@@ -261,16 +288,23 @@ class Students extends Component
             'no_years' => $this->no_years,
             'religion'=> $this->religion,
             'home_add'=> $this->home_add,
+            'poscode'=>$this->poscode,
+            'state' => $this->state,
+            'country'=>$this->country,
+            'district'=>$this->district,
             'home_lang'=> $this->home_lang,
             'home_tel'=> $this->home_tel,
             'e_contact'=> $this->e_contact,
             'e_contact_hp'=> $this->e_contact_hp,
+            'e_contact2'=> $this->e_contact2,
+            'e_contact2_hp'=> $this->e_contact2_hp,
             'fam_doc'=> $this->fam_doc,
+            'fam_doc_hp'=> $this->fam_doc_hp,
             'allergies'=> $this->allergies,
             'others'=> $this->others,
             'potential'=> $this->potential,
             'father'=> $father_id->parent_id,
-            'mother'=> $father_id->parent_id,
+            'mother'=> $mother_id->parent_id,
             'j1_class'=>$this->j1_class,
             'j2_class'=>$this->j2_class,
             'j3_class'=>$this->j3_class,
@@ -295,29 +329,6 @@ class Students extends Component
         $editing_student = Student::find($this->student_id);
         
 
-        if($this->j1_class==""){
-            $this->j2_class="Not Assigned";
-        }
-        
-        if($this->j2_class==""){
-            $this->j2_class="Not Assigned";
-        }
-
-        if($this->j3_class==""){
-            $this->j2_class="Not Assigned";
-        }
-
-        if($this->aft_j1_class==""){
-            $this->j2_class="Not Assigned";
-        }
-        
-        if($this->aft_j2_class==""){
-            $this->j2_class="Not Assigned";
-        }
-        
-        if($this->aft_j3_class==""){
-            $this->j2_class="Not Assigned";
-        }
         
 
         
@@ -335,11 +346,18 @@ class Students extends Component
             'no_years' => $this->no_years,
             'religion'=> $this->religion,
             'home_add'=> $this->home_add,
+            'poscode'=>$this->poscode,
+            'state' => $this->state,
+            'country'=>$this->country,
+            'district'=>$this->district,
             'home_lang'=> $this->home_lang,
             'home_tel'=> $this->home_tel,
             'e_contact'=> $this->e_contact,
             'e_contact_hp'=> $this->e_contact_hp,
             'fam_doc'=> $this->fam_doc,
+            'e_contact2'=> $this->e_contact2,
+            'e_contact2_hp'=> $this->e_contact2_hp,
+            'fam_doc_hp'=> $this->fam_doc_hp,
             'allergies'=> $this->allergies,
             'others'=> $this->others,
             'potential'=> $this->potential,
@@ -354,7 +372,7 @@ class Students extends Component
         ]);
 
         
-    
+
         $this->mode = 'view';
   
         session()->flash('message', 'Student Updated Successfully.');
