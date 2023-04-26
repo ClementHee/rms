@@ -1,5 +1,5 @@
 <div>
-    <h1>Student Dashboard</h1>
+    <h1>Parent Dashboard</h1>
    @if($mode=="view")
      @include('livewire.parent.list_parent')
    @elseif ($mode=='create')

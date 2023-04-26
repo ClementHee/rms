@@ -1,5 +1,5 @@
 <div>
-    <h1>Student Dashboard</h1>
+    <h1>Parent Dashboard</h1>
    <?php if($mode=="view"): ?>
      <?php echo $__env->make('livewire.parent.list_parent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    <?php elseif($mode=='create'): ?>

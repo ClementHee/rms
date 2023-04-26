@@ -14,7 +14,7 @@
                             </div>
                         @endif
                         
-                        @livewire('parents-l')
+                        <livewire:relationships/>
                         
                       
             </div>

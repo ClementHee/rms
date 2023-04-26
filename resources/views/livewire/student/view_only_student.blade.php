@@ -169,13 +169,13 @@
         </div>
         <div class="row">
             <div class="mb-3 form-group col">
-                <label for="e_contact2">Emergency Contact (other than parents): </label>
+                <label for="e_contact2">Emergency Contact 2 (other than parents): </label>
                 <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name" wire:model="e_contact2">
                 @error('e_contact2') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
             <div class="mb-3 form-group col">
-                <label for="e_contact2_hp">Emergency Contact 2 (other than parents): </label>
+                <label for="e_contact2_hp">Emergency Contact Number 2 (other than parents): </label>
                 <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact2_hp">
                 @error('e_contact2_hp') <span class="text-danger">{{ $message }}</span>@enderror
             </div>

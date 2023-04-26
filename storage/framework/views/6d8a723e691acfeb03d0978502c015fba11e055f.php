@@ -51,6 +51,8 @@
         
         </style>
     
+<?php echo \Livewire\Livewire::styles(); ?>
+
 
 </head>
 <body>
@@ -137,6 +139,7 @@
 </body>
 
 <?php echo \Livewire\Livewire::scripts(); ?>
+
 
 </html>
 <?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/layouts/app.blade.php ENDPATH**/ ?>
