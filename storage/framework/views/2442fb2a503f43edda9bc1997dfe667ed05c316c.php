@@ -3,8 +3,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                    </div>
+            <div >
+                 
                     <div class="card-body">
                         <?php if(session()->has('message')): ?>
                             <div class="alert alert-success">
@@ -15,16 +15,16 @@
                         
                         <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('relationships', [])->html();
-} elseif ($_instance->childHasBeenRendered('xKGFjCN')) {
-    $componentId = $_instance->getRenderedChildComponentId('xKGFjCN');
-    $componentTag = $_instance->getRenderedChildComponentTagName('xKGFjCN');
+    $html = \Livewire\Livewire::mount('parents-l')->html();
+} elseif ($_instance->childHasBeenRendered('Y5kZnU3')) {
+    $componentId = $_instance->getRenderedChildComponentId('Y5kZnU3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Y5kZnU3');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('xKGFjCN');
+    $_instance->preserveRenderedChild('Y5kZnU3');
 } else {
-    $response = \Livewire\Livewire::mount('relationships', []);
+    $response = \Livewire\Livewire::mount('parents-l');
     $html = $response->html();
-    $_instance->logRenderedChild('xKGFjCN', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Y5kZnU3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

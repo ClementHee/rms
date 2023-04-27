@@ -37,20 +37,20 @@
         </tr>
     </x-slot:header>
 
-    <x-slot:loading>
-        <tr class="{{ $theme->table->trBodyClass }}" style="{{ $theme->table->trBodyStyle }}">
-            <td class="{{ $theme->table->tdBodyEmptyClass }}" colspan="{{ (($checkbox) ? 1:0)
-                   + ((isset($actions)) ? 1: 0)
-                   + (count($columns))
-                }}">
-                @if($loadingComponent)
-                    @include($loadingComponent)
-                @else
-                    {{ __('Loading') }}
-                @endif
-            </td>
-        </tr>
-    </x-slot:loading>
+        <x-slot:loading>
+            <tr class="{{ $theme->table->trBodyClass }}" style="{{ $theme->table->trBodyStyle }}">
+                <td class="{{ $theme->table->tdBodyEmptyClass }}" colspan="{{ (($checkbox) ? 1:0)
+                    + ((isset($actions)) ? 1: 0)
+                    + (count($columns))
+                    }}">
+                    @if($loadingComponent)
+                        @include($loadingComponent)
+                    @else
+                        {{ __('Loading') }}
+                    @endif
+                </td>
+            </tr>
+        </x-slot:loading>
 
     <x-slot:rows>
 

@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     
     <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>
+    <?php echo \Livewire\Livewire::styles(); ?>
+
     <style type="text/css">
         .search-box .clear{
             clear:both;
@@ -50,8 +52,7 @@
     
         
         </style>
-    
-<?php echo \Livewire\Livewire::styles(); ?>
+
 
 
 </head>
@@ -89,17 +90,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo e(route('request_materials')); ?>">Request Materials</a>
                             </li>
-                       
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('student')); ?>">Students</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('parent')); ?>">Parents</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Manage Students and Parents 
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="<?php echo e(route('student')); ?>">Students</a>
+
+                                    <a class="nav-link" href="<?php echo e(route('parent')); ?>">Parents</a>
+                                    <a class="nav-link" href="<?php echo e(route('student_parent')); ?>">All Details</a>
+                                </div>
                             </li>
+                            <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
                             <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                             <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
-                            
-                           
+                           <?php endif; ?>
                             
                         </ul>
          

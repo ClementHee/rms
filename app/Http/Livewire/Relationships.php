@@ -26,9 +26,9 @@ final class Relationships extends PowerGridComponent
     public function setUp(): array
     {
         $this->showCheckBox();
-
+        
         return [
-            Exportable::make('export')
+            Exportable::make('Student Parent Details')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),

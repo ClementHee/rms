@@ -13,6 +13,7 @@ class Relationship extends Model
     public $timestamps = false;
     protected $fillable = [
             'student',
-            'parent'
+            'father',
+            'mother'
     ];
 }

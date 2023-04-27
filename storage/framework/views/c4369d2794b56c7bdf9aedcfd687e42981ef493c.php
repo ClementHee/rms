@@ -13,8 +13,8 @@
                 <label for="type">Type:</label>
                 <select class="form-select" wire:model="type" name="type" id="type">
                     <option value="">Select an option</option>
-                    <option value="halfday">Half Day</option>
-                    <option value="fullday">Full Day</option>
+                    <option value="Half Day">Half Day</option>
+                    <option value="Full Day">Full Day</option>
                 </select>
             </div>   
         </div>
@@ -240,7 +240,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="no_years">Number of Years:</label>
-                <input type="number" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" wire:model="no_years">
+                <input type="text" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" value="0" wire:model="no_years">
                 <?php $__errorArgs = ['no_years'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

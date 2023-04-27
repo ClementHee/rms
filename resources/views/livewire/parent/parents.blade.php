@@ -1,5 +1,6 @@
 <div>
     <h1>Parent Dashboard</h1>
+    <br>
    @if($mode=="view")
      @include('livewire.parent.list_parent')
    @elseif ($mode=='create')

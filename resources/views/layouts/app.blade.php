@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     
     @vite(['resources/js/app.js'])
+    @livewireStyles
     <style type="text/css">
         .search-box .clear{
             clear:both;
@@ -50,8 +51,8 @@
     
         
         </style>
-    
-@livewireStyles
+
+
 
 </head>
 <body>
@@ -87,17 +88,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('request_materials') }}">Request Materials</a>
                             </li>
-                       
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student') }}">Students</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('parent') }}">Parents</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Manage Students and Parents 
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('student') }}">Students</a>
+
+                                    <a class="nav-link" href="{{ route('parent') }}">Parents</a>
+                                    <a class="nav-link" href="{{ route('student_parent') }}">All Details</a>
+                                </div>
                             </li>
+                            @role('SuperAdmin')
                             <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                            
-                           
+                           @endrole
                             
                         </ul>
          

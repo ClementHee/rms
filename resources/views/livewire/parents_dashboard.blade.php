@@ -5,8 +5,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                    </div>
+            <div >
+                 
                     <div class="card-body">
                         @if (session()->has('message'))
                             <div class="alert alert-success">
@@ -14,7 +14,7 @@
                             </div>
                         @endif
                         
-                        <livewire:relationships/>
+                        @livewire('parents-l')
                         
                       
             </div>

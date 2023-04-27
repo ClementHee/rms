@@ -135,7 +135,7 @@
 
             <div class="mb-3 form-group col">
                 <label for="no_years">Number of Years:</label>
-                <input type="number" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" wire:model="no_years">
+                <input type="text" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" value="0" wire:model="no_years">
                 @error('no_years') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         </div>

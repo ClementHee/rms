@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Parents;
 use App\Models\Student;
 use Livewire\Component;
+use App\Models\Relationship;
 
 class Students extends Component
 {
@@ -271,8 +272,10 @@ class Students extends Component
 
     public function storeStudent()
     {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
-        $mother_id = Parents::where('name',($this->father))->get('parent_id')->first();
-       
+        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+       if($this->no_years==""){
+        $this->no_years=0;  
+       }
         
         Student::create([
             'record_year'=> $this->record_year,
@@ -301,7 +304,7 @@ class Students extends Component
             'fam_doc'=> $this->fam_doc,
             'fam_doc_hp'=> $this->fam_doc_hp,
             'allergies'=> $this->allergies,
-            'others'=> $this->others,
+            'others'=> $this->  others,
             'potential'=> $this->potential,
             'father'=> $father_id->parent_id,
             'mother'=> $mother_id->parent_id,
@@ -313,6 +316,12 @@ class Students extends Component
             'aft_j3_class'=>$this->aft_j3_class
         ]);
 
+        $student_id=Student::where('fullname',$this->fullname)->get('student_id')->first();
+        Relationship::create([
+            'student' => $student_id->student_id,
+            'father' => $father_id->parent_id,
+            'mother' => $mother_id->parent_id
+        ]);
 
         session()->flash('message', 'Student added Successfully.');
   

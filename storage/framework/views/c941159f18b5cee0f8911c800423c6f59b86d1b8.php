@@ -65,20 +65,20 @@
         </tr>
      <?php $__env->endSlot(); ?>
 
-     <?php $__env->slot('loading', null, []); ?> 
-        <tr class="<?php echo e($theme->table->trBodyClass); ?>" style="<?php echo e($theme->table->trBodyStyle); ?>">
-            <td class="<?php echo e($theme->table->tdBodyEmptyClass); ?>" colspan="<?php echo e((($checkbox) ? 1:0)
-                   + ((isset($actions)) ? 1: 0)
-                   + (count($columns))); ?>">
-                <?php if($loadingComponent): ?>
-                    <?php echo $__env->make($loadingComponent, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                <?php else: ?>
-                    <?php echo e(__('Loading')); ?>
+         <?php $__env->slot('loading', null, []); ?> 
+            <tr class="<?php echo e($theme->table->trBodyClass); ?>" style="<?php echo e($theme->table->trBodyStyle); ?>">
+                <td class="<?php echo e($theme->table->tdBodyEmptyClass); ?>" colspan="<?php echo e((($checkbox) ? 1:0)
+                    + ((isset($actions)) ? 1: 0)
+                    + (count($columns))); ?>">
+                    <?php if($loadingComponent): ?>
+                        <?php echo $__env->make($loadingComponent, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php else: ?>
+                        <?php echo e(__('Loading')); ?>
 
-                <?php endif; ?>
-            </td>
-        </tr>
-     <?php $__env->endSlot(); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+         <?php $__env->endSlot(); ?>
 
      <?php $__env->slot('rows', null, []); ?> 
 
