@@ -76,6 +76,19 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
             </div>
+
+            <div class="mb-3 form-group col">
+                <label for="birth_cert_no">MyKid No:</label>
+                <input type="text" id="mykid" name="mykid" required class="form-control pb-2" placeholder="MyKid" wire:model="mykid" readonly>
+                <?php $__errorArgs = ['mykid'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
         
             <div class="mb-3 form-group col">
                 <label for="pos_in_family">Position in Family:</label>
@@ -147,7 +160,7 @@ unset($__errorArgs, $__bag); ?>
         <div class="row">
             <div class="mb-3 form-group col">
                 <label for="poscode">Poscode: </label>
-                <input type="text" id="home_add" name="poscode" required class="form-control pb-2" placeholder="Poscode" wire:model="poscode">
+                <input type="text" id="home_add" name="poscode" required class="form-control pb-2" placeholder="Poscode" readonly wire:model="poscode">
                 <?php $__errorArgs = ['poscode'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -159,7 +172,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="state">State: </label>
-                <input type="text" id="state" name="state" required class="form-control pb-2" placeholder="State" wire:model="state" default="Sarawak">
+                <input type="text" id="state" name="state" required class="form-control pb-2" placeholder="State" readonly wire:model="state" default="Sarawak">
                 <?php $__errorArgs = ['state'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -171,7 +184,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="country">Country: </label>
-                <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Country" wire:model="country">
+                <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Country" readonly wire:model="country">
                 <?php $__errorArgs = ['country'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -302,8 +315,8 @@ unset($__errorArgs, $__bag); ?>
         </div>
         <div class="row">
             <div class="mb-3 form-group col">
-                <label for="e_contact2">Emergency Contact (other than parents): </label>
-                <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name" wire:model="e_contact2">
+                <label for="e_contact2">Emergency Contact 2 (other than parents): </label>
+                <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name"  readonly wire:model="e_contact2">
                 <?php $__errorArgs = ['e_contact2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -315,8 +328,8 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="mb-3 form-group col">
-                <label for="e_contact2_hp">Emergency Contact 2 (other than parents): </label>
-                <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact2_hp">
+                <label for="e_contact2_hp">Emergency Contact Number 2 (other than parents): </label>
+                <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" readonly wire:model="e_contact2_hp">
                 <?php $__errorArgs = ['e_contact2_hp'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

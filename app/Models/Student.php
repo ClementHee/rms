@@ -18,6 +18,7 @@ class Student extends Model
             'gender',
             'dob',
             'birth_cert_no',
+            'mykid',
             'pos_in_family',
             'race',
             'nationality',

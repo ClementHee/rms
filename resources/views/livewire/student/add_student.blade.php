@@ -54,6 +54,12 @@
                 <input type="text" id="birth_cert_no" name="birth_cert_no" required class="form-control pb-2" placeholder="Birth Cert" wire:model="birth_cert_no">
                 @error('birth_cert_no') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
+            <div class="mb-3 form-group col">
+                <label for="birth_cert_no">MyKid No:</label>
+                <input type="text" id="mykid" name="mykid" required class="form-control pb-2" placeholder="MyKid" wire:model="mykid">
+                @error('mykid') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        
         
             <div class="mb-3 form-group col">
                 <label for="pos_in_family">Position in Family:</label>

@@ -53,8 +53,7 @@ Route::group(['middleware' => ['auth','admin']], function() {
 Route::group(['middleware' => ['auth','superadmin']], function() { 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::get('/student',App\Http\Livewire\Students::class)->name('student');
-    Route::get('/parent',ParentsL::class)->name('parent');
+
     
 });
 

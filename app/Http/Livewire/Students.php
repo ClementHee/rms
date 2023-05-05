@@ -11,7 +11,7 @@ class Students extends Component
 {
     public $class,$record_year,$type,$fullname,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality,$prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies,$others,$potential,$father,$mother;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class;
-    public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp;
+    public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
     public $mode = 'view';
     public $search = '';
     public $parents;
@@ -56,6 +56,7 @@ class Students extends Component
         $this->gender=$students->gender;
         $this->dob=$students->dob;
         $this-> birth_cert_no=$students->birth_cert_no;
+        $this->mykid=$students->mykid;
         $this->pos_in_family=$students->pos_in_family;
         $this->race=$students->race;
         $this-> nationality=$students->nationality;
@@ -181,6 +182,7 @@ class Students extends Component
         $this->gender='';
         $this->dob='';
         $this-> birth_cert_no='';
+        $this->mykid='';
         $this->pos_in_family='';
         $this->race='';
         $this-> nationality='';
@@ -236,6 +238,7 @@ class Students extends Component
         $this->gender=$students->gender;
         $this->dob=$students->dob;
         $this-> birth_cert_no=$students->birth_cert_no;
+        $this->$mykid=$students->mykid;
         $this->pos_in_family=$students->pos_in_family;
         $this->race=$students->race;
         $this-> nationality=$students->nationality;
@@ -284,6 +287,7 @@ class Students extends Component
             'gender'=> $this->gender,
             'dob'=> $this->dob,
             'birth_cert_no'=> $this->birth_cert_no,
+            'mykid'=>$this->mykid,
             'pos_in_family'=> $this->pos_in_family,
             'race'=> $this->race,
             'nationality'=> $this->nationality,
@@ -348,6 +352,7 @@ class Students extends Component
             'gender'=> $this->gender,
             'dob'=> $this->dob,
             'birth_cert_no'=> $this->birth_cert_no,
+            'mykid'=>$this->mykid,
             'pos_in_family'=> $this->pos_in_family,
             'race'=> $this->race,
             'nationality'=> $this->nationality,

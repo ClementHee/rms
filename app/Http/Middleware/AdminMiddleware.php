@@ -38,9 +38,13 @@ class AdminMiddleware
     {
         $roles = Auth::user()->getRoleNames()->toArray();
         if (!in_array('Admin',$roles)) {
+            if(in_array('SuperAdmin',$roles)){
+                return $next($request);
+            }else{
             abort(403, 'Unauthorized action.');
         }
-
+        }
         return $next($request);
+      
     }
 }
