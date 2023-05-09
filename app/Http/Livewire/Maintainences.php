@@ -6,6 +6,7 @@ namespace App\Http\Livewire;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Maintainence;
+use App\Events\NewMaterialRequest;
 
   
 class Maintainences extends Component
@@ -62,6 +63,11 @@ class Maintainences extends Component
             'remarks' => $this->remarks,
             'reported_at' => Carbon::now(),
         ]);
+
+        $data=$this;
+        
+
+        event(new NewMaterialRequest($data));
 
 
         session()->flash('message', 'Issue has been lodged Successfully.');

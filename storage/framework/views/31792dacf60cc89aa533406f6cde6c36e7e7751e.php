@@ -8,12 +8,8 @@
     <?php endif; ?>
     
     <h1 class="text-center">Request book</h1>
-    <?php if(session()->has('message')): ?>
-    <div class="alert alert-success">
-        <?php echo e(session('message')); ?>
 
-    </div>
-<?php endif; ?>
+
     <div class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
         
         

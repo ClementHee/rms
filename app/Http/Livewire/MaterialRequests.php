@@ -3,8 +3,9 @@
 namespace App\Http\Livewire;
 
 use Carbon\Carbon;
-use App\Models\MaterialRequest;
 use Livewire\Component;
+use App\Models\MaterialRequest;
+use App\Events\NewMaterialRequest;
 
 class MaterialRequests extends Component
 {
@@ -12,6 +13,8 @@ class MaterialRequests extends Component
 
     public $date, $requested_by, $class, $purpose,$item,$needed,$fulfilled;
     public $updateMode = false;
+  
+    
     
     private function resetInputFields(){
         $this->date='';
@@ -58,6 +61,10 @@ class MaterialRequests extends Component
             'item' => $this->item,
             'needed'=>$this->needed
         ]);
+        $data=$this;
+        
+
+        event(new NewMaterialRequest($data));
 
 
         session()->flash('message', 'Request has been made Successfully.');

@@ -8,11 +8,8 @@
     @endif
     
     <h1 class="text-center">Request book</h1>
-    @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-@endif
+
+
     <div class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
         
         

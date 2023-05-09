@@ -37,6 +37,7 @@
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>
+                                        <td>{{ $student->mykid }}</td>
                                         <td>
                                             @if ( $student->j3_class !="")
                                                 {{ $student->j3_class}}
