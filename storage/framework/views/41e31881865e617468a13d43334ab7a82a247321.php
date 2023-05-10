@@ -1,3 +1,4 @@
+<div class= 'container pb-3'>
 <h1 class="text-center">Materials Request</h1>
         <form>
             <div class="mb-3 form-group">
@@ -72,6 +73,6 @@ unset($__errorArgs, $__bag); ?>
             
             <button wire:click.prevent="storeRequest()" class="btn btn-primary pt-1">Submit</button>
         </form>
-
+</div>
 
 <?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/materials/new_request.blade.php ENDPATH**/ ?>

@@ -70,6 +70,7 @@ class MaterialRequests extends Component
         session()->flash('message', 'Request has been made Successfully.');
   
         $this->resetInputFields();
+        $this->dispatchBrowserEvent('close-modal');
     }
   
     /**
@@ -170,6 +171,11 @@ class MaterialRequests extends Component
         ]);
          
         session()->flash('message', 'Request Not Fulfilled');
+        
+    }
+
+    public function closeModal(){
+        $this->resetInputFields();
         
     }
 }

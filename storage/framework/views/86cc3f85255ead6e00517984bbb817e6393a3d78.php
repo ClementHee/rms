@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 
 <body>
@@ -15,15 +17,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('material-requests')->html();
-} elseif ($_instance->childHasBeenRendered('6OQj4EC')) {
-    $componentId = $_instance->getRenderedChildComponentId('6OQj4EC');
-    $componentTag = $_instance->getRenderedChildComponentTagName('6OQj4EC');
+} elseif ($_instance->childHasBeenRendered('DwZWXQb')) {
+    $componentId = $_instance->getRenderedChildComponentId('DwZWXQb');
+    $componentTag = $_instance->getRenderedChildComponentTagName('DwZWXQb');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('6OQj4EC');
+    $_instance->preserveRenderedChild('DwZWXQb');
 } else {
     $response = \Livewire\Livewire::mount('material-requests');
     $html = $response->html();
-    $_instance->logRenderedChild('6OQj4EC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('DwZWXQb', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -31,4 +33,11 @@ echo $html;
         </div>
     </div>
 <?php $__env->stopSection(); ?>
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#newRequest').modal('hide');
+        
+    })
+</script>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/material_dashboard.blade.php ENDPATH**/ ?>

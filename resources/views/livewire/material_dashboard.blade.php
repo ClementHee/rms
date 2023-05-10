@@ -18,3 +18,10 @@
         </div>
     </div>
 @endsection
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#newRequest').modal('hide');
+        
+    })
+</script>

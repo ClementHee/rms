@@ -20,11 +20,12 @@
         </div>
     </div>
 
-    <script>
-        window.addEventListener('close-modal', event => {
     
-            $('#parentsModal').modal('hide');
-            
-        })
-    </script>
 @endsection
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#parentsModal').modal('hide');
+        
+    })
+</script>
