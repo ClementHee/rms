@@ -18,3 +18,11 @@
         </div>
     </div>
 @endsection
+
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#newMaintainence').modal('hide');
+        
+    })
+</script>

@@ -43,11 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/request_materials',App\Http\Livewire\MaterialRequests::class)->name('request_materials');
     Route::get('/students_parents',ParentStudentsSiblingsRelationship::class)->name('student_parent');
-    Route::post('/request_materials',function(){
-        $item = request()->item;
-        event(new NewMaterialRequest($item));
- 
-    });
+
 });
 
 Route::group(['middleware' => ['auth','admin']], function() { 

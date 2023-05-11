@@ -27,8 +27,13 @@
             </tr>
 
             <?php $__currentLoopData = $all_request; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+            <?php if($request->fulfilled==false): ?>
+            <tr class='bg-danger  bg-opacity-50'>
+            <?php else: ?>
+            <tr class="bg-success bg-opacity-50 p-2">
+            <?php endif; ?>
             
-            <tr class="p-2">
                 <td><?php echo e($request->date); ?></td>
                 <td><?php echo e($request->requested_by); ?></td>
                 <td><?php echo e($request->class); ?></td>
@@ -148,39 +153,4 @@ unset($__errorArgs, $__bag); ?>
         </form>
     </div>
 </div>
-</div>
-<script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = false;
-
-    var pusher = new Pusher('ea44c0267e7076ff3041', {
-      cluster: 'ap1'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('new-request', function(data) {
-        toastr.success('There is a new request');
-    });
-
-
-$(document).ready(function() {
-   
-    //success toast
-        
-            
-            toastr.options = {
-                autoClose: true,
-                progressBar: true,
-                sound: true
-            };
-            
-            
-            
-        
-        
-      });
-
-    </script>
-
-<?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/materials/show_requests.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/materials/show_requests.blade.php ENDPATH**/ ?>

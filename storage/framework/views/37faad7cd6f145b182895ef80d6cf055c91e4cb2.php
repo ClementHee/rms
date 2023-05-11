@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 
 <body>
@@ -15,15 +17,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('maintainences')->html();
-} elseif ($_instance->childHasBeenRendered('KBgDsHV')) {
-    $componentId = $_instance->getRenderedChildComponentId('KBgDsHV');
-    $componentTag = $_instance->getRenderedChildComponentTagName('KBgDsHV');
+} elseif ($_instance->childHasBeenRendered('Rcvx2Bi')) {
+    $componentId = $_instance->getRenderedChildComponentId('Rcvx2Bi');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Rcvx2Bi');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('KBgDsHV');
+    $_instance->preserveRenderedChild('Rcvx2Bi');
 } else {
     $response = \Livewire\Livewire::mount('maintainences');
     $html = $response->html();
-    $_instance->logRenderedChild('KBgDsHV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Rcvx2Bi', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -31,4 +33,12 @@ echo $html;
         </div>
     </div>
 <?php $__env->stopSection(); ?>
+
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#newMaintainence').modal('hide');
+        
+    })
+</script>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/maintainence_dashboard.blade.php ENDPATH**/ ?>

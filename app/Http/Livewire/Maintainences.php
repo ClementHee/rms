@@ -46,9 +46,9 @@ class Maintainences extends Component
      *
      * @var array
      */
-    public function store()
+    public function storeMaintainences()
     {
-
+      
         $new_issue=$this ->validate([
         'issue' => 'required',
         'location' => 'required',
@@ -71,8 +71,10 @@ class Maintainences extends Component
 
 
         session()->flash('message', 'Issue has been lodged Successfully.');
+       
   
         $this->resetInputFields();
+        $this->dispatchBrowserEvent('close-modal');
     }
   
     /**
@@ -171,6 +173,12 @@ class Maintainences extends Component
         ]);
 
         session()->flash('message', 'Issue Not Fixed');
+        
+    }
+
+    public function closeModal(){
+
+        $this->resetInputFields();
         
     }
 }

@@ -238,7 +238,7 @@ class Students extends Component
         $this->gender=$students->gender;
         $this->dob=$students->dob;
         $this-> birth_cert_no=$students->birth_cert_no;
-        $this->$mykid=$students->mykid;
+        $this->mykid=$students->mykid;
         $this->pos_in_family=$students->pos_in_family;
         $this->race=$students->race;
         $this-> nationality=$students->nationality;

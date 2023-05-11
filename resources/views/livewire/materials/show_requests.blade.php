@@ -27,8 +27,13 @@
             </tr>
 
             @foreach ($all_request as $request)
+
+            @if($request->fulfilled==false)
+            <tr class='bg-danger  bg-opacity-50'>
+            @else
+            <tr class="bg-success bg-opacity-50 p-2">
+            @endif
             
-            <tr class="p-2">
                 <td>{{ $request->date }}</td>
                 <td>{{ $request->requested_by }}</td>
                 <td>{{ $request->class }}</td>
@@ -114,37 +119,3 @@ aria-hidden="true">
     </div>
 </div>
 </div>
-<script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = false;
-
-    var pusher = new Pusher('ea44c0267e7076ff3041', {
-      cluster: 'ap1'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('new-request', function(data) {
-        toastr.success('There is a new request');
-    });
-
-
-$(document).ready(function() {
-   
-    //success toast
-        
-            
-            toastr.options = {
-                autoClose: true,
-                progressBar: true,
-                sound: true
-            };
-            
-            
-            
-        
-        
-      });
-
-    </script>
-

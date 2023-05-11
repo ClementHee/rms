@@ -60,7 +60,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     
-   
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        
+    
+        var pusher = new Pusher('ea44c0267e7076ff3041', {
+          cluster: 'ap1'
+        });
+    
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('new-request', function(data) {
+            toastr.success('There is a new request');
+        });
+    
+    
+    $(document).ready(function() {
+       
+        //success toast
+            
+                
+                toastr.options = {
+                    autoClose: true,
+                    progressBar: true,
+                    sound: true
+                };
+                
+                
+                
+            
+            
+          });
+    
+        </script>
+    
     
 
 </head>
@@ -114,7 +147,7 @@
                             <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
                             <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                             <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
-                           <?php endif; ?>
+                            <?php endif; ?>
                             
                         </ul>
          
