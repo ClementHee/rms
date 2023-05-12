@@ -13,7 +13,11 @@ class MaterialRequests extends Component
 
     public $date, $requested_by, $class, $purpose,$item,$needed,$fulfilled;
     public $updateMode = false;
-  
+    protected $listeners =['getNewRequest'=>'reload'];
+
+    public function reload(){
+        return redirect()->route('request_materials');
+    }
     
     
     private function resetInputFields(){
@@ -33,7 +37,9 @@ class MaterialRequests extends Component
     public function render()
     {
         $this->all_request = MaterialRequest::all();
+
         return view('livewire.materials.show_requests')->layout('livewire.material_dashboard');
+        
     }
  
     /**
@@ -66,11 +72,15 @@ class MaterialRequests extends Component
 
         event(new NewMaterialRequest($data));
 
-
+        
         session()->flash('message', 'Request has been made Successfully.');
   
-        $this->resetInputFields();
+        
+   
         $this->dispatchBrowserEvent('close-modal');
+        $this->emit('getNewRequest');
+        $this->resetInputFields();
+        
     }
   
     /**
