@@ -16,7 +16,9 @@ class MaterialRequests extends Component
     protected $listeners =['getNewRequest'=>'reload'];
 
     public function reload(){
-        return redirect()->route('request_materials');
+   
+        $this->all_request = MaterialRequest::all();
+        
     }
     
     
@@ -78,7 +80,7 @@ class MaterialRequests extends Component
         
    
         $this->dispatchBrowserEvent('close-modal');
-        $this->emit('getNewRequest');
+        $this->emitUp('getNewRequest');
         $this->resetInputFields();
         
     }

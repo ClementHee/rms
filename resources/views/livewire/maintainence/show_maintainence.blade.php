@@ -7,7 +7,7 @@
         
     <h1 class="text-center">Maintainence book</h1>
 
-    <div wire:poll.1200s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
+    <div wire:poll.60s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
         
         
         <table class="table table-striped table-sm text-center  ">
