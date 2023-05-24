@@ -443,7 +443,7 @@ class Students extends Component
     public function redirectParent($name){
         
         $parent_id = Parents::where('name',$name)->get('parent_id')->first();
-        session()->flash('message', 'Student Record Deleted Successfully.');
+     
     }
 
     public function closeModal(){
