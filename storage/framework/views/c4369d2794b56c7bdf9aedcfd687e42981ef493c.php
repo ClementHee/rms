@@ -649,6 +649,4 @@ unset($__errorArgs, $__bag); ?>
 </div>
 </div>
 
-</div>
-
 <?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\resources\views/livewire/student/add_student.blade.php ENDPATH**/ ?>

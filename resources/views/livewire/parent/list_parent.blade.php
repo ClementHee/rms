@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($parents as $parent)
+                                @foreach($parents as $parent)
                                     <tr>
                                    
                                         <td>{{ $parent->name }}</td>
@@ -40,12 +40,8 @@
                                             <button type="button"  wire:click="deleteParent({{$parent->parent_id}})" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                    
-                                @empty
-                                    <tr>
-                                        <td colspan="5">No Record Found</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach   
+                             
                             </tbody>
                         </table>
                         

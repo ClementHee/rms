@@ -434,6 +434,7 @@ class Students extends Component
         $showdiv2=false;
         $showcreatenew=false;
         $showcreatenew2= false;
+        
         $this->resetInputFields_Parents();
         $this->dispatchBrowserEvent('close-modal');
         
