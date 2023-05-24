@@ -6,6 +6,7 @@ use App\Models\Parents;
 use App\Models\Student;
 use Livewire\Component;
 use App\Models\Relationship;
+use Livewire\WithPagination;
 
 class Students extends Component
 {
@@ -21,8 +22,14 @@ class Students extends Component
     public $showcreatenew=false;
     public $showcreatenew2= false;
 
-   //
+    use WithPagination;
+    protected $paginationTheme ='bootstrap';
 
+   //
+   public function updatingSearch()
+   {
+       $this->resetPage();
+   }    
     public function create_new(){
         $this->resetInputFields();
         $this->mode = 'create';

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Parents;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ParentsL extends Component
 {
@@ -11,6 +12,9 @@ class ParentsL extends Component
     public $search = '';
     public $updateMode = false;
     public $mode = 'view';
+
+    use WithPagination;
+    protected $paginationTheme ='bootstrap';
 
     private function resetInputFields(){
         $this->name = '';

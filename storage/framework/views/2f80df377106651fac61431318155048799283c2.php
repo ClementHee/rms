@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__empty_1 = true; $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <?php $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                    
                                         <td><?php echo e($parent->name); ?></td>
@@ -40,17 +40,15 @@
                                             <button type="button"  wire:click="deleteParent(<?php echo e($parent->parent_id); ?>)" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                    
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                    <tr>
-                                        <td colspan="5">No Record Found</td>
-                                    </tr>
-                                <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
+                             
                             </tbody>
                         </table>
                         
                     </div>
                 </div>
+                <?php echo e($parents ->links()); ?>
+
             </div>
         </div>
     </div>

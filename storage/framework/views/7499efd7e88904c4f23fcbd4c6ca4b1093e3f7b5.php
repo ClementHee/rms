@@ -81,9 +81,12 @@
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
+                           
                         </table>
                         
                     </div>
+                    <?php echo e($students ->links()); ?>
+
                 </div>
             </div>
         </div>
