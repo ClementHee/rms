@@ -52,26 +52,50 @@
     
         
         </style>
-
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/toasty.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/toasty.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
+    
     <script>
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = false;
+        // Enable pusher logging - don't include this in production
+        
+    
+        var pusher = new Pusher('ea44c0267e7076ff3041', {
+          cluster: 'ap1'
+        });
+    
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('new-request', function(data) {
+            toastr.success('There is a new request');
+        });
+    
+    
+    $(document).ready(function() {
+       
+        //success toast
+            
+                
+                toastr.options = {
+                    autoClose: true,
+                    progressBar: true,
+                    sound: true
+                };
+                
+                
+                
+            
+            
+          });
+    
+        </script>
+    
+    <?php echo \Livewire\Livewire::styles(); ?>
 
-    var pusher = new Pusher('ea44c0267e7076ff3041', {
-      cluster: 'ap1'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('new-request', function(data) {
-        toastr.success('There is a new request');
-    });
-    </script>
     
 
 </head>
@@ -125,7 +149,7 @@
                             <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
                             <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                             <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
-                           <?php endif; ?>
+                            <?php endif; ?>
                             
                         </ul>
          
@@ -161,11 +185,13 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
-
-</body>
-
 <?php echo \Livewire\Livewire::scripts(); ?>
 
 
+</body>
+
+
+
+   
 </html>
 <?php /**PATH /usr/local/www/rms/resources/views/layouts/app.blade.php ENDPATH**/ ?>

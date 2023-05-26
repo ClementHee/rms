@@ -48,4 +48,4 @@
         </nav>
     <?php endif; ?>
 </div>
-<?php /**PATH C:\xampp\htdocs\RhemaManagementSystem\vendor\livewire\livewire\src\views\pagination/bootstrap.blade.php ENDPATH**/ ?>
+<?php /**PATH /usr/local/www/rms/vendor/livewire/livewire/src/views/pagination/bootstrap.blade.php ENDPATH**/ ?>

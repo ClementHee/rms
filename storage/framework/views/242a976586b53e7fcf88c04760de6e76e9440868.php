@@ -37,6 +37,7 @@
                                         <td><?php echo e($student->gender); ?></td>
                                         <td><?php echo e($student->dob); ?></td>
                                         <td><?php echo e($student->birth_cert_no); ?></td>
+                                        <td><?php echo e($student->mykid); ?></td>
                                         <td>
                                             <?php if( $student->j3_class !=""): ?>
                                                 <?php echo e($student->j3_class); ?>
@@ -80,9 +81,12 @@
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
+                           
                         </table>
                         
                     </div>
+                    <?php echo e($students ->links()); ?>
+
                 </div>
             </div>
         </div>

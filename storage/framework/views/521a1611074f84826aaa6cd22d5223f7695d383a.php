@@ -16,15 +16,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('students')->html();
-} elseif ($_instance->childHasBeenRendered('OnleDaW')) {
-    $componentId = $_instance->getRenderedChildComponentId('OnleDaW');
-    $componentTag = $_instance->getRenderedChildComponentTagName('OnleDaW');
+} elseif ($_instance->childHasBeenRendered('bGZn4rX')) {
+    $componentId = $_instance->getRenderedChildComponentId('bGZn4rX');
+    $componentTag = $_instance->getRenderedChildComponentTagName('bGZn4rX');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('OnleDaW');
+    $_instance->preserveRenderedChild('bGZn4rX');
 } else {
     $response = \Livewire\Livewire::mount('students');
     $html = $response->html();
-    $_instance->logRenderedChild('OnleDaW', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('bGZn4rX', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -33,12 +33,13 @@ echo $html;
         </div>
     </div>
 
-    <script>
-        window.addEventListener('close-modal', event => {
     
-            $('#parentsModal').modal('hide');
-            
-        })
-    </script>
 <?php $__env->stopSection(); ?>
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#parentsModal').modal('hide');
+        
+    })
+</script>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /usr/local/www/rms/resources/views/livewire/student_dashboard.blade.php ENDPATH**/ ?>
