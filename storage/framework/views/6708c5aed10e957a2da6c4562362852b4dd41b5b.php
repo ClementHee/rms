@@ -21,23 +21,31 @@
 } ?>
 <?php unset($__defined_vars); ?>
 <div>
-    <table class="table power-grid-table <?php echo e($theme->tableClass); ?>"
-           style="<?php echo e($theme->tableStyle); ?>">
-        <thead class="<?php echo e($theme->theadClass); ?>"
-               style="<?php echo e($theme->theadStyle); ?>">
-                <?php echo e($header); ?>
+    <table
+        class="table power-grid-table <?php echo e($theme->tableClass); ?>"
+        style="<?php echo e($theme->tableStyle); ?>"
+    >
+        <thead
+            class="<?php echo e($theme->theadClass); ?>"
+            style="<?php echo e($theme->theadStyle); ?>"
+        >
+            <?php echo e($header); ?>
 
         </thead>
         <?php if($readyToLoad): ?>
-            <tbody class="<?php echo e($theme->tbodyClass); ?>"
-                   style="<?php echo e($theme->tbodyStyle); ?>">
-            <?php echo e($rows); ?>
+            <tbody
+                class="<?php echo e($theme->tbodyClass); ?>"
+                style="<?php echo e($theme->tbodyStyle); ?>"
+            >
+                <?php echo e($rows); ?>
 
             </tbody>
         <?php else: ?>
-            <tbody class="<?php echo e($theme->tbodyClass); ?>"
-                   style="<?php echo e($theme->tbodyStyle); ?>">
-            <?php echo e($loading); ?>
+            <tbody
+                class="<?php echo e($theme->tbodyClass); ?>"
+                style="<?php echo e($theme->tbodyStyle); ?>"
+            >
+                <?php echo e($loading); ?>
 
             </tbody>
         <?php endif; ?>

@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 
 <body>
@@ -15,20 +17,19 @@
                         
                         <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('relationships', [])->html();
+    $html = \Livewire\Livewire::mount('student-parent-details', [])->html();
 } elseif ($_instance->childHasBeenRendered('l3257811559-0')) {
     $componentId = $_instance->getRenderedChildComponentId('l3257811559-0');
     $componentTag = $_instance->getRenderedChildComponentTagName('l3257811559-0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
     $_instance->preserveRenderedChild('l3257811559-0');
 } else {
-    $response = \Livewire\Livewire::mount('relationships', []);
+    $response = \Livewire\Livewire::mount('student-parent-details', []);
     $html = $response->html();
     $_instance->logRenderedChild('l3257811559-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-                        
                       
             </div>
         </div>

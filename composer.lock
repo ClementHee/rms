@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d70c7a9653ea892e3abbf528decc3e5b",
+    "content-hash": "9fa774ff8687d28c6c018242aaf064c5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3264,16 +3264,16 @@
         },
         {
             "name": "power-components/livewire-powergrid",
-            "version": "v4.4.1",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Power-Components/livewire-powergrid.git",
-                "reference": "c72e43dd22c372921b003737b852a4df347a6421"
+                "reference": "aa09cd347e186bda30c9b4a9917fac65f0745714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/c72e43dd22c372921b003737b852a4df347a6421",
-                "reference": "c72e43dd22c372921b003737b852a4df347a6421",
+                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/aa09cd347e186bda30c9b4a9917fac65f0745714",
+                "reference": "aa09cd347e186bda30c9b4a9917fac65f0745714",
                 "shasum": ""
             },
             "require": {
@@ -3284,14 +3284,14 @@
             },
             "require-dev": {
                 "composer/composer": "^2.5.5",
-                "laradumps/laradumps": "^1.11",
-                "laravel/pint": "^1.9",
+                "laradumps/laradumps": "^1.12.1",
+                "laravel/pint": "^1.10",
                 "nunomaduro/larastan": "^2.6.0",
-                "orchestra/testbench": "^7.0 | ^8.4.0",
-                "pestphp/pest": "^2.5.0",
+                "orchestra/testbench": "^7.0 | ^8.5.3",
+                "pestphp/pest": "^2.6.1",
                 "pestphp/pest-plugin-faker": "^2.0",
                 "pestphp/pest-plugin-livewire": "^2.0",
-                "spaze/phpstan-disallowed-calls": "^2.13.0"
+                "spaze/phpstan-disallowed-calls": "^2.14.2"
             },
             "suggest": {
                 "openspout/openspout": "Required to export XLS and CSV"
@@ -3332,7 +3332,7 @@
             "homepage": "https://github.com/power-components/livewire-powergrid",
             "support": {
                 "issues": "https://github.com/Power-Components/livewire-powergrid/issues",
-                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.4.1"
+                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.5.0"
             },
             "funding": [
                 {
@@ -3340,7 +3340,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-25T00:21:16+00:00"
+            "time": "2023-05-22T16:59:56+00:00"
         },
         {
             "name": "psr/cache",

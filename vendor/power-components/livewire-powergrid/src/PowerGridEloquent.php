@@ -3,11 +3,11 @@
 namespace PowerComponents\LivewirePowerGrid;
 
 use Closure;
-use Illuminate\Support\Collection as BaseCollection;
+use Illuminate\Support\Collection;
 
 final class PowerGridEloquent
 {
-    protected BaseCollection $collection;
+    protected Collection $collection;
 
     public array $columns = [];
 

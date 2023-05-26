@@ -174,7 +174,7 @@ class Students extends Component
     public function render()
     {
        
-        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('student_id','DESC')->paginate(10);
+        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
         
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     
@@ -282,7 +282,8 @@ class Students extends Component
 
     public function storeStudent()
     {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
-        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+       $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+        
        if($this->no_years==""){
         $this->no_years=0;  
        }

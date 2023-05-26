@@ -93,6 +93,7 @@
     
         </script>
     
+    @livewireStyles
     
 
 </head>
@@ -179,10 +180,10 @@
             @yield('content')
         </main>
     </div>
+@livewireScripts
 
 </body>
 
-@livewireScripts
 
 
    

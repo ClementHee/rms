@@ -14,8 +14,7 @@
                             </div>
                         @endif
                         
-                        <livewire:relationships/>
-                        
+                        <livewire:student-parent-details/>
                       
             </div>
         </div>

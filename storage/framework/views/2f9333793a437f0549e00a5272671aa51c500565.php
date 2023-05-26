@@ -1,7 +1,12 @@
 <div>
     <?php if(data_get($setUp, 'header.toggleColumns')): ?>
         <div class="btn-group">
-            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button
+                class="btn btn-light dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.eye-off','data' => ['width' => '20']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('livewire-powergrid::icons.eye-off'); ?>
@@ -21,9 +26,14 @@
             <ul class="dropdown-menu">
                 <?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if(!$column->forceHidden): ?>
-                        <li wire:click="$emit('pg:toggleColumn-<?php echo e($tableName); ?>', '<?php echo e($column->field); ?>')"
-                            wire:key="toggle-column-<?php echo e($column->field); ?>">
-                            <a class="dropdown-item" href="#">
+                        <li
+                            wire:click="$emit('pg:toggleColumn-<?php echo e($tableName); ?>', '<?php echo e($column->field); ?>')"
+                            wire:key="toggle-column-<?php echo e($column->field); ?>"
+                        >
+                            <a
+                                class="dropdown-item"
+                                href="#"
+                            >
                                 <?php if($column->hidden === false): ?>
                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.eye','data' => ['width' => '20']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>

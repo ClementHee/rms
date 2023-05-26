@@ -1,11 +1,13 @@
 <?php if(data_get($setUp, 'header.softDeletes')): ?>
     <div class="btn-group">
-        <button class="btn btn-secondary btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                    <span>
-                   <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+        <button
+            class="btn btn-secondary btn-sm dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+        >
+            <span>
+                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.trash','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('livewire-powergrid::icons.trash'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -20,21 +22,30 @@
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                </span>
+            </span>
         </button>
         <ul class="dropdown-menu">
             <li wire:click="$emit('pg:softDeletes-<?php echo e($tableName); ?>', '')">
-                <a class="dropdown-item" href="#">
+                <a
+                    class="dropdown-item"
+                    href="#"
+                >
                     <?php echo app('translator')->get('livewire-powergrid::datatable.soft_deletes.without_trashed'); ?>
                 </a>
             </li>
             <li wire:click="$emit('pg:softDeletes-<?php echo e($tableName); ?>', 'withTrashed')">
-                <a class="dropdown-item" href="#">
+                <a
+                    class="dropdown-item"
+                    href="#"
+                >
                     <?php echo app('translator')->get('livewire-powergrid::datatable.soft_deletes.with_trashed'); ?>
                 </a>
             </li>
             <li wire:click="$emit('pg:softDeletes-<?php echo e($tableName); ?>', 'onlyTrashed')">
-                <a class="dropdown-item" href="#">
+                <a
+                    class="dropdown-item"
+                    href="#"
+                >
                     <?php echo app('translator')->get('livewire-powergrid::datatable.soft_deletes.only_trashed'); ?>
                 </a>
             </li>

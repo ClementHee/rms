@@ -1,10 +1,13 @@
 <div <?php if($deferLoading): ?> wire:init="fetchDatasource" <?php endif; ?>>
     <div class="col-md-12">
         <?php echo $__env->make($theme->layout->header, [
-                'enabledFilters' => $enabledFilters
+            'enabledFilters' => $enabledFilters,
         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
-    <div class="<?php echo e($theme->table->divClass); ?>" style="<?php echo e($theme->table->divStyle); ?>">
+    <div
+        class="<?php echo e($theme->table->divClass); ?>"
+        style="<?php echo e($theme->table->divStyle); ?>"
+    >
         <?php echo $__env->make($table, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
     <div class="row">

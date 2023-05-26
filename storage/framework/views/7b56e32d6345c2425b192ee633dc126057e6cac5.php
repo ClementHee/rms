@@ -4,17 +4,22 @@
     ?>
     <?php if($queues > 0 && $showExporting): ?>
         <?php if($batchExporting && !$batchFinished): ?>
-            <div wire:poll="updateExportProgress"
-                 class="my-3 px-4 rounded-md py-3 shadow-sm text-center">
+            <div
+                wire:poll="updateExportProgress"
+                class="my-3 px-4 rounded-md py-3 shadow-sm text-center"
+            >
                 <div><?php echo e(trans('livewire-powergrid::datatable.export.exporting')); ?></div>
                 <div
                     class="bg-emerald-500 rounded text-center"
-                    style="background-color: rgb(16 185 129); height: 0.25rem; width: <?php echo e($batchProgress); ?>%; transition: width 300ms;">
+                    style="background-color: rgb(16 185 129); height: 0.25rem; width: <?php echo e($batchProgress); ?>%; transition: width 300ms;"
+                >
                 </div>
             </div>
 
-            <div wire:poll="updateExportProgress"
-                 class="my-3 px-4 rounded-md py-3 shadow-sm text-center">
+            <div
+                wire:poll="updateExportProgress"
+                class="my-3 px-4 rounded-md py-3 shadow-sm text-center"
+            >
                 <div><?php echo e($batchProgress); ?>%</div>
                 <div><?php echo e(trans('livewire-powergrid::datatable.export.exporting')); ?></div>
             </div>
@@ -23,20 +28,28 @@
         <?php if($batchFinished): ?>
             <div class="my-3">
                 <p>
-                    <button class="btn btn-primary"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseCompleted"
-                            aria-expanded="false"
-                            aria-controls="collapseCompleted">
+                    <button
+                        class="btn btn-primary"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseCompleted"
+                        aria-expanded="false"
+                        aria-controls="collapseCompleted"
+                    >
                         ⚡ <?php echo e(trans('livewire-powergrid::datatable.export.completed')); ?>
 
                     </button>
                 </p>
-                <div class="collapse" id="collapseCompleted">
+                <div
+                    class="collapse"
+                    id="collapseCompleted"
+                >
                     <div class="card card-body">
                         <?php $__currentLoopData = $exportedFiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div class="d-flex w-full p-2" style="cursor:pointer">
+                            <div
+                                class="d-flex w-full p-2"
+                                style="cursor:pointer"
+                            >
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.download','data' => ['style' => 'width: 1.5rem;
                                            margin-right: 6px;
@@ -56,8 +69,7 @@
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                <a
-                                    wire:click="downloadExport('<?php echo e($file); ?>')">
+                                <a wire:click="downloadExport('<?php echo e($file); ?>')">
                                     <?php echo e($file); ?>
 
                                 </a>

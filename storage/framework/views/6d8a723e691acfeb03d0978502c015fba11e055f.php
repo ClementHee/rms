@@ -94,6 +94,8 @@
     
         </script>
     
+    <?php echo \Livewire\Livewire::styles(); ?>
+
     
 
 </head>
@@ -183,10 +185,10 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+<?php echo \Livewire\Livewire::scripts(); ?>
+
 
 </body>
-
-<?php echo \Livewire\Livewire::scripts(); ?>
 
 
 

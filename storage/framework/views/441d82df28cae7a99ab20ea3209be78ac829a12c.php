@@ -1,15 +1,20 @@
 <?php if($multiSort && count($sortArray) > 0): ?>
-    <div class="col-md-12 d-flex table-responsive" style="margin-top: 10px">
+    <div
+        class="col-md-12 d-flex table-responsive"
+        style="margin-top: 10px"
+    >
         <span><?php echo app('translator')->get('livewire-powergrid::datatable.multi_sort.message'); ?></span>
         <span class="d-flex gap-2">
             <?php $__currentLoopData = $sortArray; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field => $sort): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
                     $label = $this->getLabelFromColumn($field);
                 ?>
-                <div wire:key="<?php echo e($tableName); ?>-multi-sort-<?php echo e($field); ?>"
-                     wire:click.prevent="sortBy('<?php echo e($field); ?>')"
-                     title="<?php echo e(__(':label :sort', ['label' => $label, 'sort' => $sort])); ?>"
-                     style="cursor: pointer; padding-right: 4px">
+                <div
+                    wire:key="<?php echo e($tableName); ?>-multi-sort-<?php echo e($field); ?>"
+                    wire:click.prevent="sortBy('<?php echo e($field); ?>')"
+                    title="<?php echo e(__(':label :sort', ['label' => $label, 'sort' => $sort])); ?>"
+                    style="cursor: pointer; padding-right: 4px"
+                >
                     <span class="badge rounded-pill bg-light text-dark"><?php echo e($label); ?>
 
                         <?php if($sort == 'desc'): ?>
@@ -47,7 +52,6 @@
                         <?php endif; ?>
                     </span>
                 </div>
-
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </span>
     </div>

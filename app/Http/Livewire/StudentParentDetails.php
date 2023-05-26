@@ -2,20 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Parents;
 use App\Models\Relationship;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
-use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 
-final class Relationships extends PowerGridComponent
+final class StudentParentDetails extends PowerGridComponent
 {
     use ActionButton;
     use WithExport;
-
+    public bool $multiSort = true;
     /*
     |--------------------------------------------------------------------------
     |  Features Setup
@@ -26,12 +25,12 @@ final class Relationships extends PowerGridComponent
     public function setUp(): array
     {
         $this->showCheckBox();
-        
+
         return [
-            Exportable::make('Student Parent Details')
+            Exportable::make('Student Details')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput(),
+            Header::make()->showToggleColumns(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -54,13 +53,12 @@ final class Relationships extends PowerGridComponent
     public function datasource(): Builder
     {
         return Relationship::query()->join('students','relationship.student','=','students.student_id')
-            ->join('parents as father_main','relationship.father','=','father_main.parent_id')
-            ->join('parents as mother_main','relationship.mother','=','mother_main.parent_id')
-            ->select('students.*','father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
-            'father_main.email as father_email','father_main.tel as father_tel',
-            'mother_main.name as mother_name','mother_main.ic_no as mother_ic_no','mother_main.occupation as mother_occupation','mother_main.company_name as mother_company_name','mother_main.company_add as mother_company_add',
-            'mother_main.email as mother_email','mother_main.tel as mother_tel');
-            
+        ->join('parents as father_main','relationship.father','=','father_main.parent_id')
+        ->join('parents as mother_main','relationship.mother','=','mother_main.parent_id')
+        ->select('students.*','father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
+        'father_main.email as father_email','father_main.tel as father_tel',
+        'mother_main.name as mother_name','mother_main.ic_no as mother_ic_no','mother_main.occupation as mother_occupation','mother_main.company_name as mother_company_name','mother_main.company_add as mother_company_add',
+        'mother_main.email as mother_email','mother_main.tel as mother_tel');
     }
 
     /*
@@ -92,25 +90,40 @@ final class Relationships extends PowerGridComponent
     |    the database using the `e()` Laravel Helper function.
     |
     */
-    public function addColumns(): PowerGridEloquent
+    public function addColumns(): PowerGridColumns
     {
-   
-        return PowerGrid::eloquent()
-    
-            ->addColumn('fullname')
-            ->addColumn('birth_cert_no')
-            ->addColumn('dob')
-            ->addColumn('race')
-            ->addColumn('home_add')
-
-            ->addColumn('type')
-            
-            ->addColumn('father_name')
-            ->addColumn('father_ic_no')
-            ->addColumn('father_tel')
-            ->addColumn('mother_name')
-            ->addColumn('mother_ic_no')
-            ->addColumn('Mother_tel');
+        return PowerGrid::columns()
+        ->addColumn('record_year')
+        ->addColumn('type')
+        ->addColumn('fullname')
+        ->addColumn('gender')
+        ->addColumn('dob')
+        ->addColumn('birth_cert_no')
+        ->addColumn('mykid')
+        ->addColumn('race')
+        ->addColumn('nationality')
+        ->addColumn('prev_kindy')
+        ->addColumn('no_years')
+        ->addColumn('religion')
+        ->addColumn('home_add')
+        ->addColumn('home_lang')
+        ->addColumn('home_tel')
+        ->addColumn('j1_class')
+        ->addColumn('j2_class')
+        ->addColumn('j3_class')
+        ->addColumn('aft_j1_class')
+        ->addColumn('aft_j2_class')
+        ->addColumn('aft_j3_class')
+        ->addColumn('father_name')
+        ->addColumn('father_ic_no')
+        ->addColumn('father_occupation')
+        ->addColumn('father_tel')
+        ->addColumn('father_email')
+        ->addColumn('mother_name')
+        ->addColumn('mother_ic_no')
+        ->addColumn('mother_occupation')
+        ->addColumn('mother_tel')
+        ->addColumn('mother_email');
     }
 
     /*
@@ -130,18 +143,38 @@ final class Relationships extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Student Name', 'fullname'),
+            Column::add()->title('Student Name')->field('fullname')->sortable()->searchable(),
+            Column::add()->title('Entry Year')->field('record_year')->sortable(),
+            Column::make('Type', 'type')->searchable()->sortable(),
             Column::make('Birth Cert', 'birth_cert_no'),
-            Column::make('DOB', 'dob'),
+            Column::make('MyKid', 'mykid'),
+            Column::add()->title('DOB')->field( 'dob')->sortable(),
+            Column::make('Gender', 'gender'),
             Column::make('Race', 'race'),
             Column::make('Address', 'home_add'),
-            Column::make('Type', 'type'),
-            Column::make('Father Name', 'father_name'),
+            Column::make('Previous Kindy', 'prev_kindy'),
+            Column::make('Number of years in Previous Kindy', 'no_years'),
+            Column::make('Religion', 'religion'),
+            Column::make('Home Language', 'home_lang'),
+            Column::make('Home Telephone No.', 'home_tel'),
+            Column::make('Nationality', 'nationality'),
+            Column::add()->title('J1 Class')->field('j1_class')->sortable(),
+            Column::add()->title('J2 Class')->field('j2_class')->sortable(),
+            Column::add()->title('J3 Class')->field('j3_class')->sortable(),
+            Column::add()->title('Afternoon J1 Class')->field('aft_j1_class')->sortable(),
+            Column::add()->title('Afternoon J2 Class')->field('aft_j2_class')->sortable(),
+            Column::add()->title('Afternoon J3 Class')->field('aft_j3_class')->sortable(),
+            Column::make('Father Name', 'father_name')->sortable(),
             Column::make('Father IC', 'father_ic_no'),
             Column::make('Father Contact', 'father_tel'),
-            Column::make('Mother', 'mother_name'),
+            Column::make('Father Occupation', 'father_occupation'),
+            Column::make('Father Occupation', 'father_email'),
+            Column::make('Mother', 'mother_name')->sortable(),
             Column::make('Mother IC', 'mother_ic_no'),
-            Column::make('Mother Contact', 'mother_tel'),
+            Column::make('Mother Contact', 'mother_tel')->sortable(),
+            Column::make('Mother Occupation', 'mother_occupation'),
+            Column::make('Mother Occupation', 'mother_email')
+
         ];
     }
 
