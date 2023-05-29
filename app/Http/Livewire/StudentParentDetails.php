@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Student;
 use App\Models\Relationship;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
-use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 
 final class StudentParentDetails extends PowerGridComponent
@@ -27,13 +28,14 @@ final class StudentParentDetails extends PowerGridComponent
         $this->showCheckBox();
 
         return [
-            Exportable::make('Student Details')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showToggleColumns(),
+            
+            Header::make()->showSearchInput()->showToggleColumns(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
+            Exportable::make('Student Details')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
         ];
     }
 
@@ -143,37 +145,38 @@ final class StudentParentDetails extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::add()->title('Student Name')->field('fullname')->sortable()->searchable(),
-            Column::add()->title('Entry Year')->field('record_year')->sortable(),
+            Column::make('Student Name','fullname')->sortable()->searchable(),
+            Column::make('Entry Year','record_year')->sortable()->searchable(),
             Column::make('Type', 'type')->searchable()->sortable(),
-            Column::make('Birth Cert', 'birth_cert_no'),
-            Column::make('MyKid', 'mykid'),
-            Column::add()->title('DOB')->field( 'dob')->sortable(),
-            Column::make('Gender', 'gender'),
-            Column::make('Race', 'race'),
-            Column::make('Address', 'home_add'),
-            Column::make('Previous Kindy', 'prev_kindy'),
-            Column::make('Number of years in Previous Kindy', 'no_years'),
-            Column::make('Religion', 'religion'),
-            Column::make('Home Language', 'home_lang'),
-            Column::make('Home Telephone No.', 'home_tel'),
-            Column::make('Nationality', 'nationality'),
-            Column::add()->title('J1 Class')->field('j1_class')->sortable(),
-            Column::add()->title('J2 Class')->field('j2_class')->sortable(),
-            Column::add()->title('J3 Class')->field('j3_class')->sortable(),
-            Column::add()->title('Afternoon J1 Class')->field('aft_j1_class')->sortable(),
-            Column::add()->title('Afternoon J2 Class')->field('aft_j2_class')->sortable(),
-            Column::add()->title('Afternoon J3 Class')->field('aft_j3_class')->sortable(),
-            Column::make('Father Name', 'father_name')->sortable(),
-            Column::make('Father IC', 'father_ic_no'),
-            Column::make('Father Contact', 'father_tel'),
-            Column::make('Father Occupation', 'father_occupation'),
-            Column::make('Father Occupation', 'father_email'),
-            Column::make('Mother', 'mother_name')->sortable(),
-            Column::make('Mother IC', 'mother_ic_no'),
-            Column::make('Mother Contact', 'mother_tel')->sortable(),
-            Column::make('Mother Occupation', 'mother_occupation'),
-            Column::make('Mother Occupation', 'mother_email')
+            Column::make('Birth Cert', 'birth_cert_no')->sortable()->searchable(),
+            Column::make('MyKid', 'mykid')->sortable()->searchable(),
+            Column::make('DOB','dob')->searchable()->sortable(),
+            Column::make('Gender', 'gender')->sortable()->searchable(),
+            Column::make('Race', 'race')->sortable()->searchable(),
+            Column::make('Address', 'home_add')->sortable()->searchable(),
+            Column::make('Previous Kindy', 'prev_kindy')->sortable()->searchable(),
+            Column::make('Number of years in Previous Kindy', 'no_years')->sortable()->searchable(),
+            Column::make('Religion', 'religion')->sortable()->searchable(),
+            Column::make('Home Language', 'home_lang')->sortable()->searchable(),
+            Column::make('Home Telephone No.', 'home_tel')->sortable()->searchable(),
+            Column::make('Nationality', 'nationality')->sortable()->searchable(),
+            Column::make('J1 Class','j1_class')->sortable()->searchable(),
+            Column::make('J2 Class','j2_class')->sortable()->searchable(),
+            Column::make('J3 Class','j3_class')->sortable()->searchable(),
+            Column::make('Afternoon J1 Class','aft_j1_class')->sortable()->searchable(),
+            Column::make('Afternoon J2 Class','aft_j2_class')->sortable()->searchable(),
+            Column::make('Afternoon J3 Class','aft_j3_class')->sortable()->searchable(),
+            Column::make('Father Name', 'father_name')->sortable()->searchable(),
+            Column::make('Father IC', 'father_ic_no')->sortable()->searchable(),
+            Column::make('Father Contact', 'father_tel')->sortable()->searchable(),
+            Column::make('Father Occupation', 'father_occupation')->sortable()->searchable(),
+            Column::make('Father Occupation', 'father_email')->sortable()->searchable(),
+            Column::make('Mother', 'mother_name')->sortable()->searchable(),
+            Column::make('Mother IC', 'mother_ic_no')->sortable()->searchable(),
+            Column::make('Mother Contact', 'mother_tel')->sortable()->searchable(),
+            Column::make('Mother Occupation', 'mother_occupation')->sortable()->searchable(),
+            Column::make('Mother Occupation', 'mother_email')->sortable()->searchable()
+
 
         ];
     }
@@ -186,6 +189,10 @@ final class StudentParentDetails extends PowerGridComponent
     public function filters(): array
     {
         return [
+            Filter::multiSelect('fullname', 'religion')
+            ->dataSource(Student::all())
+            ->optionValue('id')
+            ->optionLabel('name'),
         ];
     }
 
