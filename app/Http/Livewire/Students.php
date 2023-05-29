@@ -25,7 +25,16 @@ class Students extends Component
     use WithPagination;
     protected $paginationTheme ='bootstrap';
 
-   //
+    public function render()
+    {
+       
+        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
+        
+        return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
+    
+     
+    }
+
    public function updatingSearch()
    {
        $this->resetPage();
@@ -171,15 +180,7 @@ class Students extends Component
         $this->showcreatenew2 = false;
     }
 
-    public function render()
-    {
-       
-        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
-        
-        return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     
-     
-    }
     
 
     private function resetInputFields(){
@@ -287,6 +288,7 @@ class Students extends Component
        if($this->no_years==""){
         $this->no_years=0;  
        }
+
         
         Student::create([
             'record_year'=> $this->record_year,
@@ -320,7 +322,7 @@ class Students extends Component
             'potential'=> $this->potential,
             'father'=> $father_id->parent_id,
             'mother'=> $mother_id->parent_id,
-            'j1_class'=>$this->j1_class,
+            'j1_class'=>ucwords(strtolower($this->j1_class)),
             'j2_class'=>$this->j2_class,
             'j3_class'=>$this->j3_class,
             'aft_j1_class'=>$this->aft_j1_class,

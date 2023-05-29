@@ -46,7 +46,7 @@ class ParentsL extends Component
 
     public function render()
     {
-        $parents = Parents::where('name', 'like', '%'.$this->search.'%')->orderBy('parent_id','DESC')->paginate(10);
+        $parents = Parents::where('name', 'like', '%'.$this->search.'%')->where('parent_id',"!=",1)->orderBy('parent_id','DESC')->paginate(10);
 
         return view('livewire.parent.parents', ['parents' => $parents])->layout('livewire.parents_dashboard');
     }
