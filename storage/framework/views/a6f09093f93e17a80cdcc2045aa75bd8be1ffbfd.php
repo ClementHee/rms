@@ -92,7 +92,7 @@
           });
     
         </script>
-    
+   
     <?php echo \Livewire\Livewire::styles(); ?>
 
     
