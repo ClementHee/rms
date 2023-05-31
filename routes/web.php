@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function() {
     });
       
 
-
+    Route::view('/powergrid', 'powergrid-demo');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/maintainence',App\Http\Livewire\Maintainences::class)->name('maintainence');
 

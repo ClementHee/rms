@@ -7,15 +7,16 @@ use App\Models\Relationship;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
+use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 
 final class StudentParentDetails extends PowerGridComponent
-{
+{public bool $multiSort = true;
     use ActionButton;
     use WithExport;
-    public bool $multiSort = true;
+    
     /*
     |--------------------------------------------------------------------------
     |  Features Setup
@@ -29,7 +30,7 @@ final class StudentParentDetails extends PowerGridComponent
 
         return [
             
-            Header::make()->showSearchInput()->showToggleColumns(),
+            Header::make()->showToggleColumns(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -92,9 +93,9 @@ final class StudentParentDetails extends PowerGridComponent
     |    the database using the `e()` Laravel Helper function.
     |
     */
-    public function addColumns(): PowerGridColumns
+    public function addColumns(): PowerGridEloquent
     {
-        return PowerGrid::columns()
+        return PowerGrid::eloquent()
         ->addColumn('record_year')
         ->addColumn('type')
         ->addColumn('fullname')
@@ -145,7 +146,7 @@ final class StudentParentDetails extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Student Name','fullname')->sortable()->searchable(),
+            Column::make('Student','fullname')->sortable()->searchable(),
             Column::make('Entry Year','record_year')->sortable()->searchable(),
             Column::make('Type', 'type')->searchable()->sortable(),
             Column::make('Birth Cert', 'birth_cert_no')->sortable()->searchable(),
@@ -189,10 +190,18 @@ final class StudentParentDetails extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::multiSelect('fullname', 'religion')
-            ->dataSource(Student::all())
-            ->optionValue('id')
-            ->optionLabel('name'),
+            Filter::inputText('fullname')
+            ->operators(['contains']),
+                
+            Filter::select('type', 'type')
+            ->dataSource(Relationship::enrolType())
+            ->optionValue('type')
+            ->optionLabel('type'),
+
+            Filter::select('religion', 'religion')
+            ->dataSource(Relationship::religion())
+            ->optionValue('religion')
+            ->optionLabel('religion'),
         ];
     }
 

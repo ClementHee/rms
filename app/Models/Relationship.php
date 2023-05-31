@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Relationship extends Model
 {
@@ -16,4 +17,14 @@ class Relationship extends Model
             'father',
             'mother'
     ];
+
+    public static function enrolType()
+    {
+        return Student::select('type')->distinct('type')->get();
+    }
+
+    public static function religion()
+    {
+        return Student::select('religion')->distinct('religion')->get();
+    }
 }

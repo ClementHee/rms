@@ -51,4 +51,6 @@ class Student extends Model
             'aft_j3_class'
     ];
 
+
+    
 }
