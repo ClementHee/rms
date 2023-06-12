@@ -120,11 +120,13 @@ final class StudentParentDetails extends PowerGridComponent
         ->addColumn('father_name')
         ->addColumn('father_ic_no')
         ->addColumn('father_occupation')
+        ->addColumn('father_company_name')
         ->addColumn('father_tel')
         ->addColumn('father_email')
         ->addColumn('mother_name')
         ->addColumn('mother_ic_no')
         ->addColumn('mother_occupation')
+        ->addColumn('mother_company_name')
         ->addColumn('mother_tel')
         ->addColumn('mother_email');
     }
@@ -171,12 +173,14 @@ final class StudentParentDetails extends PowerGridComponent
             Column::make('Father IC', 'father_ic_no')->sortable()->searchable(),
             Column::make('Father Contact', 'father_tel')->sortable()->searchable(),
             Column::make('Father Occupation', 'father_occupation')->sortable()->searchable(),
-            Column::make('Father Occupation', 'father_email')->sortable()->searchable(),
+            Column::make('Father Company', 'father_company_name')->sortable()->searchable(),
+            Column::make('Father Email', 'father_email')->sortable()->searchable(),
             Column::make('Mother', 'mother_name')->sortable()->searchable(),
             Column::make('Mother IC', 'mother_ic_no')->sortable()->searchable(),
             Column::make('Mother Contact', 'mother_tel')->sortable()->searchable(),
             Column::make('Mother Occupation', 'mother_occupation')->sortable()->searchable(),
-            Column::make('Mother Occupation', 'mother_email')->sortable()->searchable()
+            Column::make('Mother Company', 'mother_company_name')->sortable()->searchable(),
+            Column::make('Mother Email', 'mother_email')->sortable()->searchable()
 
 
         ];

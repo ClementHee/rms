@@ -156,7 +156,6 @@ class MaterialRequests extends Component
   
         $request_update->update([
             'date' => Carbon::now(),
-          
             'requested_by' => $request_update->requested_by,
             'class' => $request_update->class,
             'purpose' => $request_update->purpose,
@@ -174,7 +173,6 @@ class MaterialRequests extends Component
     
         $request_update->update([
             'date' => Carbon::now(),
-          
             'requested_by' => $request_update->requested_by,
             'class' => $request_update->class,
             'purpose' => $request_update->purpose,
