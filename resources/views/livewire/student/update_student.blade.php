@@ -1,14 +1,15 @@
 <div>
     <div class='container'>
         <h2>Update Student</h2>
-        <form class="form-inline">
+        <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
+
+            <h2>New Student</h2>
+    
             @csrf
-            <input type="hidden" wire:model="student_id">
             <div class="row">
-                
                 <div class="mb-3 form-group col">
-                    <label for="record_year">Year:</label>
-                    <input type="number" id="record_year" name="record_year" required class="form-control" placeholder="Entry Year" wire:model="record_year"> 
+                    <label for="entry_year">Year:</label>
+                    <input type="number" id="entry_year" name="entry_year" required class="form-control" placeholder="Entry Year" wire:model="entry_year"> 
                 </div>
     
                 <div class="mb-3 form-group col">
@@ -19,13 +20,32 @@
                         <option value="Full Day">Full Day</option>
                     </select>
                 </div>   
-            </div>
-                  <div class="mb-3 form-group col ">
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" id="fullname" name="fullname" required class="form-control" placeholder="Full Name" wire:model="fullname"> 
-                    @error('issue') <span class="text-danger">{{ $message }}</span>@enderror
+    
+                <div class="mb-3 form-group col">
+                    <label for="enrolment_date">Enrolment Date:</label>
+                    <input type="date" id="enrolment_date" name="enrolment_date" required class="form-control" placeholder="Date Enrolled" wire:model="enrolment_date"> 
                 </div>
-        
+            </div>
+            <div class="row">  
+                <div class="mb-3 form-group col">
+                    <label for="first_name">Full Name:</label>
+                    <input type="text" id="first_name" name="first_name" required class="form-control" placeholder="First Name" wire:model="first_name"> 
+                    @error('first_name') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+    
+                <div class="mb-3 form-group col ">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required class="form-control" placeholder="Last Name" wire:model="last_name"> 
+                    @error('last_name') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+    
+                <div class="mb-3 form-group col ">
+                    <label for="relationship_w_child">Relationship With Child:</label>
+                    <input type="text" id="relationship_w_child" name="relationship_w_child" required class="form-control" placeholder="Relationship With Child" wire:model="relationship_w_child"> 
+                    @error('relationship_w_child') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+            </div>
+            <div >
                 <p class='d-inline px-1'>Gender:</p>
           
                     <div class="form-check form-check-inline mb-3">
@@ -41,7 +61,7 @@
                         <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                     </div>
                 
-    
+                </div>
            
     
             <div class='row'>
@@ -56,12 +76,12 @@
                     <input type="text" id="birth_cert_no" name="birth_cert_no" required class="form-control pb-2" placeholder="Birth Cert" wire:model="birth_cert_no">
                     @error('birth_cert_no') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
-
                 <div class="mb-3 form-group col">
                     <label for="birth_cert_no">MyKid No:</label>
                     <input type="text" id="mykid" name="mykid" required class="form-control pb-2" placeholder="MyKid" wire:model="mykid">
                     @error('mykid') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
+            
             
                 <div class="mb-3 form-group col">
                     <label for="pos_in_family">Position in Family:</label>
@@ -95,12 +115,17 @@
                 <input type="text" id="home_add" name="home_add" required class="form-control pb-2" placeholder="Home Address" wire:model="home_add">
                 @error('home_add') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
-
+    
             <div class="row">
                 <div class="mb-3 form-group col">
                     <label for="poscode">Poscode: </label>
                     <input type="text" id="home_add" name="poscode" required class="form-control pb-2" placeholder="Poscode" wire:model="poscode">
                     @error('poscode') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="mb-3 form-group col">
+                    <label for="district">District: </label>
+                    <input type="text" id="district" name="district" required class="form-control pb-2" placeholder="State" wire:model="district">
+                    @error('district') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="mb-3 form-group col">
                     <label for="state">State: </label>
@@ -138,11 +163,86 @@
     
                 <div class="mb-3 form-group col">
                     <label for="no_years">Number of Years:</label>
-                    <input type="number" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" wire:model="no_years">
+                    <input type="text" id="no_years" name="no_years"  class="form-control pb-2" placeholder="No of Years" value="0" wire:model="no_years">
                     @error('no_years') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
     
+            <div class='row'>
+                <div class="mb-3 form-group col">
+                    <p>Why Rhema:</p>
+                  
+                        <label class="form-check-label px-3" for="Reading">
+                            <input type="checkbox" id="Reading" wire:model="reasons" value="Reading"/>
+                            Reading
+                        </label>
+                   
+                        <label class="form-check-label px-3" for="SEL">
+                            <input type="checkbox" id="SEL" wire:model="reasons" value="SEL"/>
+                            SEL
+                        </label>
+             
+                        <label class="form-check-label px-3" for="Play">
+                            <input type="checkbox" id="Play"wire:model="reasons" value="Play"/>
+                            Play
+                        </label>
+                  
+                       
+                        <label class="form-check-label px-3" for="Cost">
+                            <input type="checkbox" id="Cost" wire:model="reasons" value="Cost"/>
+                            Cost
+                        </label>
+           
+                        <label class="form-check-label px-3" for="Locality">
+                            <input type="checkbox" id="Locality" wire:model="reasons" value="Locality"/>
+                            Locality
+                        </label>
+          
+                        <label class="form-check-label px-3" for="RSS">
+                            <input type="checkbox" id="RSS"  wire:model="reasons" value="RSS"/>
+                            RSS
+                        </label>
+               
+                </div>
+    
+                <div class="mb-3 form-group col"> 
+                    <p>Preferred Primary School:</p>
+              
+                    <label class="form-check-label px-3" for="Chung Hua">
+                        <input type="checkbox" id="Chung Hua" wire:model="pref_pri_sch" value="Chung Hua"/>
+                        Chung Hua
+                    </label>
+               
+                    <label class="form-check-label px-3" for="Private">
+                        <input type="checkbox" id="Private" wire:model="pref_pri_sch" value="Private"/>
+                        Private
+                    </label>
+         
+                    <label class="form-check-label px-3" for="National">
+                        <input type="checkbox" id="National"wire:model="pref_pri_sch" value="National"/>
+                        National
+                    </label>
+              
+                   
+                    <label class="form-check-label px-3" for="Others">
+                        <input type="checkbox" id="Others" wire:model="pref_pri_sch" value="Others"/>
+                        Others
+                    </label>
+       
+                    
+                  
+                </div>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="referral">Type:</label>
+                <select class="form-select" wire:model="referral" name="referral" id="referral">
+                    <option value="">Select an option</option>
+                    <option value="Family & Friends">Family & Friends</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Buntings">Buntings</option>
+                </select>
+           
+            </div>
             <div class ="search-box">
                 <div class='row'>
                     <div class="mb-3 form-group col">
@@ -159,8 +259,7 @@
                                 @endif
                             </ul>
                     
-                            <ul >                     
-                            </ul>
+                            
                         @elseif($showcreatenew)
                 
                                 <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
@@ -170,24 +269,29 @@
     
                         @error('father') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
-    
+                
                     
                     <div class="mb-3 form-group col">
                         <label for="mother">Mother: </label>
                         <input required type="text" id="mother" name="mother" wire:keyup="searchResult2" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+            
                         @if($showdiv2)
-                        <ul >
-                            @if(!empty($parents))
-                                @foreach($parents as $record2)
+                            <ul >
+                                @if(!empty($parents2))
+                                    @foreach($parents2 as $record2)
     
-                                    <li  wire:click="fetchMother({{ $record2->parent_id }})">{{ $record2->name}}</li>
+                                        <li  wire:click="fetchMother({{ $record2->parent_id }})" >{{ $record2->name}}</li>
     
-                                @endforeach
-                            @endif
-                        </ul>
+                                    @endforeach
+                                @endif
+                            </ul>
+                    
+                            
                         @elseif($showcreatenew2)
-                            <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
-    
+                
+                                <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
+                        
+                        
                         @endif
                         @error('mother') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
@@ -196,7 +300,7 @@
             
             <div class="row">
                 <div class="mb-3 form-group col">
-                    <label for="e_contact">Emergency Contact (other than parents): </label>
+                    <label for="e_contact">Emergency Contact 1 (other than parents): </label>
                     <input type="text" id="e_contact" name="e_contact" required class="form-control pb-2" placeholder="Name" wire:model="e_contact">
                     @error('e_contact') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
@@ -207,7 +311,6 @@
                     @error('e_contact_hp') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
-    
             <div class="row">
                 <div class="mb-3 form-group col">
                     <label for="e_contact2">Emergency Contact (other than parents): </label>
@@ -258,44 +361,99 @@
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="class">J1 Class: </label>
-                    <input type="text" id="j1_class" name="j1_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j1_class">
+                    <input type="text" id="j1_class" name="j1_class"  class="form-control pb-2"  placeholder="Class" wire:model="j1_class">
                     @error('j1_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
     
                 <div class="mb-3 form-group col">
                     <label for="class">J2 Class: </label>
-                    <input type="text" id="j2_class" name="j2_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j2_class">
+                    <input type="text" id="j2_class" name="j2_class"  class="form-control pb-2"  placeholder="Class" wire:model="j2_class">
                     @error('j2_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
     
                 <div class="mb-3 form-group col">
                     <label for="class">J3 Class: </label>
-                    <input type="text" id="j3_class" name="j3_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j3_class">
-                    @error('j1_class') <span class="text-danger">{{ $message }}</span>@enderror
+                    <input type="text" id="j3_class" name="j3_class"  class="form-control pb-2"  placeholder="Class" wire:model="j3_class">
+                    @error('j3_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
     
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="class">Afternoon Class J1: </label>
-                    <input type="text" id="aft_j1_class" name="aft_j1_class"  class="form-control pb-2" value="Not Assigned"  placeholder="Class" wire:model="aft_j1_class">
-                    @error('j1_class') <span class="text-danger">{{ $message }}</span>@enderror
+                    <input type="text" id="aft_j1_class" name="aft_j1_class"  class="form-control pb-2"placeholder="Class" wire:model="aft_j1_class">
+                    @error('aft_j1_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
     
                 <div class="mb-3 form-group col">
                     <label for="class">Afternoon Class J2: </label>
-                    <input type="text" id="aft_j2_class" name="aft_j2_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="aft_j2_class">
-                    @error('j1_class') <span class="text-danger">{{ $message }}</span>@enderror
+                    <input type="text" id="aft_j2_class" name="aft_j2_class"  class="form-control pb-2" placeholder="Class" wire:model="aft_j2_class">
+                    @error('aft_j2_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
     
                 <div class="mb-3 form-group col">
                     <label for="class">Afternoon Class J3: </label>
-                    <input type="text" id="aft_j3_class" name="j1_class"  class="form-control pb-2"  value="Not Assigned" placeholder="Class" wire:model="aft_j3_class">
-                    @error('j1_class') <span class="text-danger">{{ $message }}</span>@enderror
+                    <input type="text" id="aft_j3_class" name="aft_j3_class"  class="form-control pb-2" placeholder="Class" wire:model="aft_j3_class">
+                    @error('aft_j3_class') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
-            <button wire:click="cancel()" class="btn btn-danger">Cancel</button>
+            <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
             <button wire:click.prevent="updateStudent()" class="btn btn-primary pt-1">Submit</button>
         </form>
+    </div>
+        <!-- Insert Modal -->
+    <div wire:ignore.self class="modal fade" id="parentsModal" tabindex="-1" aria-labelledby="studentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentModalLabel">Create Parent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    wire:click="closeModal()"></button>
+            </div>
+            <form >
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input required type="text" wire:model="name" class="form-control">
+                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>IC number</label>
+                        <input required type="text" wire:model="ic_no" class="form-control">
+                        @error('ic_no') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Occupation</label>
+                        <input required type="text" wire:model="occupation" class="form-control">
+                        @error('occupation') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Company Name</label>
+                        <input required type="text" wire:model="company_name" class="form-control">
+                        @error('company_name') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Company Address</label>
+                        <input required type="text" wire:model="company_add" class="form-control">
+                        @error('company_add') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input  type="email" wire:model="email" class="form-control">
+                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Tel no</label>
+                        <input required type="text" wire:model="tel" class="form-control">
+                        @error('tel') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="closeModal()"
+                        data-bs-dismiss="modal">Close</button>
+                    <button wire:click.prevent="storeParent()" class="btn btn-primary">Save</button>
+                </div>
+            </form>
 </div>
 </div>

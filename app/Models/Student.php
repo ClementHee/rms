@@ -12,9 +12,14 @@ class Student extends Model
     protected $primaryKey = 'student_id';
     public $timestamps = false;
     protected $fillable = [
-            'record_year',
+            'enrolment_date', 
+            'referral', 
+            'reasons', 
+            'pref_pri_sch',
+            'entry_year',
             'type',
-            'fullname',
+            'first_name',
+            'last_name',
             'gender',
             'dob',
             'birth_cert_no',

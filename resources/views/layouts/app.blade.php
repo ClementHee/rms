@@ -6,13 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-  
-   
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -48,10 +42,7 @@
         .search-box ul li:hover{
             cursor: pointer;
         }
-    
-        
-        </style>
-
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -59,10 +50,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <script>
-
-        // Enable pusher logging - don't include this in production
-        
-    
         var pusher = new Pusher('ea44c0267e7076ff3041', {
           cluster: 'ap1'
         });
@@ -72,29 +59,15 @@
             toastr.success('There is a new request');
         });
     
-    
-    $(document).ready(function() {
-       
-        //success toast
-            
-                
+    $(document).ready(function() {      
                 toastr.options = {
                     autoClose: true,
                     progressBar: true,
                     sound: true
-                };
-                
-                
-                
-            
-            
+                };         
           });
-    
         </script>
-   
     @livewireStyles
-    
-
 </head>
 <body>
     <div id="app">
@@ -140,10 +113,12 @@
                                     <a class="nav-link" href="{{ route('student') }}">Students</a>
 
                                     <a class="nav-link" href="{{ route('parent') }}">Parents</a>
+                                    
                                     <a class="nav-link" href="{{ route('student_parent') }}">All Details</a>
                                 </div>
                             </li>
                             @role('SuperAdmin')
+                            <li><a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a></li>
                             <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
                             @endrole

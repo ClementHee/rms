@@ -1,6 +1,4 @@
 <div>
-
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,10 +8,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4>Students
-                            <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
-                            <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
-                        </h4>
+                        <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
+                        <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
                     </div>
                     <div class="card-body">
                         <table class="table table-borderd table-striped">
@@ -24,6 +20,7 @@
                                     <th>Gender</th>
                                     <th>D.O.B</th>
                                     <th>Birth Cert</th>
+                                    <th>MyKid</th>
                                     <th>Morning Class</th>
                                     <th>Afternoon Class</th>
                                     <th width='250px'>Actions</th>
@@ -33,7 +30,7 @@
                                 @forelse ($students as $student)
                                     <tr>
                                    
-                                        <td>{{ $student->fullname }}</td>
+                                        <td>{{ $student->first_name." ".$student->last_name }}</td>
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>

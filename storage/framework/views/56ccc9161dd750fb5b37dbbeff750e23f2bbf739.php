@@ -11,7 +11,7 @@
 
     <!-- Fonts -->
   
-   
+    <script src="https://cdn.tailwindcss.com"></script> 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

@@ -1,12 +1,13 @@
 <div class='container'>
-    <h2>Add Student</h2>
-    
-    <form class="form-inline">
+    <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
+
+        <h2>New Student</h2>
+
         @csrf
         <div class="row">
             <div class="mb-3 form-group col">
-                <label for="record_year">Year:</label>
-                <input type="number" id="record_year" name="record_year" required class="form-control" placeholder="Entry Year" wire:model="record_year"> 
+                <label for="entry_year">Year:</label>
+                <input type="number" id="entry_year" name="entry_year" required class="form-control" placeholder="Entry Year" wire:model="entry_year"> 
             </div>
 
             <div class="mb-3 form-group col">
@@ -17,13 +18,32 @@
                     <option value="Full Day">Full Day</option>
                 </select>
             </div>   
-        </div>
-              <div class="mb-3 form-group col ">
-                <label for="fullname">Full Name:</label>
-                <input type="text" id="fullname" name="fullname" required class="form-control" placeholder="Full Name" wire:model="fullname"> 
-                @error('issue') <span class="text-danger">{{ $message }}</span>@enderror
+
+            <div class="mb-3 form-group col">
+                <label for="enrolment_date">Enrolment Date:</label>
+                <input type="date" id="enrolment_date" name="enrolment_date" required class="form-control" placeholder="Date Enrolled" wire:model="enrolment_date"> 
             </div>
-    
+        </div>
+        <div class="row">  
+            <div class="mb-3 form-group col">
+                <label for="first_name">Full Name:</label>
+                <input type="text" id="first_name" name="first_name" required class="form-control" placeholder="First Name" wire:model="first_name"> 
+                @error('first_name') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col ">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required class="form-control" placeholder="Last Name" wire:model="last_name"> 
+                @error('last_name') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col ">
+                <label for="relationship_w_child">Relationship With Child:</label>
+                <input type="text" id="relationship_w_child" name="relationship_w_child" required class="form-control" placeholder="Relationship With Child" wire:model="relationship_w_child"> 
+                @error('relationship_w_child') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
+        <div >
             <p class='d-inline px-1'>Gender:</p>
       
                 <div class="form-check form-check-inline mb-3">
@@ -39,7 +59,7 @@
                     <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                 </div>
             
-
+            </div>
        
 
         <div class='row'>
@@ -146,6 +166,81 @@
             </div>
         </div>
 
+        <div class='row'>
+            <div class="mb-3 form-group col">
+                <p>Why Rhema:</p>
+              
+                    <label class="form-check-label px-3" for="Reading">
+                        <input type="checkbox" id="Reading" wire:model="reasons" value="Reading"/>
+                        Reading
+                    </label>
+               
+                    <label class="form-check-label px-3" for="SEL">
+                        <input type="checkbox" id="SEL" wire:model="reasons" value="SEL"/>
+                        SEL
+                    </label>
+         
+                    <label class="form-check-label px-3" for="Play">
+                        <input type="checkbox" id="Play"wire:model="reasons" value="Play"/>
+                        Play
+                    </label>
+              
+                   
+                    <label class="form-check-label px-3" for="Cost">
+                        <input type="checkbox" id="Cost" wire:model="reasons" value="Cost"/>
+                        Cost
+                    </label>
+       
+                    <label class="form-check-label px-3" for="Locality">
+                        <input type="checkbox" id="Locality" wire:model="reasons" value="Locality"/>
+                        Locality
+                    </label>
+      
+                    <label class="form-check-label px-3" for="RSS">
+                        <input type="checkbox" id="RSS"  wire:model="reasons" value="RSS"/>
+                        RSS
+                    </label>
+           
+            </div>
+
+            <div class="mb-3 form-group col"> 
+                <p>Preferred Primary School:</p>
+          
+                <label class="form-check-label px-3" for="Chung Hua">
+                    <input type="checkbox" id="Chung Hua" wire:model="pref_pri_sch" value="Chung Hua"/>
+                    Chung Hua
+                </label>
+           
+                <label class="form-check-label px-3" for="Private">
+                    <input type="checkbox" id="Private" wire:model="pref_pri_sch" value="Private"/>
+                    Private
+                </label>
+     
+                <label class="form-check-label px-3" for="National">
+                    <input type="checkbox" id="National"wire:model="pref_pri_sch" value="National"/>
+                    National
+                </label>
+          
+               
+                <label class="form-check-label px-3" for="Others">
+                    <input type="checkbox" id="Others" wire:model="pref_pri_sch" value="Others"/>
+                    Others
+                </label>
+   
+                
+              
+            </div>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="referral">Type:</label>
+            <select class="form-select" wire:model="referral" name="referral" id="referral">
+                <option value="">Select an option</option>
+                <option value="Family & Friends">Family & Friends</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Buntings">Buntings</option>
+            </select>
+       
+        </div>
         <div class ="search-box">
             <div class='row'>
                 <div class="mb-3 form-group col">

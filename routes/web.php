@@ -12,8 +12,8 @@ use App\Http\Livewire\MaterialRequest;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Livewire\ParentStudentsSiblingsRelationship;
-
+use App\Http\Livewire\AllDetails;
+use App\Http\Livewire\Siblingslist;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,7 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/maintainence',App\Http\Livewire\Maintainences::class)->name('maintainence');
 
     Route::get('/request_materials',App\Http\Livewire\MaterialRequests::class)->name('request_materials');
-    Route::get('/students_parents',ParentStudentsSiblingsRelationship::class)->name('student_parent');
+    Route::get('/students_parents',AllDetails::class)->name('student_parent');
+    Route::get('/siblingslist',Siblingslist::class)->name('siblingslist');
 
 });
 
