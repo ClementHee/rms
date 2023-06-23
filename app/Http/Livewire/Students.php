@@ -255,10 +255,16 @@ class Students extends Component
         $mother_name = Parents::where('parent_id',($student->mother))->get('name')->first();
        
         $students = Student::findOrFail($id);
-        $refferal_final = explode(" -- ",$students->referral);
-        $this->referral=$refferal_final[0];
-        $this->refferal_other=$refferal_final[1];
-
+        if($student->referral!=""){
+            $refferal_final = explode(" -- ",$students->referral);
+            $this->referral=$refferal_final[0];
+            $this->refferal_other=$refferal_final[1];
+        }else{
+            $this->referral = $students->referral;
+            $this->referral_other = "";
+        }
+        
+        
         $this->student_id=$id;
         $this->enrolment_date=$students->enrolment_date;
         $this->entry_year=$students->entry_year;
