@@ -141,6 +141,16 @@
     
     
             <div class='row'>
+                <div class="mb-3 col form-group">
+                    <label for="time_to_sch">Time to reach School: </label>
+                    <select class="form-select" wire:model="time_to_sch" name="time_to_sch" id="time_to_sch">
+                        <option value="">Select an option</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                        <option value="45+">More than 45</option>
+                    </select>
+                </div>
                 <div class="mb-3 form-group col">
                     <label for="home_lang">Home Language: </label>
                     <input type="text" id="home_lang" name="home_lang" required class="form-control pb-2" placeholder="Home Language" wire:model="home_lang">
@@ -233,34 +243,53 @@
                   
                 </div>
             </div>
-            <div class="mb-3 form-group">
-                <label for="referral">Type:</label>
-                <select class="form-select" wire:model="referral" name="referral" id="referral">
-                    <option value="">Select an option</option>
-                    <option value="Family & Friends">Family & Friends</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Buntings">Buntings</option>
-                </select>
-           
+
+            <div class="row">
+                <div class="mb-3 col form-group">
+                    <label for="referral">How did you hear about Tadika Rhema:</label>
+                    <select class="form-select" wire:model="referral" name="referral" id="referral">
+                        <option value="">Select an option</option>
+                        <option value="Family & Friends">Family & Friends</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Street Banner">Street Banner</option>
+                        <option value="Family & Friends">Open Day</option>
+                        <option value="Radio">Radio</option>
+                        <option value="Emails">Emails</option>
+                        <option value="Website">Website</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                    @if ($this->referral=="Other")
+                    <div class="mb-3 form-group col">
+                        <label for="referral">Please List:</label>
+                        <input type="text" id="referral_other" name="referral_other"  class="form-control pb-2"  wire:model="referral_other">
+                        @error('referral_other') <span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    @else
+                    
+                    @endif
             </div>
+
             <div class ="search-box">
                 <div class='row'>
                     <div class="mb-3 form-group col">
                         <label for="father">Father: </label>
-                        <input required type="text" id="father" name="father" wire:keyup="searchResult" class="form-control" placeholder="Father's name" wire:model="father">
-                        @if($showdiv)
+                        <input required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
+                        @if($showmodal_father)
                             <ul >
-                                @if(!empty($parents))
-                                    @foreach($parents as $record)
+                                @if(!empty($parent_father))
+                                    @foreach($parent_father as $record_father)
     
-                                        <li  wire:click="fetchFather({{ $record->parent_id }})" >{{ $record->name}}</li>
+                                        <li  wire:click="fetchFather({{ $record_father->parent_id }})" >{{ $record_father->name}}</li>
     
                                     @endforeach
                                 @endif
                             </ul>
                     
                             
-                        @elseif($showcreatenew)
+                        @elseif($createnew_father)
                 
                                 <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
                         
@@ -273,21 +302,21 @@
                     
                     <div class="mb-3 form-group col">
                         <label for="mother">Mother: </label>
-                        <input required type="text" id="mother" name="mother" wire:keyup="searchResult2" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+                        <input required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
             
-                        @if($showdiv2)
+                        @if($showmodal_mother)
                             <ul >
-                                @if(!empty($parents2))
-                                    @foreach($parents2 as $record2)
+                                @if(!empty($parent_mother))
+                                    @foreach($parent_mother as $record_mother)
     
-                                        <li  wire:click="fetchMother({{ $record2->parent_id }})" >{{ $record2->name}}</li>
+                                        <li  wire:click="fetchMother({{ $record_mother->parent_id }})" >{{ $record_mother->name}}</li>
     
                                     @endforeach
                                 @endif
                             </ul>
                     
                             
-                        @elseif($showcreatenew2)
+                        @elseif($createnew_mother)
                 
                                 <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
                         

@@ -53,9 +53,12 @@ class Student extends Model
             'j3_class',
             'aft_j1_class',
             'aft_j2_class',
-            'aft_j3_class'
+            'aft_j3_class',
+            'time_to_sch',
     ];
 
-
-    
+    public static function concat_fullname()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    } 
 }

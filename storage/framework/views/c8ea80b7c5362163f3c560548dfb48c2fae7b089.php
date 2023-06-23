@@ -247,6 +247,16 @@ unset($__errorArgs, $__bag); ?>
 
 
         <div class='row'>
+            <div class="mb-3 col form-group">
+                <label for="time_to_sch">Time to reach School: </label>
+                <select class="form-select" disabled wire:model="time_to_sch" name="time_to_sch" id="time_to_sch">
+                    <option value="">Select an option</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                    <option value="45+">More than 45</option>
+                </select>
+            </div>
             <div class="mb-3 form-group col">
                 <label for="home_lang">Home Language: </label>
                 <input readonly type="text" id="home_lang" name="home_lang" required class="form-control pb-2" placeholder="Home Language" wire:model="home_lang">
@@ -367,33 +377,32 @@ unset($__errorArgs, $__bag); ?>
               
             </div>
         </div>
+
         <div class="mb-3 form-group">
-            <label for="referral">Type:</label>
-            <select disabled class="form-select" wire:model="referral" name="referral" id="referral">
-                <option value="">Select an option</option>
-                <option value="Family & Friends">Family & Friends</option>
-                <option value="Social Media">Social Media</option>
-                <option value="Buntings">Buntings</option>
-            </select>
+            <label for="referral">How did you hear about Tadika Rhema:</label>
+            <input readonly type="text" id="referral" name="referral"  class="form-control pb-2"  wire:model="referral">
         </div>
+
+        
+
         <div class ="search-box">
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="father">Father: </label>
-                    <input readonly type="text" id="father" name="father" wire:keyup="searchResult" class="form-control" placeholder="Father's name" wire:model="father">
-                    <?php if($showdiv): ?>
+                    <input required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
+                    <?php if($showmodal_father): ?>
                         <ul >
-                            <?php if(!empty($parents)): ?>
-                                <?php $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(!empty($parent_father)): ?>
+                                <?php $__currentLoopData = $parent_father; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record_father): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                    <li  wire:click="fetchFather(<?php echo e($record->parent_id); ?>)" ><?php echo e($record->name); ?></li>
+                                    <li  wire:click="fetchFather(<?php echo e($record_father->parent_id); ?>)" ><?php echo e($record_father->name); ?></li>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
                         </ul>
                 
                         
-                    <?php elseif($showcreatenew): ?>
+                    <?php elseif($createnew_father): ?>
             
                             <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
                     
@@ -413,21 +422,21 @@ unset($__errorArgs, $__bag); ?>
                 
                 <div class="mb-3 form-group col">
                     <label for="mother">Mother: </label>
-                    <input readonly type="text" id="mother" name="mother" wire:keyup="searchResult2" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+                    <input required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
         
-                    <?php if($showdiv2): ?>
+                    <?php if($showmodal_mother): ?>
                         <ul >
-                            <?php if(!empty($parents2)): ?>
-                                <?php $__currentLoopData = $parents2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(!empty($parent_mother)): ?>
+                                <?php $__currentLoopData = $parent_mother; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record_mother): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                    <li  wire:click="fetchMother(<?php echo e($record2->parent_id); ?>)" ><?php echo e($record2->name); ?></li>
+                                    <li  wire:click="fetchMother(<?php echo e($record_mother->parent_id); ?>)" ><?php echo e($record_mother->name); ?></li>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
                         </ul>
                 
                         
-                    <?php elseif($showcreatenew2): ?>
+                    <?php elseif($createnew_mother): ?>
             
                             <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >Add Parent</button>
                     

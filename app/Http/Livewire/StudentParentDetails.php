@@ -98,7 +98,9 @@ final class StudentParentDetails extends PowerGridComponent
         return PowerGrid::eloquent()
         ->addColumn('record_year')
         ->addColumn('type')
-        ->addColumn('first_name'.'last_name')
+        ->addColumn('fullname',function (Relationship $s){
+            return $s->first_name." ".$s->last_name;
+        })
         ->addColumn('gender')
         ->addColumn('dob')
         ->addColumn('birth_cert_no')
@@ -148,8 +150,8 @@ final class StudentParentDetails extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Student','first_name'.'last_name')->sortable()->searchable(),
-            Column::make('Entry Year','record_year')->sortable()->searchable(),
+            Column::make('Student','fullname')->sortable()->searchable(),
+            Column::make('Entry Year','entry_year')->sortable()->searchable(),
             Column::make('Type', 'type')->searchable()->sortable(),
             Column::make('Birth Cert', 'birth_cert_no')->sortable()->searchable(),
             Column::make('MyKid', 'mykid')->sortable()->searchable(),

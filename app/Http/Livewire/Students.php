@@ -13,26 +13,26 @@ class Students extends Component
     public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
     public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
     public $others,$potential,$father,$mother;
-    public $enrolment_date, $referral,$relationship_w_child;
+    public $enrolment_date, $referral,$relationship_w_child,$time_to_sch;
     public array $reasons;
     public array $pref_pri_sch;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class;
     public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
     public $mode = 'view';
     public $search ='';
-    public $parents;
-    public $parents2;
-    public $showdiv=false;
-    public $showdiv2=false;
-    public $showcreatenew=false;
-    public $showcreatenew2= false;
+    public $parent_father;
+    public $parent_mother;
+    public $referral_other;
+    public $showmodal_father=false;
+    public $showmodal_mother=false;
+    public $createnew_father=false;
+    public $createnew_mother= false;
 
     use WithPagination;
     protected $paginationTheme ='bootstrap';
 
     public function render()
     {
-       
         $students = Student::where('first_name', 'like', '%'.$this->search.'%')->orderBy('first_name','ASC')->paginate(10);
         
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
@@ -112,86 +112,84 @@ class Students extends Component
         $this->aft_j1_class=$students->aft_j1_class;
         $this->aft_j2_class=$students->aft_j2_class;
         $this->aft_j3_class=$students->aft_j3_class;
+        $this->time_to_sch=$students->time_to_sch;
         
  
         $this->mode = 'single';
     }
 
-    public function searchResult(){
+    public function searchResult_Father(){
 
         if(!empty($this->father)){
             
-            $this->parents = Parents::select('*')
+            $this->parent_father = Parents::select('*')
                       ->where('name','like','%'.$this->father.'%')
                       ->limit(5)
                       ->get();
 
             
-            if(count($this->parents)==0){
-                $this->showdiv = false;
-                $this->showcreatenew = true;
+            if(count($this->parent_father)==0){
+                $this->showmodal_father = false;
+                $this->createnew_father = true;
            
                 
             }else{
-                $this->showdiv = true;
+                $this->showmodal_father = true;
             }
         }else{
-            $this->showdiv = false;
-            $this->showcreatenew = false;
+            $this->showmodal_father = false;
+            $this->createnew_father = false;
         }
       
     }
 
-    public function searchResult2(){
+    public function searchResult_Mother(){
     
         if(!empty($this->mother)){
             
-            $this->parents2 = Parents::select('*')
+            $this->parent_mother = Parents::select('*')
                       ->where('name','like','%'.$this->mother.'%')
                       ->limit(5)
                       ->get();
 
-            if(count($this->parents2)==0){
-                $this->showdiv2 = false;
-                $this->showcreatenew2 = true;
+            if(count($this->parent_mother)==0){
+                $this->showmodal_mother = false;
+                $this->createnew_mother = true;
        
             }else{
-                $this->showdiv2 = true;
+                $this->showmodal_mother = true;
             }
         }else{
             
-            $this->showdiv2 = false;
-            $this->showcreatenew2 = false;
+            $this->showmodal_mother = false;
+            $this->createnew_mother = false;
         }
         
     }
 
     public function fetchFather($id = 0){
 
-        $record = Parents::select('*')
+        $record_father = Parents::select('*')
                     ->where('parent_id',$id)
                     ->first();
 
-        $this->father = $record->name;
+        $this->father = $record_father->name;
         
-        $this->showdiv = false;
-        $this->showcreatenew = false;
+        $this->showmodal_father = false;
+        $this->createnew_father = false;
     }
 
     public function fetchMother($id = 0){
 
-        $record2 = Parents::select('*')
+        $record_mother = Parents::select('*')
                     ->where('parent_id',$id)
                     ->first();
 
-        $this->mother = $record2->name;
+        $this->mother = $record_mother->name;
         
-        $this->showdiv2 = false;
-        $this->showcreatenew2 = false;
+        $this->showmodal_mother = false;
+        $this->createnew_mother = false;
     }
-
-    
-    
 
     private function resetInputFields(){
         $this->student_id='';
@@ -214,7 +212,7 @@ class Students extends Component
         $this->home_add='';
         $this->poscode='';
         $this->state='';
-        $this->country='';
+        $this->district='';
         $this->country='';
         $this->home_lang='';
         $this->home_tel='';
@@ -238,6 +236,8 @@ class Students extends Component
         $this->aft_j1_class='';
         $this->aft_j2_class='';
         $this->aft_j3_class='';
+        $this->time_to_sch='';
+        $this->referral_other='';
         
     }
 
@@ -255,6 +255,10 @@ class Students extends Component
         $mother_name = Parents::where('parent_id',($student->mother))->get('name')->first();
        
         $students = Student::findOrFail($id);
+        $refferal_final = explode(" -- ",$students->referral);
+        $this->referral=$refferal_final[0];
+        $this->refferal_other=$refferal_final[1];
+
         $this->student_id=$id;
         $this->enrolment_date=$students->enrolment_date;
         $this->entry_year=$students->entry_year;
@@ -290,7 +294,6 @@ class Students extends Component
         $this->potential=$students->potential;
         $this->reasons=explode(", ",$students->reasons);
         $this->pref_pri_sch=explode(", ",$students->pref_pri_sch);
-        $this->referral=$students->referral;
         $this->father=$father_name->name;
         $this->mother=$mother_name->name;
         $this->j1_class=$students->j1_class;
@@ -299,6 +302,7 @@ class Students extends Component
         $this->aft_j1_class=$students->aft_j1_class;
         $this->aft_j2_class=$students->aft_j2_class;
         $this->aft_j3_class=$students->aft_j3_class;
+        $this->time_to_sch=$students->time_to_sch;
         
  
         $this->mode = 'update';
@@ -308,16 +312,27 @@ class Students extends Component
     public function storeStudent()
     {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
-        
+       
+        if($father_id==NULL){
+        $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
+ 
+        }
+        if($mother_id==NULL){
+        $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
        if($this->no_years==""){
         $this->no_years=0;  
        }
+
+       $refferal_final=$this->referral;
        
-        
+       if ($this->referral=='Other'){
+            $refferal_final=$this->referral." -- ".$this->referral_other;
+       }
         Student::create([
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
-            'referral'=>$this->referral,
+            'referral'=>$refferal_final,
             'reasons'=>implode(", ",$this->reasons),
             'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
             'type'=> $this->type,
@@ -357,6 +372,8 @@ class Students extends Component
             'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
             'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
             'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
+            'time_to_sch'=>$this->time_to_sch
+
         ]);
 
         $student_id=Student::where('birth_cert_no',$this->birth_cert_no)->get('student_id')->first();
@@ -377,9 +394,19 @@ class Students extends Component
     {
         $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
         $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+        if($father_id=NULL){
+            $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
+        if($mother_id=NULL){
+            $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
         
         $editing_student = Student::find($this->student_id);
-        
+        $refferal_final=$this->referral;
+       
+        if ($this->referral=='Others'){
+             $refferal_final=$this->referral." -- ".$this->referral_other;
+        }
         $editing_student->update([
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
@@ -423,6 +450,7 @@ class Students extends Component
             'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
             'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
             'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
+            'time_to_sch'=>$this->time_to_sch
         ]);
 
         
@@ -470,10 +498,10 @@ class Students extends Component
   
         
         
-        $showdiv=false;
-        $showdiv2=false;
-        $showcreatenew=false;
-        $showcreatenew2= false;
+        $showmodal_father=false;
+        $showmodal_mother=false;
+        $createnew_father=false;
+        $createnew_mother= false;
         
         $this->resetInputFields_Parents();
         $this->dispatchBrowserEvent('close-modal');
@@ -488,9 +516,11 @@ class Students extends Component
 
     public function closeModal(){
         $this->resetInputFields_Parents();
-        $showdiv=false;
-        $showdiv2=false;
-        $showcreatenew=false;
-        $showcreatenew2= false;
+        $showmodal_father=false;
+        $showmodal_mother=false;
+        $createnew_father=false;
+        $createnew_mother= false;
     }
+
+    
 }
