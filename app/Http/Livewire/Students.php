@@ -400,12 +400,13 @@ class Students extends Component
     {
         $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
         $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
-        if($father_id=NULL){
+        if($father_id==NULL){
             $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
-        }
-        if($mother_id=NULL){
+     
+            }
+            if($mother_id==NULL){
             $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
-        }
+            }
         
         $editing_student = Student::find($this->student_id);
         $refferal_final=$this->referral;
