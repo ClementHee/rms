@@ -20,6 +20,23 @@
                         @error('occupation') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="mb-3">
+                        <p class='d-inline px-1'>Gender:</p>
+                  
+                            <div class="form-check form-check-inline mb-3">
+                                
+                                <label class="form-check-label">Male</label>
+                                <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
+            
+                            </div>
+            
+                            <div class="form-check form-check-inline  mb-3">
+                                
+                                <label class="form-check-label">Female</label>
+                                <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
+                            </div>
+                        
+                    </div>
+                    <div class="mb-3">
                         <label>Company Name</label>
                         <input  readonly type="text" wire:model="company_name" class="form-control">
                         @error('company_name') <span class="text-danger">{{ $message }}</span> @enderror

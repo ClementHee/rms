@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class ParentsL extends Component
 {
-    public $name, $ic_no, $occupation, $company_name, $company_add, $email, $tel;
+    public $name, $ic_no, $occupation,$gender, $company_name, $company_add, $email, $tel;
     public $search = '';
     public $updateMode = false;
     public $mode = 'view';
@@ -20,6 +20,7 @@ class ParentsL extends Component
         $this->name = '';
         $this->ic_no= '';
         $this->occupation= '';
+        $this->gender='';
         $this->company_name= '';
         $this->company_add= '';
         $this->email= '';
@@ -57,6 +58,7 @@ class ParentsL extends Component
             'name' => $this->name,
             'ic_no' => $this->ic_no,
             'occupation' => $this->occupation,
+            'gender' => $this->gender,
             'company_name' => $this->company_name,
             'company_add' => $this->company_add,
             'email' => $this->email,
@@ -77,6 +79,7 @@ class ParentsL extends Component
         $this->name = $parents->name;
         $this->ic_no = $parents->ic_no;
         $this->occupation = $parents->occupation;
+        $this->gender = $parents->gender;
         $this->company_name = $parents->company_name;
         $this->company_add = $parents->company_add;
         $this->email = $parents->email;
@@ -94,6 +97,7 @@ class ParentsL extends Component
         $this->name = $parents->name;
         $this->ic_no = $parents->ic_no;
         $this->occupation = $parents->occupation;
+        $this->gender = $parents->gender;
         $this->company_name = $parents->company_name;
         $this->company_add = $parents->company_add;
         $this->email = $parents->email;
@@ -110,6 +114,7 @@ class ParentsL extends Component
             'name' => $this->name,
             'ic_no' => $this->ic_no,
             'occupation' => $this->occupation,
+            'gender' => $this->gender,
             'company_name' => $this->company_name,
             'company_add' => $this->company_add,
             'email' => $this->email,

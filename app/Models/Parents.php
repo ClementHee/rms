@@ -15,6 +15,7 @@ class Parents extends Model
             'name',
             'ic_no',
             'occupation',
+            'parents',
             'company_name',
             'company_add',
             'email',
