@@ -9,35 +9,26 @@ use App\Models\Relationship;
 use Livewire\WithPagination;
 
 class Students extends Component
-{
-    public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
-    public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
-    public $others,$potential,$father,$mother;
-    public $enrolment_date, $referral,$relationship_w_child,$time_to_sch;
-    public array $reasons;
-    public array $pref_pri_sch;
-    public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class;
-    public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
+{   
+    use WithPagination;
+    protected $paginationTheme ='bootstrap';
     public $mode = 'view';
     public $search ='';
-    public $parent_father;
-    public $parent_mother;
-    public $referral_other;
+    public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
+    public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
+    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch;
+    public array $reasons, $pref_pri_sch;
+    public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class, $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
+    public $parent_father,$parent_mother, $referral_other;
     public $showmodal_father=false;
     public $showmodal_mother=false;
     public $createnew_father=false;
     public $createnew_mother= false;
 
-    use WithPagination;
-    protected $paginationTheme ='bootstrap';
-
     public function render()
     {
-        $students = Student::where('first_name', 'like', '%'.$this->search.'%')->orderBy('first_name','ASC')->paginate(10);
-        
+        $students = Student::where('first_name', 'like', '%'.$this->search.'%')->orderBy('first_name','ASC')->paginate(10);      
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
-    
-     
     }
 
    public function updatingSearch()
@@ -47,26 +38,110 @@ class Students extends Component
     public function create_new(){
         $this->resetInputFields();
         $this->mode = 'create';
-   
     }
+
     public function list_all(){
-        
         $this->mode = 'view';
-   
     }
 
     public function view_only(){
-        
+
         $this->mode = 'single';
-   
     }
 
+    public function cancel()
+    {
+        $this->mode = 'view';
+        $this->resetInputFields();
+    }
+
+    public function storeStudent()
+    {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
+       $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+       
+        if($father_id==NULL){
+        $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
+ 
+        }
+        if($mother_id==NULL){
+        $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
+       if($this->no_years==""){
+        $this->no_years=0;  
+       }
+
+       $referral_final=$this->referral;
+       
+       if ($this->referral=='Other'){
+            $referral_final=$this->referral." -- ".$this->referral_other;
+       }
+        Student::create([
+            'entry_year'=> $this->entry_year,
+            'enrolment_date'=>$this->enrolment_date,
+            'referral'=>$refferal_final,
+            'reasons'=>implode(", ",$this->reasons),
+            'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
+            'type'=> $this->type,
+            'first_name'=>trim($this->first_name),
+            'last_name'=>trim($this->last_name),
+            'gender'=> $this->gender,
+            'dob'=> $this->dob,
+            'birth_cert_no'=> trim($this->birth_cert_no),
+            'mykid'=>trim($this->mykid),
+            'pos_in_family'=> $this->pos_in_family,
+            'race'=> trim($this->race),
+            'nationality'=> trim($this->nationality),
+            'prev_kindy' => trim($this->prev_kindy),
+            'no_years' => trim($this->no_years),
+            'religion'=> trim($this->religion),
+            'home_add'=> trim($this->home_add),
+            'poscode'=>trim($this->poscode),
+            'state' => trim($this->state),
+            'country'=>trim($this->country),
+            'district'=>trim($this->district),
+            'home_lang'=> trim($this->home_lang),
+            'home_tel'=> trim($this->home_tel),
+            'e_contact'=> trim($this->e_contact),
+            'e_contact_hp'=>trim( $this->e_contact_hp),
+            'e_contact2'=> trim($this->e_contact2),
+            'e_contact2_hp'=> trim($this->e_contact2_hp),
+            'fam_doc'=> trim($this->fam_doc),
+            'fam_doc_hp'=> trim($this->fam_doc_hp),
+            'allergies'=> trim($this->allergies),
+            'others'=> trim($this->  others),
+            'potential'=> trim($this->potential),
+            'father'=> $father_id->parent_id,
+            'mother'=> $mother_id->parent_id,
+            'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
+            'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
+            'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
+            'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
+            'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
+            'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
+            'time_to_sch'=>$this->time_to_sch
+
+        ]);
+
+        $student_id=Student::where('birth_cert_no',$this->birth_cert_no)->get('student_id')->first();
+        Relationship::create([
+            'student' => $student_id->student_id,
+            'father' => $father_id->parent_id,
+            'mother' => $mother_id->parent_id
+        ]);
+
+        session()->flash('message', 'Student added Successfully.');
+  
+        $this->resetInputFields();
+        $this->mode = 'view';
+        
+    }
     public function viewStudent($id)
     {
         $students = Student::findOrFail($id);
 
         $father_name = Parents::where('parent_id',($students->father))->get('name')->first();
         $mother_name = Parents::where('parent_id',($students->mother))->get('name')->first();
+        
        
         $this->student_id=$id;
         $this->enrolment_date=$students->enrolment_date;
@@ -114,9 +189,159 @@ class Students extends Component
         $this->aft_j3_class=$students->aft_j3_class;
         $this->time_to_sch=$students->time_to_sch;
         
- 
         $this->mode = 'single';
     }
+
+    public function editStudent($id)
+    {   
+        $student = Student::findOrFail($id);
+      
+        $father_name = Parents::where('parent_id',($student->father))->get('name')->first();
+        $mother_name = Parents::where('parent_id',($student->mother))->get('name')->first();
+        
+        $students = Student::findOrFail($id);
+        if(substr($student->referral,0,5)=="Other"){
+            $referral_final = explode(" -- ",$students->referral);
+            
+            $this->referral=$referral_final[0];
+            $this->referral_other=$referral_final[1];
+            
+        }else{
+            $this->referral = $students->referral;
+            $this->referral_other = "";
+        }
+        
+        
+        $this->student_id=$id;
+        $this->enrolment_date=$students->enrolment_date;
+        $this->entry_year=$students->entry_year;
+        $this->type=$students->type;
+        $this->first_name=$students->first_name;
+        $this->last_name=$students->last_name;
+        $this->relationship_w_child=$students->relationship_w_child;
+        $this->gender=$students->gender;
+        $this->dob=$students->dob;
+        $this-> birth_cert_no=$students->birth_cert_no;
+        $this->mykid=$students->mykid;
+        $this->pos_in_family=$students->pos_in_family;
+        $this->race=$students->race;
+        $this-> nationality=$students->nationality;
+        $this->prev_kindy=$students->prev_kindy;
+        $this->no_years=$students->no_years;
+        $this->religion=$students->religion;
+        $this->home_add=$students->home_add;
+        $this->poscode=$students->poscode;
+        $this->state=$students->state;
+        $this->country=$students->country;
+        $this->country=$students->district;
+        $this->home_lang=$students->home_lang;
+        $this->home_tel=$students->home_tel;
+        $this->e_contact=$students->e_contact;
+        $this->e_contact_hp=$students->e_contact_hp;
+        $this->e_contact2=$students->e_contact2;
+        $this->e_contact2_hp=$students->e_contact2_hp;
+        $this->fam_doc=$students->fam_doc;
+        $this->fam_doc_hp=$students->fam_doc_hp;
+        $this-> allergies=$students->allergies;
+        $this->others=$students->others;
+        $this->potential=$students->potential;
+        $this->reasons=explode(", ",$students->reasons);
+        $this->pref_pri_sch=explode(", ",$students->pref_pri_sch);
+        $this->father=$father_name->name;
+        $this->mother=$mother_name->name;
+        $this->j1_class=$students->j1_class;
+        $this->j2_class=$students->j2_class;
+        $this->j3_class=$students->j3_class;
+        $this->aft_j1_class=$students->aft_j1_class;
+        $this->aft_j2_class=$students->aft_j2_class;
+        $this->aft_j3_class=$students->aft_j3_class;
+        $this->time_to_sch=$students->time_to_sch;
+        
+ 
+        $this->mode = 'update';
+        
+    }
+
+    public function updateStudent()
+    {
+        $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
+        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+        if($father_id==NULL){
+            $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
+
+        if($mother_id==NULL){
+            $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
+        }
+        
+        $editing_student = Student::find($this->student_id);
+        $referral_final=$this->referral;
+       
+        if ($this->referral=='Other'){
+             $referral_final=$this->referral." -- ".$this->referral_other;
+        }
+
+        $editing_student->update([
+            'entry_year'=> $this->entry_year,
+            'enrolment_date'=>$this->enrolment_date,
+            'referral'=>$referral_final,
+            'reasons'=>implode(", ",$this->reasons),
+            'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
+            'type'=> $this->type,
+            'first_name'=>trim($this->first_name),
+            'last_name'=>trim($this->last_name),
+            'gender'=> $this->gender,
+            'dob'=> $this->dob,
+            'birth_cert_no'=> trim($this->birth_cert_no),
+            'mykid'=>trim($this->mykid),
+            'pos_in_family'=> $this->pos_in_family,
+            'race'=> trim($this->race),
+            'nationality'=> trim($this->nationality),
+            'prev_kindy' => trim($this->prev_kindy),
+            'no_years' => trim($this->no_years),
+            'religion'=> trim($this->religion),
+            'home_add'=> trim($this->home_add),
+            'poscode'=>trim($this->poscode),
+            'state' => trim($this->state),
+            'country'=>trim($this->country),
+            'district'=>trim($this->district),
+            'home_lang'=> trim($this->home_lang),
+            'home_tel'=> trim($this->home_tel),
+            'e_contact'=> trim($this->e_contact),
+            'e_contact_hp'=>trim( $this->e_contact_hp),
+            'e_contact2'=> trim($this->e_contact2),
+            'e_contact2_hp'=> trim($this->e_contact2_hp),
+            'fam_doc'=> trim($this->fam_doc),
+            'fam_doc_hp'=> trim($this->fam_doc_hp),
+            'allergies'=> trim($this->allergies),
+            'others'=> trim($this->  others),
+            'potential'=> trim($this->potential),
+            'father'=> $father_id->parent_id,
+            'mother'=> $mother_id->parent_id,
+            'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
+            'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
+            'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
+            'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
+            'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
+            'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
+            'time_to_sch'=>$this->time_to_sch
+        ]);
+
+        
+
+        $this->mode = 'view';
+  
+        session()->flash('message', 'Student Updated Successfully.');
+        $this->resetInputFields();
+
+    }
+
+    public function deleteStudent($id)
+    {
+        Student::find($id)->delete();
+        session()->flash('message', 'Student Record Deleted Successfully.');
+    }
+    
 
     public function searchResult_Father(){
 
@@ -241,241 +466,7 @@ class Students extends Component
         
     }
 
-    
-    public function cancel()
-    {
-        $this->mode = 'view';
-        $this->resetInputFields();
-    }
-    public function editStudent($id)
-    {   
-        $student = Student::findOrFail($id);
-      
-        $father_name = Parents::where('parent_id',($student->father))->get('name')->first();
-        $mother_name = Parents::where('parent_id',($student->mother))->get('name')->first();
-       
-        $students = Student::findOrFail($id);
-        if($student->referral!=""){
-            $refferal_final = explode(" -- ",$students->referral);
-            $this->referral=$refferal_final[0];
-            $this->refferal_other=$refferal_final[1];
-        }else{
-            $this->referral = $students->referral;
-            $this->referral_other = "";
-        }
-        
-        
-        $this->student_id=$id;
-        $this->enrolment_date=$students->enrolment_date;
-        $this->entry_year=$students->entry_year;
-        $this->type=$students->type;
-        $this->first_name=$students->first_name;
-        $this->last_name=$students->last_name;
-        $this->relationship_w_child=$students->relationship_w_child;
-        $this->gender=$students->gender;
-        $this->dob=$students->dob;
-        $this-> birth_cert_no=$students->birth_cert_no;
-        $this->mykid=$students->mykid;
-        $this->pos_in_family=$students->pos_in_family;
-        $this->race=$students->race;
-        $this-> nationality=$students->nationality;
-        $this->prev_kindy=$students->prev_kindy;
-        $this->no_years=$students->no_years;
-        $this->religion=$students->religion;
-        $this->home_add=$students->home_add;
-        $this->poscode=$students->poscode;
-        $this->state=$students->state;
-        $this->country=$students->country;
-        $this->country=$students->district;
-        $this->home_lang=$students->home_lang;
-        $this->home_tel=$students->home_tel;
-        $this->e_contact=$students->e_contact;
-        $this->e_contact_hp=$students->e_contact_hp;
-        $this->e_contact2=$students->e_contact2;
-        $this->e_contact2_hp=$students->e_contact2_hp;
-        $this->fam_doc=$students->fam_doc;
-        $this->fam_doc_hp=$students->fam_doc_hp;
-        $this-> allergies=$students->allergies;
-        $this->others=$students->others;
-        $this->potential=$students->potential;
-        $this->reasons=explode(", ",$students->reasons);
-        $this->pref_pri_sch=explode(", ",$students->pref_pri_sch);
-        $this->father=$father_name->name;
-        $this->mother=$mother_name->name;
-        $this->j1_class=$students->j1_class;
-        $this->j2_class=$students->j2_class;
-        $this->j3_class=$students->j3_class;
-        $this->aft_j1_class=$students->aft_j1_class;
-        $this->aft_j2_class=$students->aft_j2_class;
-        $this->aft_j3_class=$students->aft_j3_class;
-        $this->time_to_sch=$students->time_to_sch;
-        
- 
-        $this->mode = 'update';
-        
-    }
 
-    public function storeStudent()
-    {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
-       $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
-       
-        if($father_id==NULL){
-        $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
- 
-        }
-        if($mother_id==NULL){
-        $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
-        }
-       if($this->no_years==""){
-        $this->no_years=0;  
-       }
-
-       $refferal_final=$this->referral;
-       
-       if ($this->referral=='Other'){
-            $refferal_final=$this->referral." -- ".$this->referral_other;
-       }
-        Student::create([
-            'entry_year'=> $this->entry_year,
-            'enrolment_date'=>$this->enrolment_date,
-            'referral'=>$refferal_final,
-            'reasons'=>implode(", ",$this->reasons),
-            'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
-            'type'=> $this->type,
-            'first_name'=>trim($this->first_name),
-            'last_name'=>trim($this->last_name),
-            'gender'=> $this->gender,
-            'dob'=> $this->dob,
-            'birth_cert_no'=> trim($this->birth_cert_no),
-            'mykid'=>trim($this->mykid),
-            'pos_in_family'=> $this->pos_in_family,
-            'race'=> trim($this->race),
-            'nationality'=> trim($this->nationality),
-            'prev_kindy' => trim($this->prev_kindy),
-            'no_years' => trim($this->no_years),
-            'religion'=> trim($this->religion),
-            'home_add'=> trim($this->home_add),
-            'poscode'=>trim($this->poscode),
-            'state' => trim($this->state),
-            'country'=>trim($this->country),
-            'district'=>trim($this->district),
-            'home_lang'=> trim($this->home_lang),
-            'home_tel'=> trim($this->home_tel),
-            'e_contact'=> trim($this->e_contact),
-            'e_contact_hp'=>trim( $this->e_contact_hp),
-            'e_contact2'=> trim($this->e_contact2),
-            'e_contact2_hp'=> trim($this->e_contact2_hp),
-            'fam_doc'=> trim($this->fam_doc),
-            'fam_doc_hp'=> trim($this->fam_doc_hp),
-            'allergies'=> trim($this->allergies),
-            'others'=> trim($this->  others),
-            'potential'=> trim($this->potential),
-            'father'=> $father_id->parent_id,
-            'mother'=> $mother_id->parent_id,
-            'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
-            'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
-            'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
-            'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
-            'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
-            'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
-            'time_to_sch'=>$this->time_to_sch
-
-        ]);
-
-        $student_id=Student::where('birth_cert_no',$this->birth_cert_no)->get('student_id')->first();
-        Relationship::create([
-            'student' => $student_id->student_id,
-            'father' => $father_id->parent_id,
-            'mother' => $mother_id->parent_id
-        ]);
-
-        session()->flash('message', 'Student added Successfully.');
-  
-        $this->resetInputFields();
-        $this->mode = 'view';
-        
-    }
-
-    public function updateStudent()
-    {
-        $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
-        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
-        if($father_id==NULL){
-            $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
-     
-            }
-            if($mother_id==NULL){
-            $mother_id = Parents::where('parent_id',1)->get('parent_id')->first();
-            }
-        
-        $editing_student = Student::find($this->student_id);
-        $refferal_final=$this->referral;
-       
-        if ($this->referral=='Others'){
-             $refferal_final=$this->referral." -- ".$this->referral_other;
-        }
-        $editing_student->update([
-            'entry_year'=> $this->entry_year,
-            'enrolment_date'=>$this->enrolment_date,
-            'referral'=>$this->referral,
-            'reasons'=>implode(", ",$this->reasons),
-            'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
-            'type'=> $this->type,
-            'first_name'=>trim($this->first_name),
-            'last_name'=>trim($this->last_name),
-            'gender'=> $this->gender,
-            'dob'=> $this->dob,
-            'birth_cert_no'=> trim($this->birth_cert_no),
-            'mykid'=>trim($this->mykid),
-            'pos_in_family'=> $this->pos_in_family,
-            'race'=> trim($this->race),
-            'nationality'=> trim($this->nationality),
-            'prev_kindy' => trim($this->prev_kindy),
-            'no_years' => trim($this->no_years),
-            'religion'=> trim($this->religion),
-            'home_add'=> trim($this->home_add),
-            'poscode'=>trim($this->poscode),
-            'state' => trim($this->state),
-            'country'=>trim($this->country),
-            'district'=>trim($this->district),
-            'home_lang'=> trim($this->home_lang),
-            'home_tel'=> trim($this->home_tel),
-            'e_contact'=> trim($this->e_contact),
-            'e_contact_hp'=>trim( $this->e_contact_hp),
-            'e_contact2'=> trim($this->e_contact2),
-            'e_contact2_hp'=> trim($this->e_contact2_hp),
-            'fam_doc'=> trim($this->fam_doc),
-            'fam_doc_hp'=> trim($this->fam_doc_hp),
-            'allergies'=> trim($this->allergies),
-            'others'=> trim($this->  others),
-            'potential'=> trim($this->potential),
-            'father'=> $father_id->parent_id,
-            'mother'=> $mother_id->parent_id,
-            'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
-            'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
-            'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
-            'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
-            'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
-            'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
-            'time_to_sch'=>$this->time_to_sch
-        ]);
-
-        
-
-        $this->mode = 'view';
-  
-        session()->flash('message', 'Student Updated Successfully.');
-        $this->resetInputFields();
-
-    }
-
-    public function deleteStudent($id)
-    {
-        Student::find($id)->delete();
-        session()->flash('message', 'Student Record Deleted Successfully.');
-    }
-
-   
     public $name, $ic_no, $occupation, $company_name, $company_add, $email, $tel;
     
     private function resetInputFields_Parents(){

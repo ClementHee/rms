@@ -389,7 +389,7 @@ unset($__errorArgs, $__bag); ?>
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="father">Father: </label>
-                    <input required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
+                    <input readonly required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
                     <?php if($showmodal_father): ?>
                         <ul >
                             <?php if(!empty($parent_father)): ?>
@@ -422,7 +422,7 @@ unset($__errorArgs, $__bag); ?>
                 
                 <div class="mb-3 form-group col">
                     <label for="mother">Mother: </label>
-                    <input required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+                    <input readonly required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
         
                     <?php if($showmodal_mother): ?>
                         <ul >

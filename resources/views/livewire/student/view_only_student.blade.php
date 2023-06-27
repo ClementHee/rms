@@ -125,7 +125,7 @@
             </div>
             <div class="mb-3 form-group col">
                 <label for="district">District: </label>
-                <input readonly type="text" id="district" name="district" required class="form-control pb-2" placeholder="State" wire:model="district">
+                <input readonly type="text" id="district" name="district" required class="form-control pb-2" placeholder="District" wire:model="district">
                 @error('district') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
             <div class="mb-3 form-group col">
@@ -247,7 +247,7 @@
 
         <div class="mb-3 form-group">
             <label for="referral">How did you hear about Tadika Rhema:</label>
-            <input readonly type="text" id="referral" name="referral"  class="form-control pb-2"  wire:model="referral">
+            <input readonly type="text" id="referral" name="referral" placeholder="Referred By" class="form-control pb-2"  wire:model="referral">
         </div>
 
         
@@ -256,7 +256,7 @@
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="father">Father: </label>
-                    <input required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
+                    <input readonly required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
                     @if($showmodal_father)
                         <ul >
                             @if(!empty($parent_father))
@@ -282,7 +282,7 @@
                 
                 <div class="mb-3 form-group col">
                     <label for="mother">Mother: </label>
-                    <input required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
+                    <input readonly required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
         
                     @if($showmodal_mother)
                         <ul >
