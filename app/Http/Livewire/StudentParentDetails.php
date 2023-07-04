@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Student;
 use App\Models\Relationship;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
@@ -55,13 +56,13 @@ final class StudentParentDetails extends PowerGridComponent
      */
     public function datasource(): Builder
     {
-        return Relationship::query()->join('students','relationship.student','=','students.student_id')
-        ->join('parents as father_main','relationship.father','=','father_main.parent_id')
-        ->join('parents as mother_main','relationship.mother','=','mother_main.parent_id')
-        ->select('students.*','father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
+        return Relationship::query()->select('students.*',\DB::Raw("CONCAT('students.first_name',' ','students.last_name' )as 'fullname'"),'father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
         'father_main.email as father_email','father_main.tel as father_tel',
         'mother_main.name as mother_name','mother_main.ic_no as mother_ic_no','mother_main.occupation as mother_occupation','mother_main.company_name as mother_company_name','mother_main.company_add as mother_company_add',
-        'mother_main.email as mother_email','mother_main.tel as mother_tel');
+        'mother_main.email as mother_email','mother_main.tel as mother_tel')->join('students','relationship.student','=','students.student_id')
+        ->join('parents as father_main','relationship.father','=','father_main.parent_id')
+        ->join('parents as mother_main','relationship.mother','=','mother_main.parent_id')
+        ;
     }
 
     /*
@@ -196,7 +197,9 @@ final class StudentParentDetails extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::inputText('fullname')
+            Filter::inputText('fullname','first_name')
+            ->operators(['contains']),
+            Filter::inputText('fullname','last_name')
             ->operators(['contains']),
                 
             Filter::select('type', 'type')
