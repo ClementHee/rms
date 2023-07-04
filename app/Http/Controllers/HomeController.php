@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Parents;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $j1=0;
+        $j2=0;
+        $j3=0;
+        $j1_aft=0;
+        $j2_aft=0;
+        $j3_aft=0;
+
+        $count_students = Student::count();
+        $count_parents = Parents::count();
+        $students_cat = Student::get();
+        
+        foreach ($students_cat as $s){
+            if ($s -> j3_class!=""){
+                $j3+=1;
+            } else if ($s -> j2_class!=""){
+                $j2+=1;
+            }else{
+                $j1+=1;
+            }
+            if ($s -> aft_j3_class!="" and $s->j3_class!=""){
+                $j3_aft+=1;
+            } else if ($s -> aft_j2_class!="" and $s->j2_class!=""){
+                $j2_aft+=1;
+            }else if ($s -> aft_j1_class!="" ){
+                $j1_aft+=1;
+            }
+        }
+        return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));
     }
 }

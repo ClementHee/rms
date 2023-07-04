@@ -78,7 +78,7 @@ class Students extends Component
         Student::create([
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
-            'referral'=>$refferal_final,
+            'referral'=>$referral_final,
             'reasons'=>implode(", ",$this->reasons),
             'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
             'type'=> $this->type,
@@ -130,7 +130,7 @@ class Students extends Component
         ]);
 
         session()->flash('message', 'Student added Successfully.');
-  
+        
         $this->resetInputFields();
         $this->mode = 'view';
         

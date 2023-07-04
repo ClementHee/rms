@@ -103,16 +103,17 @@
   <body>
       <div id="app">
         
-<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-  <div class="pl-10 max-w-screen-xl flex flex-wrap items-center  ">
-    <a href="<?php echo e(url('/')); ?>" class="flex items-center">
-        <span class="py-3 px-1 text-2xl whitespace-nowrap dark:text-black">Rhema Management System</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-dropdown" aria-controls="navbar-dropdown" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-      <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="inline-block  md:flex px-36 flex-row justify-between  space-x-1 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+  <div class="justify-self-start">
+  <a href="<?php echo e(url('/')); ?>" class="flex  inline-block">
+    <span class="py-3 px-1 text-2xl dark:text-black">Rhema Management System</span>
+  </a> 
+</div>
+  <div class="pl-10 max-w-screen-xl flex flex-wrap items-center justify-start">
+   
+    
     <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-      <ul class="pl-4 flex flex-col font-medium  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white  ">
+      <ul class="pl-4 ms-auto flex font-medium  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white  ">
 
         <li>
           <a href="<?php echo e(route('maintainence')); ?>" class="inline-block  text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Maintainences</a>
@@ -174,15 +175,15 @@
       </div><?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('all-details')->html();
-} elseif ($_instance->childHasBeenRendered('4R1vUIT')) {
-    $componentId = $_instance->getRenderedChildComponentId('4R1vUIT');
-    $componentTag = $_instance->getRenderedChildComponentTagName('4R1vUIT');
+} elseif ($_instance->childHasBeenRendered('jF02sJL')) {
+    $componentId = $_instance->getRenderedChildComponentId('jF02sJL');
+    $componentTag = $_instance->getRenderedChildComponentTagName('jF02sJL');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('4R1vUIT');
+    $_instance->preserveRenderedChild('jF02sJL');
 } else {
     $response = \Livewire\Livewire::mount('all-details');
     $html = $response->html();
-    $_instance->logRenderedChild('4R1vUIT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('jF02sJL', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

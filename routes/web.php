@@ -31,14 +31,11 @@ use App\Http\Livewire\Siblingslist;
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/', function () {
-        return view('home
-        ');
-    });
+    
       
 
     Route::view('/powergrid', 'powergrid-demo');
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/maintainence',App\Http\Livewire\Maintainences::class)->name('maintainence');
 
     Route::get('/request_materials',App\Http\Livewire\MaterialRequests::class)->name('request_materials');

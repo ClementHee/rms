@@ -101,16 +101,17 @@
   <body>
       <div id="app">
         
-<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-  <div class="pl-10 max-w-screen-xl flex flex-wrap items-center  ">
-    <a href="{{ url('/') }}" class="flex items-center">
-        <span class="py-3 px-1 text-2xl whitespace-nowrap dark:text-black">Rhema Management System</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-dropdown" aria-controls="navbar-dropdown" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-      <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="inline-block  md:flex px-36 flex-row justify-between  space-x-1 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+  <div class="justify-self-start">
+  <a href="{{ url('/') }}" class="flex  inline-block">
+    <span class="py-3 px-1 text-2xl dark:text-black">Rhema Management System</span>
+  </a> 
+</div>
+  <div class="pl-10 max-w-screen-xl flex flex-wrap items-center justify-start">
+   
+    
     <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-      <ul class="pl-4 flex flex-col font-medium  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white  ">
+      <ul class="pl-4 ms-auto flex font-medium  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white  ">
 
         <li>
           <a href="{{ route('maintainence') }}" class="inline-block  text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Maintainences</a>
