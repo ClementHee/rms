@@ -45,7 +45,6 @@ class Students extends Component
     }
 
     public function view_only(){
-
         $this->mode = 'single';
     }
 
