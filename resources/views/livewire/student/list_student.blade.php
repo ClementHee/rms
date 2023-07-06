@@ -15,7 +15,6 @@
                         <table class="table table-borderd table-striped">
                             <thead>
                                 <tr>
-                              
                                     <th>Name</th>
                                     <th>Gender</th>
                                     <th>D.O.B</th>
