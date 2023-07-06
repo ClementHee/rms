@@ -20,7 +20,7 @@
                                     <th>Gender</th>
                                     <th>D.O.B</th>
                                     <th>Birth Cert</th>
-                                    <th>MyKid</th>
+                                    <th>Status</th>
                                     <th>Morning Class</th>
                                     <th>Afternoon Class</th>
                                     <th width='250px'>Actions</th>
@@ -34,7 +34,12 @@
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>
-                                        <td>{{ $student->mykid }}</td>
+                                        <td>@if( $student->status=='unactive')
+                                            <button type="button" class="btn btn-danger">Withdrawn</button>
+                                        @else
+                                            <button type="button" class="btn btn-success">Enrolled</button>
+                                        @endif
+                                        </td>
                                         <td>
                                             @if ( $student->j3_class !="")
                                                 {{ $student->j3_class}}
