@@ -31,10 +31,7 @@ use App\Http\Livewire\Siblingslist;
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
-    
-      
 
-    Route::view('/powergrid', 'powergrid-demo');
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/maintainence',App\Http\Livewire\Maintainences::class)->name('maintainence');
 
@@ -46,6 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['auth','admin']], function() { 
     Route::get('/student',App\Http\Livewire\Students::class)->name('student');
+ 
     Route::get('/parent',ParentsL::class)->name('parent');
     
 });

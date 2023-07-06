@@ -371,16 +371,21 @@
                 @error('allergies') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         </div>
-
-        <div class="mb-3 form-group">
+        <div class="row">
+        <div class="mb-3 form-group col">
+            <label for="carplate">Car Plate and model (Use , to seperate multiple cars): </label>
+            <input type="text" id="carplate" name="carplate"  class="form-control pb-2" placeholder="Carplate number followed by model" wire:model="carplate">
+            @error('carplate') <span class="text-danger">{{ $message }}</span>@enderror
+        </div>
+        <div class="mb-3 form-group col ">
             <label for="others">Other information: </label>
             <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
             @error('others') <span class="text-danger">{{ $message }}</span>@enderror
         </div>
-
+        </div>
         <div class="mb-3 form-group">
             <label for="potential">Potential: </label>
-            <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name" wire:model="potential">
+            <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name and birthdate" wire:model="potential">
             @error('potential') <span class="text-danger">{{ $message }}</span>@enderror
         </div>
 

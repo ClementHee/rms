@@ -1,11 +1,29 @@
 <div>
     <div class='container'>
-        <h2>Update Student</h2>
+
         <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
 
-            <h2>New Student</h2>
+            <h2>Update Student</h2>
     
             <?php echo csrf_field(); ?>
+
+            <div>
+                <p class='d-inline px-1'>Status:</p>
+              
+                        <div class="form-check form-check-inline mb-3">
+                            
+                            <label class="form-check-label">Enrolled</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="active">
+        
+                        </div>
+        
+                        <div class="form-check form-check-inline  mb-3">
+                            
+                            <label class="form-check-label">Withdrawn</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="unactive">
+                        </div>
+                    
+                    </div>
             <div class="row">
                 <div class="mb-3 form-group col">
                     <label for="entry_year">Year:</label>
@@ -66,8 +84,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
-            <div >
-                <p class='d-inline px-1'>Gender:</p>
+            <div>
+            <p class='d-inline px-1'>Gender:</p>
           
                     <div class="form-check form-check-inline mb-3">
                         
@@ -576,11 +594,11 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
-    
-            <div class="mb-3 form-group">
-                <label for="others">Other information: </label>
-                <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
-                <?php $__errorArgs = ['others'];
+            <div class="row">
+                <div class="mb-3 form-group col">
+                    <label for="carplate">Car Plate and model (Use , to seperate multiple cars): </label>
+                    <input type="text" id="carplate" name="carplate"  class="form-control pb-2" placeholder="Carplate number followed by model" wire:model="carplate">
+                    <?php $__errorArgs = ['carplate'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -588,12 +606,11 @@ $message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php ec
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-            </div>
-    
-            <div class="mb-3 form-group">
-                <label for="potential">Potential: </label>
-                <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name" wire:model="potential">
-                <?php $__errorArgs = ['potential'];
+                </div>
+                <div class="mb-3 form-group col ">
+                    <label for="others">Other information: </label>
+                    <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
+                    <?php $__errorArgs = ['others'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -601,9 +618,22 @@ $message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php ec
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-            </div>
+                </div>
+              
+                <div class="mb-3 form-group">
+                    <label for="potential">Potential: </label>
+                    <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name and birthdate" wire:model="potential">
+                    <?php $__errorArgs = ['potential'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                </div>
     
-            
+            </div>
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="class">J1 Class: </label>

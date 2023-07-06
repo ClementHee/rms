@@ -4501,17 +4501,17 @@
         },
         {
             "name": "power-components/livewire-powergrid",
-            "version": "v4.5.1",
-            "version_normalized": "4.5.1.0",
+            "version": "v4.8.1",
+            "version_normalized": "4.8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Power-Components/livewire-powergrid.git",
-                "reference": "cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4"
+                "reference": "5faeb879af0d31e1d72bd38083d328791ea53ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4",
-                "reference": "cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4",
+                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/5faeb879af0d31e1d72bd38083d328791ea53ad3",
+                "reference": "5faeb879af0d31e1d72bd38083d328791ea53ad3",
                 "shasum": ""
             },
             "require": {
@@ -4534,7 +4534,7 @@
             "suggest": {
                 "openspout/openspout": "Required to export XLS and CSV"
             },
-            "time": "2023-05-30T13:13:16+00:00",
+            "time": "2023-06-28T20:37:45+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -4572,7 +4572,7 @@
             "homepage": "https://github.com/power-components/livewire-powergrid",
             "support": {
                 "issues": "https://github.com/Power-Components/livewire-powergrid/issues",
-                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.5.1"
+                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.8.1"
             },
             "funding": [
                 {

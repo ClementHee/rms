@@ -23,4 +23,9 @@ class Category extends Model
     {
         return $this->hasMany(Dish::class, 'category_id');
     }
+
+    public function parentCategory()
+    {
+        return $this->belongsTo(ParentCategory::class, 'parent_category_id');
+    }
 }

@@ -16,10 +16,10 @@ class Students extends Component
     public $search ='';
     public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
     public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
-    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch;
+    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate;
     public array $reasons, $pref_pri_sch;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class, $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
-    public $parent_father,$parent_mother, $referral_other;
+    public $parent_father,$parent_mother, $referral_other,$status;
     public $showmodal_father=false;
     public $showmodal_mother=false;
     public $createnew_father=false;
@@ -74,7 +74,12 @@ class Students extends Component
        if ($this->referral=='Other'){
             $referral_final=$this->referral." -- ".$this->referral_other;
        }
+
+   
         Student::create([
+            'status'=>'active',
+            'carplate'=>$this->carplate,
+            'fullname' => $this->first_name." ".$this->last_name,
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
@@ -140,8 +145,8 @@ class Students extends Component
 
         $father_name = Parents::where('parent_id',($students->father))->get('name')->first();
         $mother_name = Parents::where('parent_id',($students->mother))->get('name')->first();
-        
-       
+        $this->status=$students->status;
+        $this->carplate=$students->carplate;
         $this->student_id=$id;
         $this->enrolment_date=$students->enrolment_date;
         $this->entry_year=$students->entry_year;
@@ -193,13 +198,13 @@ class Students extends Component
 
     public function editStudent($id)
     {   
-        $student = Student::findOrFail($id);
-      
-        $father_name = Parents::where('parent_id',($student->father))->get('name')->first();
-        $mother_name = Parents::where('parent_id',($student->mother))->get('name')->first();
-        
+
         $students = Student::findOrFail($id);
-        if(substr($student->referral,0,5)=="Other"){
+        $father_name = Parents::where('parent_id',($students->father))->get('name')->first();
+        $mother_name = Parents::where('parent_id',($students->mother))->get('name')->first();
+        
+        
+        if(substr($students->referral,0,5)=="Other"){
             $referral_final = explode(" -- ",$students->referral);
             
             $this->referral=$referral_final[0];
@@ -210,8 +215,9 @@ class Students extends Component
             $this->referral_other = "";
         }
         
-        
+        $this->status=$students->status;
         $this->student_id=$id;
+        $this->carplate=$students->carplate;
         $this->enrolment_date=$students->enrolment_date;
         $this->entry_year=$students->entry_year;
         $this->type=$students->type;
@@ -279,8 +285,10 @@ class Students extends Component
         if ($this->referral=='Other'){
              $referral_final=$this->referral." -- ".$this->referral_other;
         }
-
+    
         $editing_student->update([
+            'status'=>$this->status,
+            'fullname' => $this->first_name." ".$this->last_name,
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
@@ -323,10 +331,10 @@ class Students extends Component
             'aft_j1_class'=>trim(ucwords(strtolower($this->aft_j1_class))),
             'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
             'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
-            'time_to_sch'=>$this->time_to_sch
+            'time_to_sch'=>$this->time_to_sch,
+            'carplate'=>$this->carplate
         ]);
 
-        
 
         $this->mode = 'view';
   
@@ -338,7 +346,7 @@ class Students extends Component
     public function deleteStudent($id)
     {
         Student::find($id)->delete();
-        session()->flash('message', 'Student Record Deleted Successfully.');
+        session()->flash('danger', 'Student Record Deleted Successfully.');
     }
     
 
@@ -416,6 +424,7 @@ class Students extends Component
     }
 
     private function resetInputFields(){
+        $this->carplate='';
         $this->student_id='';
         $this->enrolment_date='';
         $this->entry_year='';
@@ -462,6 +471,7 @@ class Students extends Component
         $this->aft_j3_class='';
         $this->time_to_sch='';
         $this->referral_other='';
+        $this->status='';
         
     }
 
@@ -518,6 +528,4 @@ class Students extends Component
         $createnew_father=false;
         $createnew_mother= false;
     }
-
-    
 }

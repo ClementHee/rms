@@ -31,7 +31,7 @@ final class StudentParentDetails extends PowerGridComponent
 
         return [
             
-            Header::make()->showToggleColumns(),
+            Header::make()->showToggleColumns()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -56,10 +56,11 @@ final class StudentParentDetails extends PowerGridComponent
      */
     public function datasource(): Builder
     {
-        return Relationship::query()->select('students.*',\DB::Raw("CONCAT('students.first_name',' ','students.last_name' )as 'fullname'"),'father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
+        return Relationship::query()->select('students.*','father_main.name as father_name','father_main.ic_no as father_ic_no','father_main.occupation as father_occupation','father_main.company_name as father_company_name','father_main.company_add as father_company_add',
         'father_main.email as father_email','father_main.tel as father_tel',
         'mother_main.name as mother_name','mother_main.ic_no as mother_ic_no','mother_main.occupation as mother_occupation','mother_main.company_name as mother_company_name','mother_main.company_add as mother_company_add',
-        'mother_main.email as mother_email','mother_main.tel as mother_tel')->join('students','relationship.student','=','students.student_id')
+        'mother_main.email as mother_email','mother_main.tel as mother_tel')
+        ->join('students','relationship.student','=','students.student_id')
         ->join('parents as father_main','relationship.father','=','father_main.parent_id')
         ->join('parents as mother_main','relationship.mother','=','mother_main.parent_id')
         ;
@@ -99,9 +100,9 @@ final class StudentParentDetails extends PowerGridComponent
         return PowerGrid::eloquent()
         ->addColumn('record_year')
         ->addColumn('type')
-        ->addColumn('fullname',function (Relationship $s){
-            return $s->first_name." ".$s->last_name;
-        })
+        ->addColumn('students.first_name')
+        ->addColumn('last_name')
+        ->addColumn('fullname')
         ->addColumn('gender')
         ->addColumn('dob')
         ->addColumn('birth_cert_no')
@@ -151,39 +152,39 @@ final class StudentParentDetails extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Student','fullname')->sortable()->searchable(),
-            Column::make('Entry Year','entry_year')->sortable()->searchable(),
+            Column::add()->title('Student Name')->field('fullname','fullname')->searchable()->sortable(),
+            Column::make('Entry Year','entry_year')->sortable(),
             Column::make('Type', 'type')->searchable()->sortable(),
-            Column::make('Birth Cert', 'birth_cert_no')->sortable()->searchable(),
-            Column::make('MyKid', 'mykid')->sortable()->searchable(),
+            Column::make('Birth Cert', 'birth_cert_no')->sortable(),
+            Column::make('MyKid', 'mykid')->sortable(),
             Column::make('DOB','dob')->searchable()->sortable(),
-            Column::make('Gender', 'gender')->sortable()->searchable(),
-            Column::make('Race', 'race')->sortable()->searchable(),
-            Column::make('Address', 'home_add')->sortable()->searchable(),
-            Column::make('Previous Kindy', 'prev_kindy')->sortable()->searchable(),
-            Column::make('Number of years in Previous Kindy', 'no_years')->sortable()->searchable(),
-            Column::make('Religion', 'religion')->sortable()->searchable(),
-            Column::make('Home Language', 'home_lang')->sortable()->searchable(),
-            Column::make('Home Telephone No.', 'home_tel')->sortable()->searchable(),
-            Column::make('Nationality', 'nationality')->sortable()->searchable(),
-            Column::make('J1 Class','j1_class')->sortable()->searchable(),
-            Column::make('J2 Class','j2_class')->sortable()->searchable(),
-            Column::make('J3 Class','j3_class')->sortable()->searchable(),
-            Column::make('Afternoon J1 Class','aft_j1_class')->sortable()->searchable(),
-            Column::make('Afternoon J2 Class','aft_j2_class')->sortable()->searchable(),
-            Column::make('Afternoon J3 Class','aft_j3_class')->sortable()->searchable(),
-            Column::make('Father Name', 'father_name')->sortable()->searchable(),
-            Column::make('Father IC', 'father_ic_no')->sortable()->searchable(),
-            Column::make('Father Contact', 'father_tel')->sortable()->searchable(),
-            Column::make('Father Occupation', 'father_occupation')->sortable()->searchable(),
-            Column::make('Father Company', 'father_company_name')->sortable()->searchable(),
-            Column::make('Father Email', 'father_email')->sortable()->searchable(),
-            Column::make('Mother', 'mother_name')->sortable()->searchable(),
-            Column::make('Mother IC', 'mother_ic_no')->sortable()->searchable(),
-            Column::make('Mother Contact', 'mother_tel')->sortable()->searchable(),
-            Column::make('Mother Occupation', 'mother_occupation')->sortable()->searchable(),
-            Column::make('Mother Company', 'mother_company_name')->sortable()->searchable(),
-            Column::make('Mother Email', 'mother_email')->sortable()->searchable()
+            Column::make('Gender', 'gender')->sortable(),
+            Column::make('Race', 'race')->sortable(),
+            Column::make('Address', 'home_add')->sortable(),
+            Column::make('Previous Kindy', 'prev_kindy')->sortable(),
+            Column::make('Number of years in Previous Kindy', 'no_years')->sortable(),
+            Column::make('Religion', 'religion')->sortable(),
+            Column::make('Home Language', 'home_lang')->sortable(),
+            Column::make('Home Telephone No.', 'home_tel')->sortable(),
+            Column::make('Nationality', 'nationality')->sortable(),
+            Column::make('J1 Class','j1_class')->sortable(),
+            Column::make('J2 Class','j2_class')->sortable(),
+            Column::make('J3 Class','j3_class')->sortable(),
+            Column::make('Afternoon J1 Class','aft_j1_class')->sortable(),
+            Column::make('Afternoon J2 Class','aft_j2_class')->sortable(),
+            Column::make('Afternoon J3 Class','aft_j3_class')->sortable(),
+            Column::add()->title('Father Name')->field('father_name','father_name')->sortable(),
+            Column::make('Father IC', 'father_ic_no')->sortable(),
+            Column::make('Father Contact', 'father_tel')->sortable(),
+            Column::make('Father Occupation', 'father_occupation')->sortable(),
+            Column::make('Father Company', 'father_company_name')->sortable(),
+            Column::make('Father Email', 'father_email')->sortable(),
+            Column::make('Mother', 'mother_name')->sortable(),
+            Column::make('Mother IC', 'mother_ic_no')->sortable(),
+            Column::make('Mother Contact', 'mother_tel')->sortable(),
+            Column::make('Mother Occupation', 'mother_occupation')->sortable(),
+            Column::make('Mother Company', 'mother_company_name')->sortable(),
+            Column::make('Mother Email', 'mother_email')->sortable()
 
 
         ];
@@ -197,10 +198,9 @@ final class StudentParentDetails extends PowerGridComponent
     public function filters(): array
     {
         return [
-            Filter::inputText('fullname','first_name')
+            Filter::inputText('fullname')
             ->operators(['contains']),
-            Filter::inputText('fullname','last_name')
-            ->operators(['contains']),
+
                 
             Filter::select('type', 'type')
             ->dataSource(Relationship::enrolType())

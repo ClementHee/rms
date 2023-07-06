@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fa774ff8687d28c6c018242aaf064c5",
+    "content-hash": "59dc5779340edfe826032ebf9d2eb0d8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3264,16 +3264,16 @@
         },
         {
             "name": "power-components/livewire-powergrid",
-            "version": "v4.5.1",
+            "version": "v4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Power-Components/livewire-powergrid.git",
-                "reference": "cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4"
+                "reference": "5faeb879af0d31e1d72bd38083d328791ea53ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4",
-                "reference": "cbd4ec21bae9820c0ba978a6345c42e4cb3b23f4",
+                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/5faeb879af0d31e1d72bd38083d328791ea53ad3",
+                "reference": "5faeb879af0d31e1d72bd38083d328791ea53ad3",
                 "shasum": ""
             },
             "require": {
@@ -3332,7 +3332,7 @@
             "homepage": "https://github.com/power-components/livewire-powergrid",
             "support": {
                 "issues": "https://github.com/Power-Components/livewire-powergrid/issues",
-                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.5.1"
+                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v4.8.1"
             },
             "funding": [
                 {
@@ -3340,7 +3340,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-30T13:13:16+00:00"
+            "time": "2023-06-28T20:37:45+00:00"
         },
         {
             "name": "psr/cache",

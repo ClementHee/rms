@@ -1,11 +1,29 @@
 <div>
     <div class='container'>
-        <h2>Update Student</h2>
+
         <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
 
-            <h2>New Student</h2>
+            <h2>Update Student</h2>
     
             @csrf
+
+            <div>
+                <p class='d-inline px-1'>Status:</p>
+              
+                        <div class="form-check form-check-inline mb-3">
+                            
+                            <label class="form-check-label">Enrolled</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="active">
+        
+                        </div>
+        
+                        <div class="form-check form-check-inline  mb-3">
+                            
+                            <label class="form-check-label">Withdrawn</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="unactive">
+                        </div>
+                    
+                    </div>
             <div class="row">
                 <div class="mb-3 form-group col">
                     <label for="entry_year">Year:</label>
@@ -45,8 +63,8 @@
                     @error('relationship_w_child') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
-            <div >
-                <p class='d-inline px-1'>Gender:</p>
+            <div>
+            <p class='d-inline px-1'>Gender:</p>
           
                     <div class="form-check form-check-inline mb-3">
                         
@@ -373,20 +391,25 @@
                     @error('allergies') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
+            <div class="row">
+                <div class="mb-3 form-group col">
+                    <label for="carplate">Car Plate and model (Use , to seperate multiple cars): </label>
+                    <input type="text" id="carplate" name="carplate"  class="form-control pb-2" placeholder="Carplate number followed by model" wire:model="carplate">
+                    @error('carplate') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="mb-3 form-group col ">
+                    <label for="others">Other information: </label>
+                    <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
+                    @error('others') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+              
+                <div class="mb-3 form-group">
+                    <label for="potential">Potential: </label>
+                    <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name and birthdate" wire:model="potential">
+                    @error('potential') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
     
-            <div class="mb-3 form-group">
-                <label for="others">Other information: </label>
-                <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
-                @error('others') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
-    
-            <div class="mb-3 form-group">
-                <label for="potential">Potential: </label>
-                <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name" wire:model="potential">
-                @error('potential') <span class="text-danger">{{ $message }}</span>@enderror
-            </div>
-    
-            
             <div class='row'>
                 <div class="mb-3 form-group col">
                     <label for="class">J1 Class: </label>

@@ -55,6 +55,8 @@ class Student extends Model
             'aft_j2_class',
             'aft_j3_class',
             'time_to_sch',
+            'carplate',
+            'status'
     ];
 
     public static function concat_fullname()
