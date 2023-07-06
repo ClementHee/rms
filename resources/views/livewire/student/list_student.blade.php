@@ -23,7 +23,7 @@
                                     <th>Status</th>
                                     <th>Morning Class</th>
                                     <th>Afternoon Class</th>
-                                    <th width='250px'>Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
