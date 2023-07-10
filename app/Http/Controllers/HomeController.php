@@ -55,11 +55,13 @@ class HomeController extends Controller
             }
         }
 
-        if(auth()->user()->getRoleNames()=='SuperAdmin'){
+        if(auth()->user()->getRoleNames()[0]=='SuperAdmin'){
+   
           return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));  
-        }elseif(auth()->user()->getRoleNames()=='Admin'){
+        }elseif(auth()->user()->getRoleNames()[0]=='Admin'){
           return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));  
         }else{
+  
           return view('userdashboard');  
         }
         
