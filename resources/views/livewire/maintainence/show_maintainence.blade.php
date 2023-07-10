@@ -1,6 +1,6 @@
 <div>
 
-    <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
+    <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
     @if($updateMode)
         @include('livewire.maintainence.update_issue')
     @endif

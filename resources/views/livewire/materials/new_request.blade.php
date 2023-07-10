@@ -21,7 +21,7 @@
             
             <div class="mb-3 form-group">
                 <label for="item">Item:</label>
-                <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Title" wire:model="item"> 
+                <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Items" wire:model="item"> 
                 @error('item') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 

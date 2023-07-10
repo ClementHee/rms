@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Parents;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     /**
@@ -52,6 +54,14 @@ class HomeController extends Controller
                 $j1_aft+=1;
             }
         }
-        return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));
+
+        if(auth()->user()->getRoleNames()=='SuperAdmin'){
+          return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));  
+        }elseif(auth()->user()->getRoleNames()=='Admin'){
+          return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));  
+        }else{
+          return view('userdashboard');  
+        }
+        
     }
 }

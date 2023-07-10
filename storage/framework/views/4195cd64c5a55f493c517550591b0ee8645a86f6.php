@@ -15,7 +15,6 @@
                         <table class="table table-borderd table-striped">
                             <thead>
                                 <tr>
-                              
                                     <th>Name</th>
                                     <th>Gender</th>
                                     <th>D.O.B</th>
@@ -23,7 +22,7 @@
                                     <th>Status</th>
                                     <th>Morning Class</th>
                                     <th>Afternoon Class</th>
-                                    <th width='250px'>Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

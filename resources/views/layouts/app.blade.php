@@ -104,6 +104,7 @@
                                 <a class="nav-link" href="{{ route('request_materials') }}">Request Materials</a>
                             </li>
                             </li>
+                            @hasanyrole('Admin|SuperAdmin')
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Manage Students and Parents 
@@ -117,6 +118,7 @@
                                     <a class="nav-link" href="{{ route('student_parent') }}">All Details</a>
                                 </div>
                             </li>
+                            @endrole
                             @role('SuperAdmin')
                             <li><a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a></li>
                             <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>

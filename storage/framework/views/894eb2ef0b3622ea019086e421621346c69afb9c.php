@@ -107,6 +107,7 @@
                                 <a class="nav-link" href="<?php echo e(route('request_materials')); ?>">Request Materials</a>
                             </li>
                             </li>
+                            <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin')): ?>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Manage Students and Parents 
@@ -120,6 +121,7 @@
                                     <a class="nav-link" href="<?php echo e(route('student_parent')); ?>">All Details</a>
                                 </div>
                             </li>
+                            <?php endif; ?>
                             <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
                             <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
                             <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>

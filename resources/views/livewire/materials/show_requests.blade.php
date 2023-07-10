@@ -1,5 +1,5 @@
 <div >
-    <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRequest" >New Request</button>
+    <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newRequest" >New Request</button>
     @if($updateMode)
         @include('livewire.materials.update_request')
     @endif

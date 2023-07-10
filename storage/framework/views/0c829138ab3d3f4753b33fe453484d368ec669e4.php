@@ -1,6 +1,6 @@
 <div>
 
-    <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
+    <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
     <?php if($updateMode): ?>
         <?php echo $__env->make('livewire.maintainence.update_issue', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
