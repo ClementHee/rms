@@ -2,7 +2,9 @@
 /public/build
 /public/hot
 /public/storage
+/public/upload
 /storage/*.key
+/storage
 /vendor
 .env
 .env.backup
@@ -15,3 +17,4 @@ yarn-error.log
 /.idea
 /.vscode
 *.example
+storage/logs/laravel.log

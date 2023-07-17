@@ -56,11 +56,9 @@ class Student extends Model
             'aft_j3_class',
             'time_to_sch',
             'carplate',
-            'status'
+            'status',
+            'signed'
     ];
 
-    public static function concat_fullname()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    } 
+   
 }

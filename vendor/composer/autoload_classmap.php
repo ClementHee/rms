@@ -26,6 +26,7 @@ return array(
     'App\\Http\\Livewire\\Maintainences' => $baseDir . '/app/Http/Livewire/Maintainences.php',
     'App\\Http\\Livewire\\MaterialRequests' => $baseDir . '/app/Http/Livewire/MaterialRequests.php',
     'App\\Http\\Livewire\\ParentsL' => $baseDir . '/app/Http/Livewire/ParentsL.php',
+    'App\\Http\\Livewire\\Registration' => $baseDir . '/app/Http/Livewire/Registration.php',
     'App\\Http\\Livewire\\Siblingslist' => $baseDir . '/app/Http/Livewire/Siblingslist.php',
     'App\\Http\\Livewire\\StudentParentDetails' => $baseDir . '/app/Http/Livewire/StudentParentDetails.php',
     'App\\Http\\Livewire\\Students' => $baseDir . '/app/Http/Livewire/Students.php',

@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<style> .kbw-signature { width: 50%; height: 200px;}
+    #sig canvas{
+        width: 50% !important;
+        height: 50% !important;
+
+        
+    }</style>
 @section('content')
 
 <body>
@@ -22,10 +29,14 @@
 
     
 @endsection
+
+
 <script>
     window.addEventListener('close-modal', event => {
 
         $('#parentsModal').modal('hide');
         
     })
+
+
 </script>

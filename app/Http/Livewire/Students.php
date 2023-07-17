@@ -6,6 +6,7 @@ use App\Models\Parents;
 use App\Models\Student;
 use Livewire\Component;
 use App\Models\Relationship;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class Students extends Component
@@ -16,7 +17,7 @@ class Students extends Component
     public $search ='';
     public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
     public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
-    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate;
+    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate,$signed;
     public array $reasons, $pref_pri_sch;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class, $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
     public $parent_father,$parent_mother, $referral_other,$status;
@@ -25,6 +26,7 @@ class Students extends Component
     public $createnew_father=false;
     public $createnew_mother= false;
 
+ 
     public function render()
     {
         $students = Student::where('first_name', 'like', '%'.$this->search.'%')->orderBy('first_name','ASC')->paginate(10);      
@@ -36,8 +38,9 @@ class Students extends Component
        $this->resetPage();
    }    
     public function create_new(){
-        $this->resetInputFields();
+        
         $this->mode = 'create';
+        $this->resetInputFields();
     }
 
     public function list_all(){
@@ -53,9 +56,18 @@ class Students extends Component
         $this->mode = 'view';
         $this->resetInputFields();
     }
-
-    public function storeStudent()
-    {  $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
+    public function clearSignature()
+    {
+        $this->signed = null;
+    }
+   
+    public function storeSignature(){
+       
+        
+    }
+    public function storeStudent() {  
+       
+       $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
        
         if($father_id==NULL){
@@ -75,11 +87,16 @@ class Students extends Component
             $referral_final=$this->referral." -- ".$this->referral_other;
        }
 
-   
+       $fullname = $this->first_name." ".$this->last_name;
+  
+
+
+      
+
         Student::create([
             'status'=>'active',
             'carplate'=>$this->carplate,
-            'fullname' => $this->first_name." ".$this->last_name,
+            'fullname' => $fullname,
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
@@ -133,12 +150,32 @@ class Students extends Component
             'mother' => $mother_id->parent_id
         ]);
 
-        session()->flash('message', 'Student added Successfully.');
+        if($this->signed!=""){
+        $folderPath = public_path('upload/');
+       
+        $image_parts = explode(";base64,", $this->signed);
+             
+        $image_type_aux = explode("image/", $image_parts[0]);
+           
+        $image_type = $image_type_aux[1];
+        
+        $image_base64 = base64_decode($image_parts[1]);
+ 
+        $signature = $fullname . '.'.$image_type;
+           
+        $file = $folderPath . $signature;
+ 
+        file_put_contents($file, $image_base64);
+
+        }
         
         $this->resetInputFields();
         $this->mode = 'view';
         
     }
+
+
+
     public function viewStudent($id)
     {
         $students = Student::findOrFail($id);
@@ -192,6 +229,7 @@ class Students extends Component
         $this->aft_j2_class=$students->aft_j2_class;
         $this->aft_j3_class=$students->aft_j3_class;
         $this->time_to_sch=$students->time_to_sch;
+        $this->signed=$students->signed;
         
         $this->mode = 'single';
     }
@@ -261,7 +299,7 @@ class Students extends Component
         $this->aft_j2_class=$students->aft_j2_class;
         $this->aft_j3_class=$students->aft_j3_class;
         $this->time_to_sch=$students->time_to_sch;
-        
+        $this->signed=$students->signed;
  
         $this->mode = 'update';
         
@@ -332,7 +370,8 @@ class Students extends Component
             'aft_j2_class'=>trim(ucwords(strtolower($this->aft_j2_class))),
             'aft_j3_class'=>trim(ucwords(strtolower($this->aft_j3_class))),
             'time_to_sch'=>$this->time_to_sch,
-            'carplate'=>$this->carplate
+            'carplate'=>$this->carplate,
+            'signed'=>$this->signed
         ]);
 
 
@@ -472,6 +511,8 @@ class Students extends Component
         $this->time_to_sch='';
         $this->referral_other='';
         $this->status='';
+        $this->signed='';
+ 
         
     }
 

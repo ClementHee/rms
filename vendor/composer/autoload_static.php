@@ -610,6 +610,7 @@ class ComposerStaticInitb9b21c1e8ecde0e7cbe5b4273bf04817
         'App\\Http\\Livewire\\Maintainences' => __DIR__ . '/../..' . '/app/Http/Livewire/Maintainences.php',
         'App\\Http\\Livewire\\MaterialRequests' => __DIR__ . '/../..' . '/app/Http/Livewire/MaterialRequests.php',
         'App\\Http\\Livewire\\ParentsL' => __DIR__ . '/../..' . '/app/Http/Livewire/ParentsL.php',
+        'App\\Http\\Livewire\\Registration' => __DIR__ . '/../..' . '/app/Http/Livewire/Registration.php',
         'App\\Http\\Livewire\\Siblingslist' => __DIR__ . '/../..' . '/app/Http/Livewire/Siblingslist.php',
         'App\\Http\\Livewire\\StudentParentDetails' => __DIR__ . '/../..' . '/app/Http/Livewire/StudentParentDetails.php',
         'App\\Http\\Livewire\\Students' => __DIR__ . '/../..' . '/app/Http/Livewire/Students.php',

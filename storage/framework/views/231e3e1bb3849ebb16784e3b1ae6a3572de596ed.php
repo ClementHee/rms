@@ -1,5 +1,12 @@
 
 
+<style> .kbw-signature { width: 50%; height: 200px;}
+    #sig canvas{
+        width: 50% !important;
+        height: 50% !important;
+
+        
+    }</style>
 <?php $__env->startSection('content'); ?>
 
 <body>
@@ -18,15 +25,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('students')->html();
-} elseif ($_instance->childHasBeenRendered('3nrg6AF')) {
-    $componentId = $_instance->getRenderedChildComponentId('3nrg6AF');
-    $componentTag = $_instance->getRenderedChildComponentTagName('3nrg6AF');
+} elseif ($_instance->childHasBeenRendered('bEwCxdv')) {
+    $componentId = $_instance->getRenderedChildComponentId('bEwCxdv');
+    $componentTag = $_instance->getRenderedChildComponentTagName('bEwCxdv');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('3nrg6AF');
+    $_instance->preserveRenderedChild('bEwCxdv');
 } else {
     $response = \Livewire\Livewire::mount('students');
     $html = $response->html();
-    $_instance->logRenderedChild('3nrg6AF', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('bEwCxdv', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -37,11 +44,15 @@ echo $html;
 
     
 <?php $__env->stopSection(); ?>
+
+
 <script>
     window.addEventListener('close-modal', event => {
 
         $('#parentsModal').modal('hide');
         
     })
+
+
 </script>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student_dashboard.blade.php ENDPATH**/ ?>
