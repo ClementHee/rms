@@ -18,3 +18,4 @@ yarn-error.log
 /.vscode
 *.example
 storage/logs/laravel.log
+storage/logs/laravel.log

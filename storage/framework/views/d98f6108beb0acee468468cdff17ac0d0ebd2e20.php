@@ -742,6 +742,23 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="mb-3">
+                        <p class='d-inline px-1'>Gender:</p>
+                  
+                            <div class="form-check form-check-inline mb-3">
+                                
+                                <label class="form-check-label">Male</label>
+                                <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
+            
+                            </div>
+            
+                            <div class="form-check form-check-inline  mb-3">
+                                
+                                <label class="form-check-label">Female</label>
+                                <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
+                            </div>
+                        
+                    </div>
+                    <div class="mb-3">
                         <label>IC number</label>
                         <input required type="text" wire:model="ic_no" class="form-control">
                         <?php $__errorArgs = ['ic_no'];

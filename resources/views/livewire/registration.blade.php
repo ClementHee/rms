@@ -24,6 +24,7 @@
                 <input type="date" id="enrolment_date" name="enrolment_date" required class="form-control" placeholder="Date Enrolled" wire:model="enrolment_date"> 
             </div>
         </div>
+
         <div class="row">  
             <div class="mb-3 form-group col">
                 <label for="first_name">Full Name:</label>
@@ -270,57 +271,111 @@
                 @endif
         </div>
    
+   
         <div class ="search-box">
-            <div class='row'>
-                <div class="mb-3 form-group col">
-                    <label for="father">Father: </label>
-                    <input required type="text" id="father" name="father" wire:keyup="searchResult_Father" class="form-control" placeholder="Father's name" wire:model="father">
-                    @if($showmodal_father)
-                        <ul >
-                            @if(!empty($parent_father))
-                                @foreach($parent_father as $record_father)
-
-                                    <li  wire:click="fetchFather({{ $record_father->parent_id }})" >{{ $record_father->name}}</li>
-
-                                @endforeach
-                            @endif
-                        </ul>
-                
-                        
-                    @elseif($createnew_father)
+       
+        <div class ="search-box">
+        <div class='row'>
             
-                            <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >I am A New Parent</button>
-                    
-                    
-                    @endif
-
-                    @error('father') <span class="text-danger">{{ $message }}</span>@enderror
+            <div class="mb-3 form-group col">
+                <h2 class="mt-3">Father</h2>
+                <div class="mb-3">
+                    <label for="father_name">Full Name</label>
+                    <input required type="text" wire:model="father_name" class="form-control" placeholder="Name as per IC">
+                    @error('father_name') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-            
-                
-                <div class="mb-3 form-group col">
-                    <label for="mother">Mother: </label>
-                    <input required type="text" id="mother" name="mother" wire:keyup="searchResult_Mother" class="form-control pb-2" placeholder="Mother's name" wire:model="mother">
-        
-                    @if($showmodal_mother)
-                        <ul >
-                            @if(!empty($parent_mother))
-                                @foreach($parent_mother as $record_mother)
 
-                                    <li  wire:click="fetchMother({{ $record_mother->parent_id }})" >{{ $record_mother->name}}</li>
-
-                                @endforeach
-                            @endif
-                        </ul>
-                
-                        
-                    @elseif($createnew_mother)
+                <div class="mb-3">
+                    <p class='d-inline px-1'>Gender:</p>                  
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">Male</label>
+                        <input  class="form-check-input" wire:model='father_gender' type="radio" name="father_gender" value="Male">    
+                    </div>
+                    <div class="form-check form-check-inline ">
+                        <label class="form-check-label">Female</label>
+                        <input  class="form-check-input" wire:model='father_gender' type="radio" name="father_gender" value="Female">
+                    </div>  
+                </div>
+                <div class="mb-3">
+                    <label for="father_ic">IC number</label>
+                    <input required type="text" wire:model="father_ic" class="form-control" placeholder="NRIC number">
+                    @error('father_ic') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="father_occupation">Occupation</label>
+                    <input required type="text" wire:model="father_occupation" class="form-control" placeholder="Occupation">
+                    @error('father_occupation') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="father_co_name">Company Name</label>
+                    <input required type="text" wire:model="father_co_name" class="form-control" placeholder="Company Name">
+                    @error('father_co_name') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="father_co_add">Company Address</label>
+                    <input required type="text" wire:model="father_co_add" class="form-control" placeholder="Company Address">
+                    @error('father_co_add') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="father_email">Email</label>
+                    <input  type="email" wire:model="father_email" class="form-control" placeholder="Email">
+                    @error('father_email') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="father_tel">Contact No.</label>
+                    <input required type="text" wire:model="father_tel" class="form-control" placeholder="Contact No.">
+                    @error('father_tel') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>
             
-                            <button class="mt-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#parentsModal" >I am A New Parent</button>
-                    
-                    
-                    @endif
-                    @error('mother') <span class="text-danger">{{ $message }}</span>@enderror
+            <div class="mb-3 form-group col">
+                <h2 class="mt-3">Mother</h2>
+                <div class="mb-3">
+                    <label for="father_name">Full Name</label>
+                    <input required type="text" wire:model="mother_name" class="form-control" placeholder="Name as per IC">
+                    @error('mother_name') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="mb-3">
+                    <p class='d-inline px-1'>Gender:</p>                  
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">Male</label>
+                        <input  class="form-check-input" wire:model='mother_gender' type="radio" name="mother_gender" value="Male">    
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">Female</label>
+                        <input  class="form-check-input" wire:model='mother_gender' type="radio" name="mother_gender" value="Female">
+                    </div>  
+                </div>
+                <div class="mb-3">
+                    <label for="mother_ic">IC number</label>
+                    <input required type="text" wire:model="mother_ic" class="form-control" placeholder="NRIC number">
+                    @error('mother_ic') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="mother_occupation">Occupation</label>
+                    <input required type="text" wire:model="mother_occupation" class="form-control" placeholder="Occupation">
+                    @error('mother_occupation') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="mother_co_name">Company Name</label>
+                    <input required type="text" wire:model="mother_co_name" class="form-control" placeholder="Company Name">
+                    @error('mother_co_name') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="mother_co_add">Company Address</label>
+                    <input required type="text" wire:model="mother_co_add" class="form-control" placeholder="Company Address">
+                    @error('mother_co_add') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="mother_email">Email</label>
+                    <input  type="email" wire:model="mother_email" class="form-control" placeholder="Email">
+                    @error('mother_email') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="mother_tel">Contact No.</label>
+                    <input required type="text" wire:model="mother_tel" class="form-control" placeholder="Contact No.">
+                    @error('mother_tel') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
         </div>
@@ -332,12 +387,13 @@
                 @error('e_contact') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
-            <div class="mb-3 form-group col">
-                <label for="e_contact">Emergency Contact (other than parents): </label>
-                <input required type="text" id="e_contact_hp" name="e_contact_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact_hp">
-                @error('e_contact_hp') <span class="text-danger">{{ $message }}</span>@enderror
-            </div>
+                <div class="mb-3 form-group col">
+                    <label for="e_contact">Emergency Contact (other than parents): </label>
+                    <input required type="text" id="e_contact_hp" name="e_contact_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact_hp">
+                    @error('e_contact_hp') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
         </div>
+
         <div class="row">
             <div class="mb-3 form-group col">
                 <label for="e_contact2">Emergency Contact (other than parents): </label>
@@ -371,109 +427,114 @@
                 @error('allergies') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         </div>
+
         <div class="row">
-        <div class="mb-3 form-group col">
-            <label for="carplate">Car Plate and model (Use , to seperate multiple cars): </label>
-            <input type="text" id="carplate" name="carplate"  class="form-control pb-2" placeholder="Carplate number followed by model" wire:model="carplate">
-            @error('carplate') <span class="text-danger">{{ $message }}</span>@enderror
-        </div>
-        <div class="mb-3 form-group col ">
-            <label for="others">Other information: </label>
-            <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
-            @error('others') <span class="text-danger">{{ $message }}</span>@enderror
-        </div>
-        </div>
-        <div class="mb-3 form-group">
-            <label for="potential">Potential: </label>
-            <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name and birthdate" wire:model="potential">
-            @error('potential') <span class="text-danger">{{ $message }}</span>@enderror
+            <div class="mb-3 form-group col">
+                <label for="carplate">Car Plate and model (Use , to seperate multiple cars): </label>
+                <input type="text" id="carplate" name="carplate"  class="form-control pb-2" placeholder="Carplate number followed by model" wire:model="carplate">
+                @error('carplate') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            <div class="mb-3 form-group col ">
+                <label for="others">Other information: </label>
+                <input type="text" id="others" name="others"  class="form-control pb-2" placeholder="Other information" wire:model="others">
+                @error('others') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="potential">Potential: </label>
+                <input type="text" id="potential" name="potential"  class="form-control pb-2" placeholder="Name and birthdate" wire:model="potential">
+                @error('potential') <span class="text-danger">{{ $message }}</span>@enderror
         </div>
 
-
-        <div class="mb-3 text-center form-group col">
-            <div>
-                <label class="" for="">Signature:</label>
-                <br/>
-                <div wire:ignore id="sig"></div>
-                <br/>
-                <div>
-                    <button id="clear" class="btn btn-danger btn-sm">Resign</button>
-                    <button id="done" class="btn btn-primary btn-sm">Done</button>
-                   
+        <div class="list-group">
+                  
+            <div class="d-flex w-100 justify-content-between">
+              <h3 class="mb-3 mt-3">Payment Guidelines</h3>
+           
+            </div>
+            <p class="list-group-item">1. Confirmation of registration is subject to payment of commitment deposit.</p>
+            <p class="list-group-item">2. All fees are to be paid either by: 
+                <br>- <span class="fw-bold">crossed cheque </span>made payable to <span class="fw-bold">Tadika Rhema Sdn Bhd.</span>
+                <br>- banked into the school account <span class="fw-bold">(21114600031136 - RHB) </span> and the bank-in receipt given to the office.
+                <br>- online transfer (successful transfer advice e-mail to <span class="fw-bold">tadikarhema@gmail.com.</span>)
+            </p>
+            <p class="list-group-item">3. The commitment deposit is refundable upon fulfillment on the following terms:
+                <br> a. Your child must have completed <span class="fw-bold">as least one full school term</span>.
+                <br><span class="fw-bold"> One month's written notice </span> is given before the end of the child's final term with the school.
+            </p>
+            <p class="list-group-item">4. Where payment is not made by thr relevant due date, a <span class="fw-bold">"FIVE PERCENT (5%) LATE PAYMENT ADMINSTRATIVE FEE"</span> will be levied, unless prior arrangement (a written letter) has been made with the school.</p>
+            <p class="list-group-item">5. Any student who has not paid his / her full fees plus late payment fee, 2 weeks after the due date, will not be allowed to attend classes or any other school activities until the outstanding amount is settled in full.</p>
+            <p class="list-group-item">6. Any student who has not paid his/ her full fees plus late payment fee, one month after the due date, the shcool reserves the right to terminate the student's enrolment.</p>
+            <p class="list-group-item">7. Fees are subject to changes at the discretion of the Management</p>
+            <p class="list-group-item">8. <span class="fw-bold"> Copyright of images recorded at Tadika Rhema</span>
+            <br>The Management of Tadika Rhema Sdn Bhd claims and reserves all rights of all images taken or created of your child while they are registered students of Tadika Rhema Sdn Bhd together with all the images of the child and family members (hereinafter collectively
+            reffered to as "images") and reservers the absolute right to use and publish these images in whatever form including but not limited to photographic, video and electronic images without the need to seek yout permission and without disclosing the names and identities
+            of those images and the creator of those images unless prior written request is made to the Management of Tadika Rhema Sdn Bhd which the Management reserves the right to consider without any obligation to agree. 
+            </p>
+            <p class="list-group-item">9. <span class="fw-bold"> Personal Data Protection Statement</span>
+            <br>Your personal information collected is processed, retained and used by Tadika Rhema Sdn Bhd in accordance with the Malaysian Personal Data Protection Act 2010. Your personal information may be used for all purposes in relation to your enrolment of you child in
+            Tadika Rhema Sdn Bhd, and to meet statutory obligations, and for registration of public events such as art competitions. Tadika Rhema Sdn Bhd may also retain and continue to process your personal data for all intents and purposes unless you request in writing
+            to withdraw your consent
+            </p>
+          
+  
+        </div>
+        
+            <div class="mb-3 form-group col">
+                <p>I, 
+                    <select class="form control" data-width="100px">
+                        <option value="{{$this->father_name}}">{{$this->father_name}}</option>
+                        <option value="{{$this->mother_name}}">{{$this->mother_name}}</option>
+                    </select> 
+                    (I.C No.   <select class="form control" data-width="100px" wire:model="consent_ic" name="consent_ic" id="consent_ic">
+                        <option value="{{$this->father_ic}}">{{$this->father_ic}}</option>
+                        <option value="{{$this->mother_ic}}">{{$this->mother_ic}}</option>
+                    </select>), hereby agree to accept the above guidelines. I also agree to provide my personal data as mentioned in the Statement above.</p>
+            </div>
+        <div class="row">
+            <div class="mb-3 form-group col">
+                <p>Name: <select class="form control" data-width="100px" wire:model="consent_name" name="consent_name" id="consent_name">
+                    <option value="{{$this->father_name}}">{{$this->father_name}}</option>
+                    <option value="{{$this->mother_name}}">{{$this->mother_name}}</option>
+                </select> 
+                <br>
+                Child's Name: {{$this->first_name}} {{$this->last_name}}
+                <br>
+                Date: {{date("Y/m/d")}}</p>
+            </div>
+                <div class="mb-3 form-group col">
+                    <p for="">Signature:</p>
+      
+                    <div wire:ignore id="sig"></div>
+                    <br/>
+                    <div class="text-center">
+                        <button id="clear" class="btn btn-danger btn-sm mt-3">Resign</button>
+                        <button id="done" class="btn btn-primary btn-sm mt-3">Done</button>
+                    
+                    </div>
                 </div>
             </div>
         </div>
-        <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
-        <button wire:click.prevent="storeStudent()" class="btn btn-primary">Submit</button>
+        
+        <button wire:click="list_all()" class="btn btn-danger ">Cancel</button>
+        <button wire:click.prevent="storeStudent()" class="btn btn-primary ">Submit</button>
     </form>
    
 </div>
-
-    <!-- Insert Modal -->
-<div wire:ignore.self class="modal fade" id="parentsModal" tabindex="-1" aria-labelledby="studentModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="studentModalLabel">Create Parent</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    wire:click="closeModal()"></button>
-            </div>
-            <form >
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Name</label>
-                        <input required type="text" wire:model="name" class="form-control">
-                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>IC number</label>
-                        <input required type="text" wire:model="ic_no" class="form-control">
-                        @error('ic_no') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Occupation</label>
-                        <input required type="text" wire:model="occupation" class="form-control">
-                        @error('occupation') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Company Name</label>
-                        <input required type="text" wire:model="company_name" class="form-control">
-                        @error('company_name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Company Address</label>
-                        <input required type="text" wire:model="company_add" class="form-control">
-                        @error('company_add') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input  type="email" wire:model="email" class="form-control">
-                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Tel no</label>
-                        <input required type="text" wire:model="tel" class="form-control">
-                        @error('tel') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" wire:click="closeModal()"
-                        data-bs-dismiss="modal">Close</button>
-                    <button wire:click.prevent="storeParent()" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+<link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
 
 <script>
+    
     var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+    
     $('#clear').click(function(e) {
         $('#sig').signature('enable');
         e.preventDefault();
         sig.signature('clear');
+        @this.signed = '';
 
     });
     $('#done').click(function(e) { 
@@ -484,6 +545,8 @@ aria-hidden="true">
 
     });
 
-   
+    if(@this.signed=''){
+        sig.signature('clear');
+    }
    
 </script>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-<style> .kbw-signature { width: 50%; height: 200px;}
+<style> .kbw-signature { width: 30%; height: 200px;}
     #sig canvas{
-        width: 50% !important;
-        height: 50% !important;
+        width: 100% !important;
+        height: 100% !important;
 
         
     }</style>

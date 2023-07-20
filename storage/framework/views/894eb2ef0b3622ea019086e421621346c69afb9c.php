@@ -101,15 +101,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                                 </li>
-                                <!---<li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?php echo e(route('enrolment')); ?>"><?php echo e(__('Enrolment form')); ?></a>
-                                </li>--->
+                                </li>
                             <?php endif; ?>
-
-                           
-                       
-                
-                           
                         <?php else: ?>
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">

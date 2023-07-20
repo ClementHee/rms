@@ -99,9 +99,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                                <!---<li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('enrolment') }}">{{ __('Enrolment form') }}</a>
-                                </li>--->
+                                </li>
                             @endif
                         @else
                         <ul class="navbar-nav me-auto">

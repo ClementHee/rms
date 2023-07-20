@@ -66,6 +66,7 @@ class Students extends Component
         
     }
     public function storeStudent() {  
+  
        
        $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
