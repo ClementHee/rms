@@ -521,16 +521,17 @@
     </form>
    
 </div>
-<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
 
 <script>
     
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    
+    var sig = $('#sig').signature({syncFormat: 'PNG'});
+    $('#sig').draggable();
     $('#clear').click(function(e) {
         $('#sig').signature('enable');
         e.preventDefault();
