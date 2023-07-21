@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Enrol;
 use App\Models\Parents;
 use App\Models\Student;
 use Livewire\Component;
@@ -80,7 +81,7 @@ class Registration extends Component
  
         $fullname = $this->first_name." ".$this->last_name;
 
-         Student::create([
+         Enrol::create([
              'status'=>'active',
              'carplate'=>$this->carplate,
              'fullname' => $fullname,
