@@ -6,13 +6,17 @@
 
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+ 
 
-
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>
-    <?php echo \Livewire\Livewire::styles(); ?>
+    <!-- Custom fonts for this template-->
+  
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style type="text/css">
         .search-box .clear{
@@ -42,22 +46,14 @@
     
         .search-box ul li:hover{
             cursor: pointer;}
-
-       
     </style>
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
- 
- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <!-- Signature Pad -->
-
-
     <script>
         var pusher = new Pusher('ea44c0267e7076ff3041', {
           cluster: 'ap1'
@@ -76,105 +72,157 @@
                 };         
           });
     </script>
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo e(asset('css/paper-dashboard.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
+    
+    <?php echo \Livewire\Livewire::styles(); ?>
 
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <?php echo e(config('app.name', 'Laravel')); ?>
-
+<body id="page-top">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white" data-active-color="danger">
+          <div class="logo">
+            
+            <a href="<?php echo e(url('/')); ?>" class="simple-text logo-normal">
+              Rhema Management System
+              <!-- <div class="logo-image-big">
+                <img src="../assets/img/logo-big.png">
+              </div> -->
+            </a>
+          </div>
+          <div class="sidebar-wrapper">
+            <ul class="nav">
+              <li>
+                <a href="<?php echo e(url('/')); ?>">
+                  <p>Home</p>
                 </a>
-          
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+              </li>
+              <li>
+                <a href="<?php echo e(route('maintainence')); ?>">
+                  <p>Maintainence</p>
+                </a>
+              </li>
+              <li>
+                <a href="<?php echo e(route('request_materials')); ?>">
+                  
+                  <p>Request Materials</p>
+                </a>
+              </li>
+              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin')): ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
+                <div class="dropdown-menu ms-5">
+                  <a class="nav-link" href="<?php echo e(route('student')); ?>">Students</a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        <?php if(auth()->guard()->guest()): ?>
-                            <?php if(Route::has('login')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('enrolment')); ?>"><?php echo e(__('Enrolment form')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                        <?php else: ?>
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('maintainence')); ?>">Maintainence</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('request_materials')); ?>">Request Materials</a>
-                            </li>
-                            </li>
-                            <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin')): ?>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Manage Students and Parents 
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="<?php echo e(route('student')); ?>">Students</a>
-
-                                    <a class="nav-link" href="<?php echo e(route('parent')); ?>">Parents</a>
-                                    
-                                    <a class="nav-link" href="<?php echo e(route('student_parent')); ?>">All Details</a>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
-                            <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
-                            <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
-                            <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
-                            <?php endif; ?>
-                            
-                        </ul>
-         
-    
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
-
-                                    
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <?php echo e(__('Logout')); ?>
-
-                                    </a>
-
-                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
-                                        <?php echo csrf_field(); ?>
-                                    </form>
-                                </div>
-                            </li>
-                      
-                        <?php endif; ?>
-                        
-                    </ul>
+                  <a class="nav-link" href="<?php echo e(route('parent')); ?>">Parents</a>
+                  
+                  <a class="nav-link" href="<?php echo e(route('student_parent')); ?>">All Details</a>
                 </div>
+              </li>
+              <?php endif; ?>
+              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
+                <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
+                <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
+                <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
+              <?php endif; ?>
+            </ul>
+          </div>
+        </div>
+        <div class="main-panel" style="height: 100vh;">
+          <!-- Navbar -->
+          <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+            <div class="container-fluid">
+              <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                  <button type="button" class="navbar-toggler">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                  </button>
+                </div>
+                
+              </div>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                
+                <ul class="navbar-nav">
+                  <li class="nav-item btn-rotate dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?php echo e(Auth::user()->name); ?>
+
+                 
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                          onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                          <?php echo e(__('Logout')); ?>
+
+                      </a>
+
+                      <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                        <?php echo csrf_field(); ?>
+                      </form>
+                  
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </nav>
-
-        <main class="py-4">
-            <?php echo $__env->yieldContent('content'); ?>
-        </main>
-    </div>
-
+          </nav>
+          <!-- End Navbar -->
+          <div class="content">
+            <div class="row">
+              <div class="col-md-12">
+                <main class="py-4">
+                  <?php echo $__env->yieldContent('content'); ?>
+              </main>
+              </div>
+            </div>
+          </div>
+         <!--<footer class="footer" style="position: absolute; bottom: 0; width: -webkit-fill-available;">
+            <div class="container-fluid">
+              <div class="row">
+                <nav class="footer-nav">
+                  <ul>
+                    <li><a href="https://www.creative-tim.com" target="_blank">Creative Tim</a></li>
+                    <li><a href="https://www.creative-tim.com/blog" target="_blank">Blog</a></li>
+                    <li><a href="https://www.creative-tim.com/license" target="_blank">Licenses</a></li>
+                  </ul>
+                </nav>
+                <div class="credits ml-auto">
+                  <span class="copyright">
+                    © 2020, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                  </span>
+                </div>
+              </div>
+            </div>
+          </footer>-->
+        </div>
+      </div>
 <?php echo \Livewire\Livewire::scripts(); ?>
 
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+
+<script src="<?php echo e(asset("js/core/popper.min.js")); ?>"></script>
+<script src="<?php echo e(asset("js/core//bootstrap.min.js")); ?>"></script>
+<script src="<?php echo e(asset("js/plugins/perfect-scrollbar.min.js")); ?>"></script>
+
+<!-- Chart JS -->
+<script src="<?php echo e(asset('js/plugins/chartjs.min.js')); ?>"></script>
+
+<!--  Notifications Plugin    -->
+<script src="<?php echo e(asset('js/plugins/bootstrap-notify.js')); ?>"></script>
+
+<!-- Control Center for Paper Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="<?php echo e(asset('js/paper-dashboard.min.js?v=2.0.0')); ?>" type="text/javascript"></script>
 
 
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">

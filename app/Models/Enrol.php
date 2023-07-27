@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Enrol extends Model
 {
     use HasFactory;
     protected $table = 'enrol';
     protected $primaryKey = 'student_id';
-
+    public $timestamps = false;
     protected $fillable = [
             'enrolment_date', 
             'referral', 
@@ -57,7 +57,8 @@ class Student extends Model
             'time_to_sch',
             'carplate',
             'status',
-            'signed'
+            'chinese_name',
+            'signature'
     ];
 
    

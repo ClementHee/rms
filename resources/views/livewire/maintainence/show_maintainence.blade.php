@@ -12,16 +12,16 @@
         
         <table class="table table-striped table-sm text-center  ">
             <tr>
-                <th>Issue No.</th>
+             
                 <th>Issue</th>
                 <th>Location</th>
                 <th>Reported By</th>
                 <th>Time</th>
                 <th>Status</th>
                 <th>Remarks</th>
-                <th>Seen</th>
-                <th>Updated on</th>
-                <th width="150px">Action</th>
+                <th>Status</th>
+                
+                <th>Action</th>
             </tr>
 
             @foreach ($all_maintainence as $issues)
@@ -31,7 +31,7 @@
                 <tr class="bg-success bg-opacity-50 p-2">
             @endif
         
-                <td>{{ $issues->issueNo }}</td>
+              
                 <td>{{ $issues->issue }}</td>
                 <td>{{ $issues->location }}</td>
                 <td>{{ $issues->reported_by }}</td>
@@ -68,7 +68,7 @@
                     </form> 
                 </td>
                 
-                <td>{{ $issues->updated_at }}</td>
+           
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
                     <button wire:click="delete({{ $issues->issueNo }})" class="btn btn-danger">Delete</button>

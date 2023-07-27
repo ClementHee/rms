@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div>
    
         <div class="row">
             <div class="col-md-12">
@@ -9,10 +9,10 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4>Parents
-                            <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
+                        
+                            <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                             <button wire:click="create_new()" class="btn btn-primary float-end">Add New Parent</button>
-                        </h4>
+                 
                     </div>
                     <div class="card-body">
                         <table class="table table-borderd table-striped">
@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($parents as $parent)
+                                @forelse($parents as $parent)
                                     <tr>
                                    
                                         <td>{{ $parent->name }}</td>
@@ -40,14 +40,19 @@
                                             <button type="button"  wire:click="deleteParent({{$parent->parent_id}})" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                @endforeach   
+                                    @empty
+                                    <tr>
+                                        <td colspan="2">No Record Found</td>
+                                    </tr>
+                                @endforelse
                              
                             </tbody>
                         </table>
                         
                     </div>
+                    {{$parents ->links()}}
                 </div>
-                {{$parents ->links()}}
+                
             </div>
         </div>
     </div>

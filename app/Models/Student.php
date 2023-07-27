@@ -57,7 +57,8 @@ class Student extends Model
             'time_to_sch',
             'carplate',
             'status',
-            'signed'
+            'chinese_name',
+            'signature'
     ];
 
    

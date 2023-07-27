@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div>
         <div class="row">
             <div class="col-md-12">
                 <?php if(session()->has('message')): ?>
@@ -8,7 +8,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
+                        <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                         <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
                     </div>
                     <div class="card-body">
@@ -78,7 +78,7 @@
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr>
-                                        <td colspan="5">No Record Found</td>
+                                        <td colspan="8">No Record Found</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

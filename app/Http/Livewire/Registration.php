@@ -15,18 +15,19 @@ class Registration extends Component
     public $search ='';
     public $class,$entry_year,$type,$first_name,$last_name,$gender,$dob,$birth_cert_no,$pos_in_family,$race,$nationality;
     public $prev_kindy,$no_years,$religion,$home_add,$home_lang,$home_tel,$e_contact,$e_contact_hp,$fam_doc,$allergies;
-    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate,$signed;
+    public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate,$signature;
     public $reasons =[];
     public $pref_pri_sch=[];
     public $consent_ic, $consent_name;
     public $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
-    public $parent_father,$parent_mother, $referral_other,$status;
+    public $parent_father,$parent_mother, $referral_other,$status,$chinese_name;
     public $father_name, $father_gender, $father_ic, $father_occupation, $father_co_name, $father_co_add, $father_email,$father_tel;
     public $mother_name, $mother_gender, $mother_ic, $mother_occupation, $mother_co_name, $mother_co_add, $mother_email,$mother_tel;
  
     public function render()
     {
-        return view('livewire.registration')->layout('livewire.registration_dashboard');
+        $students = Enrol::get();
+        return view('livewire.registration' ,['students' => $students])->layout('livewire.registration_dashboard');
     }
     public function storeStudent() {  
        
@@ -81,78 +82,68 @@ class Registration extends Component
  
         $fullname = $this->first_name." ".$this->last_name;
 
-         Enrol::create([
-             'status'=>'active',
-             'carplate'=>$this->carplate,
-             'fullname' => $fullname,
-             'entry_year'=> $this->entry_year,
-             'enrolment_date'=>$this->enrolment_date,
-             'referral'=>$referral_final,
-             'reasons'=>implode(", ",$this->reasons),
-             'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
-             'type'=> $this->type,
-             'first_name'=>trim($this->first_name),
-             'last_name'=>trim($this->last_name),
-             'gender'=> $this->gender,
-             'dob'=> $this->dob,
-             'birth_cert_no'=> trim($this->birth_cert_no),
-             'mykid'=>trim($this->mykid),
-             'pos_in_family'=> $this->pos_in_family,
-             'race'=> trim($this->race),
-             'nationality'=> trim($this->nationality),
-             'prev_kindy' => trim($this->prev_kindy),
-             'no_years' => trim($this->no_years),
-             'religion'=> trim($this->religion),
-             'home_add'=> trim($this->home_add),
-             'poscode'=>trim($this->poscode),
-             'state' => trim($this->state),
-             'country'=>trim($this->country),
-             'district'=>trim($this->district),
-             'home_lang'=> trim($this->home_lang),
-             'home_tel'=> trim($this->home_tel),
-             'e_contact'=> trim($this->e_contact),
-             'e_contact_hp'=>trim( $this->e_contact_hp),
-             'e_contact2'=> trim($this->e_contact2),
-             'e_contact2_hp'=> trim($this->e_contact2_hp),
-             'fam_doc'=> trim($this->fam_doc),
-             'fam_doc_hp'=> trim($this->fam_doc_hp),
-             'allergies'=> trim($this->allergies),
-             'others'=> trim($this->  others),
-             'potential'=> trim($this->potential),
-             'father'=> $father_id->parent_id,
-             'mother'=> $mother_id->parent_id,
-             'time_to_sch'=>$this->time_to_sch
-         ]);
+       
  
-         $student_id=Student::where('birth_cert_no',$this->birth_cert_no)->get('student_id')->first();
-         Relationship::create([
-             'student' => $student_id->student_id,
-             'father' => $father_id->parent_id,
-             'mother' => $mother_id->parent_id
-         ]);
- 
-         if($this->signed!=""){
-         $folderPath = public_path('upload/');
-        
-         $image_parts = explode(";base64,", $this->signed);
-              
-         $image_type_aux = explode("image/", $image_parts[0]);
+         if($this->signature!=""){
             
-         $image_type = $image_type_aux[1];
+            Enrol::create([
+                'chinese_name'=>$this->chinese_name,
+                'status'=>'active',
+                'carplate'=>$this->carplate,
+                'fullname' => $fullname,
+                'entry_year'=> $this->entry_year,
+                'enrolment_date'=>$this->enrolment_date,
+                'referral'=>$referral_final,
+                'reasons'=>implode(", ",$this->reasons),
+                'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
+                'type'=> $this->type,
+                'first_name'=>trim($this->first_name),
+                'last_name'=>trim($this->last_name),
+                'gender'=> $this->gender,
+                'dob'=> $this->dob,
+                'birth_cert_no'=> trim($this->birth_cert_no),
+                'mykid'=>trim($this->mykid),
+                'pos_in_family'=> $this->pos_in_family,
+                'race'=> trim($this->race),
+                'nationality'=> trim($this->nationality),
+                'prev_kindy' => trim($this->prev_kindy),
+                'no_years' => trim($this->no_years),
+                'religion'=> trim($this->religion),
+                'home_add'=> trim($this->home_add),
+                'poscode'=>trim($this->poscode),
+                'state' => trim($this->state),
+                'country'=>trim($this->country),
+                'district'=>trim($this->district),
+                'home_lang'=> trim($this->home_lang),
+                'home_tel'=> trim($this->home_tel),
+                'e_contact'=> trim($this->e_contact),
+                'e_contact_hp'=>trim( $this->e_contact_hp),
+                'e_contact2'=> trim($this->e_contact2),
+                'e_contact2_hp'=> trim($this->e_contact2_hp),
+                'fam_doc'=> trim($this->fam_doc),
+                'fam_doc_hp'=> trim($this->fam_doc_hp),
+                'allergies'=> trim($this->allergies),
+                'others'=> trim($this->  others),
+                'potential'=> trim($this->potential),
+                'father'=> $father_id->parent_id,
+                'mother'=> $mother_id->parent_id,
+                'time_to_sch'=>$this->time_to_sch,
+                'signature' =>$this->signature,
+             ]);
+     
+             $student_id=Student::where('birth_cert_no',$this->birth_cert_no)->get('student_id')->first();
+             Relationship::create([
+                 'student' => $student_id->student_id,
+                 'father' => $father_id->parent_id,
+                 'mother' => $mother_id->parent_id
+             ]);
          
-         $image_base64 = base64_decode($image_parts[1]);
-  
-         $signature = $fullname . '.'.$image_type;
-            
-         $file = $folderPath . $signature;
-  
-         file_put_contents($file, $image_base64);
  
          }
          
         $this->resetInputFields();
         $this->resetInputFields_Parents();
-  
+        return redirect('/login ');
         
      }
      public function searchResult_Father(){
@@ -291,7 +282,7 @@ class Registration extends Component
         $this->referral_other='';
         $this->status='';
         $this->signed='';
- 
+        $this->chinese_name='';
         
     }
     private function resetInputFields_Parents(){

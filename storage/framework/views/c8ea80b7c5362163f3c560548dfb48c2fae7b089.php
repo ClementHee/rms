@@ -53,7 +53,18 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
             </div>
-
+            <div class="mb-3 form-group col ">
+                <label for="chinese_name">Chinese Name (if any):</label>
+                <input type="text" id="chinese_name" name="chinese_name" required class="form-control" placeholder="Chinese Name (if any)" wire:model="chinese_name" readonly> 
+                <?php $__errorArgs = ['chinese_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
             <div class="mb-3 form-group col ">
                 <label for="relationship_w_child">Relationship With Child:</label>
                 <input readonly type="text" id="relationship_w_child" name="relationship_w_child" required class="form-control"  wire:model="relationship_w_child"> 

@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 
 <body>
-    <div class="container">
+    <div >
         <div class="row justify-content-center">
             <div class="col-md-8">
                     </div>
@@ -17,15 +17,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('maintainences')->html();
-} elseif ($_instance->childHasBeenRendered('iXDpH6u')) {
-    $componentId = $_instance->getRenderedChildComponentId('iXDpH6u');
-    $componentTag = $_instance->getRenderedChildComponentTagName('iXDpH6u');
+} elseif ($_instance->childHasBeenRendered('F2VOa1c')) {
+    $componentId = $_instance->getRenderedChildComponentId('F2VOa1c');
+    $componentTag = $_instance->getRenderedChildComponentTagName('F2VOa1c');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('iXDpH6u');
+    $_instance->preserveRenderedChild('F2VOa1c');
 } else {
     $response = \Livewire\Livewire::mount('maintainences');
     $html = $response->html();
-    $_instance->logRenderedChild('iXDpH6u', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('F2VOa1c', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

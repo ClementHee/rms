@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div>
    
         <div class="row">
             <div class="col-md-12">
@@ -9,10 +9,10 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4>Parents
-                            <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
+                        
+                            <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                             <button wire:click="create_new()" class="btn btn-primary float-end">Add New Parent</button>
-                        </h4>
+                 
                     </div>
                     <div class="card-body">
                         <table class="table table-borderd table-striped">
@@ -25,7 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__empty_1 = true; $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                    
                                         <td><?php echo e($parent->name); ?></td>
@@ -40,15 +40,20 @@
                                             <button type="button"  wire:click="deleteParent(<?php echo e($parent->parent_id); ?>)" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <tr>
+                                        <td colspan="2">No Record Found</td>
+                                    </tr>
+                                <?php endif; ?>
                              
                             </tbody>
                         </table>
                         
                     </div>
-                </div>
-                <?php echo e($parents ->links()); ?>
+                    <?php echo e($parents ->links()); ?>
 
+                </div>
+                
             </div>
         </div>
     </div>

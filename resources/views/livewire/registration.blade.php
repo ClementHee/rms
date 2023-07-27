@@ -2,7 +2,7 @@
     <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded" >
 
         <h2>Registration</h2>
-
+       
         @csrf
         <div class="row">
             <div class="mb-3 form-group col">
@@ -36,6 +36,12 @@
                 <label for="last_name">Last Name:</label>
                 <input type="text" id="last_name" name="last_name" required class="form-control" placeholder="Last Name" wire:model="last_name"> 
                 @error('last_name') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group col ">
+                <label for="chinese_name">Chinese Name (if any):</label>
+                <input type="text" id="chinese_name" name="chinese_name" required class="form-control" placeholder="Chinese Name (if any)" wire:model="chinese_name"    > 
+                @error('chinese_name') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
             <div class="mb-3 form-group col ">
@@ -482,7 +488,7 @@
         
             <div class="mb-3 form-group col">
                 <p>I, 
-                    <select class="form control" data-width="100px">
+                    <select class="form control" data-width="100px" wire:model="consent_name" name="consent_name" id="consent_name">
                         <option value="{{$this->father_name}}">{{$this->father_name}}</option>
                         <option value="{{$this->mother_name}}">{{$this->mother_name}}</option>
                     </select> 
@@ -493,10 +499,7 @@
             </div>
         <div class="row">
             <div class="mb-3 form-group col">
-                <p>Name: <select class="form control" data-width="100px" wire:model="consent_name" name="consent_name" id="consent_name">
-                    <option value="{{$this->father_name}}">{{$this->father_name}}</option>
-                    <option value="{{$this->mother_name}}">{{$this->mother_name}}</option>
-                </select> 
+                <p>Name: {{ $this->consent_name }}
                 <br>
                 Child's Name: {{$this->first_name}} {{$this->last_name}}
                 <br>
@@ -515,9 +518,10 @@
                 </div>
             </div>
         </div>
-        
-        <button wire:click="list_all()" class="btn btn-danger ">Cancel</button>
-        <button wire:click.prevent="storeStudent()" class="btn btn-primary ">Submit</button>
+        <div class="text-center">
+        <button wire:click="list_all()" class="btn btn-danger btn-lg">Cancel</button>
+        <button wire:click.prevent="storeStudent()" class="btn btn-primary btn-lg">Submit</button>
+        </div>
     </form>
    
 </div>
@@ -536,18 +540,18 @@
         $('#sig').signature('enable');
         e.preventDefault();
         sig.signature('clear');
-        @this.signed = '';
+        @this.signature = '';
 
     });
     $('#done').click(function(e) { 
         e.preventDefault();
         var x = $('#sig').signature('toDataURL');
-        @this.signed = x;
+        @this.signature = x;
         $('#sig').signature('disable');
 
     });
 
-    if(@this.signed=''){
+    if(@this.signature=''){
         sig.signature('clear');
     }
    

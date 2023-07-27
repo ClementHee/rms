@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.logindashboard')
 
 <style> .kbw-signature { width: 100%; height: 200px;}
     #sig canvas{

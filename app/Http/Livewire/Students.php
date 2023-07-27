@@ -20,7 +20,7 @@ class Students extends Component
     public $others,$potential,$father,$mother, $enrolment_date, $referral,$relationship_w_child,$time_to_sch,$carplate,$signed;
     public array $reasons, $pref_pri_sch;
     public $j1_class,$j2_class,$j3_class,$aft_j1_class,$aft_j2_class,$aft_j3_class, $poscode, $state, $country,$district,$e_contact2,$e_contact2_hp,$fam_doc_hp,$mykid;
-    public $parent_father,$parent_mother, $referral_other,$status;
+    public $parent_father,$parent_mother, $referral_other,$status,$chinese_name;
     public $showmodal_father=false;
     public $showmodal_mother=false;
     public $createnew_father=false;
@@ -96,6 +96,7 @@ class Students extends Component
 
         Student::create([
             'status'=>'active',
+            'chinese_name'=>$this->chinese_name,
             'carplate'=>$this->carplate,
             'fullname' => $fullname,
             'entry_year'=> $this->entry_year,
@@ -184,6 +185,7 @@ class Students extends Component
         $father_name = Parents::where('parent_id',($students->father))->get('name')->first();
         $mother_name = Parents::where('parent_id',($students->mother))->get('name')->first();
         $this->status=$students->status;
+        $this->chinese_name=$students->chinese_name;
         $this->carplate=$students->carplate;
         $this->student_id=$id;
         $this->enrolment_date=$students->enrolment_date;
@@ -230,7 +232,7 @@ class Students extends Component
         $this->aft_j2_class=$students->aft_j2_class;
         $this->aft_j3_class=$students->aft_j3_class;
         $this->time_to_sch=$students->time_to_sch;
-        $this->signed=$students->signed;
+ 
         
         $this->mode = 'single';
     }
@@ -254,6 +256,7 @@ class Students extends Component
             $this->referral_other = "";
         }
         
+        $this->chinese_name=$students->chinese_name;
         $this->status=$students->status;
         $this->student_id=$id;
         $this->carplate=$students->carplate;
@@ -326,6 +329,7 @@ class Students extends Component
         }
     
         $editing_student->update([
+            'chinese_name'=>$this->chinese_name,
             'status'=>$this->status,
             'fullname' => $this->first_name." ".$this->last_name,
             'entry_year'=> $this->entry_year,
@@ -464,6 +468,7 @@ class Students extends Component
     }
 
     private function resetInputFields(){
+        $this->chinese_name = '';
         $this->carplate='';
         $this->student_id='';
         $this->enrolment_date='';

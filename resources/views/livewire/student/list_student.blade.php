@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div>
         <div class="row">
             <div class="col-md-12">
                 @if (session()->has('message'))
@@ -8,7 +8,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px" />
+                        <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                         <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
                     </div>
                     <div class="card-body">
@@ -72,7 +72,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">No Record Found</td>
+                                        <td colspan="8">No Record Found</td>
                                     </tr>
                                 @endforelse
                             </tbody>

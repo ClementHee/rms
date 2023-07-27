@@ -56,7 +56,11 @@
                     <input type="text" id="last_name" name="last_name" required class="form-control" placeholder="Last Name" wire:model="last_name"> 
                     @error('last_name') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
-    
+                <div class="mb-3 form-group col ">
+                    <label for="chinese_name">Chinese Name (if any):</label>
+                    <input type="text" id="chinese_name" name="chinese_name" required class="form-control" placeholder="Chinese Name (if any)" wire:model="chinese_name"> 
+                    @error('chinese_name') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
                 <div class="mb-3 form-group col ">
                     <label for="relationship_w_child">Relationship With Child:</label>
                     <input type="text" id="relationship_w_child" name="relationship_w_child" required class="form-control" placeholder="Relationship With Child" wire:model="relationship_w_child"> 

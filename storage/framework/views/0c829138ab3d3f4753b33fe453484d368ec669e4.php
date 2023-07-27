@@ -12,16 +12,16 @@
         
         <table class="table table-striped table-sm text-center  ">
             <tr>
-                <th>Issue No.</th>
+             
                 <th>Issue</th>
                 <th>Location</th>
                 <th>Reported By</th>
                 <th>Time</th>
                 <th>Status</th>
                 <th>Remarks</th>
-                <th>Seen</th>
-                <th>Updated on</th>
-                <th width="150px">Action</th>
+                <th>Status</th>
+                
+                <th>Action</th>
             </tr>
 
             <?php $__currentLoopData = $all_maintainence; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $issues): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -31,7 +31,7 @@
                 <tr class="bg-success bg-opacity-50 p-2">
             <?php endif; ?>
         
-                <td><?php echo e($issues->issueNo); ?></td>
+              
                 <td><?php echo e($issues->issue); ?></td>
                 <td><?php echo e($issues->location); ?></td>
                 <td><?php echo e($issues->reported_by); ?></td>
@@ -68,7 +68,7 @@
                     </form> 
                 </td>
                 
-                <td><?php echo e($issues->updated_at); ?></td>
+           
                 <td>
                     <button wire:click="edit(<?php echo e($issues->issueNo); ?>)" class="btn btn-primary ">Edit</button>
                     <button wire:click="delete(<?php echo e($issues->issueNo); ?>)" class="btn btn-danger">Delete</button>
