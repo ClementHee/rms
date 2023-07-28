@@ -88,7 +88,7 @@ class Registration extends Component
             
             Enrol::create([
                 'chinese_name'=>$this->chinese_name,
-                'status'=>'active',
+                'status'=>'registered',
                 'carplate'=>$this->carplate,
                 'fullname' => $fullname,
                 'entry_year'=> $this->entry_year,

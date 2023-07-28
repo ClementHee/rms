@@ -60,6 +60,5 @@ class Student extends Model
             'chinese_name',
             'signature'
     ];
-
    
 }

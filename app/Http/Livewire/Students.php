@@ -89,11 +89,7 @@ class Students extends Component
        }
 
        $fullname = $this->first_name." ".$this->last_name;
-  
-
-
-      
-
+       
         Student::create([
             'status'=>'active',
             'chinese_name'=>$this->chinese_name,
