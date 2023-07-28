@@ -1,12 +1,9 @@
+<div>
 
-<div class='container'>
-    <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded" >
-
-        <h2>New Student</h2>
-
+    <form class=" p-4 shadow-lg  bg-white border border-secondary rounded" >
         <?php echo csrf_field(); ?>
         <div class="row">
-            <div class="mb-3 form-group col">
+            <div class="mb-3  col">
                 <label for="entry_year">Year:</label>
                 <input type="number" id="entry_year" name="entry_year" required class="form-control" placeholder="Entry Year" wire:model="entry_year"> 
             </div>
@@ -43,6 +40,19 @@ unset($__errorArgs, $__bag); ?>
                 <label for="last_name">Last Name:</label>
                 <input type="text" id="last_name" name="last_name" required class="form-control" placeholder="Last Name" wire:model="last_name"> 
                 <?php $__errorArgs = ['last_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
+
+            <div class="mb-3 form-group col ">
+                <label for="chinese_name">Chinese Name (if any):</label>
+                <input type="text" id="chinese_name" name="chinese_name" required class="form-control" placeholder="Chinese Name (if any)" wire:model="chinese_name"> 
+                <?php $__errorArgs = ['chinese_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -698,19 +708,7 @@ unset($__errorArgs, $__bag); ?>
 
         </div>
 
-        <div class="mb-3 text-center form-group col">
-            <div>
-                <label class="" for="">Signature:</label>
-                <br/>
-                <div wire:ignore id="sig"></div>
-                <br/>
-                <div>
-                    <button id="clear" class="btn btn-danger btn-sm">Resign</button>
-                    <button id="done" class="btn btn-primary btn-sm">Done</button>
-                   
-                </div>
-            </div>
-        </div>
+      
         <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
         <button wire:click.prevent="storeStudent()" class="btn btn-primary">Submit</button>
     </form>
@@ -841,23 +839,4 @@ unset($__errorArgs, $__bag); ?>
     </div>
 </div>
 
-
-<script>
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        $('#sig').signature('enable');
-        e.preventDefault();
-        sig.signature('clear');
-
-    });
-    $('#done').click(function(e) { 
-        e.preventDefault();
-        var x = $('#sig').signature('toDataURL');
-        window.livewire.find('<?php echo e($_instance->id); ?>').signed = x;
-        $('#sig').signature('disable');
-
-    });
-
-   
-   
-</script><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student/add_student.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student/add_student.blade.php ENDPATH**/ ?>

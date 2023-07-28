@@ -1,12 +1,6 @@
 
 
-<style> .kbw-signature { width: 30%; height: 200px;}
-    #sig canvas{
-        width: 100% !important;
-        height: 100% !important;
 
-        
-    }</style>
 <?php $__env->startSection('content'); ?>
 
 <body>
@@ -25,15 +19,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('students')->html();
-} elseif ($_instance->childHasBeenRendered('GWQ7wI7')) {
-    $componentId = $_instance->getRenderedChildComponentId('GWQ7wI7');
-    $componentTag = $_instance->getRenderedChildComponentTagName('GWQ7wI7');
+} elseif ($_instance->childHasBeenRendered('5dxgMAE')) {
+    $componentId = $_instance->getRenderedChildComponentId('5dxgMAE');
+    $componentTag = $_instance->getRenderedChildComponentTagName('5dxgMAE');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('GWQ7wI7');
+    $_instance->preserveRenderedChild('5dxgMAE');
 } else {
     $response = \Livewire\Livewire::mount('students');
     $html = $response->html();
-    $_instance->logRenderedChild('GWQ7wI7', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('5dxgMAE', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

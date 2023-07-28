@@ -1,12 +1,9 @@
+<div>
 
-<div class='container'>
-    <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded" >
-
-        <h2>New Student</h2>
-
+    <form class=" p-4 shadow-lg  bg-white border border-secondary rounded" >
         @csrf
         <div class="row">
-            <div class="mb-3 form-group col">
+            <div class="mb-3  col">
                 <label for="entry_year">Year:</label>
                 <input type="number" id="entry_year" name="entry_year" required class="form-control" placeholder="Entry Year" wire:model="entry_year"> 
             </div>
@@ -438,19 +435,7 @@
 
         </div>
 
-        <div class="mb-3 text-center form-group col">
-            <div>
-                <label class="" for="">Signature:</label>
-                <br/>
-                <div wire:ignore id="sig"></div>
-                <br/>
-                <div>
-                    <button id="clear" class="btn btn-danger btn-sm">Resign</button>
-                    <button id="done" class="btn btn-primary btn-sm">Done</button>
-                   
-                </div>
-            </div>
-        </div>
+      
         <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
         <button wire:click.prevent="storeStudent()" class="btn btn-primary">Submit</button>
     </form>
@@ -532,23 +517,3 @@ aria-hidden="true">
     </div>
 </div>
 
-
-<script>
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        $('#sig').signature('enable');
-        e.preventDefault();
-        sig.signature('clear');
-
-    });
-    $('#done').click(function(e) { 
-        e.preventDefault();
-        var x = $('#sig').signature('toDataURL');
-        @this.signed = x;
-        $('#sig').signature('disable');
-
-    });
-
-   
-   
-</script>
