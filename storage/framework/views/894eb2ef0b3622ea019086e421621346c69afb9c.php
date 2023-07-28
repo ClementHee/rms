@@ -28,7 +28,7 @@
             list-style: none;
             padding: 0px;
             width: 250px;
-            position: absolute;
+ 
             margin: 0;
             background: white;
         }

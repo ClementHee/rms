@@ -88,13 +88,13 @@ class Students extends Component
             $referral_final=$this->referral." -- ".$this->referral_other;
        }
 
-       $fullname = $this->first_name." ".$this->last_name;
-       
+   
         Student::create([
+            'fullname' =>$this->first_name." ".$this->last_name,
             'status'=>'active',
             'chinese_name'=>$this->chinese_name,
             'carplate'=>$this->carplate,
-            'fullname' => $fullname,
+            
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
@@ -148,26 +148,8 @@ class Students extends Component
             'mother' => $mother_id->parent_id
         ]);
 
-        if($this->signed!=""){
-        $folderPath = public_path('upload/');
-       
-        $image_parts = explode(";base64,", $this->signed);
-             
-        $image_type_aux = explode("image/", $image_parts[0]);
-           
-        $image_type = $image_type_aux[1];
-        
-        $image_base64 = base64_decode($image_parts[1]);
  
-        $signature = $fullname . '.'.$image_type;
-           
-        $file = $folderPath . $signature;
- 
-        file_put_contents($file, $image_base64);
 
-        }
-        
-        $this->resetInputFields();
         $this->mode = 'view';
         
     }
@@ -529,6 +511,7 @@ class Students extends Component
         $this->company_add= '';
         $this->email= '';
         $this->tel= '';
+        $this->gender='';
    
     }
 

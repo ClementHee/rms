@@ -80,14 +80,14 @@ unset($__errorArgs, $__bag); ?>
       
                 <div class="form-check form-check-inline mb-3">
                     
-                    <label class="form-check-label">Male</label>
+                    <label class="form-check-label pr-2">Male</label>
                     <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="M">
 
                 </div>
 
                 <div class="form-check form-check-inline  mb-3">
                     
-                    <label class="form-check-label">Female</label>
+                    <label class="form-check-label pr-2">Female</label>
                     <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                 </div>
             
@@ -744,8 +744,8 @@ unset($__errorArgs, $__bag); ?>
                   
                             <div class="form-check form-check-inline mb-3">
                                 
-                                <label class="form-check-label">Male</label>
-                                <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
+                                <label class="form-check-label pr-2">Male</label>
+                                <input  class="form-check-input pr-2" wire:model='gender' type="radio" name="gender" value="Male">
             
                             </div>
             

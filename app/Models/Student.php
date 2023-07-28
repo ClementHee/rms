@@ -20,6 +20,7 @@ class Student extends Model
             'type',
             'first_name',
             'last_name',
+            'fullname',
             'gender',
             'dob',
             'birth_cert_no',

@@ -1,10 +1,10 @@
 <div>
-    <div class='container'>
-        <h2>Update Student</h2>
+    <div >
+   
     <button readonly wire:click="list_all()" class="btn btn-primary">Back</button><br>
-    <form class="form-inline p-4 mt-2 shadow-lg  bg-white border border-secondary rounded">
+    <form class=" p-4 mt-2 shadow-lg  bg-white border border-secondary rounded">
 
-        <h2>New Student</h2>
+      
 
         <?php echo csrf_field(); ?>
         <div class="row">
@@ -81,16 +81,16 @@ unset($__errorArgs, $__bag); ?>
         <div >
             <p class='d-inline px-1'>Gender:</p>
       
-                <div class="form-check form-check-inline mb-3">
+                <div class="form-check  form-check-inline ">
                     
-                    <label class="form-check-label">Male</label>
+                    <label class="form-check-label pr-2">Male</label>
                     <input disabled  class="form-check-input" wire:model='gender' type="radio" name="gender" value="M">
 
                 </div>
 
-                <div class="form-check form-check-inline  mb-3">
+                <div class="form-check form-check-inline  ">
                     
-                    <label class="form-check-label">Female</label>
+                    <label class="form-check-label pr-2">Female</label>
                     <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                 </div>
             
