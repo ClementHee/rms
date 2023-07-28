@@ -1,5 +1,4 @@
 <div>
-   
    @if($mode=="view")
    <h1 class="px-4">Student Dashboard</h1>
      @include('livewire.student.list_student')

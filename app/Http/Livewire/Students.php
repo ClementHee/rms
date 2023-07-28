@@ -149,7 +149,7 @@ class Students extends Component
         ]);
 
  
-
+        $this->resetInputFields();
         $this->mode = 'view';
         
     }
