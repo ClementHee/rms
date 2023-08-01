@@ -135,7 +135,7 @@ class Students extends Component
             'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
             'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
             'aft_j1_class'=>trim(strtoupper($this->aft_j1_class)),
-            'aft_j2_class'=>tri(strtoupper($this->aft_j2_class)),
+            'aft_j2_class'=>trim(strtoupper($this->aft_j2_class)),
             'aft_j3_class'=>trm(strtoupper($this->aft_j3_class)),
             'time_to_sch'=>$this->time_to_sch
 
@@ -350,7 +350,7 @@ class Students extends Component
             'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
             'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
             'aft_j1_class'=>trim(strtoupper($this->aft_j1_class)),
-            'aft_j2_class'=>tri(strtoupper($this->aft_j2_class)),
+            'aft_j2_class'=>trim(strtoupper($this->aft_j2_class)),
             'aft_j3_class'=>trm(strtoupper($this->aft_j3_class)),
             'time_to_sch'=>$this->time_to_sch,
             'carplate'=>$this->carplate,
