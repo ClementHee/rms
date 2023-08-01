@@ -1,7 +1,7 @@
 <div>
     <div>
-        <div class="row">
-            <div class="col-md-12">
+        <div >
+            <div >
                 @if (session()->has('message'))
                     <h5 class="alert alert-success">{{ session('message') }}</h5>
                 @endif
@@ -29,7 +29,7 @@
                                 @forelse ($students as $student)
                                     <tr>
                                    
-                                        <td>{{ $student->first_name." ".$student->last_name }}</td>
+                                        <td><a wire:click="viewStudent({{$student->student_id}})" style="color:black" onMouseOver="this.style.color='Black'" onMouseOut="this.style.color='Black'"  href=" wire:click="viewStudent({{$student->student_id}})">{{ $student->first_name." ".$student->last_name }}</a></td>
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>
@@ -61,13 +61,11 @@
                                             Not Assigned
                                         @endif</td>
                                         <td>
-                                            <button type="button"  wire:click="viewStudent({{$student->student_id}})" class="btn btn-primary">
-                                                View
-                                            </button>
+                                            
                                             <button type="button"  wire:click="editStudent({{$student->student_id}})" class="btn btn-primary">
                                                 Edit
                                             </button>
-                                            <button type="button"  wire:click="deleteStudent({{$student->student_id}})" class="btn btn-danger">Delete</button>
+                                            <button type="button"  wire:click="deleteStudent({{$student->student_id}})" class="btn btn-danger mt-3">Delete</button>
                                         </td>
                                     </tr>
                                 @empty

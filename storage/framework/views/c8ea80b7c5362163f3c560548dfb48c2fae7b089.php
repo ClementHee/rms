@@ -15,7 +15,7 @@
 
             <div class="mb-3 form-group col">
                 <label for="type">Type:</label>
-                <select readonly class="form-select" wire:model="type" name="type" id="type">
+                <select disabled class="form-select" wire:model="type" name="type" id="type">
                     <option value="">Select an option</option>
                     <option value="Half Day">Half Day</option>
                     <option value="Full Day">Full Day</option>
