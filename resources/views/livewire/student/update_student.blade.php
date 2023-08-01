@@ -1,6 +1,5 @@
 <div>
-    <div class='container'>
-
+    
         <form class="p-4 shadow-lg  bg-white border border-secondary rounded">
 
             <h2>Update Student</h2>
@@ -511,5 +510,5 @@
                     <button wire:click.prevent="storeParent()" class="btn btn-primary">Save</button>
                 </div>
             </form>
-</div>
+
 </div>
