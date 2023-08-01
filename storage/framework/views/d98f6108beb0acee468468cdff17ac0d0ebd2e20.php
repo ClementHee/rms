@@ -19,7 +19,7 @@
 
             <div class="mb-3 form-group col">
                 <label for="enrolment_date">Enrolment Date:</label>
-                <input type="date" id="enrolment_date" name="enrolment_date" required class="form-control" placeholder="Date Enrolled" wire:model="enrolment_date"> 
+                <input type="date" id="enrolment_date" name="enrolment_date" required class="form-control" placeholder="Date Enrolled" wire:model="enrolment_date" pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])"> 
             </div>
         </div>
         <div class="row">  
@@ -505,7 +505,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="mb-3 form-group col">
-                <label for="e_contact">Emergency Contact (other than parents): </label>
+                <label for="e_contact">Emergency Contact Hp No. : </label>
                 <input required type="text" id="e_contact_hp" name="e_contact_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact_hp">
                 <?php $__errorArgs = ['e_contact_hp'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -519,7 +519,7 @@ unset($__errorArgs, $__bag); ?>
         </div>
         <div class="row">
             <div class="mb-3 form-group col">
-                <label for="e_contact2">Emergency Contact (other than parents): </label>
+                <label for="e_contact2">Emergency Contact 2 (other than parents): </label>
                 <input type="text" id="e_contact2" name="e_contact2" required class="form-control pb-2" placeholder="Name" wire:model="e_contact2">
                 <?php $__errorArgs = ['e_contact2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -532,7 +532,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="mb-3 form-group col">
-                <label for="e_contact2_hp">Emergency Contact 2 (other than parents): </label>
+                <label for="e_contact2_hp">Emergency Contact Hp No. (other than parents): </label>
                 <input required type="text" id="e_contact2_hp" name="e_contact2_hp" required class="form-control pb-2" placeholder="Emergency Contact Number" wire:model="e_contact2_hp">
                 <?php $__errorArgs = ['e_contact2_hp'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -751,7 +751,7 @@ unset($__errorArgs, $__bag); ?>
             
                             <div class="form-check form-check-inline  mb-3">
                                 
-                                <label class="form-check-label">Female</label>
+                                <label class="form-check-label pr-2">Female</label>
                                 <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
                             </div>
                         

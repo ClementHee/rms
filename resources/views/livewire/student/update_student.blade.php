@@ -1,7 +1,7 @@
 <div>
     <div class='container'>
 
-        <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
+        <form class="p-4 shadow-lg  bg-white border border-secondary rounded">
 
             <h2>Update Student</h2>
     
