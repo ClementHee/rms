@@ -29,7 +29,7 @@
                                 @forelse ($students as $student)
                                     <tr>
                                    
-                                        <td><a wire:click="viewStudent({{$student->student_id}})" style="color:black" onMouseOver="this.style.color='Black'" onMouseOut="this.style.color='Black'"  href=" wire:click="viewStudent({{$student->student_id}})">{{ $student->first_name." ".$student->last_name }}</a></td>
+                                        <td wire:click="viewStudent({{$student->student_id}})" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" >{{ $student->first_name." ".$student->last_name }}</td>
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>

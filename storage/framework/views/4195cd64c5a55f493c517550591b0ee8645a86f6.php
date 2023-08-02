@@ -29,7 +29,7 @@
                                 <?php $__empty_1 = true; $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                    
-                                        <td><a wire:click="viewStudent(<?php echo e($student->student_id); ?>)" style="color:black" onMouseOver="this.style.color='Black'" onMouseOut="this.style.color='Black'"  href=" wire:click="viewStudent(<?php echo e($student->student_id); ?>)"><?php echo e($student->first_name." ".$student->last_name); ?></a></td>
+                                        <td wire:click="viewStudent(<?php echo e($student->student_id); ?>)" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" ><?php echo e($student->first_name." ".$student->last_name); ?></td>
                                         <td><?php echo e($student->gender); ?></td>
                                         <td><?php echo e($student->dob); ?></td>
                                         <td><?php echo e($student->birth_cert_no); ?></td>

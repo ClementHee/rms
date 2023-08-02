@@ -29,7 +29,7 @@ class Students extends Component
  
     public function render()
     {
-        $students = Student::where('first_name', 'like', '%'.$this->search.'%')->orderBy('first_name','ASC')->paginate(10);      
+        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);      
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     }
 
