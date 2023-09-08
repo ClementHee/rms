@@ -1,3 +1,80 @@
-<button wire:click="getData()"  >
-    Back
-</button><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/siblingslist.blade.php ENDPATH**/ ?>
+<div>
+<h1> Siblings List</h1>
+<?php
+$prevItem = null
+
+?>
+<?php $__currentLoopData = $siblings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sibling): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php if($prevItem!==null): ?>
+ 
+        <?php if((($sibling->father)==($prevItem->father)) ||(($sibling->mother)==($prevItem->mother)) ): ?>
+            <tr>
+                <td>
+                    <?php echo e($sibling->fullname); ?>
+
+                </td>
+                <td>
+                    <?php if( $sibling->j3_class !=""): ?>
+                        <?php echo e($sibling->j3_class); ?>
+
+                    <?php elseif( $sibling->j2_class !=""): ?>
+                        <?php echo e($sibling->j2_class); ?>
+
+                    <?php elseif($sibling->j1_class): ?>
+                        <?php echo e($sibling->j1_class); ?>
+
+                    <?php else: ?>
+                        Not Assigned
+                    <?php endif; ?>
+                </td>
+            </tr>
+
+        <?php else: ?>
+        </table>
+        <br>
+            <table class="table table-bordered" style="border: 3px solid black !important;  width:30%">
+            <tr ><td class="col-3"><?php echo e($sibling->fullname); ?></td>
+                <td class="col-3">
+                    <?php if( $sibling->j3_class !=""): ?>
+                        <?php echo e($sibling->j3_class); ?>
+
+                    <?php elseif( $sibling->j2_class !=""): ?>
+                        <?php echo e($sibling->j2_class); ?>
+
+                    <?php elseif($sibling->j1_class): ?>
+                        <?php echo e($sibling->j1_class); ?>
+
+                    <?php else: ?>
+                        Not Assigned
+                    <?php endif; ?>
+                </td>
+        <?php endif; ?>
+    <?php else: ?>
+
+        <table class="table table-bordered" style="border: 3px solid black !important; width:30%" >
+            <tr>
+                <td class="col-3" ><?php echo e($sibling->fullname); ?></td>
+                <td class="col-3">
+                    <?php if( $sibling->j3_class !=""): ?>
+                        <?php echo e($sibling->j3_class); ?>
+
+                    <?php elseif( $sibling->j2_class !=""): ?>
+                        <?php echo e($sibling->j2_class); ?>
+
+                    <?php elseif($sibling->j1_class): ?>
+                        <?php echo e($sibling->j1_class); ?>
+
+                    <?php else: ?>
+                        Not Assigned
+                    <?php endif; ?>
+                </td>
+            </tr>
+
+    <?php endif; ?>
+ 
+ <?php
+     $prevItem =$sibling
+ ?>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</div><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/siblingslist.blade.php ENDPATH**/ ?>

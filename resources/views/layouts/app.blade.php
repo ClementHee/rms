@@ -120,9 +120,10 @@
                   <a class="nav-link" href="{{ route('student_parent') }}">All Details</a>
                 </div>
               </li>
+              <li><a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a></li>
               @endrole
               @role('SuperAdmin')
-                <li><a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a></li>
+                
                 <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                 <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
               @endrole

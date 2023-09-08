@@ -1,7 +1,6 @@
 <div>
-    <div class='container'>
-
-        <form class="form-inline p-4 shadow-lg  bg-white border border-secondary rounded">
+    
+        <form class="p-4 shadow-lg  bg-white border border-secondary rounded">
 
             <h2>Update Student</h2>
     
@@ -12,8 +11,8 @@
               
                         <div class="form-check form-check-inline mb-3">
                             
-                            <label class="form-check-label">Enrolled</label>
-                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="active">
+                            <label class="form-check-label pr-2">Enrolled</label>
+                            <input  class="form-check-input pr-2" wire:model='status' type="radio" name="status" value="active">
         
                         </div>
         
@@ -100,14 +99,14 @@ unset($__errorArgs, $__bag); ?>
           
                     <div class="form-check form-check-inline mb-3">
                         
-                        <label class="form-check-label">Male</label>
+                        <label class="form-check-label pr-2">Male</label>
                         <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="M">
     
                     </div>
     
                     <div class="form-check form-check-inline  mb-3">
                         
-                        <label class="form-check-label">Female</label>
+                        <label class="form-check-label pr-2">Female</label>
                         <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                     </div>
                 
@@ -833,6 +832,6 @@ unset($__errorArgs, $__bag); ?>
                     <button wire:click.prevent="storeParent()" class="btn btn-primary">Save</button>
                 </div>
             </form>
-</div>
+
 </div>
 <?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student/update_student.blade.php ENDPATH**/ ?>
