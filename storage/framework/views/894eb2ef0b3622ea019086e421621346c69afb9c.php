@@ -96,7 +96,7 @@
             <ul class="nav">
               <li>
                 <a href="<?php echo e(url('/')); ?>">
-                  <p>Home</p>
+                  <p>Main Dashboard</p>
                 </a>
               </li>
               <li>
@@ -114,16 +114,17 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
                 <div class="dropdown-menu ms-5">
-                  <a class="nav-link" href="<?php echo e(route('student')); ?>">Students</a>
+                  <a class="nav-link text-dark" href="<?php echo e(route('student')); ?>">Students</a>
 
-                  <a class="nav-link" href="<?php echo e(route('parent')); ?>">Parents</a>
+                  <a class="nav-link text-dark" href="<?php echo e(route('parent')); ?>">Parents</a>
                   
-                  <a class="nav-link" href="<?php echo e(route('student_parent')); ?>">All Details</a>
+                  <a class="nav-link text-dark" href="<?php echo e(route('student_parent')); ?>">All Details</a>
                 </div>
               </li>
+              <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
               <?php endif; ?>
               <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
-                <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
+                
                 <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                 <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
               <?php endif; ?>
@@ -153,11 +154,13 @@
                 
                 <ul class="navbar-nav">
                   <li class="nav-item btn-rotate dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <?php echo e(Auth::user()->name); ?>
 
-                 
-                    </a>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                    </button>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"

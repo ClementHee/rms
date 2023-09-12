@@ -1,10 +1,6 @@
 <div>
-    <script src="https://cdn.tailwindcss.com"></script> 
 
-    <div class="container mx-auto sm:px-4 py-2">
 
-    </div>
-      <div class="container mx-auto sm:px-4 ">
       <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('student-parent-details', [])->html();
@@ -20,6 +16,6 @@ if (! isset($_instance)) {
 }
 echo $html;
 ?>
-    </div>      
+  
 </div>
 <?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/all-details.blade.php ENDPATH**/ ?>
