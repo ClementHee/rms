@@ -20,7 +20,7 @@
                 <th>Status</th>
                 <th>Remarks</th>
                 <th>Status</th>
-                
+                <th>Fixed at</th>
                 <th>Action</th>
             </tr>
 
@@ -67,7 +67,7 @@
                         @endif
                     </form> 
                 </td>
-                
+                <td>{{ $issues->updated_at }}</td>
            
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
