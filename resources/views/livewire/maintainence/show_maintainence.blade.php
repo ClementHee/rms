@@ -67,7 +67,15 @@
                         @endif
                     </form> 
                 </td>
-                <td>{{ $issues->updated_at }}</td>
+                <td>
+                    
+                    @if($issues->fixed==false)
+                    
+                        {{ $issues->updated_at }}
+                    @else
+                        - 
+                    @endif
+                </td>
            
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
