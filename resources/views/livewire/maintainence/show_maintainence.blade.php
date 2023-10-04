@@ -26,9 +26,9 @@
 
             @foreach ($all_maintainence as $issues)
             @if($issues->fixed==false)
-            <tr class='bg-danger text-white bg-opacity-50'>
+            <tr class=' bg-opacity-50'>
             @else
-                <tr class="bg-success bg-opacity-50 p-2">
+                <tr class=" bg-opacity-50 p-2">
             @endif
         
               
