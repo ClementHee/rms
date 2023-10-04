@@ -27,9 +27,9 @@
             @foreach ($all_request as $request)
 
             @if($request->fulfilled==false)
-            <tr class='bg-danger  bg-opacity-50'>
+            <tr class='  bg-opacity-50'>
             @else
-            <tr class="bg-success bg-opacity-50 p-2">
+            <tr class=" bg-opacity-50 ">
             @endif
             
                 <td>{{ $request->date }}</td>
