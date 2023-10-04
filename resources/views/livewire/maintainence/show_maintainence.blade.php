@@ -69,7 +69,7 @@
                 </td>
                 <td>
                     
-                    @if($issues->fixed==false)
+                    @if($issues->fixed==true)
                     
                         {{ $issues->updated_at }}
                     @else
