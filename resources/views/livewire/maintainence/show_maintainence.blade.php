@@ -28,7 +28,7 @@
             @if($issues->fixed==false)
             <tr class=' bg-opacity-50'>
             @else
-                <tr class=" bg-opacity-50 p-2">
+                <tr class=" bg-opacity-50 ">
             @endif
         
               
