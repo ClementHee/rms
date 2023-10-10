@@ -1,5 +1,6 @@
 <div>
 <h1> Siblings List</h1>
+<div class="row">
 @php
 $prevItem = null
 
@@ -26,9 +27,10 @@ $prevItem = null
             </tr>
 
         @else
-        </table>
+        </table></div>
         <br>
-            <table class="table table-bordered" style="border: 3px solid black !important;  width:30%">
+        <div class="col-4">
+            <table class="table table-bordered" style="border: 3px solid black !important;  width:100%">
             <tr ><td class="col-3">{{$sibling->fullname}}</td>
                 <td class="col-3">
                     @if ( $sibling->j3_class !="")
@@ -43,8 +45,8 @@ $prevItem = null
                 </td>
         @endif
     @else
-
-        <table class="table table-bordered" style="border: 3px solid black !important; width:30%" >
+        <div class='col-4'>
+        <table class="table table-bordered" style="border: 3px solid black !important; width:100%" >
             <tr>
                 <td class="col-3" >{{$sibling->fullname}}</td>
                 <td class="col-3">
@@ -67,4 +69,5 @@ $prevItem = null
  @endphp
 
 @endforeach
+        </div>
 </div>
