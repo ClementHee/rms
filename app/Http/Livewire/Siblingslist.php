@@ -6,7 +6,7 @@ use App\Models\Student;
 use Livewire\Component;
 use App\Models\Relationship;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\PDF;
+use PDF;
 
 class Siblingslist extends Component
 {
