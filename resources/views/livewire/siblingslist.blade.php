@@ -33,7 +33,7 @@ $prevItem = null
         </table></div>
         <br>
         <div class="col-4">
-            <table class="table table-bordered" style="border: 3px solid black !important;  width:75%">
+            <table cellspacing="0" cellpadding="0"  border="1" class="table table-bordered" style="table-layout:fixed; border: 3px solid black !important;  width:75%">
             <tr ><td class="col-3">{{$sibling->fullname}}</td>
                 <td class="col-3">
                     @if ( $sibling->j3_class !="")
@@ -49,7 +49,7 @@ $prevItem = null
         @endif
     @else
         <div class='col-4'>
-        <table class="table table-bordered" style="border: 3px solid black !important; width:75%" >
+        <table cellspacing="0" cellpadding="0"  border="1" class="table table-bordered" style="table-layout:fixed; border: 3px solid black !important; width:75%" >
             <tr>
                 <td class="col-3" >{{$sibling->fullname}}</td>
                 <td class="col-3">
