@@ -1,7 +1,7 @@
 <div>
 <h1> Siblings List</h1>
     
-<button wire:click="exportPDF()" class="ml-5 btn btn-info">
+<button wire:click="exportPDF()" class="btn btn-info">
     Export</button> 
 <div class="row">
 @php
