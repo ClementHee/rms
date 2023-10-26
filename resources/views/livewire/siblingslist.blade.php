@@ -1,5 +1,8 @@
 <div>
 <h1> Siblings List</h1>
+    
+<button wire:click="exportPDF()" class="ml-5 btn btn-info">
+    Export</button> 
 <div class="row">
 @php
 $prevItem = null
@@ -30,7 +33,7 @@ $prevItem = null
         </table></div>
         <br>
         <div class="col-4">
-            <table class="table table-bordered" style="border: 3px solid black !important;  width:100%">
+            <table class="table table-bordered" style="border: 3px solid black !important;  width:75%">
             <tr ><td class="col-3">{{$sibling->fullname}}</td>
                 <td class="col-3">
                     @if ( $sibling->j3_class !="")
@@ -46,7 +49,7 @@ $prevItem = null
         @endif
     @else
         <div class='col-4'>
-        <table class="table table-bordered" style="border: 3px solid black !important; width:100%" >
+        <table class="table table-bordered" style="border: 3px solid black !important; width:75%" >
             <tr>
                 <td class="col-3" >{{$sibling->fullname}}</td>
                 <td class="col-3">

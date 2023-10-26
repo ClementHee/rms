@@ -1,16 +1,30 @@
 <div>
+    
+    <button class=" btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
+    @if ($this->filters=='reset')
+      <button wire:click.prevent="filterUnfixed()" class="mt-2 btn btn-info btn-lg" >
+        Show unfixed</button> 
 
-    <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
-    @if($updateMode)
+    @elseif($this->filters=='unfixed')
+        <button wire:click.prevent="filterFixed()" class="mt-2 btn btn-info btn-lg" >
+        Show fixed</button>
+    
+    @else
+        <button wire:click.prevent="filterReset()" class="mt-2 btn btn-info btn-lg" >
+       Reset Filter</button>
+   @endif
+   
+   @if($updateMode)
         @include('livewire.maintainence.update_issue')
     @endif
-        
+    
     <h1 class="text-center">Maintainence book</h1>
+    
 
-    <div wire:poll.60s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
+    <div wire:poll.60s class="p-3 mt-2 shadow-lg  bg-white border border-secondary rounded ">   
         
         
-        <table class="table table-striped table-sm text-center  ">
+        <table class="pt-3 table table-striped table-sm text-center  ">
             <tr>
              
                 <th>Issue</th>
@@ -56,16 +70,16 @@
                 </td>
                 
                 <td>
-                    <form>
+            
                         @if($issues->fixed==true)
                         
-                            <button wire:click.prevent="mau({{ $issues->issueNo }})" class="btn btn-info">Mark as Unfixed</button>
+                            <button type="button" wire:click.prevent="mau({{ $issues->issueNo }})" class="btn btn-info">Mark as Unfixed</button>
                         @else
                         
-                            <button wire:click.prevent="maf({{ $issues->issueNo }})" class="btn btn-info">Mark as Fixed</button>
+                            <button type="button" wire:click.prevent="maf({{ $issues->issueNo }})" class="btn btn-info">Mark as Fixed</button>
                     
                         @endif
-                    </form> 
+        
                 </td>
                 <td>
                     

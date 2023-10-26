@@ -8,11 +8,13 @@ use Livewire\Component;
 use App\Models\Maintainence;
 use App\Events\NewMaterialRequest;
 
+
   
 class Maintainences extends Component
 {
     public $issue, $location, $reported_by, $reported_at,$remarks,$fixed;
     public $updateMode = false;
+    public $filters = 'reset';
     
 
     /**
@@ -21,9 +23,18 @@ class Maintainences extends Component
      * @var array
      */
     public function render()
-    {
+    {   
+ 
+    
+        if($this->filters=='unfixed'){
+            $this->all_maintainence = Maintainence::where('fixed','=',0)->get();
+        }elseif($this->filters=='fixed'){
+            $this->all_maintainence = Maintainence::where('fixed','=',1)->get();
+        }else{
+            $this->all_maintainence = Maintainence::all();
+        }
         
-        $this->all_maintainence = Maintainence::all();
+       
         
         return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard');
     }
@@ -175,10 +186,20 @@ class Maintainences extends Component
         session()->flash('message', 'Issue Not Fixed');
         
     }
+    public function filterUnfixed(){
+        $this->filters='unfixed';
+    }
+
+    public function filterFixed(){
+        $this->filters='fixed';
+    }
+    public function filterReset(){
+        $this->filters='reset';
+    }
+
+
 
     public function closeModal(){
-
         $this->resetInputFields();
-        
     }
 }

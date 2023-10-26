@@ -1,16 +1,30 @@
 <div>
+    
+    <button class=" btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
+    <?php if($this->filters=='reset'): ?>
+      <button wire:click.prevent="filterUnfixed()" class="mt-2 btn btn-info btn-lg" >
+        Show unfixed</button> 
 
-    <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
-    <?php if($updateMode): ?>
+    <?php elseif($this->filters=='unfixed'): ?>
+        <button wire:click.prevent="filterFixed()" class="mt-2 btn btn-info btn-lg" >
+        Show fixed</button>
+    
+    <?php else: ?>
+        <button wire:click.prevent="filterReset()" class="mt-2 btn btn-info btn-lg" >
+       Reset Filter</button>
+   <?php endif; ?>
+   
+   <?php if($updateMode): ?>
         <?php echo $__env->make('livewire.maintainence.update_issue', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
-        
+    
     <h1 class="text-center">Maintainence book</h1>
+    
 
-    <div wire:poll.60s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
+    <div wire:poll.60s class="p-3 mt-2 shadow-lg  bg-white border border-secondary rounded ">   
         
         
-        <table class="table table-striped table-sm text-center  ">
+        <table class="pt-3 table table-striped table-sm text-center  ">
             <tr>
              
                 <th>Issue</th>
@@ -20,15 +34,15 @@
                 <th>Status</th>
                 <th>Remarks</th>
                 <th>Status</th>
-                
+                <th>Fixed at</th>
                 <th>Action</th>
             </tr>
 
             <?php $__currentLoopData = $all_maintainence; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $issues): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php if($issues->fixed==false): ?>
-            <tr class='bg-danger text-white bg-opacity-50'>
+            <tr class=' bg-opacity-50'>
             <?php else: ?>
-                <tr class="bg-success bg-opacity-50 p-2">
+                <tr class=" bg-opacity-50 ">
             <?php endif; ?>
         
               
@@ -56,18 +70,27 @@
                 </td>
                 
                 <td>
-                    <form>
+            
                         <?php if($issues->fixed==true): ?>
                         
-                            <button wire:click.prevent="mau(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Unfixed</button>
+                            <button type="button" wire:click.prevent="mau(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Unfixed</button>
                         <?php else: ?>
                         
-                            <button wire:click.prevent="maf(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Fixed</button>
+                            <button type="button" wire:click.prevent="maf(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Fixed</button>
                     
                         <?php endif; ?>
-                    </form> 
+        
                 </td>
-                
+                <td>
+                    
+                    <?php if($issues->fixed==true): ?>
+                    
+                        <?php echo e($issues->updated_at); ?>
+
+                    <?php else: ?>
+                        - 
+                    <?php endif; ?>
+                </td>
            
                 <td>
                     <button wire:click="edit(<?php echo e($issues->issueNo); ?>)" class="btn btn-primary ">Edit</button>
