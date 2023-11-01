@@ -2,9 +2,13 @@
 
 
 
+use App\Http\Livewire\Staffs;
 use App\Http\Livewire\ParentsL;
 use App\Http\Livewire\Students;
+use App\Http\Livewire\AllDetails;
 use App\Events\NewMaterialRequest;
+use App\Http\Livewire\Registration;
+use App\Http\Livewire\Siblingslist;
 use App\Http\Livewire\Maintainences;
 use App\Http\Livewire\Relationships;
 use Illuminate\Support\Facades\Route;
@@ -12,9 +16,6 @@ use App\Http\Livewire\MaterialRequest;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Livewire\AllDetails;
-use App\Http\Livewire\Siblingslist;
-use App\Http\Livewire\Registration;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +63,11 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 Route::group(['middleware' => ['auth','admin']], function() { 
+
+    
+});
+
+Route::group(['middleware' => ['auth','admin']], function() { 
     Route::get('/student',App\Http\Livewire\Students::class)->name('student');
  
     Route::get('/parent',ParentsL::class)->name('parent');
@@ -69,9 +75,17 @@ Route::group(['middleware' => ['auth','admin']], function() {
 });
 
 Route::group(['middleware' => ['auth','superadmin']], function() { 
+
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
+    
+});
+
+
+Route::group(['middleware' => ['auth','emt']], function() { 
+    Route::get('/staff',Staffs::class)->name('staff');
+ 
     
 });
 

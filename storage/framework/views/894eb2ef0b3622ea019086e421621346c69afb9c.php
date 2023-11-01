@@ -110,7 +110,7 @@
                   <p>Request Materials</p>
                 </a>
               </li>
-              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin')): ?>
+              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin|EMT')): ?>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
                 <div class="dropdown-menu ms-5">
@@ -127,6 +127,10 @@
                 
                 <li><a class="nav-link" href="<?php echo e(route('users.index')); ?>">Manage Users</a></li>
                 <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
+              <?php endif; ?>
+
+              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'EMT')): ?>
+              <li><a class="nav-link text-dark" href="<?php echo e(route('staff')); ?>">Staffs</a></li>
               <?php endif; ?>
             </ul>
           </div>

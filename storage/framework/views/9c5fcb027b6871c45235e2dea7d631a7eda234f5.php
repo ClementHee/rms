@@ -44,9 +44,9 @@
                 <div class="row">
                     <div class="col-lg-8 col-12 col-sm-10 offset-lg-2 offset-sm-1">
                         <i class="fa fa-frown-o" aria-hidden="true"></i>
-                        @section('code', '403')
+                        <?php $__env->startSection('code', '403'); ?>
                         <h6>You do not have permission to view this page</h6>
-                        <a href="{{ url('/') }}" class="btn btn-primary">Back to home</a>
+                        <a href="<?php echo e(url('/')); ?>" class="btn btn-primary">Back to home</a>
                      </div>
                 </div>
             </div>
@@ -55,3 +55,4 @@
 </body>
 </html>
 
+<?php /**PATH C:\xampp\htdocs\rms\resources\views/errors/403.blade.php ENDPATH**/ ?>
