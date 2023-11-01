@@ -27,14 +27,14 @@ class Maintainences extends Component
  
     
         if($this->filters=='unfixed'){
-            $all_maintainence = Maintainence::where('fixed','=',0)->get();
+            $this->all_maintainence = Maintainence::where('fixed','=',0)->get();
         }elseif($this->filters=='fixed'){
-            $all_maintainence = Maintainence::where('fixed','=',1)->get();
+            $this->all_maintainence = Maintainence::where('fixed','=',1)->get();
         }else{
-            $editing_issueall_maintainence = Maintainence::all();
+            $this->all_maintainence = Maintainence::all();
         }
 
-        return view ('livewire.maintainence.show_maintainence',['all_maintainence'=>$all_maintainence])->layout('livewire.maintainence_dashboard');
+        return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard');
     }
   
     /**
