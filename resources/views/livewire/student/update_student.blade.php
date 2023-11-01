@@ -1,7 +1,7 @@
 <div>
     
         <form class="p-4 shadow-lg  bg-white border border-secondary rounded">
-
+            <h2><u>Student Details</u></h2>   
             <h2>Update Student</h2>
     
             @csrf

@@ -2,6 +2,7 @@
 <div>
     <button wire:click="list_all()" class="btn btn-primary">Back</button><br>
     <form>
+        <h2><u>Parent Details</u></h2>   
                 <div>
                     <div class="mb-3">
                         <label>Name</label>

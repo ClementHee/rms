@@ -1,5 +1,5 @@
 <div>
-    
+    <button wire:click="list_all()" class="btn btn-primary">Back</button><br>
     <form class=" p-4 shadow-lg  bg-white border border-secondary rounded" >
     <h2><u>Staff Details</u></h2>   
     @csrf

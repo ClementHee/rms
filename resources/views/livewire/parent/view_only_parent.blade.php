@@ -1,6 +1,8 @@
 <div>
     <button wire:click="list_all()" class="btn btn-primary">Back</button><br>
+    
     <form>
+        <h2><u>Parent Details</u></h2>   
         @csrf
         <input type="hidden" wire:model="parent_id">
                 <div>
