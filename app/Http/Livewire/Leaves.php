@@ -121,7 +121,7 @@ class Leaves extends Component
             $error = $pdf->getError();
         
         }
-        dd($result);
+        dd($error);
         
       
     }
