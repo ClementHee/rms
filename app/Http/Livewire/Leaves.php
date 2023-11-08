@@ -107,7 +107,10 @@ class Leaves extends Component
 
     public function fillPDF(){
 
-        $pdf = new Pdf(asset('form/form.pdf'));
+        $pdf = new Pdf(asset('form/form.pdf'),[
+            'command' => '/usr/local/bin/pdftk',
+            'useExec' => true,
+        ]);
 
         $result = $pdf->
         fillForm([
