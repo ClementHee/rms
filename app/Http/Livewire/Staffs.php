@@ -12,6 +12,7 @@ class Staffs extends Component
     public $fullname, $dob, $nric,$birth_cert_no,$gender,$race,$nationality,$religion,$home_add,$home_tel,$hp_np,$email,$marital_status,$socso,$epf,$allergies,$qualification,$other;
     public $spouse,$spouse_dob,$spouse_nric,$spouse_race,$spouse_religion,$spouse_nationality,$spouse_occupation,$spouse_comp,$spouse_hp,$spouse_office_no;
     public $search ='';
+    public $days_entitled,$days_left,$days_available;
 
     public function create_new(){
         $this->mode = 'create';
@@ -43,6 +44,7 @@ class Staffs extends Component
         $staffs = Staff::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);      
         return view('livewire.staff.staffs',['staffs'=>$staffs])->layout('livewire.staff_dashboard');
     }
+    
 
     public function storeStaff(){
         if($this->spouse_dob==''){
@@ -77,7 +79,10 @@ class Staffs extends Component
             'spouse_hp' => trim($this->spouse_hp),
             'spouse_office_no' => trim($this->spouse_office_no),
             'qualification' => trim($this->qualification),
-            'other' => trim($this->other)
+            'other' => trim($this->other),
+            'days_entitled' =>trim ($this->days_entitled),
+            'days_left' =>trim ($this->days_left),
+            'days_available' =>trim ($this->days_available)
         ]);
 
         $this->resetInputFields();
@@ -117,6 +122,9 @@ class Staffs extends Component
         $this->spouse_office_no = $staff->spouse_office_no;
         $this->qualification = $staff->qualification;
         $this->other = $staff->other;
+        $this->days_entitled =$staff-> days_entitled;
+        $this->days_left=$staff-> days_left;
+        $this->days_available=$staff-> days_available;
     }
 
     public function updateStaff(){
@@ -150,7 +158,10 @@ class Staffs extends Component
             'spouse_hp' => trim($this->spouse_hp),
             'spouse_office_no' => trim($this->spouse_office_no),
             'qualification' => trim($this->qualification),
-            'other' => trim($this->other)
+            'other' => trim($this->other),
+            'days_entitled' =>trim ($this->days_entitled),
+            'days_left' =>trim ($this->days_left),
+            'days_available' =>trim ($this->days_available)
         ]);
 
         $this->resetInputFields();
@@ -163,6 +174,7 @@ class Staffs extends Component
         session()->flash('danger', 'Student Record Deleted Successfully.');
     }
 
+  
     public function resetInputFields(){
         $this->fullname = '';
         $this->dob = '';

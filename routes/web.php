@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Livewire\Leaves;
 use App\Http\Livewire\Staffs;
 use App\Http\Livewire\ParentsL;
 use App\Http\Livewire\Students;
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/students_parents',AllDetails::class)->name('student_parent');
     Route::get('/siblingslist',Siblingslist::class)->name('siblingslist');
     Route::get('/registration',Registration::class)->name('registration');
+    Route::get('/leave',Leaves::class)->name('leave');
 
 });
 

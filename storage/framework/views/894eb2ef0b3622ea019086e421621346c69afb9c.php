@@ -114,7 +114,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
                 <div class="dropdown-menu ms-5">
-                  <a class="nav-link text-dark" href="<?php echo e(route('student')); ?>">Students</a>
+                  <a class="nav-link text-dark" href="<?php echo e(route('student')); ?>" >Students</a>
 
                   <a class="nav-link text-dark" href="<?php echo e(route('parent')); ?>">Parents</a>
                   
@@ -129,9 +129,19 @@
                 <li><a class="nav-link" href="<?php echo e(route('roles.index')); ?>">Manage Role</a></li>
               <?php endif; ?>
 
-              <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'EMT')): ?>
-              <li><a class="nav-link text-dark" href="<?php echo e(route('staff')); ?>">Staffs</a></li>
-              <?php endif; ?>
+              
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Staffs</a>
+                <div class="dropdown-menu ms-5">
+                  <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'EMT')): ?>
+                  <a class="nav-link text-dark" href="<?php echo e(route('staff')); ?>">Staffs</a>
+                  <?php endif; ?>
+                  <a class="nav-link text-dark" href="<?php echo e(route('leave')); ?>">Staff Leaves</a>
+                </div>
+              </li>
+        
+              
             </ul>
           </div>
         </div>

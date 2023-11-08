@@ -1,6 +1,7 @@
 <div>
 
     <form class=" p-4 shadow-lg  bg-white border border-secondary rounded" >
+        <h2><u>Student Details</u></h2>   
         <?php echo csrf_field(); ?>
         <div class="row">
             <div class="mb-3  col">

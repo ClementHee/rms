@@ -38,7 +38,7 @@
                                             <button type="button"  wire:click="editStaff('<?php echo e($staff->staff_id); ?>')" class="btn btn-primary">
                                                 Edit
                                             </button>
-                                            <button type="button"  wire:click="deleteStaff('<?php echo e($staff->staff_id); ?>')" class="btn btn-danger">Delete</button>
+                                            <button type="button"  wire:click="deleteStaff('<?php echo e($staff->staff_id); ?>')" class="btn btn-danger"  wire:confirm="Are you sure you want to delete this post?">Delete</button>
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

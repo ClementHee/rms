@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,7 +45,10 @@ class Staff extends Model
         'spouse_hp',
         'spouse_office_no',
         'qualification',
-        'other'
+        'other',
+        'days_entitled',
+        'days_left',
+        'days_available'
     ];
 
     protected  static  function  boot()

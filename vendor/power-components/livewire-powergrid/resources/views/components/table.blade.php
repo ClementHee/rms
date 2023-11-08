@@ -20,7 +20,8 @@
             @endif
 
             @isset($setUp['responsive'])
-                <th fixed x-show="hasHiddenElements" class="font-medium p-4 pr-8 pt-0 pb-3 text-slate-200 text-left">
+                <th fixed x-show="hasHiddenElements" class="{{ $theme->table->thClass }}"
+                    style="{{ $theme->table->thStyle }}">
                 </th>
             @endisset
 
@@ -120,9 +121,13 @@
 
                     $rowId = $row->{$primaryKey};
 
+                    if (method_exists($this, 'actionRules')) {
+                        $applyRulesLoop = $actionRulesClass->loop($this->actionRules($row), $loop);
+                    }
+
                     $ruleSetAttribute = data_get($rules, 'setAttribute');
 
-                    if (filled($ruleSetAttribute)) {
+                    if (filled($ruleSetAttribute) && $applyRulesLoop) {
                         foreach ($ruleSetAttribute as $attribute) {
                             if (isset($attribute['attribute'])) {
                                 $class .= ' ' . $attribute['value'];

@@ -5,6 +5,9 @@
     } else {
         $parameters = $helperClass->makeActionParameters($action->params);
     }
+    
+    $dynamicComponentAttributesBag = $helperClass->componentAttributesBag($action->params);
+    
 @endphp
 @if ($action->event !== '' && $action->to === '')
     <button
@@ -33,6 +36,11 @@
     >
         {!! $action->caption !!}
     </button>
+@elseif ($action->bladeComponent !== '')
+    <x-dynamic-component
+        :component="$action->bladeComponent"
+        :attributes="$dynamicComponentAttributesBag"
+    />
 @else
     @if (strtolower($action->method) !== 'get')
         <form
