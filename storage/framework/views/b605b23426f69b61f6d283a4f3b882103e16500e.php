@@ -53,19 +53,19 @@ unset($__errorArgs, $__bag); ?>
             <h6 ><u>Position</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3 ">
                 <label for="Principal" class="form-check-label ml-n3 pr-2">Principal</label>
-                <input  class="form-check-input" wire:model='position' type="radio" id="Principal" name="Principal" value="Principal">
+                <input  class="form-check-input" wire:model='position' type="radio" id="Principal" name="Principal" value="principal">
             
                 <label for ="Trainer" class="form-check-label pr-2">Trainer</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="Trainer" name="Trainer" value="Trainer">
+                <input class="form-check-input" wire:model='position' type="radio" id="Trainer" name="Trainer" value="trainer">
 
                 <label for ="Adminstrator" class="form-check-label pr-2">Adminstrator</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="Adminstrator" name="Adminstrator" value="Adminstrator">
+                <input class="form-check-input" wire:model='position' type="radio" id="Adminstrator" name="Adminstrator" value="adminstrator">
 
                 <label for ="ITFM" class="form-check-label pr-2">It & Fac. M</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="ITFM" name="ITFM" value="ITFM">
+                <input class="form-check-input" wire:model='position' type="radio" id="ITFM" name="ITFM" value="it_f_m">
 
                 <label for ="AC" class="form-check-label pr-2">Admin Clerk</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="AC" name="AC" value="AC">
+                <input class="form-check-input" wire:model='position' type="radio" id="AC" name="AC" value="admin_clerk">
                
             </div>
         </div>
@@ -73,13 +73,13 @@ unset($__errorArgs, $__bag); ?>
             <h6 ><u>Leave applied for</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3">
                 <label for="office_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
-                <input  class="form-check-input" wire:model='leave_type' type="radio" id="office_mc" name="office_mc" value="Medical with MC">
+                <input  class="form-check-input" wire:model='leave_type' type="radio" id="office_mc" name="office_mc" value="office_mc">
             
                 <label for ="office_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="office_emergency" name="office_emergency" value="Emergency/Compassionate">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="office_emergency" name="office_emergency" value="office_emergency">
          
                 <label for ="office_annual" class="form-check-label pr-2">Annual</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="office_annual" name="office_annual" value="Annual">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="office_annual" name="office_annual" value="office_annual">
             </div>
         </div>
         <div class ="row">
@@ -89,7 +89,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -113,14 +113,14 @@ unset($__errorArgs, $__bag); ?>
         <div class ="row">
             <h6><u>Leave applied for</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3">
-                <label for="teachers_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
-                <input  class="form-check-input" wire:model='leave_type' type="radio" id="teachers_mc" name="teachers_mc" value="Medical with MC">
+                <label for="teaching_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
+                <input  class="form-check-input" wire:model='leave_type' type="radio" id="teaching_mc" name="teaching_mc" value="teaching_mc">
             
                 <label for ="teachers_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="teachers_emergency" name="teachers_emergency" value="Emergency/Compassionate">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_emergency" name="teaching_emergency" value="teaching_emergency">
          
                 <label for ="teachers_unpaid" class="form-check-label pr-2">Unpaid</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="teachers_unpaid" name="teachers_unpaid" value="Unpaid">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_unpaid" name="teaching_unpaid" value="teaching_unpaid">
             </div>
 
             <div class="mb-3 form-group col">
@@ -136,7 +136,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -151,10 +151,10 @@ unset($__errorArgs, $__bag); ?>
             <h6 ><u>Position</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3 ">
                 <label for="Caretaker" class="form-check-label ml-n3 pr-2">Caretaker</label>
-                <input  class="form-check-input" wire:model='position' type="radio" id="Caretaker" name="Caretaker" value="Caretaker">
+                <input  class="form-check-input" wire:model='position' type="radio" id="Caretaker" name="Caretaker" value="caretaker">
             
                 <label for ="Cleaner" class="form-check-label pr-2">Cleaner</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="Cleaner" name="Cleaner" value="Cleaner">
+                <input class="form-check-input" wire:model='position' type="radio" id="Cleaner" name="Cleaner" value="cleaner">
             </div>
         </div>
      
@@ -163,13 +163,13 @@ unset($__errorArgs, $__bag); ?>
             <h6><u>Leave applied for</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3">
                 <label for="support_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
-                <input  class="form-check-input" wire:model='leave_type' type="radio" id="support_mc" name="support_mc" value="Medical with MC">
+                <input  class="form-check-input" wire:model='leave_type' type="radio" id="support_mc" name="support_mc" value="support_mc">
             
                 <label for ="support_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="support_emergency" name="support_emergency" value="Emergency/Compassionate">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="support_emergency" name="support_emergency" value="support_emergency">
          
                 <label for ="support_annual" class="form-check-label pr-2">Unpaid</label>
-                <input class="form-check-input" wire:model='leave_type' type="radio" id="support_annual" name="support_annual" value="Annual">
+                <input class="form-check-input" wire:model='leave_type' type="radio" id="support_annual" name="support_annual" value="support_annual">
             </div>
         </div>
 
@@ -180,7 +180,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>

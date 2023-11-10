@@ -24,7 +24,8 @@ class Leave extends Model
         'reasons',
         'days_entitled',
         'days_available',
-        'days_left'
+        'days_left',
+        'category'
     ];
 
     protected  static  function  boot()

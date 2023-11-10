@@ -2,11 +2,12 @@
     <button wire:click=applyNew() class="btn btn-primary">Apply Leave</button>
     <div class="card">
         <div class="card-body">
-            <button wire:click="fillPDF()">Click Me</button>
+            
             <table>
                 <tr>
                     <th>Staff</th>
                     <th>Dates</th>
+                    <th>Actions</th>
                 </tr>
                 @forelse($leaves as $leave)
                 
@@ -17,6 +18,11 @@
                     </td>
                     <td>
                         {{$leave->date_start}} - {{$leave->date_end}}
+                    </td>
+                    <td>
+                        <button type="button"  wire:click="viewLeave('{{$leave->leave_id}}')" class="btn btn-primary">
+                            View
+                        </button>
                     </td>
                     
                 </tr>
@@ -33,6 +39,9 @@
     </div>
     @if ($this->mode=='apply')
         @include('livewire.leaves.apply_leave')
+    @elseif ($this->mode=='single')
+        @include('livewire.leaves.view_leave_application')
     @endif
+
     
 </div>
