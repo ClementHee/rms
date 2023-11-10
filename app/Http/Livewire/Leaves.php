@@ -218,7 +218,8 @@ class Leaves extends Component
         }
 
         $pdf = new Pdf(public_path('/form/form.pdf'),[
-            'command' => '/usr/local/bin/pdftk'
+            'command' => '/usr/local/bin/pdftk',
+            'useExec' => true
 
         ]); 
         
