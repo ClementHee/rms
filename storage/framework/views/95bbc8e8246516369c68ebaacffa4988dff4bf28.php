@@ -1,10 +1,8 @@
 <div>
     <button wire:click=cancel() class="btn btn-secondary">Cancel</button>
-    <?php if($this->filled==false): ?>
-        <button wire:click.prevent="fillPDF()" class='btn btn-primary'>Fill PDF Form</button>
-    <?php else: ?>
-    <button wire:click.prevent="downloadPDF()" class='btn btn-primary'>Download Form</button>
-    <?php endif; ?>
+ 
+        <button wire:click.prevent="fillPDF()" class='btn btn-primary'>Download Filled Form</button>
+  
     
     <form class=" p-4 shadow-lg  bg-white border border-secondary rounded">
         <?php echo csrf_field(); ?>
@@ -96,7 +94,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -142,7 +140,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -185,7 +183,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>

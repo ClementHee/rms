@@ -103,11 +103,11 @@ unset($__errorArgs, $__bag); ?>
         <div class="row">
             <h6 ><u>Position</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3 ">
-                <label for="MT" class="form-check-label ml-n3 pr-2">MT</label>
-                <input  class="form-check-input" wire:model='position' type="radio" id="MT" name="MT" value="MT">
+                <label for="mt_1" class="form-check-label ml-n3 pr-2">MT</label>
+                <input  class="form-check-input" wire:model='position' type="radio" id="mt_1" name="mt_1" value="mt_1">
             
-                <label for ="AT" class="form-check-label pr-2">AT</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="AT" name="AT" value="AT">
+                <label for ="at" class="form-check-label pr-2">AT</label>
+                <input class="form-check-input" wire:model='position' type="radio" id="at" name="at" value="at">
             </div>
         </div>
         <div class ="row">
@@ -116,10 +116,10 @@ unset($__errorArgs, $__bag); ?>
                 <label for="teaching_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
                 <input  class="form-check-input" wire:model='leave_type' type="radio" id="teaching_mc" name="teaching_mc" value="teaching_mc">
             
-                <label for ="teachers_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
+                <label for ="teaching_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_emergency" name="teaching_emergency" value="teaching_emergency">
          
-                <label for ="teachers_unpaid" class="form-check-label pr-2">Unpaid</label>
+                <label for ="teaching_unpaid" class="form-check-label pr-2">Unpaid</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_unpaid" name="teaching_unpaid" value="teaching_unpaid">
             </div>
 

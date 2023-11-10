@@ -112,6 +112,7 @@ class Leaves extends Component
         $this->date_end = $leave->date_end;
         $this->reasons = $leave->reasons;
         
+        
     }
 
     public function viewLeave($id){
@@ -119,6 +120,7 @@ class Leaves extends Component
         $this->getLeave($id);
         $this->staff= Staff::where('staff_id','=',$this->staff_id)->get('fullname')->first()->fullname;
         $this->mode='single';
+        
 
     }
 
@@ -143,13 +145,13 @@ class Leaves extends Component
     }
 
     public function fillPDF(){
-      
+        
         
         $this->days_available = Staff::where('staff_id','=',$this->staff_id)->get('days_available')->first()->days_available;        
         $this->days_entitled = Staff::where('staff_id','=',$this->staff_id)->get('days_entitled')->first()->days_entitled;
         $this->days_left = Staff::where('staff_id','=',$this->staff_id)->get('days_left')->first()->days_left;
 
-
+        
 
         if($this->category=="Office"){
 
@@ -157,12 +159,12 @@ class Leaves extends Component
             $this->form_days_available ='office_days_avail';
             $this->form_days_left ='office_days_left';
 
-            if($this->leave_type='office_mc'){
+            if($this->leave_type=='office_mc'){
                 $this->form_no_days = 'office_mc_days';
                 $this->form_dates = 'office_mc_dates';
                 $this->form_reasons = 'office_mc_reasons';
             }
-            elseif($this->leave_type='office_emergency'){
+            elseif($this->leave_type=='office_emergency'){
                 $this->form_no_days = 'office_emergency_days';
                 $this->form_dates = 'office_emergency_dates';
                 $this->form_reasons = 'office_emergency_reasons';
@@ -177,13 +179,13 @@ class Leaves extends Component
             $this->form_days_available ='teaching_days_avail';
             $this->form_days_left ='teaching_days_left';
 
-            if($this->leave_type='teaching_mc'){
+            if($this->leave_type=='teaching_mc'){
                 $this->form_no_days = 'teaching_mc_days';
                 $this->form_dates = 'teaching_mc_dates';
                 $this->form_reasons = 'teaching_mc_reasons';
                 
             }
-            elseif($this->leave_type='teaching_emergency'){
+            elseif($this->leave_type=='teaching_emergency'){
                 $this->form_no_days = 'teaching_emergency_days';
                 $this->form_dates = 'teaching_emergency_dates';
                 $this->form_reasons = 'teaching_emergency_reasons';
@@ -198,13 +200,13 @@ class Leaves extends Component
             $this->form_days_available ='support_days_avail';
             $this->form_days_left ='support_days_left';
 
-            if($this->leave_type='support_mc'){
+            if($this->leave_type=='support_mc'){
                 $this->form_no_days = 'support_mc_days';
                 $this->form_dates = 'support_mc_dates';
                 $this->form_reasons = 'support_mc_reasons';
                 
             }
-            elseif($this->leave_type='support_emergency'){
+            elseif($this->leave_type=='support_emergency'){
                 $this->form_no_days = 'support_emergency_days';
                 $this->form_dates = 'support_emergency_dates';
                 $this->form_reasons = 'support_emergency_reasons';
@@ -216,7 +218,7 @@ class Leaves extends Component
         }
 
         $pdf = new Pdf(public_path('/form/form.pdf'),[
-            'command' => '/usr/local/bin/pdftk',
+            'command' => '/usr/local/bin/pdftk'
 
         ]); 
         
@@ -234,24 +236,20 @@ class Leaves extends Component
             $this->form_days_left => $this->days_left
   
         ])
-        ->flatten()
+        ->needAppearances()
         ->saveAs(storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf'));
         
-        $this->link_to_file = storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf');
-      
-        $this->filled=true;
+        $this->link_to_file = storage_path('applied_form\\'.$this->staff.' '.$this->date_start.'.pdf');
+        return response()->download($this->link_to_file);
         if ($result === false) {
             $error = $pdf->getError();
             dd($error);
         }
+
       
     }
 
-    public function downloadPDF(){
-        $this->filled=false;
-        return response()->download($this->link_to_file);
-    }
-
+  
       /*'staff_id',
     'position',
     'class_name',

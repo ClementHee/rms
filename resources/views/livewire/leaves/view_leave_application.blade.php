@@ -1,10 +1,8 @@
 <div>
     <button wire:click=cancel() class="btn btn-secondary">Cancel</button>
-    @if ($this->filled==false)
-        <button wire:click.prevent="fillPDF()" class='btn btn-primary'>Fill PDF Form</button>
-    @else
-    <button wire:click.prevent="downloadPDF()" class='btn btn-primary'>Download Form</button>
-    @endif
+ 
+        <button wire:click.prevent="fillPDF()" class='btn btn-primary'>Download Filled Form</button>
+  
     
     <form class=" p-4 shadow-lg  bg-white border border-secondary rounded">
         @csrf
