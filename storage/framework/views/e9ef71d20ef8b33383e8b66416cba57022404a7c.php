@@ -366,7 +366,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
         <?php endif; ?>
-        <?php if(in_array('Super Admin',Auth::user()->getRoleNames()->toArray())): ?>
+        <?php if(in_array('EMT',Auth::user()->getRoleNames()->toArray())): ?>
         <h2><u>Leave Details</u></h2>
         <div class="mb-3 form-group col">
             <label for="days_entitled">Days Entitled:</label>

@@ -8,11 +8,11 @@
         <?php echo $__env->make('livewire.staff.add_staff', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   
     <?php elseif($mode=='single'): ?>
-        <h1 class="px-2">Add New Staff</h1>
+        <h1 class="px-2">View Staff Details</h1>
         <?php echo $__env->make('livewire.staff.view_staff', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php elseif($mode=='edit'): ?>
-        <h1 class="px-2">Add New Staff</h1>
+        <h1 class="px-2">Update Staff Details</h1>
         <?php echo $__env->make('livewire.staff.update_staff', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
     

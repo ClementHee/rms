@@ -202,19 +202,19 @@
             <h2><u>Leave Details</u></h2>
             <div class="mb-3 form-group col">
                 <label for="days_entitled">Days Entitled:</label>
-                <input type="text" id="days_entitled" name="days_entitled" class="form-control" placeholder="Days Of Leave Entitled" wire:model="days_entitled"> 
+                <input type="text" id="days_entitled" name="days_entitled" class="form-control" wire:model="days_entitled"> 
                 @error('days_entitled') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
             <div class="mb-3 form-group col">
                 <label for="days_available">Days Available:</label>
-                <input type="text" id="days_available" name="days_available" class="form-control" placeholder="Days Available" wire:model="days_available"> 
+                <input type="text" id="days_available" name="days_available" class="form-control"  wire:model="days_available"> 
                 @error('days_available') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
             <div class="mb-3 form-group col">
                 <label for="days_left">Days Left:</label>
-                <input type="text" id="days_left" name="days_left" class="form-control" placeholder="Days Left" wire:model="days_left"> 
+                <input type="text" id="days_left" name="days_left" class="form-control"  wire:model="days_left"> 
                 @error('days_left') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
         @endif

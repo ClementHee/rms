@@ -370,7 +370,7 @@ unset($__errorArgs, $__bag); ?>
             <h2><u>Leave Details</u></h2>
             <div class="mb-3 form-group col">
                 <label for="days_entitled">Days Entitled:</label>
-                <input type="text" id="days_entitled" name="days_entitled" class="form-control" placeholder="Days Of Leave Entitled" wire:model="days_entitled"> 
+                <input type="text" id="days_entitled" name="days_entitled" class="form-control" wire:model="days_entitled"> 
                 <?php $__errorArgs = ['days_entitled'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -383,7 +383,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="days_available">Days Available:</label>
-                <input type="text" id="days_available" name="days_available" class="form-control" placeholder="Days Available" wire:model="days_available"> 
+                <input type="text" id="days_available" name="days_available" class="form-control"  wire:model="days_available"> 
                 <?php $__errorArgs = ['days_available'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -396,7 +396,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="days_left">Days Left:</label>
-                <input type="text" id="days_left" name="days_left" class="form-control" placeholder="Days Left" wire:model="days_left"> 
+                <input type="text" id="days_left" name="days_left" class="form-control"  wire:model="days_left"> 
                 <?php $__errorArgs = ['days_left'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

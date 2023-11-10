@@ -47,6 +47,15 @@ class Staffs extends Component
     
 
     public function storeStaff(){
+        if($this->days_entitled==null){
+            $this->days_entitled = 0;
+        };
+        if($this->days_left==null){
+            $this->days_left = 0;
+        };
+        if($this->days_available==null){
+            $this->days_available = 0;
+        };
         if($this->spouse_dob==''){
             $spouse_dob=NULL;
     
