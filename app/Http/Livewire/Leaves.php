@@ -216,7 +216,7 @@ class Leaves extends Component
         }
 
         $pdf = new Pdf(public_path('/form/form.pdf'),[
-            'command' => '/usr/local/bin/pdftk',
+            
             'useExec' => true,
         ]); 
         
@@ -236,7 +236,7 @@ class Leaves extends Component
         ->flatten()
         ->saveAs(storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf'));
         
-        $this->link_to_file = storage_path('applied_form\\'.$this->staff.' '.$this->date_start.'.pdf');
+        $this->link_to_file = storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf');
       
         $this->filled=true;
         if ($result === false) {
