@@ -240,7 +240,7 @@ class Leaves extends Component
         ->needAppearances()
         ->saveAs(storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf'));
         
-        $this->link_to_file = storage_path('applied_form\\'.$this->staff.' '.$this->date_start.'.pdf');
+        $this->link_to_file = storage_path('applied_form/'.$this->staff.' '.$this->date_start.'.pdf');
         return response()->download($this->link_to_file);
         if ($result === false) {
             $error = $pdf->getError();
