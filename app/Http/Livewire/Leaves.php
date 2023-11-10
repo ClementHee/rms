@@ -36,7 +36,7 @@ class Leaves extends Component
     {
 
         $leaves =  DB::table('staffs')
-        ->leftJoin('leaves', 'staffs.staff_id', '=', 'leaves.staff_id')
+        ->join('leaves', 'staffs.staff_id', '=', 'leaves.staff_id')
         ->get();
      
         return view('livewire.leaves.leaves',['leaves'=>$leaves])->layout('livewire.leaves_dashboard');
