@@ -52,14 +52,16 @@ class Leaves extends Component
             'class_name' => trim($this->class_name),
             'leave_type' => trim($this->leave_type),
             'no_days' => trim($this->no_days),
-            'date_start' => Carbon::createFromFormat('Y-m-d',$this->dates),
-            'date_end' => Carbon::createFromFormat('Y-m-d',$this->dates)->addDays($this->no_days),
+            'date_start' => Carbon::createFromFormat('Y-m-d',$this->date_start),
+            'date_end' => Carbon::createFromFormat('Y-m-d',$this->date_start)->addDays($this->no_days),
             'reasons' => trim($this->reasons)
       
         ]);
+        $this->days_available = Staff::where('fullname','=',$this->staff)->get('days_available')->first()->days_available;
+   
         $after_apply = $this->days_available - $this->no_days;
         $edit_staff = Staff::findOrFail(Staff::where('fullname','=',$this->staff)->get('staff_id')->first()->staff_id);
-        Staff::update([
+        $edit_staff->update([
             'days_left' =>$after_apply,
 
         ]);

@@ -33,7 +33,7 @@ class Leave extends Model
         parent::boot();
 
         static::creating(function  ($model)  {
-            $model->leave_id = 'L' . ($model::count() + 1)*1000;
+            $model->leave_id = 'L' .  strval(rand(10000,99999));;
         });
     }
 }
