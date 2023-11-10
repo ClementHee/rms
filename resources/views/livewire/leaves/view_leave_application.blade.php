@@ -89,7 +89,7 @@
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -135,7 +135,7 @@
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
@@ -178,7 +178,7 @@
             </div>
             <div class="mb-3 form-group col">
                 <label for="dates">Dates: </label>
-                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="dates">
+                <input readonly type="date" id="dates" name="dates" class="form-control" wire:model="date_start">
             </div> 
         </div>
         <div>
