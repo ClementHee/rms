@@ -240,7 +240,7 @@ class Leaves extends Component
         $this->filled=true;
         if ($result === false) {
             $error = $pdf->getError();
-            dd($result);
+            dd($error);
         }
       
     }

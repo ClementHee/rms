@@ -109,10 +109,10 @@
                 <label for="teaching_mc" class="form-check-label ml-n3 pr-2">Medical with MC</label>
                 <input  class="form-check-input" wire:model='leave_type' type="radio" id="teaching_mc" name="teaching_mc" value="teaching_mc">
             
-                <label for ="teachers_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
+                <label for ="teaching_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_emergency" name="teaching_emergency" value="teaching_emergency">
          
-                <label for ="teachers_unpaid" class="form-check-label pr-2">Unpaid</label>
+                <label for ="teaching_unpaid" class="form-check-label pr-2">Unpaid</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="teaching_unpaid" name="teaching_unpaid" value="teaching_unpaid">
             </div>
 
