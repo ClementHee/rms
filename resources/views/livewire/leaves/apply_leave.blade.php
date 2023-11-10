@@ -96,11 +96,11 @@
         <div class="row">
             <h6 ><u>Position</u></h6>
             <div class="form-check form-check-inline mt-3 mb-3 ">
-                <label for="MT" class="form-check-label ml-n3 pr-2">MT</label>
-                <input  class="form-check-input" wire:model='position' type="radio" id="MT" name="MT" value="MT">
+                <label for="mt_1" class="form-check-label ml-n3 pr-2">MT</label>
+                <input  class="form-check-input" wire:model='position' type="radio" id="mt_1" name="mt_1" value="mt_1">
             
-                <label for ="AT" class="form-check-label pr-2">AT</label>
-                <input class="form-check-input" wire:model='position' type="radio" id="AT" name="AT" value="AT">
+                <label for ="at" class="form-check-label pr-2">AT</label>
+                <input class="form-check-input" wire:model='position' type="radio" id="at" name="at" value="at">
             </div>
         </div>
         <div class ="row">

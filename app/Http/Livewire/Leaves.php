@@ -225,6 +225,7 @@ class Leaves extends Component
             'staff_name' => $this->staff,
             $this->leave_type => "Yes",
             $this->position => "Yes",
+            'class' =>$this->class_name,
             $this->form_no_days=>$this->no_days,
             $this->form_dates=>$this->date_start . ' -> ' . $this->date_end,
             $this->form_reasons=>$this->reasons,
