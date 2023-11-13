@@ -161,7 +161,7 @@
                 <label for ="support_emergency" class="form-check-label pr-2">Emergency/Compassionate</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="support_emergency" name="support_emergency" value="support_emergency">
          
-                <label for ="support_annual" class="form-check-label pr-2">Unpaid</label>
+                <label for ="support_annual" class="form-check-label pr-2">Annual</label>
                 <input class="form-check-input" wire:model='leave_type' type="radio" id="support_annual" name="support_annual" value="support_annual">
             </div>
         </div>
