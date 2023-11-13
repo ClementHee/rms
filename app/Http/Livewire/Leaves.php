@@ -219,7 +219,7 @@ class Leaves extends Component
 
         $pdf = new Pdf(public_path('/form/form.pdf'),[
             'command' => '/usr/local/bin/pdftk',
-         
+            //'useExec' => true
 
         ]); 
         
@@ -230,7 +230,7 @@ class Leaves extends Component
             $this->position => "Yes",
             'class' =>$this->class_name,
             $this->form_no_days=>$this->no_days,
-            $this->form_dates=>$this->date_start . ' -> \n' . $this->date_end,
+            $this->form_dates=>$this->date_start . ' - ' . $this->date_end,
             $this->form_reasons=>$this->reasons,
             $this->form_days_entitled => $this-> days_entitled,
             $this->form_days_available => $this-> days_available,
