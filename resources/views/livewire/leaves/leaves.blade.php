@@ -19,11 +19,16 @@
                     <td>
                         {{$leave->date_start}} - {{$leave->date_end}}
                     </td>
-                    <td>
+                    
+                    @if (in_array('EMT',Auth::user()->getRoleNames()->toArray())||in_array('SuperAdmin',Auth::user()->getRoleNames()->toArray()))
+                       <td>
                         <button type="button"  wire:click="viewLeave('{{$leave->leave_id}}')" class="btn btn-primary">
                             View
                         </button>
                     </td>
+                 
+                    @endif
+                    
                     
                 </tr>
                 @empty
