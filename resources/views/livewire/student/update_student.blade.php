@@ -45,7 +45,7 @@
             </div>
             <div class="row">  
                 <div class="mb-3 form-group col">
-                    <label for="first_name">Full Name:</label>
+                    <label for="first_name">First Name:</label>
                     <input type="text" id="first_name" name="first_name" required class="form-control" placeholder="First Name" wire:model="first_name"> 
                     @error('first_name') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>

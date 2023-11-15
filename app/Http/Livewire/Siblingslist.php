@@ -35,7 +35,7 @@ class Siblingslist extends Component
         $data = ['siblings'=>$siblings];
     
         
-        $pdf = PDF::loadView('livewire.siblingslist', $data)->setPaper('a4', 'potrait')->output(); //
+        $pdf = PDF::loadView('livewire.export_sibling_list', $data)->setPaper('a4', 'potrait')->output(); //
         return response()->streamDownload(
             fn() => print($pdf), 'Siblings List.pdf'
         );
