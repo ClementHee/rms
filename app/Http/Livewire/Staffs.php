@@ -13,6 +13,7 @@ class Staffs extends Component
     public $spouse,$spouse_dob,$spouse_nric,$spouse_race,$spouse_religion,$spouse_nationality,$spouse_occupation,$spouse_comp,$spouse_hp,$spouse_office_no;
     public $search ='';
     public $days_entitled,$days_left,$days_available;
+    protected $listeners = ['delete'=>'deleteStaff'];
 
     public function create_new(){
         $this->mode = 'create';
@@ -213,6 +214,17 @@ class Staffs extends Component
         $this->spouse_office_no = '';
         $this->qualification = '';
         $this->other = '';
+    }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
     }
     /*public function editStaff(){
         $staff = Staff::findOrFail($id);

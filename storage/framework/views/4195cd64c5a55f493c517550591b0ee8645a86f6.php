@@ -71,7 +71,7 @@
                                             <button type="button"  wire:click="editStudent(<?php echo e($student->student_id); ?>)" class="btn btn-primary">
                                                 Edit
                                             </button>
-                                            <button type="button"  wire:click="deleteStudent(<?php echo e($student->student_id); ?>)" class="btn btn-danger ">Delete</button>
+                                            <button type="button"  wire:click="deleteConfirm(<?php echo e($student->student_id); ?>)" class="btn btn-danger ">Delete</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

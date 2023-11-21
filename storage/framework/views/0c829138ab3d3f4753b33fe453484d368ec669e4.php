@@ -94,7 +94,7 @@
            
                 <td>
                     <button wire:click="edit(<?php echo e($issues->issueNo); ?>)" class="btn btn-primary ">Edit</button>
-                    <button wire:click="delete(<?php echo e($issues->issueNo); ?>)" class="btn btn-danger">Delete</button>
+                    <button wire:click="deleteConfirm(<?php echo e($issues->issueNo); ?>)" class="btn btn-danger">Delete</button>
                 </td>
 
                
@@ -176,5 +176,6 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
+
 
 <?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/maintainence/show_maintainence.blade.php ENDPATH**/ ?>

@@ -3,7 +3,7 @@
 @section('content')
 
 <body>
-    <div >
+    <div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                     </div>
@@ -13,7 +13,9 @@
                                 {{ session('message') }}
                             </div>
                         @endif
+ 
                         @livewire('maintainences')
+              
             </div>
         </div>
     </div>
@@ -26,3 +28,16 @@
         
     })
 </script>
+
+@if (Session::has('message'))
+    <script>
+        swal("Message","{{Session::get('message')}}",'success',{
+            button:true,
+            button:"OK",
+            timer:3000,
+            dangerMode:true
+
+        })
+    </script>
+    
+@endif

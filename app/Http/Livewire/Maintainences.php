@@ -15,6 +15,7 @@ class Maintainences extends Component
     public $issue, $location, $reported_by, $reported_at,$remarks,$fixed;
     public $updateMode = false;
     public $filters = 'reset';
+    protected $listeners = ['delete'];
     
 
     /**
@@ -73,11 +74,18 @@ class Maintainences extends Component
             'reported_at' => Carbon::now(),
         ]);
 
-        $data=$this;
+        //$data=$this;
         
 
-        event(new NewMaterialRequest($data));
+        //event(new NewMaterialRequest($data));
 
+
+        $this->dispatchBrowserEvent('swal:modal',[
+            'type' => 'success',
+            'title' => 'Issue reported',
+            'text' =>'Issue has been reported. Please wait for it to be fixed',
+        
+        ]);
 
         session()->flash('message', 'Issue has been lodged Successfully.');
        
@@ -135,7 +143,13 @@ class Maintainences extends Component
   
         $this->updateMode = false;
   
-        session()->flash('message', 'Issue Updated Successfully.');
+        $this->dispatchBrowserEvent('swal:modal',[
+            'type' => 'success',
+            'title' => 'Issue Updated',
+            'text' =>'Issue has been updated.',
+        
+        ]);
+
         $this->resetInputFields();
 
     }
@@ -148,7 +162,7 @@ class Maintainences extends Component
     public function delete($id)
     {
         Maintainence::find($id)->delete();
-        session()->flash('message', 'Issue Deleted Successfully.');
+        
     }
 
     public function maf($id){
@@ -165,7 +179,7 @@ class Maintainences extends Component
             'fixed'=>$issue_update->fixed
         ]);
 
-         
+        
         session()->flash('message', 'Issue Fixed');
         
     }
@@ -193,6 +207,17 @@ class Maintainences extends Component
     }
     public function filterReset(){
         $this->filters='reset';
+    }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
     }
 
 

@@ -1,9 +1,7 @@
-
-
 <?php $__env->startSection('content'); ?>
 
 <body>
-    <div >
+    <div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                     </div>
@@ -14,21 +12,23 @@
 
                             </div>
                         <?php endif; ?>
+ 
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('maintainences')->html();
-} elseif ($_instance->childHasBeenRendered('F2VOa1c')) {
-    $componentId = $_instance->getRenderedChildComponentId('F2VOa1c');
-    $componentTag = $_instance->getRenderedChildComponentTagName('F2VOa1c');
+} elseif ($_instance->childHasBeenRendered('eN4Ha7d')) {
+    $componentId = $_instance->getRenderedChildComponentId('eN4Ha7d');
+    $componentTag = $_instance->getRenderedChildComponentTagName('eN4Ha7d');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('F2VOa1c');
+    $_instance->preserveRenderedChild('eN4Ha7d');
 } else {
     $response = \Livewire\Livewire::mount('maintainences');
     $html = $response->html();
-    $_instance->logRenderedChild('F2VOa1c', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('eN4Ha7d', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
+              
             </div>
         </div>
     </div>
@@ -41,4 +41,17 @@ echo $html;
         
     })
 </script>
+
+<?php if(Session::has('message')): ?>
+    <script>
+        swal("Message","<?php echo e(Session::get('message')); ?>",'success',{
+            button:true,
+            button:"OK",
+            timer:3000,
+            dangerMode:true
+
+        })
+    </script>
+    
+<?php endif; ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/maintainence_dashboard.blade.php ENDPATH**/ ?>

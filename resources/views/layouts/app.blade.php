@@ -54,7 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script>
+     <script>
         var pusher = new Pusher('ea44c0267e7076ff3041', {
           cluster: 'ap1'
         });
@@ -72,8 +72,8 @@
                 };         
           });
     </script>
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/paper-dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     
@@ -241,7 +241,32 @@
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  window.addEventListener('swal:modal',event => {
+    swal({
+      title: event.detail.title,
+      text: event.detail.text,
+      icon: event.detail.icon,
+      buttons:false,
+      timer:3000,
+    });
+  });
 
+  window.addEventListener('swal:confirm',event => {
+    swal({
+      title: event.detail.title,
+      text: event.detail.text,
+      icon: event.detail.icon,
+      buttons: true,
+      dangerMode:true,
+    }).then((willDelete)=>{
+      if(willDelete){
+        window.livewire.emit('delete',event.detail.id);
+      }
+    })
+  });
+</script>
 </body>
 
 

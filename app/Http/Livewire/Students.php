@@ -25,7 +25,7 @@ class Students extends Component
     public $showmodal_mother=false;
     public $createnew_father=false;
     public $createnew_mother= false;
-
+    protected $listeners = ['delete'=>'deleteStudent'];
  
     public function render()
     {
@@ -148,7 +148,7 @@ class Students extends Component
             'mother' => $mother_id->parent_id
         ]);
 
- 
+        session()->flash('message', 'Student Added Successfully.');
         $this->resetInputFields();
         $this->mode = 'view';
         
@@ -368,8 +368,25 @@ class Students extends Component
     public function deleteStudent($id)
     {
         Student::find($id)->delete();
-        session()->flash('danger', 'Student Record Deleted Successfully.');
+        $this->dispatchBrowserEvent('swal:modal',[
+            'type' => 'success',
+            'title' => 'Student deleted',
+            'text' =>'Student record has been deleted',
+        
+        ]);
     }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
+    }
+
     
 
     public function searchResult_Father(){
