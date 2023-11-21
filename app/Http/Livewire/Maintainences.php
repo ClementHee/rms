@@ -28,9 +28,9 @@ class Maintainences extends Component
  
     
         if($this->filters=='unfixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',0)->get();
+            $this->all_maintainence = Maintainence::where('fixed','=',0)->orderBy('reported_at','DESC')->get();
         }elseif($this->filters=='fixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',1)->get();
+            $this->all_maintainence = Maintainence::where('fixed','=',1)->orderBy('reported_at','DESC')->get();
         }else{
             $this->all_maintainence = Maintainence::all();
         }
