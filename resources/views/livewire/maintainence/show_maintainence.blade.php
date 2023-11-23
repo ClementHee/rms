@@ -30,7 +30,7 @@
                 <th>Issue</th>
                 <th>Location</th>
                 <th>Reported By</th>
-                <th>Time</th>
+                <th>Date</th>
                 <th>Status</th>
                 <th>Remarks</th>
                 <th>Status</th>
