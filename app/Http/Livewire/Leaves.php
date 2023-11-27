@@ -19,7 +19,7 @@ class Leaves extends Component
     public $mode = 'view';
     public $form_no_days,$form_dates,$form_reasons,$form_days_entitled,$form_days_available,$form_days_left,$link_to_file;
     public $filled=false;
-    
+    protected $listeners = ['delete'];
 
     public function applyNew(){
         $this->mode = 'apply';
@@ -142,6 +142,23 @@ class Leaves extends Component
         $this->days_entitled = '';
         $this->days_available = '';
         $this->days_left = ''; 
+    }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
+    }
+
+    public function delete($id)
+    {
+        Leave::find($id)->delete();
+        
     }
 
     public function fillPDF(){

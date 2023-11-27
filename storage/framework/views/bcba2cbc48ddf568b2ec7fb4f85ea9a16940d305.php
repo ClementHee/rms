@@ -22,15 +22,17 @@
 
                     </td>
                     
-                    <?php if(in_array('EMT',Auth::user()->getRoleNames()->toArray())||in_array('SuperAdmin',Auth::user()->getRoleNames()->toArray())): ?>
-                       <td>
+                    <td>
                         <button type="button"  wire:click="viewLeave('<?php echo e($leave->leave_id); ?>')" class="btn btn-primary">
                             View
                         </button>
+                        <?php if(in_array('EMT',Auth::user()->getRoleNames()->toArray())): ?>
+                        <button type="button"  wire:click="deleteConfirm('<?php echo e($leave->leave_id); ?>')" class="btn btn-danger">
+                            Delete
+                        </button>
+                        <?php endif; ?>
                     </td>
-                 
-                    <?php endif; ?>
-                    
+                
                     
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

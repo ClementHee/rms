@@ -24,6 +24,11 @@
                         <button type="button"  wire:click="viewLeave('{{$leave->leave_id}}')" class="btn btn-primary">
                             View
                         </button>
+                        @if (in_array('EMT',Auth::user()->getRoleNames()->toArray()))
+                        <button type="button"  wire:click="deleteConfirm('{{$leave->leave_id}}')" class="btn btn-danger">
+                            Delete
+                        </button>
+                        @endif
                     </td>
                 
                     
