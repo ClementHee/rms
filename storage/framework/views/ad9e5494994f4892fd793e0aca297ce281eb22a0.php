@@ -20,7 +20,7 @@
                                 <tr>
                               
                                     <th>Name</th>
-                          
+                                    
                                     <th width='250px'>Actions</th>
                                 </tr>
                             </thead>
@@ -28,13 +28,12 @@
                                 <?php $__empty_1 = true; $__currentLoopData = $staffs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $staff): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                    
-                                        <td><?php echo e($staff->fullname); ?></td>
                                     
+                                        <td wire:click="viewStaff('<?php echo e($staff->staff_id); ?>')" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" ><?php echo e($staff->fullname); ?></td>
+                          
                                         
                                         <td>
-                                            <button type="button"  wire:click="viewStaff('<?php echo e($staff->staff_id); ?>')" class="btn btn-primary">
-                                                View
-                                            </button>
+                                            
                                             <button type="button"  wire:click="editStaff('<?php echo e($staff->staff_id); ?>')" class="btn btn-primary">
                                                 Edit
                                             </button>

@@ -9,6 +9,8 @@ $prevItem = null
 
 @endphp
 @foreach($siblings as $sibling)
+    
+  
     @if ($prevItem!==null)
  
         @if ((($sibling->father)==($prevItem->father)) ||(($sibling->mother)==($prevItem->mother)) )

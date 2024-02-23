@@ -12,14 +12,20 @@
                         <div class="form-check form-check-inline mb-3">
                             
                             <label class="form-check-label pr-2">Enrolled</label>
-                            <input  class="form-check-input pr-2" wire:model='status' type="radio" name="status" value="active">
+                            <input  class="form-check-input pr-2" wire:model='status' type="radio" name="status" value="enrolled">
         
                         </div>
         
                         <div class="form-check form-check-inline  mb-3">
                             
                             <label class="form-check-label">Withdrawn</label>
-                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="unactive">
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="withdrawn">
+                        </div>
+
+                        <div class="form-check form-check-inline  mb-3">
+                            
+                            <label class="form-check-label">Graduated</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="graduated">
                         </div>
                     
                     </div>

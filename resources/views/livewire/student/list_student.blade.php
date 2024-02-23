@@ -10,7 +10,27 @@
                     <div class="card-header">
                         <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                         <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
+                        @if ($this->filters=='reset')
+                            <button wire:click.prevent="filterActive()" class="btn btn-success float-end" >
+                                Show active
+                            </button> 
+
+                        @elseif($this->filters=='active')
+                            <button wire:click.prevent="filterWithdrawn()" class="btn btn-danger float-end" >
+                                Show Withdrawn
+                            </button>
+                        @elseif($this->filters=='withdrawn')
+                            <button wire:click.prevent="filterGraduated()" class="btn btn-info float-end" >
+                                Show Graduated
+                            </button>
+                        @else
+                            <button wire:click.prevent="filterReset()" class="btn btn-secondary float-end" >
+                                Reset Filter
+                            </button>
+                        @endif
                     </div>
+
+                    
                     <div class="card-body">
                         <table class="table table-borderd table-striped">
                             <thead>
@@ -33,8 +53,10 @@
                                         <td>{{ $student->gender }}</td>
                                         <td>{{ $student->dob }}</td>
                                         <td>{{ $student->birth_cert_no }}</td>
-                                        <td>@if( $student->status=='unactive')
+                                        <td>@if( $student->status=='withdrawn')
                                             <button type="button" class="btn btn-danger">Withdrawn</button>
+                                        @elseif ($student->status=='graduated')
+                                            <button type="button" class="btn btn-info">Graduated</button>
                                         @else
                                             <button type="button" class="btn btn-success">Enrolled</button>
                                         @endif

@@ -1,8 +1,8 @@
 <div>
     
         <form class="p-4 shadow-lg  bg-white border border-secondary rounded">
-
-            <h2>Update Student</h2>
+            <h2><u>Student Details</u></h2>   
+       
     
             <?php echo csrf_field(); ?>
 
@@ -12,14 +12,20 @@
                         <div class="form-check form-check-inline mb-3">
                             
                             <label class="form-check-label pr-2">Enrolled</label>
-                            <input  class="form-check-input pr-2" wire:model='status' type="radio" name="status" value="active">
+                            <input  class="form-check-input pr-2" wire:model='status' type="radio" name="status" value="enrolled">
         
                         </div>
         
                         <div class="form-check form-check-inline  mb-3">
                             
                             <label class="form-check-label">Withdrawn</label>
-                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="unactive">
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="withdrawn">
+                        </div>
+
+                        <div class="form-check form-check-inline  mb-3">
+                            
+                            <label class="form-check-label">Graduated</label>
+                            <input  class="form-check-input" wire:model='status' type="radio" name="status" value="graduated">
                         </div>
                     
                     </div>
@@ -45,7 +51,7 @@
             </div>
             <div class="row">  
                 <div class="mb-3 form-group col">
-                    <label for="first_name">Full Name:</label>
+                    <label for="first_name">First Name:</label>
                     <input type="text" id="first_name" name="first_name" required class="form-control" placeholder="First Name" wire:model="first_name"> 
                     <?php $__errorArgs = ['first_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

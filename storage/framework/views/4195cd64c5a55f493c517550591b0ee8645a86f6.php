@@ -10,7 +10,27 @@
                     <div class="card-header">
                         <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
                         <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
+                        <?php if($this->filters=='reset'): ?>
+                            <button wire:click.prevent="filterActive()" class="btn btn-success float-end" >
+                                Show active
+                            </button> 
+
+                        <?php elseif($this->filters=='active'): ?>
+                            <button wire:click.prevent="filterWithdrawn()" class="btn btn-danger float-end" >
+                                Show Withdrawn
+                            </button>
+                        <?php elseif($this->filters=='withdrawn'): ?>
+                            <button wire:click.prevent="filterGraduated()" class="btn btn-info float-end" >
+                                Show Graduated
+                            </button>
+                        <?php else: ?>
+                            <button wire:click.prevent="filterReset()" class="btn btn-secondary float-end" >
+                                Reset Filter
+                            </button>
+                        <?php endif; ?>
                     </div>
+
+                    
                     <div class="card-body">
                         <table class="table table-borderd table-striped">
                             <thead>
@@ -33,8 +53,10 @@
                                         <td><?php echo e($student->gender); ?></td>
                                         <td><?php echo e($student->dob); ?></td>
                                         <td><?php echo e($student->birth_cert_no); ?></td>
-                                        <td><?php if( $student->status=='unactive'): ?>
+                                        <td><?php if( $student->status=='withdrawn'): ?>
                                             <button type="button" class="btn btn-danger">Withdrawn</button>
+                                        <?php elseif($student->status=='graduated'): ?>
+                                            <button type="button" class="btn btn-info">Graduated</button>
                                         <?php else: ?>
                                             <button type="button" class="btn btn-success">Enrolled</button>
                                         <?php endif; ?>

@@ -25,11 +25,22 @@ class Students extends Component
     public $showmodal_mother=false;
     public $createnew_father=false;
     public $createnew_mother= false;
+    public $filters = 'reset';
     protected $listeners = ['delete'=>'deleteStudent'];
  
     public function render()
-    {
-        $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);      
+    {   if($this->filters=='active'){
+            $students = Student::where('status','=','active')->where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
+        }elseif($this->filters=='withdrawn'){
+            $students = Student::where('status','=','withdrawn')->where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
+        }
+        elseif($this->filters=='graduated'){
+            $students = Student::where('status','=','graduated')->where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
+        }else{
+            $students = Student::where('fullname', 'like', '%'.$this->search.'%')->orderBy('fullname','ASC')->paginate(10);
+        }
+
+  
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     }
 
@@ -460,6 +471,20 @@ class Students extends Component
         
         $this->showmodal_mother = false;
         $this->createnew_mother = false;
+    }
+
+    public function filterActive(){
+        $this->filters='active';
+    }
+
+    public function filterWithdrawn(){
+        $this->filters='withdrawn';
+    }
+    public function filterGraduated(){
+        $this->filters='graduated';
+    }
+    public function filterReset(){
+        $this->filters='reset';
     }
 
     private function resetInputFields(){

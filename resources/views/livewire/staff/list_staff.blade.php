@@ -20,7 +20,7 @@
                                 <tr>
                               
                                     <th>Name</th>
-                          
+                                    
                                     <th width='250px'>Actions</th>
                                 </tr>
                             </thead>
@@ -28,13 +28,12 @@
                                 @forelse($staffs as $staff)
                                     <tr>
                                    
-                                        <td>{{ $staff->fullname }}</td>
                                     
+                                        <td wire:click="viewStaff('{{$staff->staff_id}}')" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" >{{ $staff->fullname}}</td>
+                          
                                         
                                         <td>
-                                            <button type="button"  wire:click="viewStaff('{{$staff->staff_id}}')" class="btn btn-primary">
-                                                View
-                                            </button>
+                                            
                                             <button type="button"  wire:click="editStaff('{{$staff->staff_id}}')" class="btn btn-primary">
                                                 Edit
                                             </button>

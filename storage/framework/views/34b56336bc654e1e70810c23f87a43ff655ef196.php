@@ -9,6 +9,8 @@ $prevItem = null
 
 ?>
 <?php $__currentLoopData = $siblings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sibling): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    
+  
     <?php if($prevItem!==null): ?>
  
         <?php if((($sibling->father)==($prevItem->father)) ||(($sibling->mother)==($prevItem->mother)) ): ?>
