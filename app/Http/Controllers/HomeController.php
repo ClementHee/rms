@@ -34,7 +34,7 @@ class HomeController extends Controller
         $j2_aft=0;
         $j3_aft=0;
 
-        $count_students = Student::count();
+        $count_students = Student::where('status','active')->count();
         $count_parents = Parents::count();
         $students_cat = Student::get();
         
