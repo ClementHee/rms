@@ -47,6 +47,7 @@ class HomeController extends Controller
                 continue;
             }else{
                 $j1+=1;  
+                continue;
             }
         }
 
