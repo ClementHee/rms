@@ -41,20 +41,28 @@ class HomeController extends Controller
         foreach ($students_cat as $s){
             if ($s -> j3_class!=""){
                 $j3+=1;
+                continue;
             } else if ($s -> j2_class!=""){
                 $j2+=1;
+                continue;
             }else{
-                $j1+=1;
-            }
-            if ($s -> aft_j3_class!="" and $s->j3_class!=""){
-                $j3_aft+=1;
-            } else if ($s -> aft_j2_class!="" and $s->j2_class!=""){
-                $j2_aft+=1;
-            }else if ($s -> aft_j1_class!="" ){
-                $j1_aft+=1;
+                $j1+=1;  
             }
         }
 
+        foreach ($students_cat as $s){
+            if ($s -> aft_j3_class!="" and $s->j3_class!=""){
+                $j3_aft+=1;
+                continue;     
+            } else if ($s -> aft_j2_class!="" and $s->j2_class!=""){
+                $j2_aft+=1;
+                continue;   
+            }else if ($s -> aft_j1_class!="" ){
+                $j1_aft+=1;
+                continue;
+            }   
+        }
+        
         if(auth()->user()->getRoleNames()[0]=='SuperAdmin'){
    
           return view('home',compact('count_students','count_parents','j1','j2','j3','j1_aft','j2_aft','j3_aft'));  
