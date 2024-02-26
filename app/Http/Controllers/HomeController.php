@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         $count_students = Student::where('status','active')->count();
         $count_parents = Parents::count();
-        $students_cat = Student::get();
+        $students_cat = Student::where('status','active')->get();
         
         foreach ($students_cat as $s){
             if ($s -> j3_class!=""){
