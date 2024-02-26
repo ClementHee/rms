@@ -28,12 +28,10 @@
                                 <?php $__empty_1 = true; $__currentLoopData = $parents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                    
-                                        <td><?php echo e($parent->name); ?></td>
+                                        <td wire:click="viewParent(<?php echo e($parent->parent_id); ?>)" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" ><?php echo e($parent->name); ?></td>
                                         
                                         <td>
-                                            <button type="button"  wire:click="viewParent(<?php echo e($parent->parent_id); ?>)" class="btn btn-primary">
-                                                View
-                                            </button>
+                                            
                                             <button type="button"  wire:click="editParent(<?php echo e($parent->parent_id); ?>)" class="btn btn-primary">
                                                 Edit
                                             </button>

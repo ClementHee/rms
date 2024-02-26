@@ -28,12 +28,10 @@
                                 @forelse($parents as $parent)
                                     <tr>
                                    
-                                        <td>{{ $parent->name }}</td>
+                                        <td wire:click="viewParent({{$parent->parent_id}})" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" >{{ $parent->name }}</td>
                                         
                                         <td>
-                                            <button type="button"  wire:click="viewParent({{$parent->parent_id}})" class="btn btn-primary">
-                                                View
-                                            </button>
+                                            
                                             <button type="button"  wire:click="editParent({{$parent->parent_id}})" class="btn btn-primary">
                                                 Edit
                                             </button>

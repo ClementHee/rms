@@ -1,6 +1,8 @@
 <div>
     <button wire:click="list_all()" class="btn btn-primary">Back</button><br>
+    
     <form>
+        <h2><u>Parent Details</u></h2>   
         <?php echo csrf_field(); ?>
         <input type="hidden" wire:model="parent_id">
                 <div>
@@ -45,14 +47,14 @@ unset($__errorArgs, $__bag); ?>
                   
                             <div class="form-check form-check-inline mb-3">
                                 
-                                <label class="form-check-label">Male</label>
+                                <label class="form-check-label pr-2">Male</label>
                                 <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
             
                             </div>
             
                             <div class="form-check form-check-inline  mb-3">
                                 
-                                <label class="form-check-label">Female</label>
+                                <label class="form-check-label pr-2">Female</label>
                                 <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
                             </div>
                         
