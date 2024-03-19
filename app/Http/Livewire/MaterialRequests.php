@@ -13,6 +13,7 @@ class MaterialRequests extends Component
 
     public $date, $requested_by, $class, $purpose,$item,$needed,$fulfilled;
     public $updateMode = false;
+    public $filters = 'reset';
     protected $listeners =['getNewRequest'=>'reload'];
 
     public function reload(){
@@ -38,7 +39,15 @@ class MaterialRequests extends Component
      */
     public function render()
     {
-        $this->all_request = MaterialRequest::all();
+
+        if($this->filters=='unfixed'){
+            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get();
+        }elseif($this->filters=='fixed'){
+            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get();
+        }else{
+            $this->all_request = MaterialRequest::orderBy('date','DESC')->get();
+        }
+      
 
         return view('livewire.materials.show_requests')->layout('livewire.material_dashboard');
         
@@ -182,6 +191,16 @@ class MaterialRequests extends Component
          
         session()->flash('message', 'Request Not Fulfilled');
         
+    }
+    public function filterUnfulfilled(){
+        $this->filters='unfixed';
+    }
+
+    public function filterFulfilled(){
+        $this->filters='fixed';
+    }
+    public function filterReset(){
+        $this->filters='reset';
     }
 
     public function closeModal(){

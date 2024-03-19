@@ -1,6 +1,6 @@
 <div>
     
-    <button class=" btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
+    <button class="mt-2  btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
     @if ($this->filters=='reset')
       <button wire:click.prevent="filterUnfixed()" class="mt-2 btn btn-info btn-lg" >
         Show unfixed</button> 
@@ -93,7 +93,7 @@
            
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
-                    <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger">Delete</button>
+                    <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger mt-1">Delete</button>
                 </td>
 
                

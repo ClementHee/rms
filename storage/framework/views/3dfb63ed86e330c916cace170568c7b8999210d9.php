@@ -1,5 +1,17 @@
 <div >
     <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newRequest" >New Request</button>
+    <?php if($this->filters=='reset'): ?>
+      <button wire:click.prevent="filterUnfulfilled()" class="mt-2 btn btn-info btn-lg" >
+        Show Unfulfilled</button> 
+
+    <?php elseif($this->filters=='fulfilled'): ?>
+        <button wire:click.prevent="filterFulfilled()" class="mt-2 btn btn-info btn-lg" >
+        Show Fulfilled</button>
+    
+    <?php else: ?>
+        <button wire:click.prevent="filterReset()" class="mt-2 btn btn-info btn-lg" >
+       Reset Filter</button>
+   <?php endif; ?>
     <?php if($updateMode): ?>
         <?php echo $__env->make('livewire.materials.update_request', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
@@ -27,9 +39,9 @@
             <?php $__currentLoopData = $all_request; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
             <?php if($request->fulfilled==false): ?>
-            <tr class='bg-danger  bg-opacity-50'>
+            <tr class='  bg-opacity-50'>
             <?php else: ?>
-            <tr class="bg-success bg-opacity-50 p-2">
+            <tr class=" bg-opacity-50 ">
             <?php endif; ?>
             
                 <td><?php echo e($request->date); ?></td>
@@ -48,7 +60,7 @@
                 
                 
                 <td>
-                    <form>
+                  
                         <?php if($request->fulfilled==true): ?>
                         
                             <button wire:click.prevent="mauf(<?php echo e($request->request_id); ?>)" class="btn btn-info">Mark as Unfulfilled</button>
@@ -57,12 +69,13 @@
                             <button wire:click.prevent="maf(<?php echo e($request->request_id); ?>)" class="btn btn-info">Mark as Fulfilled</button>
                     
                         <?php endif; ?>
-                    </form> 
+                    
                 </td>
 
                 <td>
                     <button wire:click="editRequest(<?php echo e($request->request_id); ?>)" class="btn btn-primary">Edit</button>
-                    <button wire:click="deleteRequest(<?php echo e($request->request_id); ?>)" class="btn btn-danger ">Delete</button>
+                    <br>
+                    <button wire:click="deleteRequest(<?php echo e($request->request_id); ?>)" class="btn btn-danger mt-1">Delete</button>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

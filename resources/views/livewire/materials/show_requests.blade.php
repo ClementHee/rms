@@ -1,5 +1,17 @@
 <div >
     <button class="mt-2 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newRequest" >New Request</button>
+    @if ($this->filters=='reset')
+      <button wire:click.prevent="filterUnfulfilled()" class="mt-2 btn btn-info btn-lg" >
+        Show Unfulfilled</button> 
+
+    @elseif($this->filters=='fulfilled')
+        <button wire:click.prevent="filterFulfilled()" class="mt-2 btn btn-info btn-lg" >
+        Show Fulfilled</button>
+    
+    @else
+        <button wire:click.prevent="filterReset()" class="mt-2 btn btn-info btn-lg" >
+       Reset Filter</button>
+   @endif
     @if($updateMode)
         @include('livewire.materials.update_request')
     @endif
@@ -48,7 +60,7 @@
                 
                 
                 <td>
-                    <form>
+                  
                         @if($request->fulfilled==true)
                         
                             <button wire:click.prevent="mauf({{ $request->request_id }})" class="btn btn-info">Mark as Unfulfilled</button>
@@ -57,12 +69,13 @@
                             <button wire:click.prevent="maf({{ $request->request_id }})" class="btn btn-info">Mark as Fulfilled</button>
                     
                         @endif
-                    </form> 
+                    
                 </td>
 
                 <td>
                     <button wire:click="editRequest({{ $request->request_id }})" class="btn btn-primary">Edit</button>
-                    <button wire:click="deleteRequest({{ $request->request_id }})" class="btn btn-danger ">Delete</button>
+                    <br>
+                    <button wire:click="deleteRequest({{ $request->request_id }})" class="btn btn-danger mt-1">Delete</button>
                 </td>
             </tr>
             @endforeach
