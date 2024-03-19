@@ -73,9 +73,9 @@
                                             @endif
                                         </td>
                                    
-                                        <td> @if ( $student->aft_j3_class !="")
+                                        <td> @if ( $student->aft_j3_class !=""  and $s->j3_class!="")
                                             {{ $student->aft_j3_class}}
-                                        @elseif( $student->aft_j2_class !="")
+                                        @elseif( $student->aft_j2_class !=""  and $s->j2_class!="") 
                                             {{ $student->aft_j2_class}}
                                         @elseif($student->aft_j1_class!="")
                                             {{ $student->aft_j1_class}}
