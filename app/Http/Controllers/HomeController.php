@@ -36,13 +36,13 @@ class HomeController extends Controller
 
         $count_students = Student::where('status','active')->count();
         $count_parents = Parents::count();
-        $students_cat = Student::where('status','active')->get();
+        $active_students = Student::where('status','active')->get();
         
-        foreach ($students_cat as $s){
-            if ($s -> j3_class!=""){
+        foreach ($active_students as $student){
+            if ($student -> j3_class!=""){
                 $j3+=1;
                 continue;
-            } else if ($s -> j2_class!=""){
+            } else if ($student -> j2_class!=""){
                 $j2+=1;
                 continue;
             }else{
@@ -51,14 +51,14 @@ class HomeController extends Controller
             }
         }
 
-        foreach ($students_cat as $s){
-            if ($s -> aft_j3_class!="" and $s->j3_class!=""){
+        foreach ($active_students as $student){
+            if ($student -> aft_j3_class!="" and $student->j3_class!=""){
                 $j3_aft+=1;
                 continue;     
-            } else if ($s -> aft_j2_class!="" and $s->j2_class!=""){
+            } else if ($student -> aft_j2_class!="" and $student->j2_class!=""){
                 $j2_aft+=1;
                 continue;   
-            }else if ($s -> aft_j1_class!="" ){
+            }else if ($student -> aft_j1_class!="" ){
                 $j1_aft+=1;
                 continue;
             }   

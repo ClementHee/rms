@@ -105,7 +105,6 @@ class Students extends Component
             'status'=>'active',
             'chinese_name'=>$this->chinese_name,
             'carplate'=>$this->carplate,
-            
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
@@ -170,7 +169,6 @@ class Students extends Component
     public function viewStudent($id)
     {
         $students = Student::findOrFail($id);
-
         $father_name = Parents::where('parent_id',($students->father))->get('name')->first();
         $mother_name = Parents::where('parent_id',($students->mother))->get('name')->first();
         $this->status=$students->status;
@@ -369,11 +367,12 @@ class Students extends Component
         ]);
 
 
-        $this->mode = 'view';
-  
+        //$this->mode = 'view';
+        
         session()->flash('message', 'Student Updated Successfully.');
         $this->resetInputFields();
-
+        
+        return redirect(request()->header('Referer'));
     }
 
     public function deleteStudent($id)

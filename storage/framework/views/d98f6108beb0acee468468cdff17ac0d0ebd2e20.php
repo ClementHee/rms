@@ -630,7 +630,7 @@ unset($__errorArgs, $__bag); ?>
         <div class='row'>
             <div class="mb-3 form-group col">
                 <label for="class">J1 Class: </label>
-                <input type="text" id="j1_class" name="j1_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j1_class">
+                <input type="text" id="j1_class" name="j1_class"  class="form-control pb-2" placeholder="Class" wire:model="j1_class">
                 <?php $__errorArgs = ['j1_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -643,7 +643,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="class">J2 Class: </label>
-                <input type="text" id="j2_class" name="j2_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j2_class">
+                <input type="text" id="j2_class" name="j2_class"  class="form-control pb-2"  placeholder="Class" wire:model="j2_class">
                 <?php $__errorArgs = ['j2_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -656,7 +656,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="class">J3 Class: </label>
-                <input type="text" id="j3_class" name="j3_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="j3_class">
+                <input type="text" id="j3_class" name="j3_class"  class="form-control pb-2"  placeholder="Class" wire:model="j3_class">
                 <?php $__errorArgs = ['j1_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -671,7 +671,7 @@ unset($__errorArgs, $__bag); ?>
         <div class='row'>
             <div class="mb-3 form-group col">
                 <label for="class">Afternoon Class J1: </label>
-                <input type="text" id="aft_j1_class" name="aft_j1_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="aft_j1_class">
+                <input type="text" id="aft_j1_class" name="aft_j1_class"  class="form-control pb-2"  placeholder="Class" wire:model="aft_j1_class">
                 <?php $__errorArgs = ['j1_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -684,7 +684,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="class">Afternoon Class J2: </label>
-                <input type="text" id="aft_j2_class" name="aft_j2_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="aft_j2_class">
+                <input type="text" id="aft_j2_class" name="aft_j2_class"  class="form-control pb-2"  placeholder="Class" wire:model="aft_j2_class">
                 <?php $__errorArgs = ['j1_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -697,7 +697,7 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="mb-3 form-group col">
                 <label for="class">Afternoon Class J3: </label>
-                <input type="text" id="aft_j3_class" name="j1_class"  class="form-control pb-2" value="Not Assigned" placeholder="Class" wire:model="aft_j3_class">
+                <input type="text" id="aft_j3_class" name="j1_class"  class="form-control pb-2"  placeholder="Class" wire:model="aft_j3_class">
                 <?php $__errorArgs = ['j1_class'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

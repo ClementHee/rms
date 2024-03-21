@@ -32,7 +32,7 @@
 
                     
                     <div class="card-body">
-                        <table class="table table-borderd table-striped">
+                        <table class="table table-borderd table-striped  table-sm text-center ">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -87,7 +87,7 @@
                                             <button type="button"  wire:click="editStudent({{$student->student_id}})" class="btn btn-primary">
                                                 Edit
                                             </button>
-                                            <button type="button"  wire:click="deleteConfirm({{$student->student_id}})" class="btn btn-danger ">Delete</button>
+                                            <button type="button"  wire:click="deleteConfirm({{$student->student_id}})" class="btn btn-danger mt-1 ">Delete</button>
                                         </td>
                                     </tr>
                                 @empty

@@ -6,25 +6,20 @@
             <div class="col-md-8">
                     </div>
                     <div class="card-body">
-                        <?php if(session()->has('message')): ?>
-                            <div class="alert alert-success">
-                                <?php echo e(session('message')); ?>
-
-                            </div>
-                        <?php endif; ?>
+                       
  
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('students')->html();
-} elseif ($_instance->childHasBeenRendered('LVJqk8J')) {
-    $componentId = $_instance->getRenderedChildComponentId('LVJqk8J');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LVJqk8J');
+} elseif ($_instance->childHasBeenRendered('of2XURL')) {
+    $componentId = $_instance->getRenderedChildComponentId('of2XURL');
+    $componentTag = $_instance->getRenderedChildComponentTagName('of2XURL');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LVJqk8J');
+    $_instance->preserveRenderedChild('of2XURL');
 } else {
     $response = \Livewire\Livewire::mount('students');
     $html = $response->html();
-    $_instance->logRenderedChild('LVJqk8J', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('of2XURL', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

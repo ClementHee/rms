@@ -3,7 +3,7 @@
    
     <button readonly wire:click="list_all()" class="btn btn-primary">Back</button><br>
     <form class=" p-4 mt-2 shadow-lg  bg-white border border-secondary rounded">
-
+        <h2><u>Student Details</u></h2>   
       
 
         <?php echo csrf_field(); ?>

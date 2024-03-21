@@ -76,10 +76,10 @@
                                             <?php endif; ?>
                                         </td>
                                    
-                                        <td> <?php if( $student->aft_j3_class !=""): ?>
+                                        <td> <?php if( $student->aft_j3_class !=""  and $student->j3_class!=""): ?>
                                             <?php echo e($student->aft_j3_class); ?>
 
-                                        <?php elseif( $student->aft_j2_class !=""): ?>
+                                        <?php elseif( $student->aft_j2_class !=""  and $student->j2_class!=""): ?> 
                                             <?php echo e($student->aft_j2_class); ?>
 
                                         <?php elseif($student->aft_j1_class!=""): ?>
