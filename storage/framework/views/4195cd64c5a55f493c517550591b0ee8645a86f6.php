@@ -88,7 +88,7 @@
                                         <?php else: ?>
                                             Not Assigned
                                         <?php endif; ?></td>
-                                        <td>
+                                        <td class="text-center">
                                             
                                             <button type="button"  wire:click="editStudent(<?php echo e($student->student_id); ?>)" class="btn btn-primary">
                                                 Edit

@@ -32,7 +32,7 @@
 
                     
                     <div class="card-body">
-                        <table class="table table-borderd table-striped  table-sm text-center ">
+                        <table class="table table-borderd table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -82,7 +82,7 @@
                                         @else
                                             Not Assigned
                                         @endif</td>
-                                        <td>
+                                        <td class="text-center">
                                             
                                             <button type="button"  wire:click="editStudent({{$student->student_id}})" class="btn btn-primary">
                                                 Edit
