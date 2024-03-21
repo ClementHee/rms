@@ -93,7 +93,7 @@
            
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
-                    <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger mt-1">Delete</button>
+                    <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger">Delete</button>
                 </td>
 
                
