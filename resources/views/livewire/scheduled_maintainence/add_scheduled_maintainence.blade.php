@@ -89,7 +89,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" wire:click="resetInputFields()"
                     data-bs-dismiss="modal">Close</button>
-                <button wire:click.prevent="addToDoList()" class="btn btn-primary">Save</button>
+                <button wire:click.prevent="scheduleMaintainence()" class="btn btn-primary">Save</button>
             </div>
         </form>
         
