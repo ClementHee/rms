@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use App\Http\Livewire\ScheduledMaintainences;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -15,7 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call('\App\Http\Livewire\ScheduledMaintainences@weeklySchedule')->weekly();
+        $schedule->call('\App\Http\Livewire\ScheduledMaintainences@quarterlySchedule')->quarterly();
+        $schedule->call('\App\Http\Livewire\ScheduledMaintainences@monthlySchedule')->monthly();
+   
     }
 
     /**

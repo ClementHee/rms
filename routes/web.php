@@ -6,6 +6,7 @@ use App\Http\Livewire\Leaves;
 use App\Http\Livewire\Staffs;
 use App\Http\Livewire\ParentsL;
 use App\Http\Livewire\Students;
+use App\Http\Livewire\ToDoLists;
 use App\Http\Livewire\AllDetails;
 use App\Events\NewMaterialRequest;
 use App\Http\Livewire\Registration;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\MaterialRequest;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\ScheduledMaintainences;
 use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
@@ -61,12 +63,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/siblingslist',Siblingslist::class)->name('siblingslist');
     Route::get('/registration',Registration::class)->name('registration');
     Route::get('/leave',Leaves::class)->name('leave');
+    Route::get('/scheduled_maintainence',ScheduledMaintainences::class)->name('scheduled_maintainence');
+    Route::get('/to_do_list',ToDoLists::class)->name('to_do_list');
 
-});
-
-Route::group(['middleware' => ['auth','admin']], function() { 
-
-    
 });
 
 Route::group(['middleware' => ['auth','admin']], function() { 

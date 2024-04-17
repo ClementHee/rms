@@ -58,13 +58,6 @@ class Maintainences extends Component
      */
     public function storeMaintainences()
     {
-      
-        $new_issue=$this ->validate([
-        'issue' => 'required',
-        'location' => 'required',
-        'reported_by' => 'required',
-
-        ]);
         
         Maintainence::create([
             'issue' => $this->issue,
@@ -73,6 +66,8 @@ class Maintainences extends Component
             'remarks' => $this->remarks,
             'reported_at' => Carbon::now(),
         ]);
+
+     
 
         //$data=$this;
         

@@ -67,15 +67,7 @@ class Students extends Component
         $this->mode = 'view';
         $this->resetInputFields();
     }
-    public function clearSignature()
-    {
-        $this->signed = null;
-    }
-   
-    public function storeSignature(){
-       
-        
-    }
+    
     public function storeStudent() {  
   
        
@@ -314,7 +306,9 @@ class Students extends Component
         if ($this->referral=='Other'){
              $referral_final=$this->referral." -- ".$this->referral_other;
         }
-    
+        
+        $array = array_diff($this->reasons,array(""));
+        
         $editing_student->update([
             'chinese_name'=>$this->chinese_name,
             'status'=>$this->status,
@@ -322,7 +316,7 @@ class Students extends Component
             'entry_year'=> $this->entry_year,
             'enrolment_date'=>$this->enrolment_date,
             'referral'=>$referral_final,
-            'reasons'=>implode(", ",$this->reasons),
+            'reasons'=>implode(", ",$array),
             'pref_pri_sch'=>implode(", ",$this->pref_pri_sch),
             'type'=> $this->type,
             'first_name'=>trim($this->first_name),
@@ -366,7 +360,7 @@ class Students extends Component
             'signed'=>$this->signed
         ]);
 
-
+        
         //$this->mode = 'view';
         
         session()->flash('message', 'Student Updated Successfully.');
