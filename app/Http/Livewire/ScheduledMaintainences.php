@@ -83,7 +83,7 @@ class ScheduledMaintainences extends Component
     }
         
     public function weeklySchedule(){
-        ToDoList::truncate();
+        ToDoList::where('status','=', 1)->delete();
         $weekly_maintainences = ScheduledMaintainence::where('recurrences','weekly')->get();
 
         foreach($weekly_maintainences as $single_task){
@@ -99,7 +99,7 @@ class ScheduledMaintainences extends Component
     }
 
     public function monthlySchedule(){
-        ToDoList::truncate();
+        ToDoList::where('status','=', 1)->delete();
         $weekly_maintainences = ScheduledMaintainence::where('recurrences','monthly')->get();
         foreach($weekly_maintainences as $single_task){    
             ToDoList::create([
@@ -111,7 +111,7 @@ class ScheduledMaintainences extends Component
     }
 
     public function quaterlySchedule(){
-        ToDoList::truncate();
+        ToDoList::where('status','=', 1)->delete();
         $weekly_maintainences = ScheduledMaintainence::where('recurrences','quarterly')->get();
         foreach($weekly_maintainences as $single_task){    
             ToDoList::create([
