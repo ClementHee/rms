@@ -1,6 +1,6 @@
 <div>
 
 
-      <livewire:student-parent-details/>
+      <livewire:summary-details/>
   
 </div>

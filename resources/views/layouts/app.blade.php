@@ -15,7 +15,7 @@
 
     <!-- Custom fonts for this template-->
   
-   
+ 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style type="text/css">
@@ -98,26 +98,33 @@
                   <p>Main Dashboard</p>
                 </a>
               </li>
-              <li>
-                <a href="{{ route('maintainence') }}">
-                  <p>Maintainence</p>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('request_materials') }}">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintainence</a>
+                <div class="dropdown-menu ms-5">
+                  <a  class="dropdown-item text-dark" href="{{ route('maintainence') }}">
+                    <p>Maintainence</p>
+                  </a>
+
+                  <a  class="dropdown-item text-dark" href="{{ route('scheduled_maintainence') }}">
+                    <p>Scheduled Maintainence</p>
+                  </a>
                   
-                  <p>Request Materials</p>
-                </a>
+                  <a  class="dropdown-item text-dark" href="{{ route('to_do_list') }}">
+                    <p>To Do List</p>
+                  </a>
+                </div>
               </li>
+             
               @hasanyrole('Admin|SuperAdmin|EMT')
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
                 <div class="dropdown-menu ms-5">
-                  <a class="nav-link text-dark" href="{{ route('student') }}" >Students</a>
+                  <a class="dropdown-item text-dark" href="{{ route('student') }}" >Students</a>
 
-                  <a class="nav-link text-dark" href="{{ route('parent') }}">Parents</a>
+                  <a class="dropdown-item text-dark" href="{{ route('parent') }}">Parents</a>
                   
-                  <a class="nav-link text-dark" href="{{ route('student_parent') }}">All Details</a>
+                  <a class="dropdown-item text-dark" href="{{ route('student_parent') }}">All Details</a>
                 </div>
               </li>
               <li><a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a></li>
@@ -134,9 +141,9 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Staffs</a>
                 <div class="dropdown-menu ms-5">
                   @role('EMT')
-                  <a class="nav-link text-dark" href="{{ route('staff') }}">Staffs</a>
+                  <a class="dropdown-item text-dark" href="{{ route('staff') }}">Staffs</a>
                   @endrole
-                  <a class="nav-link text-dark" href="{{ route('leave') }}">Staff Leaves</a>
+                  <a class="dropdown-item text-dark" href="{{ route('leave') }}">Staff Leaves</a>
                 </div>
               </li>
         
@@ -175,16 +182,19 @@
                     </button>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="{{ route('logout') }}"
-                          onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                          {{ __('Logout') }}
-                      </a>
-
+                      <ul class="list-unstyled">
+                        <li>
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                          </a>
+                        </li>
+                      </ul>
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                       </form>
-                  
+                    
                     </div>
                   </li>
                 </ul>
@@ -221,7 +231,8 @@
           </footer>-->
         </div>
       </div>
-@livewireScripts
+
+
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
 
 <script src="{{asset("js/core/popper.min.js")}}"></script>
@@ -237,7 +248,7 @@
 <!-- Control Center for Paper Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/paper-dashboard.min.js?v=2.0.0') }}" type="text/javascript"></script>
 
-
+@livewireScripts
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>

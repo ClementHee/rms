@@ -15,7 +15,7 @@
 
     <!-- Custom fonts for this template-->
   
-   
+ 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style type="text/css">
@@ -99,26 +99,33 @@
                   <p>Main Dashboard</p>
                 </a>
               </li>
-              <li>
-                <a href="<?php echo e(route('maintainence')); ?>">
-                  <p>Maintainence</p>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo e(route('request_materials')); ?>">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintainence</a>
+                <div class="dropdown-menu ms-5">
+                  <a  class="dropdown-item text-dark" href="<?php echo e(route('maintainence')); ?>">
+                    <p>Maintainence</p>
+                  </a>
+
+                  <a  class="dropdown-item text-dark" href="<?php echo e(route('scheduled_maintainence')); ?>">
+                    <p>Scheduled Maintainence</p>
+                  </a>
                   
-                  <p>Request Materials</p>
-                </a>
+                  <a  class="dropdown-item text-dark" href="<?php echo e(route('to_do_list')); ?>">
+                    <p>To Do List</p>
+                  </a>
+                </div>
               </li>
+             
               <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Admin|SuperAdmin|EMT')): ?>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
                 <div class="dropdown-menu ms-5">
-                  <a class="nav-link text-dark" href="<?php echo e(route('student')); ?>" >Students</a>
+                  <a class="dropdown-item text-dark" href="<?php echo e(route('student')); ?>" >Students</a>
 
-                  <a class="nav-link text-dark" href="<?php echo e(route('parent')); ?>">Parents</a>
+                  <a class="dropdown-item text-dark" href="<?php echo e(route('parent')); ?>">Parents</a>
                   
-                  <a class="nav-link text-dark" href="<?php echo e(route('student_parent')); ?>">All Details</a>
+                  <a class="dropdown-item text-dark" href="<?php echo e(route('student_parent')); ?>">All Details</a>
                 </div>
               </li>
               <li><a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a></li>
@@ -135,9 +142,9 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Staffs</a>
                 <div class="dropdown-menu ms-5">
                   <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'EMT')): ?>
-                  <a class="nav-link text-dark" href="<?php echo e(route('staff')); ?>">Staffs</a>
+                  <a class="dropdown-item text-dark" href="<?php echo e(route('staff')); ?>">Staffs</a>
                   <?php endif; ?>
-                  <a class="nav-link text-dark" href="<?php echo e(route('leave')); ?>">Staff Leaves</a>
+                  <a class="dropdown-item text-dark" href="<?php echo e(route('leave')); ?>">Staff Leaves</a>
                 </div>
               </li>
         
@@ -177,17 +184,20 @@
                     </button>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                          onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                          <?php echo e(__('Logout')); ?>
+                      <ul class="list-unstyled">
+                        <li>
+                          <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                              onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                              <?php echo e(__('Logout')); ?>
 
-                      </a>
-
+                          </a>
+                        </li>
+                      </ul>
                       <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
                         <?php echo csrf_field(); ?>
                       </form>
-                  
+                    
                     </div>
                   </li>
                 </ul>
@@ -224,7 +234,7 @@
           </footer>-->
         </div>
       </div>
-<?php echo \Livewire\Livewire::scripts(); ?>
+
 
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
 
@@ -241,6 +251,7 @@
 <!-- Control Center for Paper Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="<?php echo e(asset('js/paper-dashboard.min.js?v=2.0.0')); ?>" type="text/javascript"></script>
 
+<?php echo \Livewire\Livewire::scripts(); ?>
 
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
