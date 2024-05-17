@@ -119,7 +119,7 @@
                   </a>
                 </div>
               </li>
-             
+              <li><a class="nav-link" href="{{ route('request_materials') }}">Request Materials</a></li>
               @hasanyrole('Admin|SuperAdmin|EMT')
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Student and Parents</a>
@@ -140,18 +140,18 @@
               @endrole
 
               
-
+              @role('EMT')
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Staffs</a>
                 <div class="dropdown-menu ms-5">
-                  @role('EMT')
+                 
                   <a class="dropdown-item text-dark" href="{{ route('staff') }}">Staffs</a>
                   <a class="dropdown-item text-dark" href="{{ route('leave') }}">Staff Leaves</a>
-                  @endrole
+                 
                   
                 </div>
               </li>
-        
+              @endrole
               
             </ul>
           </div>
