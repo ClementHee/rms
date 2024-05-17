@@ -78,10 +78,10 @@ class MaterialRequests extends Component
             'item' => $this->item,
             'needed'=>$this->needed
         ]);
-        $data=$this;
+        //$data=$this;
         
 
-        event(new NewMaterialRequest($data));
+        //event(new NewMaterialRequest($data));
 
         
         session()->flash('message', 'Request has been made Successfully.');
