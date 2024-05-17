@@ -17,7 +17,7 @@
         x-transition:leave="transform duration-100"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-90"
-        class="py-3"
+        class="pg-filter-container"
     >
         @php
             $customConfig = [];
@@ -43,6 +43,7 @@
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'datetime',
                             ])
                         </div>
                     @endif
@@ -53,6 +54,8 @@
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'date',
+
                             ])
                         </div>
                     @endif

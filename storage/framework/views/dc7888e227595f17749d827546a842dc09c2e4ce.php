@@ -27,16 +27,21 @@
                     <span style="min-width: 25px;"><?php echo app('translator')->get('XLSX'); ?></span>
                     <a
                         class="text-black-50"
-                        wire:click="exportToXLS()"
+                        wire:click.prevent="exportToXLS"
                         href="#"
                     >
-                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+
+                        <?php if(count($enabledFilters)===0): ?>
+                            <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                        <?php else: ?>
+                            <?php echo app('translator')->get('livewire-powergrid::datatable.labels.filtered'); ?>
+                        <?php endif; ?>
                     </a>
                     <?php if($checkbox): ?>
                         /
                         <a
                             class="text-black-50"
-                            wire:click="exportToXLS(true)"
+                            wire:click.prevent="exportToXLS(true)"
                             href="#"
                         >
                             <?php echo app('translator')->get('livewire-powergrid::datatable.labels.selected'); ?>
@@ -51,16 +56,20 @@
                     <span><?php echo app('translator')->get('Csv'); ?></span>
                     <a
                         class="text-black-50"
-                        wire:click="exportToCsv"
+                        wire:click.prevent="exportToCsv"
                         href="#"
                     >
-                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                        <?php if(count($enabledFilters)===0): ?>
+                            <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                        <?php else: ?>
+                            <?php echo app('translator')->get('livewire-powergrid::datatable.labels.filtered'); ?>
+                        <?php endif; ?>
                     </a>
                     <?php if($checkbox): ?>
                         /
                         <a
                             class="text-black-50"
-                            wire:click="exportToCsv(true)"
+                            wire:click.prevent="exportToCsv(true)"
                             href="#"
                         >
                             <?php echo app('translator')->get('livewire-powergrid::datatable.labels.selected'); ?>

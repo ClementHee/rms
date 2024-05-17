@@ -61,10 +61,10 @@ final class CellValueFormatter
     ];
 
     /** @var bool Whether date/time values should be returned as PHP objects or be formatted as strings */
-    private readonly bool $shouldFormatDates;
+    private bool $shouldFormatDates;
 
     /** @var ODS Used to unescape XML data */
-    private readonly ODS $escaper;
+    private ODS $escaper;
 
     /**
      * @param bool $shouldFormatDates Whether date/time values should be returned as PHP objects or be formatted as strings
@@ -81,9 +81,9 @@ final class CellValueFormatter
      *
      * @see http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#refTable13
      *
-     * @return bool|DateInterval|DateTimeImmutable|float|int|string The value associated with the cell, empty string if cell's type is void/undefined
-     *
      * @throws InvalidValueException If the node value is not valid
+     *
+     * @return bool|DateInterval|DateTimeImmutable|float|int|string The value associated with the cell, empty string if cell's type is void/undefined
      */
     public function extractAndFormatNodeValue(DOMElement $node): bool|DateInterval|DateTimeImmutable|float|int|string
     {
@@ -142,7 +142,7 @@ final class CellValueFormatter
      */
     private function formatBooleanCellValue(DOMElement $node): bool
     {
-        return (bool) $node->getAttribute(self::XML_ATTRIBUTE_BOOLEAN_VALUE);
+        return (bool) ($node->getAttribute(self::XML_ATTRIBUTE_BOOLEAN_VALUE));
     }
 
     /**
@@ -150,7 +150,7 @@ final class CellValueFormatter
      *
      * @throws InvalidValueException If the value is not a valid date
      */
-    private function formatDateCellValue(DOMElement $node): DateTimeImmutable|string
+    private function formatDateCellValue(DOMElement $node): string|DateTimeImmutable
     {
         // The XML node looks like this:
         // <table:table-cell calcext:value-type="date" office:date-value="2016-05-19T16:39:00" office:value-type="date">
@@ -178,9 +178,9 @@ final class CellValueFormatter
     /**
      * Returns the cell Time value from the given node.
      *
-     * @return DateInterval|string The value associated with the cell
-     *
      * @throws InvalidValueException If the value is not a valid time
+     *
+     * @return DateInterval|string The value associated with the cell
      */
     private function formatTimeCellValue(DOMElement $node): DateInterval|string
     {
@@ -238,7 +238,7 @@ final class CellValueFormatter
         foreach ($pNode->childNodes as $childNode) {
             if ($childNode instanceof DOMText) {
                 $textValue .= $childNode->nodeValue;
-            } elseif ($this->isWhitespaceNode($childNode->nodeName) && $childNode instanceof DOMElement) {
+            } elseif ($this->isWhitespaceNode($childNode->nodeName)) {
                 $textValue .= $this->transformWhitespaceNode($childNode);
             } elseif (self::XML_NODE_TEXT_A === $childNode->nodeName || self::XML_NODE_TEXT_SPAN === $childNode->nodeName) {
                 $textValue .= $this->extractTextValueFromNode($childNode);

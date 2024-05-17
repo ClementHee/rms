@@ -6,7 +6,8 @@
     >
         <button
             @click.prevent="open = ! open"
-            class="pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-500 "
+            class="pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-500 dark:hover:bg-pg-primary-700
+    dark:ring-offset-pg-primary-800 dark:text-pg-primary-400 dark:bg-pg-primary-600"
         >
             <div class="flex">
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -44,7 +45,7 @@
                     <div
                         wire:click="$emit('pg:toggleColumn-<?php echo e($tableName); ?>', '<?php echo e($column->field); ?>')"
                         wire:key="toggle-column-<?php echo e($column->field); ?>"
-                        class="<?php if($column->hidden): ?> opacity-40 bg-pg-primary-300 dark:bg-pg-primary-800 <?php endif; ?> cursor-pointer flex justify-start block px-4 py-2 text-pg-primary-800"
+                        class="<?php if($column->hidden): ?> opacity-40 bg-pg-primary-300 dark:bg-pg-primary-800 <?php endif; ?> cursor-pointer flex justify-start block px-4 py-2 text-pg-primary-800 hover:bg-pg-primary-50 hover:text-black-200 dark:text-pg-primary-200 dark:hover:bg-gray-900 dark:hover:bg-pg-primary-700"
                     >
                         <?php if(!$column->hidden): ?>
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

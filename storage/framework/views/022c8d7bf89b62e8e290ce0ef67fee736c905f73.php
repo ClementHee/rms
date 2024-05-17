@@ -48,7 +48,7 @@
 
                     <?php if(!$paginator->onFirstPage()): ?>
                         <a
-                            class="px-2 py-1 pt-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                            class="px-2 py-1 pt-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                             wire:click="gotoPage(1)"
                         >
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -69,7 +69,7 @@
                         </a>
 
                         <a
-                            class="px-2 py-1 pt-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                            class="px-2 py-1 pt-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                             wire:click="previousPage"
                             rel="next"
                         >
@@ -102,7 +102,7 @@
 
                                 <?php if($page == $paginator->currentPage()): ?>
                                     <span
-                                        class="px-2 py-1 m-1 text-center border-pg-primary-400 rounded cursor-pointer border-1 dark:bg-pg-primary-700 dark:text-black dark:text-pg-primary-300"
+                                        class="px-2 py-1 m-1 text-center border-pg-primary-400 rounded cursor-pointer border-1 dark:bg-pg-primary-700 dark:text-white dark:text-pg-primary-300"
                                     ><?php echo e($page); ?></span>
                                 <?php elseif(
                                     $page === $paginator->currentPage() + 1 ||
@@ -110,7 +110,7 @@
                                         $page === $paginator->currentPage() - 1 ||
                                         $page === $paginator->currentPage() - 2): ?>
                                     <a
-                                        class="px-2 py-1 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                        class="px-2 py-1 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                         wire:click="gotoPage(<?php echo e($page); ?>)"
                                     ><?php echo e($page); ?></a>
                                 <?php endif; ?>
@@ -129,7 +129,7 @@
                     <?php if($paginator->hasMorePages()): ?>
                         <?php if($paginator->lastPage() - $paginator->currentPage() >= 2): ?>
                             <a
-                                class="px-2 py-1 pt-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                class="px-2 py-1 pt-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                 wire:click="nextPage"
                                 rel="next"
                             >
@@ -149,7 +149,7 @@
                             </a>
                         <?php endif; ?>
                         <a
-                            class="px-2 py-1 pt-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                            class="px-2 py-1 pt-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                             wire:click="gotoPage(<?php echo e($paginator->lastPage()); ?>)"
                         >
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -209,7 +209,7 @@
                                     <button
                                         wire:click="setPage('<?php echo e($paginator->previousCursor()->encode()); ?>','<?php echo e($paginator->getCursorName()); ?>')"
                                         wire:loading.attr="disabled"
-                                        class="p-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                        class="p-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                     >
                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.chevron-double-left','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -231,7 +231,7 @@
                                     <button
                                         wire:click="previousPage('<?php echo e($paginator->getPageName()); ?>')"
                                         wire:loading.attr="disabled"
-                                        class="p-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                        class="p-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                     >
                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.chevron-double-left','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -260,7 +260,7 @@
                                     <button
                                         wire:click="setPage('<?php echo e($paginator->nextCursor()->encode()); ?>','<?php echo e($paginator->getCursorName()); ?>')"
                                         wire:loading.attr="disabled"
-                                        class="p-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                        class="p-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                     >
                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.chevron-double-right','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -282,7 +282,7 @@
                                     <button
                                         wire:click="nextPage('<?php echo e($paginator->getPageName()); ?>')"
                                         wire:loading.attr="disabled"
-                                        class="p-2 m-1 text-center text-black bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
+                                        class="p-2 m-1 text-center text-white bg-pg-primary-500 border-pg-primary-400 rounded cursor-pointer border-1 hover:bg-pg-primary-600 hover:border-pg-primary-800 dark:text-pg-primary-300"
                                     >
                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.icons.chevron-double-right','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>

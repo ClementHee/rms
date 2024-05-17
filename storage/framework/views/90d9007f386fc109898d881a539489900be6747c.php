@@ -33,15 +33,15 @@
     <?php
         $field = strval(data_get($filter, 'field'));
         $title = strval(data_get($filter, 'title'));
-        $operators = data_get($filter, 'operators', []);
+        $operators = (array)data_get($filter, 'operators', []);
         $placeholder = strval(data_get($filter, 'placeholder'));
-        $componentAttributes = (array) data_get($filter, 'attributes');
+        $componentAttributes = (array) data_get($filter, 'attributes', []);
         
         $inputTextOptions = \PowerComponents\LivewirePowerGrid\Filters\FilterInputText::getInputTextOperators();
         $inputTextOptions = count($operators) > 0 ? $operators : $inputTextOptions;
         $showSelectOptions = !(count($inputTextOptions) === 1 && in_array('contains', $inputTextOptions));
         
-        $defaultPlaceholder = $column->placeholder ?: $column->title;
+        $defaultPlaceholder = $column->placeholder ?: $column?->title;
         $overridePlaceholder = $placeholder ?: $defaultPlaceholder;
         
         unset($filter['placeholder']);
@@ -96,7 +96,7 @@
                         <?php $__currentLoopData = $inputTextOptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option
                                 wire:key="input-text-options-<?php echo e($tableName); ?>-<?php echo e($key . '-' . $value); ?>"
-                                value="<?php echo e($key); ?>"
+                                value="<?php echo e($value); ?>"
                             ><?php echo e(trans('livewire-powergrid::datatable.input_text_options.' . $value)); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
@@ -104,6 +104,7 @@
             <?php endif; ?>
             <div class="mt-1">
                 <input
+                    wire:key="input-<?php echo e($field); ?>"
                     data-id="<?php echo e($field); ?>"
                     <?php if(isset($enabledFilters[$field]['disabled']) && boolval($enabledFilters[$field]['disabled']) === true): ?> disabled <?php else: ?>
                         <?php echo e($defaultAttributes['inputAttributes']); ?> <?php endif; ?>

@@ -35,10 +35,10 @@ final class WorkbookRelationshipsManager
     public const XML_ATTRIBUTE_TARGET = 'Target';
 
     /** @var string Path of the XLSX file being read */
-    private readonly string $filePath;
+    private string $filePath;
 
-    /** @var array<string, string> Cache of the already read workbook relationships: [TYPE] => [FILE_NAME] */
-    private array $cachedWorkbookRelationships;
+    /** @var null|array<string, string> Cache of the already read workbook relationships: [TYPE] => [FILE_NAME] */
+    private ?array $cachedWorkbookRelationships = null;
 
     /**
      * @param string $filePath Path of the XLSX file being read
@@ -58,7 +58,7 @@ final class WorkbookRelationshipsManager
             ?? $workbookRelationships[self::RELATIONSHIP_TYPE_SHARED_STRINGS_STRICT];
 
         // the file path can be relative (e.g. "styles.xml") or absolute (e.g. "/xl/styles.xml")
-        $doesContainBasePath = str_contains($sharedStringsXMLFilePath, self::BASE_PATH);
+        $doesContainBasePath = (str_contains($sharedStringsXMLFilePath, self::BASE_PATH));
         if (!$doesContainBasePath) {
             // make sure we return an absolute file path
             $sharedStringsXMLFilePath = self::BASE_PATH.$sharedStringsXMLFilePath;
@@ -99,7 +99,7 @@ final class WorkbookRelationshipsManager
             ?? $workbookRelationships[self::RELATIONSHIP_TYPE_STYLES_STRICT];
 
         // the file path can be relative (e.g. "styles.xml") or absolute (e.g. "/xl/styles.xml")
-        $doesContainBasePath = str_contains($stylesXMLFilePath, self::BASE_PATH);
+        $doesContainBasePath = (str_contains($stylesXMLFilePath, self::BASE_PATH));
         if (!$doesContainBasePath) {
             // make sure we return a full path
             $stylesXMLFilePath = self::BASE_PATH.$stylesXMLFilePath;
@@ -112,13 +112,13 @@ final class WorkbookRelationshipsManager
      * Reads the workbook.xml.rels and extracts the filename associated to the different types.
      * It caches the result so that the file is read only once.
      *
-     * @return array<string, string>
-     *
      * @throws \OpenSpout\Common\Exception\IOException If workbook.xml.rels can't be read
+     *
+     * @return array<string, string>
      */
     private function getWorkbookRelationships(): array
     {
-        if (!isset($this->cachedWorkbookRelationships)) {
+        if (null === $this->cachedWorkbookRelationships) {
             $xmlReader = new XMLReader();
 
             if (false === $xmlReader->openFileInZip($this->filePath, self::WORKBOOK_RELS_XML_FILE_PATH)) {

@@ -10,16 +10,14 @@ use OpenSpout\Common\Entity\Cell\BooleanCell;
 use OpenSpout\Common\Entity\Cell\DateIntervalCell;
 use OpenSpout\Common\Entity\Cell\DateTimeCell;
 use OpenSpout\Common\Entity\Cell\EmptyCell;
+use OpenSpout\Common\Entity\Cell\ErrorCell;
 use OpenSpout\Common\Entity\Cell\FormulaCell;
 use OpenSpout\Common\Entity\Cell\NumericCell;
 use OpenSpout\Common\Entity\Cell\StringCell;
-use OpenSpout\Common\Entity\Comment\Comment;
 use OpenSpout\Common\Entity\Style\Style;
 
 abstract class Cell
 {
-    public ?Comment $comment = null;
-
     private Style $style;
 
     public function __construct(?Style $style)
@@ -27,7 +25,7 @@ abstract class Cell
         $this->setStyle($style);
     }
 
-    abstract public function getValue(): null|bool|DateInterval|DateTimeInterface|float|int|string;
+    abstract public function getValue(): mixed;
 
     final public function setStyle(?Style $style): void
     {
@@ -39,7 +37,7 @@ abstract class Cell
         return $this->style;
     }
 
-    final public static function fromValue(null|bool|DateInterval|DateTimeInterface|float|int|string $value, ?Style $style = null): self
+    final public static function fromValue(mixed $value, ?Style $style = null): self
     {
         if (\is_bool($value)) {
             return new BooleanCell($value, $style);
@@ -56,10 +54,13 @@ abstract class Cell
         if ($value instanceof DateInterval) {
             return new DateIntervalCell($value, $style);
         }
-        if (isset($value[0]) && '=' === $value[0]) {
-            return new FormulaCell($value, $style, null);
+        if (\is_string($value) && isset($value[0]) && '=' === $value[0]) {
+            return new FormulaCell($value, $style);
+        }
+        if (\is_string($value)) {
+            return new StringCell($value, $style);
         }
 
-        return new StringCell($value, $style);
+        return new ErrorCell($value, $style);
     }
 }

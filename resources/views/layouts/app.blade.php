@@ -54,7 +54,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-     <script>
+
+    
+    <script>
         var pusher = new Pusher('ea44c0267e7076ff3041', {
           cluster: 'ap1'
         });
@@ -76,9 +78,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/paper-dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    
+
     @livewireStyles
+    
 </head>
+
 <body id="page-top">
     <div class="wrapper ">
         <div class="sidebar" data-color="white" data-active-color="danger">
@@ -142,8 +146,9 @@
                 <div class="dropdown-menu ms-5">
                   @role('EMT')
                   <a class="dropdown-item text-dark" href="{{ route('staff') }}">Staffs</a>
-                  @endrole
                   <a class="dropdown-item text-dark" href="{{ route('leave') }}">Staff Leaves</a>
+                  @endrole
+                  
                 </div>
               </li>
         

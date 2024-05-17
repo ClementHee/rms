@@ -8,7 +8,7 @@
     <?php elseif($ruleDisable): ?>
         <td
             class="<?php echo e($theme->checkbox->thClass); ?>"
-            style="<?php echo e($theme->thStyle); ?>"
+            style="<?php echo e($theme->checkbox->thStyle); ?>"
         >
             <div class="<?php echo e($theme->checkbox->divClass); ?>">
                 <label class="<?php echo e($theme->checkbox->labelClass); ?>">
@@ -31,6 +31,7 @@
             <div class="<?php echo e($theme->checkbox->divClass); ?>">
                 <label class="<?php echo e($theme->checkbox->labelClass); ?>">
                     <input
+                        x-data="{}"
                         <?php if(isset($ruleSetAttribute['attribute'])): ?> <?php echo e($attributes->merge([$ruleSetAttribute['attribute'] => $ruleSetAttribute['value']])->class($theme->checkbox->inputClass)); ?>
 
                            <?php else: ?>

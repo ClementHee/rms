@@ -32,15 +32,15 @@
 <div>
     <?php if(isset($actions) && count($actions) && $row !== ''): ?>
         <td
-            class="pg-actions <?php echo e($theme->table->tdBodyClass); ?>"
-            style="<?php echo e($theme->table->tdBodyStyle); ?>"
+            class="pg-actions <?php echo e($theme->table->tdBodyClass. ' ' .$theme->table->tdActionClass); ?>"
+            style="<?php echo e($theme->table->tdBodyStyle .' '.$theme->table->tdActionStyle); ?>"
         >
 
             <?php $__currentLoopData = $actions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $action): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
                     $customAction = null;
                     $actionClass = new \PowerComponents\LivewirePowerGrid\Helpers\Actions($action, $row, $primaryKey, $theme);
-                    
+
                 ?>
 
                 <?php if(!boolval($actionClass->ruleHide) && empty($customAction)): ?>

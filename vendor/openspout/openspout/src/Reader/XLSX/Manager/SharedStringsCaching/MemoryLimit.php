@@ -9,7 +9,7 @@ namespace OpenSpout\Reader\XLSX\Manager\SharedStringsCaching;
  */
 final class MemoryLimit
 {
-    private readonly string $memoryLimit;
+    private string $memoryLimit;
 
     public function __construct(string $memoryLimit)
     {
@@ -29,7 +29,7 @@ final class MemoryLimit
         }
 
         if (1 === preg_match('/(\d+)([bkmgt])b?/', $memoryLimitFormatted, $matches)) {
-            $amount = (int) $matches[1];
+            $amount = (int) ($matches[1]);
             $unit = $matches[2];
 
             switch ($unit) {

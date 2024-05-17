@@ -15,7 +15,7 @@ use OpenSpout\Reader\RowIteratorInterface;
 final class RowIterator implements RowIteratorInterface
 {
     /**
-     * Value passed to fgetcsv. 0 means "unlimited" (slightly slower but accommodates for very long lines).
+     * Value passed to fgetcsv. 0 means "unlimited" (slightly slower but accomodates for very long lines).
      */
     public const MAX_READ_BYTES_PER_LINE = 0;
 
@@ -26,15 +26,15 @@ final class RowIterator implements RowIteratorInterface
     private int $numReadRows = 0;
 
     /** @var null|Row Buffer used to store the current row, while checking if there are more rows to read */
-    private ?Row $rowBuffer = null;
+    private ?Row $rowBuffer;
 
     /** @var bool Indicates whether all rows have been read */
     private bool $hasReachedEndOfFile = false;
 
-    private readonly Options $options;
+    private Options $options;
 
     /** @var EncodingHelper Helper to work with different encodings */
-    private readonly EncodingHelper $encodingHelper;
+    private EncodingHelper $encodingHelper;
 
     /**
      * @param resource $filePointer Pointer to the CSV file to read
@@ -95,7 +95,7 @@ final class RowIterator implements RowIteratorInterface
      *
      * @see http://php.net/manual/en/iterator.current.php
      */
-    public function current(): ?Row
+    public function current(): Row
     {
         return $this->rowBuffer;
     }
@@ -158,7 +158,8 @@ final class RowIterator implements RowIteratorInterface
 
         return
             (!$hasSuccessfullyFetchedRowData && !$hasNowReachedEndOfFile)
-            || (!$this->options->SHOULD_PRESERVE_EMPTY_ROWS && $isEmptyLine);
+            || (!$this->options->SHOULD_PRESERVE_EMPTY_ROWS && $isEmptyLine)
+        ;
     }
 
     /**
@@ -166,9 +167,9 @@ final class RowIterator implements RowIteratorInterface
      * As fgetcsv() does not manage correctly encoding for non UTF-8 data,
      * we remove manually whitespace with ltrim or rtrim (depending on the order of the bytes).
      *
-     * @return array<int, null|string>|false The row for the current file pointer, encoded in UTF-8 or FALSE if nothing to read
-     *
      * @throws \OpenSpout\Common\Exception\EncodingConversionException If unable to convert data to UTF-8
+     *
+     * @return array<int, null|string>|false The row for the current file pointer, encoded in UTF-8 or FALSE if nothing to read
      */
     private function getNextUTF8EncodedRow(): array|false
     {

@@ -13,7 +13,6 @@ use OpenSpout\Common\Exception\InvalidArgumentException;
 use OpenSpout\Common\Exception\IOException;
 use OpenSpout\Common\Helper\Escaper\ODS as ODSEscaper;
 use OpenSpout\Writer\Common\Entity\Worksheet;
-use OpenSpout\Writer\Common\Helper\CellHelper;
 use OpenSpout\Writer\Common\Manager\RegisteredStyle;
 use OpenSpout\Writer\Common\Manager\Style\StyleMerger;
 use OpenSpout\Writer\Common\Manager\WorksheetManagerInterface;
@@ -25,13 +24,13 @@ use OpenSpout\Writer\ODS\Manager\Style\StyleManager;
 final class WorksheetManager implements WorksheetManagerInterface
 {
     /** @var ODSEscaper Strings escaper */
-    private readonly ODSEscaper $stringsEscaper;
+    private ODSEscaper $stringsEscaper;
 
     /** @var StyleManager Manages styles */
-    private readonly StyleManager $styleManager;
+    private StyleManager $styleManager;
 
     /** @var StyleMerger Helper to merge styles together */
-    private readonly StyleMerger $styleMerger;
+    private StyleMerger $styleMerger;
 
     /**
      * WorksheetManager constructor.
@@ -76,31 +75,6 @@ final class WorksheetManager implements WorksheetManagerInterface
         $tableElement .= $this->styleManager->getStyledTableColumnXMLContent($worksheet->getMaxNumColumns());
 
         return $tableElement;
-    }
-
-    /**
-     * Returns the table:database-range XML node for AutoFilter as string.
-     */
-    public function getTableDatabaseRangeElementAsString(Worksheet $worksheet): string
-    {
-        $externalSheet = $worksheet->getExternalSheet();
-        $escapedSheetName = $this->stringsEscaper->escape($externalSheet->getName());
-        $databaseRange = '';
-
-        if (null !== $autofilter = $externalSheet->getAutoFilter()) {
-            $rangeAddress = sprintf(
-                '\'%s\'.%s%s:\'%s\'.%s%s',
-                $escapedSheetName,
-                CellHelper::getColumnLettersFromColumnIndex($autofilter->fromColumnIndex),
-                $autofilter->fromRow,
-                $escapedSheetName,
-                CellHelper::getColumnLettersFromColumnIndex($autofilter->toColumnIndex),
-                $autofilter->toRow
-            );
-            $databaseRange = '<table:database-range table:name="__Anonymous_Sheet_DB__'.$externalSheet->getIndex().'" table:target-range-address="'.$rangeAddress.'" table:display-filter-buttons="true"/>';
-        }
-
-        return $databaseRange;
     }
 
     /**
@@ -215,9 +189,9 @@ final class WorksheetManager implements WorksheetManagerInterface
      * @param int  $styleIndex            Index of the used style
      * @param int  $numTimesValueRepeated Number of times the value is consecutively repeated
      *
-     * @return string The cell XML content
-     *
      * @throws InvalidArgumentException If a cell value's type is not supported
+     *
+     * @return string The cell XML content
      */
     private function getCellXML(Cell $cell, int $styleIndex, int $numTimesValueRepeated): string
     {
@@ -259,13 +233,15 @@ final class WorksheetManager implements WorksheetManagerInterface
             $data .= ' office:value-type="time" office:time-value="'.$value.'">';
             $data .= '<text:p>'.$value.'</text:p>';
             $data .= '</table:table-cell>';
-        } elseif ($cell instanceof Cell\ErrorCell) {
+        } elseif ($cell instanceof Cell\ErrorCell && \is_string($cell->getRawValue())) {
             // only writes the error value if it's a string
             $data .= ' office:value-type="string" calcext:value-type="error" office:value="">';
             $data .= '<text:p>'.$cell->getRawValue().'</text:p>';
             $data .= '</table:table-cell>';
         } elseif ($cell instanceof Cell\EmptyCell) {
             $data .= '/>';
+        } else {
+            throw new InvalidArgumentException('Trying to add a value with an unsupported type: '.\gettype($cell->getValue()));
         }
 
         return $data;

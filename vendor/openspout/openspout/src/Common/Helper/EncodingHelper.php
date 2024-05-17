@@ -33,9 +33,9 @@ final class EncodingHelper
     /** @var array<string, string> Map representing the encodings supporting BOMs (key) and their associated BOM (value) */
     private array $supportedEncodingsWithBom;
 
-    private readonly bool $canUseIconv;
+    private bool $canUseIconv;
 
-    private readonly bool $canUseMbString;
+    private bool $canUseMbString;
 
     public function __construct(bool $canUseIconv, bool $canUseMbString)
     {
@@ -87,9 +87,9 @@ final class EncodingHelper
      * @param string $string         Non UTF-8 string to be converted
      * @param string $sourceEncoding The encoding used to encode the source string
      *
-     * @return string The converted, UTF-8 string
-     *
      * @throws \OpenSpout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     *
+     * @return string The converted, UTF-8 string
      */
     public function attemptConversionToUTF8(?string $string, string $sourceEncoding): ?string
     {
@@ -102,9 +102,9 @@ final class EncodingHelper
      * @param string $string         UTF-8 string to be converted
      * @param string $targetEncoding The encoding the string should be re-encoded into
      *
-     * @return string The converted string, encoded with the given encoding
-     *
      * @throws \OpenSpout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     *
+     * @return string The converted string, encoded with the given encoding
      */
     public function attemptConversionFromUTF8(?string $string, string $targetEncoding): ?string
     {
@@ -143,9 +143,9 @@ final class EncodingHelper
      * @param string $sourceEncoding The encoding used to encode the source string
      * @param string $targetEncoding The encoding the string should be re-encoded into
      *
-     * @return string The converted string, encoded with the given encoding
-     *
      * @throws \OpenSpout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     *
+     * @return string The converted string, encoded with the given encoding
      */
     private function attemptConversion(?string $string, string $sourceEncoding, string $targetEncoding): ?string
     {
@@ -183,7 +183,7 @@ final class EncodingHelper
                 $convertedString = false;
             }
         } else {
-            throw new EncodingConversionException("The conversion from {$sourceEncoding} to {$targetEncoding} is not supported. Please install \"iconv\" or \"mbstring\".");
+            throw new EncodingConversionException("The conversion from {$sourceEncoding} to {$targetEncoding} is not supported. Please install \"iconv\" or \"PHP Intl\".");
         }
 
         if (false === $convertedString) {

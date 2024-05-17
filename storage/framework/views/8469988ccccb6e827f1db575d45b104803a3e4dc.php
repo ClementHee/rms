@@ -18,7 +18,13 @@
 } ?>
 <?php unset($__defined_vars); ?>
 <div>
+    <?php
+        $responsiveCheckboxColumnName = PowerComponents\LivewirePowerGrid\Responsive::CHECKBOX_COLUMN_NAME;
+
+        $isCheckboxFixedOnResponsive = isset($this->setUp['responsive']) && in_array($responsiveCheckboxColumnName, data_get($this->setUp, 'responsive.fixedColumns')) ? true : false;
+    ?>
     <th
+        <?php if($isCheckboxFixedOnResponsive): ?> fixed <?php endif; ?>
         scope="col"
         class="<?php echo e($theme->thClass); ?>"
         style="<?php echo e($theme->thStyle); ?>"

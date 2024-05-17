@@ -22,9 +22,9 @@ interface ReaderInterface
     /**
      * Returns an iterator to iterate over sheets.
      *
-     * @return T
-     *
      * @throws \OpenSpout\Reader\Exception\ReaderNotOpenedException If called before opening the reader
+     *
+     * @return T
      */
     public function getSheetIterator(): SheetIteratorInterface;
 

@@ -42,15 +42,22 @@
             <div class="flex px-4 py-2 text-pg-primary-400 dark:text-pg-primary-300">
                 <span class="w-12"><?php echo app('translator')->get('XLSX'); ?></span>
                 <a
-                    x-on:click="$wire.call('exportToXLS'); open = false"
+                    wire:click.prevent="exportToXLS"
+                    x-on:click="open = false"
                     href="#"
                     class="px-2 block text-pg-primary-800 hover:bg-pg-primary-50 hover:text-black-300 dark:text-pg-primary-200 dark:hover:bg-pg-primary-700 rounded"
                 >
-                    <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                    <?php if(count($enabledFilters)===0): ?>
+                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                    <?php else: ?>
+                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.filtered'); ?>
+                    <?php endif; ?>
+
                 </a>
                 <?php if($checkbox): ?>
                     <a
-                        x-on:click="$wire.call('exportToXLS', true); open = false"
+                        wire:click.prevent="exportToXLS(true)"
+                        x-on:click="open = false"
                         href="#"
                         class="px-2 block text-pg-primary-800 hover:bg-pg-primary-50 hover:text-black-300 dark:text-pg-primary-200 dark:hover:bg-pg-primary-700 rounded"
                     >
@@ -63,15 +70,21 @@
             <div class="flex px-4 py-2 text-pg-primary-400 dark:text-pg-primary-300">
                 <span class="w-12"><?php echo app('translator')->get('Csv'); ?></span>
                 <a
-                    x-on:click="$wire.call('exportToCsv'); open = false"
+                    wire:click.prevent="exportToCsv"
+                    x-on:click="open = false"
                     href="#"
                     class="px-2 block text-pg-primary-800 hover:bg-pg-primary-50 hover:text-black-300 dark:text-pg-primary-200 dark:hover:bg-pg-primary-700 rounded"
                 >
-                    <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                    <?php if(count($enabledFilters)===0): ?>
+                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.all'); ?>
+                    <?php else: ?>
+                        <?php echo app('translator')->get('livewire-powergrid::datatable.labels.filtered'); ?>
+                    <?php endif; ?>
                 </a>
                 <?php if($checkbox): ?>
                     <a
-                        x-on:click="$wire.call('exportToCsv', true); open = false"
+                        wire:click.prevent="exportToCsv(true)"
+                        x-on:click="open = false"
                         href="#"
                         class="px-2 block text-pg-primary-800 hover:bg-pg-primary-50 hover:text-black-300 dark:text-pg-primary-200 dark:hover:bg-pg-primary-700 rounded"
                     >

@@ -31,10 +31,16 @@
 <?php unset($__defined_vars); ?>
 <?php
     $field = filled($column->dataField) ? $column->dataField : $column->field;
+
+    $isFixedOnResponsive = isset($this->setUp['responsive']) && in_array($field, data_get($this->setUp, 'responsive.fixedColumns')) ? true : false;
+
+    $sortOrder = isset($this->setUp['responsive']) ? data_get($this->setUp, "responsive.sortOrder.{$field}", null) : null;
 ?>
 <th
+    <?php if($sortOrder): ?> sort_order="<?php echo e($sortOrder); ?>" <?php endif; ?>
     class="<?php echo e($theme->table->thClass . ' ' . $column->headerClass); ?>"
     wire:key="<?php echo e(md5($column->field)); ?>"
+    <?php if($isFixedOnResponsive): ?> fixed <?php endif; ?>
     <?php if($column->sortable): ?> x-data x-multisort-shift-click="<?php echo e($this->getLivewireId()); ?>" wire:click="sortBy('<?php echo e($field); ?>')" <?php endif; ?>
     style="<?php echo e($column->hidden === true ? 'display:none' : ''); ?>; width: max-content; <?php if($column->sortable): ?> cursor:pointer; <?php endif; ?> <?php echo e($theme->table->thStyle . ' ' . $column->headerStyle); ?>"
 >

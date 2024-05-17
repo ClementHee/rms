@@ -32,10 +32,10 @@ abstract class AbstractWorkbookManager implements WorkbookManagerInterface
     protected AbstractOptions $options;
 
     /** @var Workbook The workbook to manage */
-    private readonly Workbook $workbook;
+    private Workbook $workbook;
 
     /** @var StyleMerger Helper to merge styles */
-    private readonly StyleMerger $styleMerger;
+    private StyleMerger $styleMerger;
 
     /** @var Worksheet The worksheet where data will be written to */
     private Worksheet $currentWorksheet;
@@ -128,7 +128,6 @@ abstract class AbstractWorkbookManager implements WorkbookManagerInterface
         }
 
         $this->addRowToWorksheet($currentWorksheet, $row);
-        $currentWorksheet->getExternalSheet()->incrementWrittenRowCount();
     }
 
     /**
@@ -173,7 +172,7 @@ abstract class AbstractWorkbookManager implements WorkbookManagerInterface
     {
         $sheetsContentTempFolder = $this->fileSystemHelper->getSheetsContentTempFolder();
 
-        return $sheetsContentTempFolder.\DIRECTORY_SEPARATOR.'sheet'.(1 + $sheet->getIndex()).'.xml';
+        return $sheetsContentTempFolder.\DIRECTORY_SEPARATOR.'sheet'.$sheet->getIndex().'.xml';
     }
 
     /**
@@ -188,9 +187,9 @@ abstract class AbstractWorkbookManager implements WorkbookManagerInterface
     /**
      * Creates a new sheet in the workbook. The current sheet remains unchanged.
      *
-     * @return Worksheet The created sheet
-     *
      * @throws \OpenSpout\Common\Exception\IOException If unable to open the sheet for writing
+     *
+     * @return Worksheet The created sheet
      */
     private function addNewSheet(): Worksheet
     {

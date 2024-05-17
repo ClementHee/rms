@@ -13,14 +13,14 @@ use OpenSpout\Writer\Exception\WriterNotOpenedException;
 
 abstract class AbstractWriterMultiSheets extends AbstractWriter
 {
-    private WorkbookManagerInterface $workbookManager;
+    private ?WorkbookManagerInterface $workbookManager = null;
 
     /**
      * Returns all the workbook's sheets.
      *
-     * @return Sheet[] All the workbook's sheets
-     *
      * @throws WriterNotOpenedException If the writer has not been opened yet
+     *
+     * @return Sheet[] All the workbook's sheets
      */
     final public function getSheets(): array
     {
@@ -39,10 +39,10 @@ abstract class AbstractWriterMultiSheets extends AbstractWriter
     /**
      * Creates a new sheet and make it the current sheet. The data will now be written to this sheet.
      *
-     * @return Sheet The created sheet
-     *
      * @throws IOException
      * @throws WriterNotOpenedException If the writer has not been opened yet
+     *
+     * @return Sheet The created sheet
      */
     final public function addNewSheetAndMakeItCurrent(): Sheet
     {
@@ -55,9 +55,9 @@ abstract class AbstractWriterMultiSheets extends AbstractWriter
     /**
      * Returns the current sheet.
      *
-     * @return Sheet The current sheet
-     *
      * @throws WriterNotOpenedException If the writer has not been opened yet
+     *
+     * @return Sheet The current sheet
      */
     final public function getCurrentSheet(): Sheet
     {
@@ -83,15 +83,20 @@ abstract class AbstractWriterMultiSheets extends AbstractWriter
 
     abstract protected function createWorkbookManager(): WorkbookManagerInterface;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function openWriter(): void
     {
-        if (!isset($this->workbookManager)) {
+        if (null === $this->workbookManager) {
             $this->workbookManager = $this->createWorkbookManager();
             $this->workbookManager->addNewSheetAndMakeItCurrent();
         }
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws Exception\WriterException
      */
     protected function addRowToWriter(Row $row): void
@@ -100,9 +105,12 @@ abstract class AbstractWriterMultiSheets extends AbstractWriter
         $this->workbookManager->addRowToCurrentWorksheet($row);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function closeWriter(): void
     {
-        if (isset($this->workbookManager)) {
+        if (null !== $this->workbookManager) {
             $this->workbookManager->close($this->filePointer);
         }
     }
@@ -114,7 +122,7 @@ abstract class AbstractWriterMultiSheets extends AbstractWriter
      */
     private function throwIfWorkbookIsNotAvailable(): void
     {
-        if (!isset($this->workbookManager)) {
+        if (null === $this->workbookManager) {
             throw new WriterNotOpenedException('The writer must be opened before performing this action.');
         }
     }

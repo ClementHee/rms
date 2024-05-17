@@ -54,6 +54,6 @@
 </table>
 
 
-{!! $data->render() !!}
+{!! $data->links("pagination::bootstrap-5") !!}
 </div>
 @endsection

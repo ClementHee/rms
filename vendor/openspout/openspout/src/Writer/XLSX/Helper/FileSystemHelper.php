@@ -7,13 +7,11 @@ namespace OpenSpout\Writer\XLSX\Helper;
 use DateTimeImmutable;
 use OpenSpout\Common\Helper\Escaper\XLSX;
 use OpenSpout\Common\Helper\FileSystemHelper as CommonFileSystemHelper;
-use OpenSpout\Writer\Common\Entity\Sheet;
 use OpenSpout\Writer\Common\Entity\Worksheet;
 use OpenSpout\Writer\Common\Helper\CellHelper;
 use OpenSpout\Writer\Common\Helper\FileSystemWithRootFolderHelperInterface;
 use OpenSpout\Writer\Common\Helper\ZipHelper;
 use OpenSpout\Writer\XLSX\Manager\Style\StyleManager;
-use OpenSpout\Writer\XLSX\MergeCell;
 use OpenSpout\Writer\XLSX\Options;
 
 /**
@@ -21,8 +19,9 @@ use OpenSpout\Writer\XLSX\Options;
  */
 final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
 {
+    public const APP_NAME = 'OpenSpout';
+
     public const RELS_FOLDER_NAME = '_rels';
-    public const DRAWINGS_FOLDER_NAME = 'drawings';
     public const DOC_PROPS_FOLDER_NAME = 'docProps';
     public const XL_FOLDER_NAME = 'xl';
     public const WORKSHEETS_FOLDER_NAME = 'worksheets';
@@ -40,17 +39,14 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
         <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
         EOD;
 
-    private readonly string $baseFolderRealPath;
-    private readonly CommonFileSystemHelper $baseFileSystemHelper;
+    private string $baseFolderRealPath;
+    private CommonFileSystemHelper $baseFileSystemHelper;
 
     /** @var ZipHelper Helper to perform tasks with Zip archive */
-    private readonly ZipHelper $zipHelper;
-
-    /** @var string document creator */
-    private readonly string $creator;
+    private ZipHelper $zipHelper;
 
     /** @var XLSX Used to escape XML data */
-    private readonly XLSX $escaper;
+    private XLSX $escaper;
 
     /** @var string Path to the root folder inside the temp folder where the files to create the XLSX will be stored */
     private string $rootFolder;
@@ -77,15 +73,13 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
      * @param string    $baseFolderPath The path of the base folder where all the I/O can occur
      * @param ZipHelper $zipHelper      Helper to perform tasks with Zip archive
      * @param XLSX      $escaper        Used to escape XML data
-     * @param string    $creator        document creator
      */
-    public function __construct(string $baseFolderPath, ZipHelper $zipHelper, XLSX $escaper, string $creator)
+    public function __construct(string $baseFolderPath, ZipHelper $zipHelper, XLSX $escaper)
     {
         $this->baseFileSystemHelper = new CommonFileSystemHelper($baseFolderPath);
         $this->baseFolderRealPath = $this->baseFileSystemHelper->getBaseFolderRealPath();
         $this->zipHelper = $zipHelper;
         $this->escaper = $escaper;
-        $this->creator = $creator;
     }
 
     public function createFolder(string $parentFolderPath, string $folderName): string
@@ -156,14 +150,12 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
             <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
                 <Default ContentType="application/xml" Extension="xml"/>
                 <Default ContentType="application/vnd.openxmlformats-package.relationships+xml" Extension="rels"/>
-                <Default ContentType="application/vnd.openxmlformats-officedocument.vmlDrawing" Extension="vml"/>
                 <Override ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" PartName="/xl/workbook.xml"/>
             EOD;
 
         /** @var Worksheet $worksheet */
         foreach ($worksheets as $worksheet) {
             $contentTypesXmlFileContents .= '<Override ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" PartName="/xl/worksheets/sheet'.$worksheet->getId().'.xml"/>';
-            $contentTypesXmlFileContents .= '<Override ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml" PartName="/xl/comments'.$worksheet->getId().'.xml" />';
         }
 
         $contentTypesXmlFileContents .= <<<'EOD'
@@ -202,31 +194,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
 
         $workbookXmlFileContents .= <<<'EOD'
                 </sheets>
-            EOD;
-
-        $definedNames = '';
-
-        /** @var Worksheet $worksheet */
-        foreach ($worksheets as $worksheet) {
-            $sheet = $worksheet->getExternalSheet();
-            if (null !== $autofilter = $sheet->getAutoFilter()) {
-                $worksheetName = $sheet->getName();
-                $name = sprintf(
-                    '\'%s\'!$%s$%s:$%s$%s',
-                    $this->escaper->escape($worksheetName),
-                    CellHelper::getColumnLettersFromColumnIndex($autofilter->fromColumnIndex),
-                    $autofilter->fromRow,
-                    CellHelper::getColumnLettersFromColumnIndex($autofilter->toColumnIndex),
-                    $autofilter->toRow
-                );
-                $definedNames .= '<definedName function="false" hidden="true" localSheetId="'.$sheet->getIndex().'" name="_xlnm._FilterDatabase" vbProcedure="false">'.$name.'</definedName>';
-            }
-        }
-        if ('' !== $definedNames) {
-            $workbookXmlFileContents .= '<definedNames>'.$definedNames.'</definedNames>';
-        }
-
-        $workbookXmlFileContents .= <<<'EOD'
             </workbook>
             EOD;
 
@@ -263,32 +230,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     }
 
     /**
-     * Create the "rels" file for a given worksheet. This contains relations to the comments.xml and drawing.vml files for this worksheet.
-     *
-     * @param Worksheet[] $worksheets
-     */
-    public function createWorksheetRelsFiles(array $worksheets): self
-    {
-        $this->createFolder($this->getXlWorksheetsFolder(), self::RELS_FOLDER_NAME);
-
-        foreach ($worksheets as $worksheet) {
-            $worksheetId = $worksheet->getId();
-            $worksheetRelsContent = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-              <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-                <Relationship Id="rId_comments_vml1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing" Target="../drawings/vmlDrawing'.$worksheetId.'.vml"/>
-                <Relationship Id="rId_comments1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments" Target="../comments'.$worksheetId.'.xml"/>
-              </Relationships>';
-
-            $folder = $this->getXlWorksheetsFolder().\DIRECTORY_SEPARATOR.'_rels';
-            $filename = 'sheet'.$worksheetId.'.xml.rels';
-
-            $this->createFileWithContents($folder, $filename, $worksheetRelsContent);
-        }
-
-        return $this;
-    }
-
-    /**
      * Creates the "styles.xml" file under the "xl" folder.
      */
     public function createStylesFile(StyleManager $styleManager): self
@@ -306,51 +247,26 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
      */
     public function createContentFiles(Options $options, array $worksheets): self
     {
-        $allMergeCells = $options->getMergeCells();
-
         foreach ($worksheets as $worksheet) {
-            $contentXmlFilePath = $this->getXlWorksheetsFolder().\DIRECTORY_SEPARATOR.basename($worksheet->getFilePath());
+            $sheet = $worksheet->getExternalSheet();
+            $contentXmlFilePath = $this->getXlWorksheetsFolder().\DIRECTORY_SEPARATOR.strtolower($sheet->getName()).'.xml';
             $worksheetFilePointer = fopen($contentXmlFilePath, 'w');
             \assert(false !== $worksheetFilePointer);
 
-            $sheet = $worksheet->getExternalSheet();
             fwrite($worksheetFilePointer, self::SHEET_XML_FILE_HEADER);
-
-            // AutoFilter tags
-            $range = '';
-            if (null !== $autofilter = $sheet->getAutoFilter()) {
-                $range = sprintf(
-                    '%s%s:%s%s',
-                    CellHelper::getColumnLettersFromColumnIndex($autofilter->fromColumnIndex),
-                    $autofilter->fromRow,
-                    CellHelper::getColumnLettersFromColumnIndex($autofilter->toColumnIndex),
-                    $autofilter->toRow
-                );
-                fwrite($worksheetFilePointer, '<sheetPr filterMode="false"><pageSetUpPr fitToPage="false"/></sheetPr>');
-                fwrite($worksheetFilePointer, sprintf('<dimension ref="%s"/>', $range));
-            }
-
             if (null !== ($sheetView = $sheet->getSheetView())) {
                 fwrite($worksheetFilePointer, '<sheetViews>'.$sheetView->getXml().'</sheetViews>');
             }
             fwrite($worksheetFilePointer, $this->getXMLFragmentForDefaultCellSizing($options));
-            fwrite($worksheetFilePointer, $this->getXMLFragmentForColumnWidths($options, $sheet));
+            fwrite($worksheetFilePointer, $this->getXMLFragmentForColumnWidths($options));
             fwrite($worksheetFilePointer, '<sheetData>');
 
             $worksheetFilePath = $worksheet->getFilePath();
             $this->copyFileContentsToTarget($worksheetFilePath, $worksheetFilePointer);
             fwrite($worksheetFilePointer, '</sheetData>');
 
-            // AutoFilter tag
-            if ('' !== $range) {
-                fwrite($worksheetFilePointer, sprintf('<autoFilter ref="%s"/>', $range));
-            }
-
             // create nodes for merge cells
-            $mergeCells = array_filter(
-                $allMergeCells,
-                static fn (MergeCell $c) => $c->sheetIndex === $worksheet->getExternalSheet()->getIndex(),
-            );
+            $mergeCells = $options->getMergeCells();
             if ([] !== $mergeCells) {
                 $mergeCellString = '<mergeCells count="'.\count($mergeCells).'">';
                 foreach ($mergeCells as $mergeCell) {
@@ -365,13 +281,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
                 $mergeCellString .= '</mergeCells>';
                 fwrite($worksheetFilePointer, $mergeCellString);
             }
-
-            $this->getXMLFragmentForPageMargin($worksheetFilePointer, $options);
-
-            $this->getXMLFragmentForPageSetup($worksheetFilePointer, $options);
-
-            // Add the legacy drawing for comments
-            fwrite($worksheetFilePointer, '<legacyDrawing r:id="rId_comments_vml1"/>');
 
             fwrite($worksheetFilePointer, '</worksheet>');
             fclose($worksheetFilePointer);
@@ -416,59 +325,15 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     }
 
     /**
-     * @param resource $targetResource
-     */
-    private function getXMLFragmentForPageMargin($targetResource, Options $options): void
-    {
-        $pageMargin = $options->getPageMargin();
-        if (null === $pageMargin) {
-            return;
-        }
-
-        fwrite($targetResource, "<pageMargins top=\"{$pageMargin->top}\" right=\"{$pageMargin->right}\" bottom=\"{$pageMargin->bottom}\" left=\"{$pageMargin->left}\" header=\"{$pageMargin->header}\" footer=\"{$pageMargin->footer}\"/>");
-    }
-
-    /**
-     * @param resource $targetResource
-     */
-    private function getXMLFragmentForPageSetup($targetResource, Options $options): void
-    {
-        $pageSetup = $options->getPageSetup();
-        if (null === $pageSetup) {
-            return;
-        }
-
-        $xml = '<pageSetup';
-
-        if (null !== $pageSetup->pageOrientation) {
-            $xml .= " orientation=\"{$pageSetup->pageOrientation->value}\"";
-        }
-
-        if (null !== $pageSetup->paperSize) {
-            $xml .= " paperSize=\"{$pageSetup->paperSize->value}\"";
-        }
-
-        $xml .= '/>';
-
-        fwrite($targetResource, $xml);
-    }
-
-    /**
      * Construct column width references xml to inject into worksheet xml file.
      */
-    private function getXMLFragmentForColumnWidths(Options $options, Sheet $sheet): string
+    private function getXMLFragmentForColumnWidths(Options $options): string
     {
-        if ([] !== $sheet->getColumnWidths()) {
-            $widths = $sheet->getColumnWidths();
-        } elseif ([] !== $options->getColumnWidths()) {
-            $widths = $options->getColumnWidths();
-        } else {
+        if ([] === $options->getColumnWidths()) {
             return '';
         }
-
         $xml = '<cols>';
-
-        foreach ($widths as $columnWidth) {
+        foreach ($options->getColumnWidths() as $columnWidth) {
             $xml .= '<col min="'.$columnWidth->start.'" max="'.$columnWidth->end.'" width="'.$columnWidth->width.'" customWidth="true"/>';
         }
         $xml .= '</cols>';
@@ -561,10 +426,11 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
      */
     private function createAppXmlFile(): self
     {
+        $appName = self::APP_NAME;
         $appXmlFileContents = <<<EOD
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
-                <Application>{$this->creator}</Application>
+                <Application>{$appName}</Application>
                 <TotalTime>0</TotalTime>
             </Properties>
             EOD;
@@ -606,7 +472,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
         $this->xlFolder = $this->createFolder($this->rootFolder, self::XL_FOLDER_NAME);
         $this->createXlRelsFolder();
         $this->createXlWorksheetsFolder();
-        $this->createDrawingsFolder();
 
         return $this;
     }
@@ -632,18 +497,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     private function createXlRelsFolder(): self
     {
         $this->xlRelsFolder = $this->createFolder($this->xlFolder, self::RELS_FOLDER_NAME);
-
-        return $this;
-    }
-
-    /**
-     * Creates the "drawings" folder under the "xl" folder.
-     *
-     * @throws \OpenSpout\Common\Exception\IOException If unable to create the folder
-     */
-    private function createDrawingsFolder(): self
-    {
-        $this->createFolder($this->getXlFolder(), self::DRAWINGS_FOLDER_NAME);
 
         return $this;
     }

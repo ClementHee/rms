@@ -11,25 +11,24 @@ class StyleManager implements StyleManagerInterface
     /**
      * Nodes used to find relevant information in the styles XML file.
      */
-    final public const XML_NODE_NUM_FMTS = 'numFmts';
-    final public const XML_NODE_NUM_FMT = 'numFmt';
-    final public const XML_NODE_CELL_XFS = 'cellXfs';
-    final public const XML_NODE_XF = 'xf';
+    public const XML_NODE_NUM_FMTS = 'numFmts';
+    public const XML_NODE_NUM_FMT = 'numFmt';
+    public const XML_NODE_CELL_XFS = 'cellXfs';
+    public const XML_NODE_XF = 'xf';
 
     /**
      * Attributes used to find relevant information in the styles XML file.
      */
-    final public const XML_ATTRIBUTE_NUM_FMT_ID = 'numFmtId';
-    final public const XML_ATTRIBUTE_FORMAT_CODE = 'formatCode';
-    final public const XML_ATTRIBUTE_APPLY_NUMBER_FORMAT = 'applyNumberFormat';
-    final public const XML_ATTRIBUTE_COUNT = 'count';
+    public const XML_ATTRIBUTE_NUM_FMT_ID = 'numFmtId';
+    public const XML_ATTRIBUTE_FORMAT_CODE = 'formatCode';
+    public const XML_ATTRIBUTE_APPLY_NUMBER_FORMAT = 'applyNumberFormat';
 
     /**
      * By convention, default style ID is 0.
      */
-    final public const DEFAULT_STYLE_ID = 0;
+    public const DEFAULT_STYLE_ID = 0;
 
-    final public const NUMBER_FORMAT_GENERAL = 'General';
+    public const NUMBER_FORMAT_GENERAL = 'General';
 
     /**
      * Mapping between built-in numFmtId and the associated format - for dates only.
@@ -52,16 +51,16 @@ class StyleManager implements StyleManagerInterface
     ];
 
     /** @var string Path of the XLSX file being read */
-    private readonly string $filePath;
+    private string $filePath;
 
     /** @var null|string Path of the styles XML file */
-    private readonly ?string $stylesXMLFilePath;
+    private ?string $stylesXMLFilePath;
 
-    /** @var array<int, string> Array containing a mapping NUM_FMT_ID => FORMAT_CODE */
-    private array $customNumberFormats;
+    /** @var null|array<int, string> Array containing a mapping NUM_FMT_ID => FORMAT_CODE */
+    private ?array $customNumberFormats = null;
 
-    /** @var array<array-key, array<string, null|bool|int>> Array containing a mapping STYLE_ID => [STYLE_ATTRIBUTES] */
-    private array $stylesAttributes;
+    /** @var null|array<array-key, array<string, null|bool|int>> Array containing a mapping STYLE_ID => [STYLE_ATTRIBUTES] */
+    private ?array $stylesAttributes = null;
 
     /** @var array<int, bool> Cache containing a mapping NUM_FMT_ID => IS_DATE_FORMAT. Used to avoid lots of recalculations */
     private array $numFmtIdToIsDateFormatCache = [];
@@ -107,7 +106,7 @@ class StyleManager implements StyleManagerInterface
             $numberFormatCode = self::builtinNumFmtIdToNumFormatMapping[$numFmtId];
         } else {
             $customNumberFormats = $this->getCustomNumberFormats();
-            $numberFormatCode = $customNumberFormats[$numFmtId] ?? '';
+            $numberFormatCode = $customNumberFormats[$numFmtId];
         }
 
         return $numberFormatCode;
@@ -118,7 +117,7 @@ class StyleManager implements StyleManagerInterface
      */
     protected function getCustomNumberFormats(): array
     {
-        if (!isset($this->customNumberFormats)) {
+        if (null === $this->customNumberFormats) {
             $this->extractRelevantInfo();
         }
 
@@ -130,7 +129,7 @@ class StyleManager implements StyleManagerInterface
      */
     protected function getStylesAttributes(): array
     {
-        if (!isset($this->stylesAttributes)) {
+        if (null === $this->stylesAttributes) {
             $this->extractRelevantInfo();
         }
 
@@ -149,8 +148,7 @@ class StyleManager implements StyleManagerInterface
 
         if ($xmlReader->openFileInZip($this->filePath, $this->stylesXMLFilePath)) {
             while ($xmlReader->read()) {
-                if ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_NUM_FMTS)
-                    && '0' !== $xmlReader->getAttribute(self::XML_ATTRIBUTE_COUNT)) {
+                if ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_NUM_FMTS)) {
                     $this->extractNumberFormats($xmlReader);
                 } elseif ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_CELL_XFS)) {
                     $this->extractStyleAttributes($xmlReader);
@@ -172,7 +170,7 @@ class StyleManager implements StyleManagerInterface
     {
         while ($xmlReader->read()) {
             if ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_NUM_FMT)) {
-                $numFmtId = (int) $xmlReader->getAttribute(self::XML_ATTRIBUTE_NUM_FMT_ID);
+                $numFmtId = (int) ($xmlReader->getAttribute(self::XML_ATTRIBUTE_NUM_FMT_ID));
                 $formatCode = $xmlReader->getAttribute(self::XML_ATTRIBUTE_FORMAT_CODE);
                 \assert(null !== $formatCode);
                 $this->customNumberFormats[$numFmtId] = $formatCode;
@@ -262,7 +260,7 @@ class StyleManager implements StyleManagerInterface
         $customNumberFormats = $this->getCustomNumberFormats();
 
         // Using isset here because it is way faster than array_key_exists...
-        return $customNumberFormats[$numFmtId] ?? null;
+        return (isset($customNumberFormats[$numFmtId])) ? $customNumberFormats[$numFmtId] : null;
     }
 
     /**
@@ -294,10 +292,6 @@ class StyleManager implements StyleManagerInterface
         // Remove extra formatting (what's between [ ], the brackets should not be preceded by a "\")
         $pattern = '((?<!\\\)\[.+?(?<!\\\)\])';
         $formatCode = preg_replace($pattern, '', $formatCode);
-        \assert(null !== $formatCode);
-
-        // Remove strings in double quotes, as they won't be interpreted as date format characters
-        $formatCode = preg_replace('/"[^"]+"/', '', $formatCode);
         \assert(null !== $formatCode);
 
         // custom date formats contain specific characters to represent the date:

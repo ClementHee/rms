@@ -12,7 +12,6 @@ use OpenSpout\Reader\XLSX\Helper\CellValueFormatter;
 use OpenSpout\Reader\XLSX\Options;
 use OpenSpout\Reader\XLSX\RowIterator;
 use OpenSpout\Reader\XLSX\Sheet;
-use OpenSpout\Reader\XLSX\SheetHeaderReader;
 
 /**
  * @internal
@@ -51,15 +50,15 @@ final class SheetManager
     public const SHEET_STATE_HIDDEN = 'hidden';
 
     /** @var string Path of the XLSX file being read */
-    private readonly string $filePath;
+    private string $filePath;
 
-    private readonly Options $options;
+    private Options $options;
 
     /** @var SharedStringsManager Manages shared strings */
-    private readonly SharedStringsManager $sharedStringsManager;
+    private SharedStringsManager $sharedStringsManager;
 
     /** @var XLSX Used to unescape XML data */
-    private readonly XLSX $escaper;
+    private XLSX $escaper;
 
     /** @var Sheet[] List of sheets */
     private array $sheets;
@@ -188,7 +187,6 @@ final class SheetManager
 
         return new Sheet(
             $this->createRowIterator($this->filePath, $sheetDataXMLFilePath, $this->options, $this->sharedStringsManager),
-            $this->createSheetHeaderReader($this->filePath, $sheetDataXMLFilePath),
             $sheetIndexZeroBased,
             $sheetName,
             $isSheetActive,
@@ -266,20 +264,6 @@ final class SheetManager
             new XMLProcessor($xmlReader),
             $cellValueFormatter,
             new RowManager()
-        );
-    }
-
-    private function createSheetHeaderReader(
-        string $filePath,
-        string $sheetDataXMLFilePath
-    ): SheetHeaderReader {
-        $xmlReader = new XMLReader();
-
-        return new SheetHeaderReader(
-            $filePath,
-            $sheetDataXMLFilePath,
-            $xmlReader,
-            new XMLProcessor($xmlReader)
         );
     }
 }

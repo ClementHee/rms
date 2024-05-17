@@ -8,15 +8,19 @@ use Throwable;
 
 final class InvalidValueException extends ReaderException
 {
-    private readonly string $invalidValue;
+    /** @var mixed */
+    private $invalidValue;
 
-    public function __construct(string $invalidValue, string $message = '', int $code = 0, ?Throwable $previous = null)
+    /**
+     * @param mixed $invalidValue
+     */
+    public function __construct($invalidValue, string $message = '', int $code = 0, ?Throwable $previous = null)
     {
         $this->invalidValue = $invalidValue;
         parent::__construct($message, $code, $previous);
     }
 
-    public function getInvalidValue(): string
+    public function getInvalidValue(): mixed
     {
         return $this->invalidValue;
     }

@@ -13,6 +13,7 @@ use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 use PowerComponents\LivewirePowerGrid\Detail;
+use PowerComponents\LivewirePowerGrid\Traits\WithCheckbox;
 
 final class SummaryDetails extends PowerGridComponent
 {
@@ -32,8 +33,8 @@ final class SummaryDetails extends PowerGridComponent
     */
     public function setUp(): array
     {
-        $this->showCheckBox();
-
+        $this->showCheckBox('student_id');
+    
         return [
             
             Header::make()->showToggleColumns()->showSearchInput(),
@@ -43,7 +44,7 @@ final class SummaryDetails extends PowerGridComponent
             Exportable::make('Student Details')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-        ];;
+        ];
     }
 
     /*

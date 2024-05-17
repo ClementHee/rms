@@ -20,7 +20,7 @@
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 } ?>
 <?php unset($__defined_vars); ?>
-<div>
+<div <?php if(isset($this->setUp['responsive'])): ?> x-data="tableResponsive" <?php endif; ?>>
     <table
         class="table power-grid-table <?php echo e($theme->tableClass); ?>"
         style="<?php echo e($theme->tableStyle); ?>"
@@ -36,6 +36,7 @@
             <tbody
                 class="<?php echo e($theme->tbodyClass); ?>"
                 style="<?php echo e($theme->tbodyStyle); ?>"
+                wire:key="tableBody-<?php echo e(uniqid()); ?>"
             >
                 <?php echo e($rows); ?>
 
@@ -50,5 +51,26 @@
             </tbody>
         <?php endif; ?>
     </table>
+
+    <?php if(isset($this->setUp['responsive'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                this.livewire.hook('message.processed', () => {
+                    Alpine.nextTick(() => {
+                        window.dispatchEvent(
+                            new CustomEvent('pg-livewire-request-finished')
+                        );
+                    })
+                })
+                this.livewire.hook('message.failed', () => {
+                    Alpine.nextTick(() => {
+                        window.dispatchEvent(
+                            new CustomEvent('pg-livewire-request-finished')
+                        );
+                    })
+                })
+            });
+        </script>
+    <?php endif; ?>
 </div>
 <?php /**PATH C:\xampp\htdocs\rms\resources\views/vendor/livewire-powergrid/components/table-base.blade.php ENDPATH**/ ?>

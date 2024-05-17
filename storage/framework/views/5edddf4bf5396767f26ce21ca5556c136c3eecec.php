@@ -57,7 +57,7 @@
 </table>
 
 
-<?php echo $data->render(); ?>
+<?php echo $data->links("pagination::bootstrap-5"); ?>
 
 </div>
 <?php $__env->stopSection(); ?>

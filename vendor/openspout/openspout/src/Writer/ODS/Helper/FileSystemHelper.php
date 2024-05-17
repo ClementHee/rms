@@ -17,6 +17,7 @@ use OpenSpout\Writer\ODS\Manager\WorksheetManager;
  */
 final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
 {
+    public const APP_NAME = 'OpenSpout';
     public const MIMETYPE = 'application/vnd.oasis.opendocument.spreadsheet';
 
     public const META_INF_FOLDER_NAME = 'META-INF';
@@ -27,11 +28,8 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     public const MIMETYPE_FILE_NAME = 'mimetype';
     public const STYLES_XML_FILE_NAME = 'styles.xml';
 
-    private readonly string $baseFolderRealPath;
-
-    /** @var string document creator */
-    private readonly string $creator;
-    private readonly CommonFileSystemHelper $baseFileSystemHelper;
+    private string $baseFolderRealPath;
+    private CommonFileSystemHelper $baseFileSystemHelper;
 
     /** @var string Path to the root folder inside the temp folder where the files to create the ODS will be stored */
     private string $rootFolder;
@@ -43,19 +41,17 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     private string $sheetsContentTempFolder;
 
     /** @var ZipHelper Helper to perform tasks with Zip archive */
-    private readonly ZipHelper $zipHelper;
+    private ZipHelper $zipHelper;
 
     /**
      * @param string    $baseFolderPath The path of the base folder where all the I/O can occur
      * @param ZipHelper $zipHelper      Helper to perform tasks with Zip archive
-     * @param string    $creator        document creator
      */
-    public function __construct(string $baseFolderPath, ZipHelper $zipHelper, string $creator)
+    public function __construct(string $baseFolderPath, ZipHelper $zipHelper)
     {
         $this->baseFileSystemHelper = new CommonFileSystemHelper($baseFolderPath);
         $this->baseFolderRealPath = $this->baseFileSystemHelper->getBaseFolderRealPath();
         $this->zipHelper = $zipHelper;
-        $this->creator = $creator;
     }
 
     public function createFolder(string $parentFolderPath, string $folderName): string
@@ -121,20 +117,12 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
 
         $contentXmlFileContents .= '<office:body><office:spreadsheet>';
 
-        $topContentTempFile = uniqid(self::CONTENT_XML_FILE_NAME);
-        $this->createFileWithContents($this->rootFolder, $topContentTempFile, $contentXmlFileContents);
+        $this->createFileWithContents($this->rootFolder, self::CONTENT_XML_FILE_NAME, $contentXmlFileContents);
 
         // Append sheets content to "content.xml"
         $contentXmlFilePath = $this->rootFolder.\DIRECTORY_SEPARATOR.self::CONTENT_XML_FILE_NAME;
-        $contentXmlHandle = fopen($contentXmlFilePath, 'w');
+        $contentXmlHandle = fopen($contentXmlFilePath, 'a');
         \assert(false !== $contentXmlHandle);
-
-        $topContentTempPathname = $this->rootFolder.\DIRECTORY_SEPARATOR.$topContentTempFile;
-        $topContentTempHandle = fopen($topContentTempPathname, 'r');
-        \assert(false !== $topContentTempHandle);
-        stream_copy_to_stream($topContentTempHandle, $contentXmlHandle);
-        fclose($topContentTempHandle);
-        unlink($topContentTempPathname);
 
         foreach ($worksheets as $worksheet) {
             // write the "<table:table>" node, with the final sheet's name
@@ -144,17 +132,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
             $this->copyFileContentsToTarget($worksheetFilePath, $contentXmlHandle);
 
             fwrite($contentXmlHandle, '</table:table>');
-        }
-
-        // add AutoFilter
-        $databaseRanges = '';
-        foreach ($worksheets as $worksheet) {
-            $databaseRanges .= $worksheetManager->getTableDatabaseRangeElementAsString($worksheet);
-        }
-        if ('' !== $databaseRanges) {
-            fwrite($contentXmlHandle, '<table:database-ranges>');
-            fwrite($contentXmlHandle, $databaseRanges);
-            fwrite($contentXmlHandle, '</table:database-ranges>');
         }
 
         $contentXmlFileContents = '</office:spreadsheet></office:body></office:document-content>';
@@ -279,13 +256,14 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
      */
     private function createMetaFile(): self
     {
+        $appName = self::APP_NAME;
         $createdDate = (new DateTimeImmutable())->format(DateTimeImmutable::W3C);
 
         $metaXmlFileContents = <<<EOD
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <office:document-meta office:version="1.2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <office:meta>
-                    <dc:creator>{$this->creator}</dc:creator>
+                    <dc:creator>{$appName}</dc:creator>
                     <meta:creation-date>{$createdDate}</meta:creation-date>
                     <dc:date>{$createdDate}</dc:date>
                 </office:meta>

@@ -20,7 +20,7 @@ final class InMemoryStrategy implements CachingStrategyInterface
     private SplFixedArray $inMemoryCache;
 
     /** @var bool Whether the cache has been closed */
-    private bool $isCacheClosed = false;
+    private bool $isCacheClosed;
 
     /**
      * @param int $sharedStringsUniqueCount Number of unique shared strings
@@ -28,6 +28,7 @@ final class InMemoryStrategy implements CachingStrategyInterface
     public function __construct(int $sharedStringsUniqueCount)
     {
         $this->inMemoryCache = new SplFixedArray($sharedStringsUniqueCount);
+        $this->isCacheClosed = false;
     }
 
     /**
@@ -57,15 +58,15 @@ final class InMemoryStrategy implements CachingStrategyInterface
      *
      * @param int $sharedStringIndex Index of the shared string in the sharedStrings.xml file
      *
-     * @return string The shared string at the given index
-     *
      * @throws \OpenSpout\Reader\Exception\SharedStringNotFoundException If no shared string found for the given index
+     *
+     * @return string The shared string at the given index
      */
     public function getStringAtIndex(int $sharedStringIndex): string
     {
         try {
             return $this->inMemoryCache->offsetGet($sharedStringIndex);
-        } catch (RuntimeException) {
+        } catch (RuntimeException $e) {
             throw new SharedStringNotFoundException("Shared string not found for index: {$sharedStringIndex}");
         }
     }

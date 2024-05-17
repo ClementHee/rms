@@ -3,15 +3,17 @@
 <?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $column): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php
         $content = $row->{$column->field};
+        $contentClassField = $column->contentClassField != '' ? $row->{$column->contentClassField} : '';
         $content = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $content);
         $field = $column->dataField != '' ? $column->dataField : $column->field;
+        $contentClass = array_key_exists($content, $column->contentClasses) ? $column->contentClasses[$content] : '';
     ?>
     <td
         class="<?php echo e($theme->table->tdBodyClass . ' ' . $column->bodyClass ?? ''); ?>"
         style="<?php echo e($column->hidden === true ? 'display:none' : ''); ?>; <?php echo e($theme->table->tdBodyStyle . ' ' . $column->bodyStyle ?? ''); ?>"
     >
         <?php if(data_get($column->editable, 'hasPermission') && !str_contains($field, '.')): ?>
-            <span class="<?php echo e($theme->clickToCopy->spanClass); ?>">
+            <span class="<?php echo e($contentClassField . ' ' . $contentClass); ?> <?php echo e($theme->clickToCopy->spanClass); ?>">
                 <?php echo $__env->make($theme->editable->view, ['editable' => $column->editable], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <?php if($column->clickToCopy): ?>
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -39,7 +41,7 @@
             ?>
             <?php echo $__env->make($theme->toggleable->view, ['tableName' => $tableName], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php else: ?>
-            <span class="<?php if($column->clickToCopy): ?> <?php echo e($theme->clickToCopy->spanClass); ?> <?php endif; ?>">
+            <span class="<?php echo e($contentClassField . ' ' . $contentClass); ?> <?php if($column->clickToCopy): ?> <?php echo e($theme->clickToCopy->spanClass); ?> <?php endif; ?>">
                 <div><?php echo $column->index ? $rowIndex : $content; ?></div>
                 <?php if($column->clickToCopy): ?>
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

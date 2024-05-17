@@ -24,6 +24,12 @@
                 </th>
             <?php endif; ?>
 
+            <?php if(isset($setUp['responsive'])): ?>
+                <th fixed x-show="hasHiddenElements" class="<?php echo e($theme->table->thClass); ?>"
+                    style="<?php echo e($theme->table->thStyle); ?>">
+                </th>
+            <?php endif; ?>
+
             <?php if($checkbox): ?>
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-powergrid::components.checkbox-all','data' => ['checkbox' => $checkbox,'theme' => $theme->checkbox]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -61,10 +67,17 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             <?php if(isset($actions) && count($actions)): ?>
+                <?php
+                    $responsiveActionsColumnName = PowerComponents\LivewirePowerGrid\Responsive::ACTIONS_COLUMN_NAME;
+
+                    $isActionFixedOnResponsive = isset($this->setUp['responsive']) && in_array($responsiveActionsColumnName, data_get($this->setUp, 'responsive.fixedColumns')) ? true : false;
+                ?>
+
                 <th
-                    class="<?php echo e($theme->table->thClass . ' ' . $column->headerClass); ?>"
+                    <?php if($isActionFixedOnResponsive): ?> fixed <?php endif; ?>
+                    class="<?php echo e($theme->table->thClass . ' ' . $theme->table->thActionClass); ?>"
                     scope="col"
-                    style="<?php echo e($theme->table->thStyle); ?>"
+                    style="<?php echo e($theme->table->thStyle . ' ' . $theme->table->thActionStyle); ?>"
                     colspan="<?php echo e(count($actions)); ?>"
                     wire:key="<?php echo e(md5('actions')); ?>"
                 >
@@ -139,9 +152,15 @@
                     $class = $theme->table->trBodyClass;
                     $rules = $actionRulesClass->recoverFromAction('pg:rows', $row);
 
+                    $rowId = $row->{$primaryKey};
+
+                    if (method_exists($this, 'actionRules')) {
+                        $applyRulesLoop = $actionRulesClass->loop($this->actionRules($row), $loop);
+                    }
+
                     $ruleSetAttribute = data_get($rules, 'setAttribute');
 
-                    if (filled($ruleSetAttribute)) {
+                    if (filled($ruleSetAttribute) && $applyRulesLoop) {
                         foreach ($ruleSetAttribute as $attribute) {
                             if (isset($attribute['attribute'])) {
                                 $class .= ' ' . $attribute['value'];
@@ -163,6 +182,12 @@
                             wire:key="<?php echo e(md5($row->{$primaryKey} ?? $loop->index)); ?>"
                         >
                 <?php endif; ?>
+
+                <?php echo $__env->renderWhen(isset($setUp['responsive']), powerGridThemeRoot().'.toggle-detail-responsive', [
+                    'theme' => $theme->table,
+                    'rowId' => $rowId,
+                    'view' => data_get($setUp, 'detail.viewIcon') ?? null
+                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?>
 
                 <?php
                     $ruleRows = $actionRulesClass->recoverFromAction('pg:rows', $row);
@@ -244,6 +269,8 @@
                 <?php if(isset($setUp['detail'])): ?>
                     </tbody>
                 <?php endif; ?>
+
+                <?php echo $__env->renderWhen(isset($setUp['responsive']), 'livewire-powergrid::components.expand-container', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             <?php echo $__env->renderWhen($footerTotalColumn, 'livewire-powergrid::components.table-footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?>

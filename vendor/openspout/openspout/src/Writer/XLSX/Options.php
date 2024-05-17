@@ -6,8 +6,6 @@ namespace OpenSpout\Writer\XLSX;
 
 use OpenSpout\Common\Entity\Style\Style;
 use OpenSpout\Writer\Common\AbstractOptions;
-use OpenSpout\Writer\XLSX\Options\PageMargin;
-use OpenSpout\Writer\XLSX\Options\PageSetup;
 
 final class Options extends AbstractOptions
 {
@@ -18,10 +16,6 @@ final class Options extends AbstractOptions
 
     /** @var MergeCell[] */
     private array $MERGE_CELLS = [];
-
-    private ?PageMargin $pageMargin = null;
-
-    private ?PageSetup $pageSetup = null;
 
     public function __construct()
     {
@@ -42,17 +36,14 @@ final class Options extends AbstractOptions
      * @param positive-int   $topLeftRow
      * @param 0|positive-int $bottomRightColumn
      * @param positive-int   $bottomRightRow
-     * @param 0|positive-int $sheetIndex
      */
     public function mergeCells(
         int $topLeftColumn,
         int $topLeftRow,
         int $bottomRightColumn,
-        int $bottomRightRow,
-        int $sheetIndex = 0,
+        int $bottomRightRow
     ): void {
         $this->MERGE_CELLS[] = new MergeCell(
-            $sheetIndex,
             $topLeftColumn,
             $topLeftRow,
             $bottomRightColumn,
@@ -61,32 +52,12 @@ final class Options extends AbstractOptions
     }
 
     /**
-     * @return MergeCell[]
-     *
      * @internal
+     *
+     * @return MergeCell[]
      */
     public function getMergeCells(): array
     {
         return $this->MERGE_CELLS;
-    }
-
-    public function setPageMargin(PageMargin $pageMargin): void
-    {
-        $this->pageMargin = $pageMargin;
-    }
-
-    public function getPageMargin(): ?PageMargin
-    {
-        return $this->pageMargin;
-    }
-
-    public function setPageSetup(PageSetup $pageSetup): void
-    {
-        $this->pageSetup = $pageSetup;
-    }
-
-    public function getPageSetup(): ?PageSetup
-    {
-        return $this->pageSetup;
     }
 }

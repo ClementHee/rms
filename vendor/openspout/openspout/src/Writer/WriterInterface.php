@@ -50,18 +50,6 @@ interface WriterInterface
     public function addRows(array $rows): void;
 
     /**
-     * Set document creator.
-     *
-     * @param string $creator document creator
-     */
-    public function setCreator(string $creator): void;
-
-    /**
-     * @return 0|positive-int
-     */
-    public function getWrittenRowCount(): int;
-
-    /**
      * Closes the writer. This will close the streamer as well, preventing new data
      * to be written to the file.
      */

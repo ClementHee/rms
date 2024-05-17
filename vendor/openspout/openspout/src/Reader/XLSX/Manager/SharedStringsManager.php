@@ -8,7 +8,7 @@ use DOMElement;
 use OpenSpout\Common\Exception\IOException;
 use OpenSpout\Reader\Exception\XMLProcessingException;
 use OpenSpout\Reader\Wrapper\XMLReader;
-use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactoryInterface;
+use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactory;
 use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyInterface;
 use OpenSpout\Reader\XLSX\Options;
 
@@ -34,24 +34,24 @@ final class SharedStringsManager
     public const XML_ATTRIBUTE_VALUE_PRESERVE = 'preserve';
 
     /** @var string Path of the XLSX file being read */
-    private readonly string $filePath;
+    private string $filePath;
 
-    private readonly Options $options;
+    private Options $options;
 
     /** @var WorkbookRelationshipsManager Helps retrieving workbook relationships */
-    private readonly WorkbookRelationshipsManager $workbookRelationshipsManager;
+    private WorkbookRelationshipsManager $workbookRelationshipsManager;
 
-    /** @var CachingStrategyFactoryInterface Factory to create shared strings caching strategies */
-    private readonly CachingStrategyFactoryInterface $cachingStrategyFactory;
+    /** @var CachingStrategyFactory Factory to create shared strings caching strategies */
+    private CachingStrategyFactory $cachingStrategyFactory;
 
-    /** @var CachingStrategyInterface The best caching strategy for storing shared strings */
-    private CachingStrategyInterface $cachingStrategy;
+    /** @var null|CachingStrategyInterface The best caching strategy for storing shared strings */
+    private ?CachingStrategyInterface $cachingStrategy = null;
 
     public function __construct(
         string $filePath,
         Options $options,
         WorkbookRelationshipsManager $workbookRelationshipsManager,
-        CachingStrategyFactoryInterface $cachingStrategyFactory
+        CachingStrategyFactory $cachingStrategyFactory
     ) {
         $this->filePath = $filePath;
         $this->options = $options;
@@ -116,9 +116,9 @@ final class SharedStringsManager
      *
      * @param int $sharedStringIndex Index of the shared string in the sharedStrings.xml file
      *
-     * @return string The shared string at the given index
-     *
      * @throws \OpenSpout\Reader\Exception\SharedStringNotFoundException If no shared string found for the given index
+     *
+     * @return string The shared string at the given index
      */
     public function getStringAtIndex(int $sharedStringIndex): string
     {
@@ -130,7 +130,7 @@ final class SharedStringsManager
      */
     public function cleanup(): void
     {
-        if (isset($this->cachingStrategy)) {
+        if (null !== $this->cachingStrategy) {
             $this->cachingStrategy->clearCache();
         }
     }
@@ -140,9 +140,9 @@ final class SharedStringsManager
      *
      * @param XMLReader $xmlReader XMLReader instance
      *
-     * @return null|int Number of unique shared strings in the sharedStrings.xml file
-     *
      * @throws \OpenSpout\Common\Exception\IOException If sharedStrings.xml is invalid and can't be read
+     *
+     * @return null|int Number of unique shared strings in the sharedStrings.xml file
      */
     private function getSharedStringsUniqueCount(XMLReader $xmlReader): ?int
     {
@@ -192,6 +192,7 @@ final class SharedStringsManager
         $textNodes = $siNode->getElementsByTagName(self::XML_NODE_T);
 
         foreach ($textNodes as $textNode) {
+            \assert($textNode instanceof DOMElement);
             if ($this->shouldExtractTextNodeValue($textNode)) {
                 $textNodeValue = $textNode->nodeValue;
                 \assert(null !== $textNodeValue);
@@ -199,7 +200,8 @@ final class SharedStringsManager
 
                 $sharedStringValue .= $shouldPreserveWhitespace
                     ? $textNodeValue
-                    : trim($textNodeValue);
+                    : trim($textNodeValue)
+                ;
             }
         }
 

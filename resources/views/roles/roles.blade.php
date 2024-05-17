@@ -48,6 +48,6 @@
     @endforeach
 </table>
 
-{!! $roles->render() !!}
+{!! $roles->links("pagination::bootstrap-5") !!}
 </div>
 @endsection

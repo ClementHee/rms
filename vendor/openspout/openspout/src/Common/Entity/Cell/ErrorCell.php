@@ -9,20 +9,20 @@ use OpenSpout\Common\Entity\Style\Style;
 
 final class ErrorCell extends Cell
 {
-    private readonly string $value;
+    private mixed $value;
 
-    public function __construct(string $value, ?Style $style)
+    public function __construct(mixed $value, ?Style $style)
     {
         $this->value = $value;
         parent::__construct($style);
     }
 
-    public function getValue(): ?string
+    public function getValue(): mixed
     {
         return null;
     }
 
-    public function getRawValue(): string
+    public function getRawValue(): mixed
     {
         return $this->value;
     }

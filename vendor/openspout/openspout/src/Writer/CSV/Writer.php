@@ -15,18 +15,13 @@ final class Writer extends AbstractWriter
     /** @var string Content-Type value for the header */
     protected static string $headerContentType = 'text/csv; charset=UTF-8';
 
-    private readonly Options $options;
+    private Options $options;
 
     private int $lastWrittenRowIndex = 0;
 
     public function __construct(?Options $options = null)
     {
         $this->options = $options ?? new Options();
-    }
-
-    public function getOptions(): Options
-    {
-        return $this->options;
     }
 
     /**
@@ -49,11 +44,7 @@ final class Writer extends AbstractWriter
      */
     protected function addRowToWriter(Row $row): void
     {
-        $cells = array_map(static function (Cell\BooleanCell|Cell\EmptyCell|Cell\FormulaCell|Cell\NumericCell|Cell\StringCell $value): string {
-            if ($value instanceof Cell\BooleanCell) {
-                return (string) (int) $value->getValue();
-            }
-
+        $cells = array_map(static function (Cell $value): string {
             return (string) $value->getValue();
         }, $row->getCells());
 

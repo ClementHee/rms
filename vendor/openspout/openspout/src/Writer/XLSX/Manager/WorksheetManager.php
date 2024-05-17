@@ -17,7 +17,6 @@ use OpenSpout\Writer\Common\Manager\RegisteredStyle;
 use OpenSpout\Writer\Common\Manager\Style\StyleMerger;
 use OpenSpout\Writer\Common\Manager\WorksheetManagerInterface;
 use OpenSpout\Writer\XLSX\Helper\DateHelper;
-use OpenSpout\Writer\XLSX\Helper\DateIntervalHelper;
 use OpenSpout\Writer\XLSX\Manager\Style\StyleManager;
 use OpenSpout\Writer\XLSX\Options;
 
@@ -35,25 +34,22 @@ final class WorksheetManager implements WorksheetManagerInterface
      */
     public const MAX_CHARACTERS_PER_CELL = 32767;
 
-    /** @var CommentsManager Manages comments */
-    private readonly CommentsManager $commentsManager;
-
-    private readonly Options $options;
+    private Options $options;
 
     /** @var StyleManager Manages styles */
-    private readonly StyleManager $styleManager;
+    private StyleManager $styleManager;
 
     /** @var StyleMerger Helper to merge styles together */
-    private readonly StyleMerger $styleMerger;
+    private StyleMerger $styleMerger;
 
     /** @var SharedStringsManager Helper to write shared strings */
-    private readonly SharedStringsManager $sharedStringsManager;
+    private SharedStringsManager $sharedStringsManager;
 
     /** @var XLSXEscaper Strings escaper */
-    private readonly XLSXEscaper $stringsEscaper;
+    private XLSXEscaper $stringsEscaper;
 
     /** @var StringHelper String helper */
-    private readonly StringHelper $stringHelper;
+    private StringHelper $stringHelper;
 
     /**
      * WorksheetManager constructor.
@@ -62,7 +58,6 @@ final class WorksheetManager implements WorksheetManagerInterface
         Options $options,
         StyleManager $styleManager,
         StyleMerger $styleMerger,
-        CommentsManager $commentsManager,
         SharedStringsManager $sharedStringsManager,
         XLSXEscaper $stringsEscaper,
         StringHelper $stringHelper
@@ -70,7 +65,6 @@ final class WorksheetManager implements WorksheetManagerInterface
         $this->options = $options;
         $this->styleManager = $styleManager;
         $this->styleMerger = $styleMerger;
-        $this->commentsManager = $commentsManager;
         $this->sharedStringsManager = $sharedStringsManager;
         $this->stringsEscaper = $stringsEscaper;
         $this->stringHelper = $stringHelper;
@@ -81,28 +75,34 @@ final class WorksheetManager implements WorksheetManagerInterface
         return $this->sharedStringsManager;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function startSheet(Worksheet $worksheet): void
     {
         $sheetFilePointer = fopen($worksheet->getFilePath(), 'w');
         \assert(false !== $sheetFilePointer);
 
         $worksheet->setFilePointer($sheetFilePointer);
-        $this->commentsManager->createWorksheetCommentFiles($worksheet);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addRow(Worksheet $worksheet, Row $row): void
     {
         if (!$row->isEmpty()) {
             $this->addNonEmptyRow($worksheet, $row);
-            $this->commentsManager->addComments($worksheet, $row);
         }
 
         $worksheet->setLastWrittenRowIndex($worksheet->getLastWrittenRowIndex() + 1);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function close(Worksheet $worksheet): void
     {
-        $this->commentsManager->closeWorksheetCommentFiles($worksheet);
         fclose($worksheet->getFilePointer());
     }
 
@@ -122,9 +122,8 @@ final class WorksheetManager implements WorksheetManagerInterface
         $rowIndexOneBased = $worksheet->getLastWrittenRowIndex() + 1;
         $numCells = $row->getNumCells();
 
-        $rowHeight = $row->getHeight();
-        $hasCustomHeight = ($this->options->DEFAULT_ROW_HEIGHT > 0 || $rowHeight > 0) ? '1' : '0';
-        $rowXML = "<row r=\"{$rowIndexOneBased}\" spans=\"1:{$numCells}\" ".($rowHeight > 0 ? "ht=\"{$rowHeight}\" " : '')."customHeight=\"{$hasCustomHeight}\">";
+        $hasCustomHeight = $this->options->DEFAULT_ROW_HEIGHT > 0 ? '1' : '0';
+        $rowXML = "<row r=\"{$rowIndexOneBased}\" spans=\"1:{$numCells}\" customHeight=\"{$hasCustomHeight}\">";
 
         foreach ($row->getCells() as $columnIndexZeroBased => $cell) {
             $registeredStyle = $this->applyStyleAndRegister($cell, $rowStyle);
@@ -194,16 +193,14 @@ final class WorksheetManager implements WorksheetManagerInterface
         if ($cell instanceof Cell\StringCell) {
             $cellXML .= $this->getCellXMLFragmentForNonEmptyString($cell->getValue());
         } elseif ($cell instanceof Cell\BooleanCell) {
-            $cellXML .= ' t="b"><v>'.(int) $cell->getValue().'</v></c>';
+            $cellXML .= ' t="b"><v>'.(int) ($cell->getValue()).'</v></c>';
         } elseif ($cell instanceof Cell\NumericCell) {
             $cellXML .= '><v>'.$cell->getValue().'</v></c>';
         } elseif ($cell instanceof Cell\FormulaCell) {
             $cellXML .= '><f>'.substr($cell->getValue(), 1).'</f></c>';
         } elseif ($cell instanceof Cell\DateTimeCell) {
             $cellXML .= '><v>'.DateHelper::toExcel($cell->getValue()).'</v></c>';
-        } elseif ($cell instanceof Cell\DateIntervalCell) {
-            $cellXML .= '><v>'.DateIntervalHelper::toExcel($cell->getValue()).'</v></c>';
-        } elseif ($cell instanceof Cell\ErrorCell) {
+        } elseif ($cell instanceof Cell\ErrorCell && \is_string($cell->getRawValue())) {
             // only writes the error value if it's a string
             $cellXML .= ' t="e"><v>'.$cell->getRawValue().'</v></c>';
         } elseif ($cell instanceof Cell\EmptyCell) {
@@ -214,6 +211,8 @@ final class WorksheetManager implements WorksheetManagerInterface
                 // NOTE: not appending to $cellXML is the right behavior!!
                 $cellXML = '';
             }
+        } else {
+            throw new InvalidArgumentException('Trying to add a value with an unsupported type: '.\gettype($cell->getValue()));
         }
 
         return $cellXML;
@@ -224,9 +223,9 @@ final class WorksheetManager implements WorksheetManagerInterface
      *
      * @param string $cellValue The cell value
      *
-     * @return string The XML fragment representing the cell
-     *
      * @throws InvalidArgumentException If the string exceeds the maximum number of characters allowed per cell
+     *
+     * @return string The XML fragment representing the cell
      */
     private function getCellXMLFragmentForNonEmptyString(string $cellValue): string
     {

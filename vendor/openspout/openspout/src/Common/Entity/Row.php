@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OpenSpout\Common\Entity;
 
-use DateInterval;
-use DateTimeInterface;
 use OpenSpout\Common\Entity\Style\Style;
 
 final class Row
@@ -19,9 +17,6 @@ final class Row
 
     /** The row style. */
     private Style $style;
-
-    /** Row height. */
-    private float $height = 0;
 
     /**
      * Row constructor.
@@ -37,11 +32,11 @@ final class Row
     }
 
     /**
-     * @param list<null|bool|DateInterval|DateTimeInterface|float|int|string> $cellValues
+     * @param mixed[] $cellValues
      */
     public static function fromValues(array $cellValues = [], ?Style $rowStyle = null): self
     {
-        $cells = array_map(static function (null|bool|DateInterval|DateTimeInterface|float|int|string $cellValue): Cell {
+        $cells = array_map(static function (mixed $cellValue): Cell {
             return Cell::fromValue($cellValue);
         }, $cellValues);
 
@@ -112,29 +107,13 @@ final class Row
     }
 
     /**
-     * Set row height.
-     */
-    public function setHeight(float $height): self
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Returns row height.
-     */
-    public function getHeight(): float
-    {
-        return $this->height;
-    }
-
-    /**
-     * @return list<null|bool|DateInterval|DateTimeInterface|float|int|string> The row values, as array
+     * @internal
+     *
+     * @return mixed[] The row values, as array
      */
     public function toArray(): array
     {
-        return array_map(static function (Cell $cell): null|bool|DateInterval|DateTimeInterface|float|int|string {
+        return array_map(static function (Cell $cell): mixed {
             return $cell->getValue();
         }, $this->cells);
     }

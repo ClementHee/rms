@@ -24,10 +24,6 @@ trait TempFolderOptionTrait
 
     final public function getTempFolder(): string
     {
-        if (!isset($this->tempFolder)) {
-            $this->setTempFolder(sys_get_temp_dir());
-        }
-
         return $this->tempFolder;
     }
 }

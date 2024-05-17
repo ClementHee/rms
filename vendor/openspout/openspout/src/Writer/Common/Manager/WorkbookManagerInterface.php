@@ -7,6 +7,7 @@ namespace OpenSpout\Writer\Common\Manager;
 use OpenSpout\Common\Entity\Row;
 use OpenSpout\Common\Exception\IOException;
 use OpenSpout\Writer\Common\Entity\Sheet;
+use OpenSpout\Writer\Common\Entity\Workbook;
 use OpenSpout\Writer\Common\Entity\Worksheet;
 use OpenSpout\Writer\Exception\SheetNotFoundException;
 use OpenSpout\Writer\Exception\WriterException;
@@ -20,9 +21,9 @@ interface WorkbookManagerInterface
      * Creates a new sheet in the workbook and make it the current sheet.
      * The writing will resume where it stopped (i.e. data won't be truncated).
      *
-     * @return Worksheet The created sheet
-     *
      * @throws IOException If unable to open the sheet for writing
+     *
+     * @return Worksheet The created sheet
      */
     public function addNewSheetAndMakeItCurrent(): Worksheet;
 

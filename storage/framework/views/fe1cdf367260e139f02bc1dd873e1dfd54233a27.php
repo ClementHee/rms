@@ -34,7 +34,7 @@
             <?php if(isset($filter['label'])): ?>
                 <span
                     wire:key="enabled-filters-<?php echo e($field); ?>"
-                    class="outline-none inline-flex justify-center items-center group rounded gap-x-1 text-xs font-semibold px-2.5 py-0.5 text-pg-primary-600 bg-pg-primary-100 dark:bg-pg-primary-600"
+                    class="outline-none inline-flex justify-center items-center group rounded gap-x-1 text-xs font-semibold px-2.5 py-0.5 text-pg-primary-600 dark:text-pg-primary-200 bg-pg-primary-100 dark:bg-pg-primary-600"
                 >
                     <?php echo e($filter['label']); ?>
 

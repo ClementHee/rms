@@ -238,17 +238,14 @@ final class StyleManager extends CommonStyleManager
 
             $content .= sprintf(' applyBorder="%d"', (bool) $style->getBorder());
 
-            if ($style->shouldApplyCellAlignment() || $style->shouldApplyCellVerticalAlignment() || $style->hasSetWrapText() || $style->shouldShrinkToFit()) {
+            if ($style->shouldApplyCellAlignment() || $style->shouldWrapText() || $style->shouldShrinkToFit()) {
                 $content .= ' applyAlignment="1">';
                 $content .= '<alignment';
                 if ($style->shouldApplyCellAlignment()) {
                     $content .= sprintf(' horizontal="%s"', $style->getCellAlignment());
                 }
-                if ($style->shouldApplyCellVerticalAlignment()) {
-                    $content .= sprintf(' vertical="%s"', $style->getCellVerticalAlignment());
-                }
-                if ($style->hasSetWrapText()) {
-                    $content .= ' wrapText="'.($style->shouldWrapText() ? '1' : '0').'"';
+                if ($style->shouldWrapText()) {
+                    $content .= ' wrapText="1"';
                 }
                 if ($style->shouldShrinkToFit()) {
                     $content .= ' shrinkToFit="true"';

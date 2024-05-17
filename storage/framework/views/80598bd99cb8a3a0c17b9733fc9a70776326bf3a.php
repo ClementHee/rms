@@ -39,7 +39,7 @@
         x-transition:leave="transform duration-100"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-90"
-        class="py-3"
+        class="pg-filter-container"
     >
         <?php
             $customConfig = [];
@@ -73,11 +73,13 @@
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'datetime',
                             ])) echo $__env->make($theme->filterDatePicker->view, [
                                 'filter' => $filter,
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'datetime',
                             ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     <?php endif; ?>
@@ -88,11 +90,15 @@
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'date',
+
                             ])) echo $__env->make($theme->filterDatePicker->view, [
                                 'filter' => $filter,
                                 'tableName' => $tableName,
                                 'classAttr' => 'w-full',
                                 'theme' => $theme->filterDatePicker,
+                                'type' => 'date',
+
                             ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     <?php endif; ?>
