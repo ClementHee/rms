@@ -41,15 +41,15 @@ class MaterialRequests extends Component
     {
 
         if($this->filters=='unfixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get();
+            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get()->paginate(10);
         }elseif($this->filters=='fixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get();
+            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get()->paginate(10);
         }else{
-            $this->all_request = MaterialRequest::orderBy('date','DESC')->get();
+            $this->all_request = MaterialRequest::orderBy('date','DESC')->get()->paginate(10);
         }
       
 
-        return view('livewire.materials.show_requests')->layout('livewire.material_dashboard')->paginate(10);
+        return view('livewire.materials.show_requests')->layout('livewire.material_dashboard');
         
     }
  
