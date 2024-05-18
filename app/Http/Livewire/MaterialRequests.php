@@ -49,7 +49,7 @@ class MaterialRequests extends Component
         }
       
 
-        return view('livewire.materials.show_requests')->layout('livewire.material_dashboard');
+        return view('livewire.materials.show_requests')->layout('livewire.material_dashboard')->paginate(10);
         
     }
  

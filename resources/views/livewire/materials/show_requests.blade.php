@@ -23,7 +23,7 @@
     <div wire:poll.60s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
         
         
-        <table class="table table-striped table-responsive-lg text-center  ">
+        <table class="table table-striped table-responsive-xl text-center  ">
             <tr>
                 <th>Date</th>
                 <th>Name</th>

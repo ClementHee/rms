@@ -35,7 +35,7 @@ class Maintainences extends Component
             $this->all_maintainence = Maintainence::orderBy('reported_at','DESC')->get();
         }
 
-        return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard');
+        return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard')->paginate(10);
     }
   
     /**

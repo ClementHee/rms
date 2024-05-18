@@ -24,7 +24,7 @@
     <div wire:poll.60s class="p-3 mt-2 shadow-lg  bg-white border border-secondary rounded ">   
         
         
-        <table class="pt-3 table table-striped table-responsive-lg text-center  ">
+        <table class="pt-3 table table-striped table-responsive-xl text-center  ">
             <tr>
              
                 <th>Issue</th>
