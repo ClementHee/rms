@@ -41,11 +41,11 @@ class MaterialRequests extends Component
     {
 
         if($this->filters=='unfixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get()->paginate(10);
+            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get();
         }elseif($this->filters=='fixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get()->paginate(10);
+            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get();
         }else{
-            $this->all_request = MaterialRequest::orderBy('date','DESC')->get()->paginate(10);
+            $this->all_request = MaterialRequest::orderBy('date','DESC')->get();
         }
       
 

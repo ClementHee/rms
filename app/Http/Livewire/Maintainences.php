@@ -28,11 +28,11 @@ class Maintainences extends Component
  
     
         if($this->filters=='unfixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',0)->orderBy('reported_at','DESC')->paginate(10);
+            $this->all_maintainence = Maintainence::where('fixed','=',0)->orderBy('reported_at','DESC')->get();
         }elseif($this->filters=='fixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',1)->orderBy('reported_at','DESC')->paginate(10);
+            $this->all_maintainence = Maintainence::where('fixed','=',1)->orderBy('reported_at','DESC')->get();
         }else{
-            $this->all_maintainence = Maintainence::orderBy('reported_at','DESC')->paginate(10);
+            $this->all_maintainence = Maintainence::orderBy('reported_at','DESC')->get();
         }
 
         return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard');
