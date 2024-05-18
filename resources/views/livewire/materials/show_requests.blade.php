@@ -23,7 +23,7 @@
     <div wire:poll.60s class="p-3 shadow-lg  bg-white border border-secondary rounded ">   
         
         
-        <table class="table table-striped table-sm text-center  ">
+        <table class="table table-striped table-responsive-lg text-center  ">
             <tr>
                 <th>Date</th>
                 <th>Name</th>
@@ -33,7 +33,7 @@
                 <th>Date Needed</th>
                 <th>Status</th>
                 <th>Fulfilled</th>
-                <th width="150px">Action</th>
+                <th>Action</th>
             </tr>
 
             @foreach ($all_request as $request)

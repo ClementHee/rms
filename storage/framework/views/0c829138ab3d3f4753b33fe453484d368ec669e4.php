@@ -1,22 +1,22 @@
 <div>
     
     <button class="mt-2  btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#newMaintainence" >Report an Issue</button>
-    @if ($this->filters=='reset')
+    <?php if($this->filters=='reset'): ?>
       <button wire:click.prevent="filterUnfixed()" class="mt-2 btn btn-info btn-lg" >
         Show unfixed</button> 
 
-    @elseif($this->filters=='unfixed')
+    <?php elseif($this->filters=='unfixed'): ?>
         <button wire:click.prevent="filterFixed()" class="mt-2 btn btn-info btn-lg" >
         Show fixed</button>
     
-    @else
+    <?php else: ?>
         <button wire:click.prevent="filterReset()" class="mt-2 btn btn-info btn-lg" >
        Reset Filter</button>
-   @endif
+   <?php endif; ?>
    
-   @if($updateMode)
-        @include('livewire.maintainence.update_issue')
-    @endif
+   <?php if($updateMode): ?>
+        <?php echo $__env->make('livewire.maintainence.update_issue', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php endif; ?>
     
     <h1 class="text-center">Maintainence book</h1>
     
@@ -38,67 +38,68 @@
                 <th>Action</th>
             </tr>
 
-            @foreach ($all_maintainence as $issues)
-            @if($issues->fixed==false)
+            <?php $__currentLoopData = $all_maintainence; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $issues): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if($issues->fixed==false): ?>
             <tr class=' bg-opacity-50'>
-            @else
+            <?php else: ?>
                 <tr class=" bg-opacity-50 ">
-            @endif
+            <?php endif; ?>
         
               
-                <td>{{ $issues->issue }}</td>
-                <td>{{ $issues->location }}</td>
-                <td>{{ $issues->reported_by }}</td>
-                <td>{{ $issues->reported_at }}</td>
+                <td><?php echo e($issues->issue); ?></td>
+                <td><?php echo e($issues->location); ?></td>
+                <td><?php echo e($issues->reported_by); ?></td>
+                <td><?php echo e($issues->reported_at); ?></td>
                 
                 <td>
-                    @if($issues->fixed==false)
+                    <?php if($issues->fixed==false): ?>
                     
                         <button type="button" class="btn btn-danger">Not Fixed</button>
                
-                    @else
+                    <?php else: ?>
                    <button type="button" class="btn btn-success">Fixed</button>
                         
-                    @endif
+                    <?php endif; ?>
                 </td>
                 <td>
-                    @if($issues->remarks==null)
+                    <?php if($issues->remarks==null): ?>
                         <p>None</p>
-                    @else
-                        <p>{{$issues->remarks}}</p>
-                    @endif
+                    <?php else: ?>
+                        <p><?php echo e($issues->remarks); ?></p>
+                    <?php endif; ?>
                 </td>
                 
                 <td>
             
-                        @if($issues->fixed==true)
+                        <?php if($issues->fixed==true): ?>
                         
-                            <button type="button" wire:click.prevent="mau({{ $issues->issueNo }})" class="btn btn-info">Mark as Unfixed</button>
-                        @else
+                            <button type="button" wire:click.prevent="mau(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Unfixed</button>
+                        <?php else: ?>
                         
-                            <button type="button" wire:click.prevent="maf({{ $issues->issueNo }})" class="btn btn-info">Mark as Fixed</button>
+                            <button type="button" wire:click.prevent="maf(<?php echo e($issues->issueNo); ?>)" class="btn btn-info">Mark as Fixed</button>
                     
-                        @endif
+                        <?php endif; ?>
         
                 </td>
                 <td>
                     
-                    @if($issues->fixed==true)
+                    <?php if($issues->fixed==true): ?>
                     
-                        {{ $issues->updated_at }}
-                    @else
+                        <?php echo e($issues->updated_at); ?>
+
+                    <?php else: ?>
                         - 
-                    @endif
+                    <?php endif; ?>
                 </td>
            
                 <td>
-                    <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
-                    <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger mt-1">Delete</button>
+                    <button wire:click="edit(<?php echo e($issues->issueNo); ?>)" class="btn btn-primary ">Edit</button>
+                    <button wire:click="deleteConfirm(<?php echo e($issues->issueNo); ?>)" class="btn btn-danger mt-1">Delete</button>
                 </td>
 
                
             </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
         
     </div>
@@ -114,25 +115,53 @@
             <form> <div class="mb-3 form-group">
                         <label for="issue">Issue:</label>
                         <input type="text" id="issue" name="issue" required class="form-control" placeholder="Enter Title" wire:model="issue"> 
-                        @error('issue') <span class="text-danger">{{ $message }}</span>@enderror
+                        <?php $__errorArgs = ['issue'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <div class="mb-3 form-group">
                         <label for="location">Location:</label>
                         <input type="text" id="location" name="location" required class="form-control" placeholder="Enter Location" wire:model="location">
-                        @error('location') <span class="text-danger">{{ $message }}</span>@enderror
+                        <?php $__errorArgs = ['location'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <div class="mb-3 form-group">
                         <label for="reported_by">Reported By:</label>
                         <input type="text" id="reported_by" name="reported_by" required class="form-control pb-2" placeholder="Enter Your Name" wire:model="reported_by">
-                        @error('reported_by') <span class="text-danger">{{ $message }}</span>@enderror
+                        <?php $__errorArgs = ['reported_by'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <div class="mb-3 form-group">
                         <label for="remarks">Remarks:</label>
                         <input type="text" id="remarks" name="remarks" required class="form-control pb-2" placeholder="Remarks" wire:model="remarks">
-                        @error('remarks') <span class="text-danger">{{ $message }}</span>@enderror
+                        <?php $__errorArgs = ['remarks'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
                     
                     <div class="modal-footer">
@@ -149,3 +178,4 @@
 </div>
 
 
+<?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/maintainence/show_maintainence.blade.php ENDPATH**/ ?>
