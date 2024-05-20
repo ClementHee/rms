@@ -75,11 +75,14 @@
                 <td>
                     <button wire:click="editRequest({{ $request->request_id }})" class="btn btn-primary">Edit</button>
                     <br>
+                    @role('Admin|EMT|SuperAdmin')
                     <button wire:click="deleteRequest({{ $request->request_id }})" class="btn btn-danger mt-1">Delete</button>
+                    @endrole
                 </td>
             </tr>
             @endforeach
         </table>
+        {{$all_request ->links("pagination::bootstrap-5")}}
     </div>
 
     <div wire:ignore.self class="modal fade" id="newRequest" tabindex="-1" aria-labelledby="studentModalLabel"

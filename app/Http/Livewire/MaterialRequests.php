@@ -13,6 +13,7 @@ class MaterialRequests extends Component
 
     public $date, $requested_by, $class, $purpose,$item,$needed,$fulfilled;
     public $updateMode = false;
+    public $all_requests;
     public $filters = 'reset';
     protected $listeners =['getNewRequest'=>'reload'];
 
@@ -41,15 +42,15 @@ class MaterialRequests extends Component
     {
 
         if($this->filters=='unfixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->get();
+            $all_requests = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->pagninate(10);
         }elseif($this->filters=='fixed'){
-            $this->all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->get();
+            $all_requests = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->paginate(10);
         }else{
-            $this->all_request = MaterialRequest::orderBy('date','DESC')->get();
+            $all_requests = MaterialRequest::orderBy('date','DESC')->paginate(10);
         }
       
 
-        return view('livewire.materials.show_requests')->layout('livewire.material_dashboard');
+        return view('livewire.materials.show_requests',['all_request'=>$all_requests])->layout('livewire.material_dashboard');
         
     }
  

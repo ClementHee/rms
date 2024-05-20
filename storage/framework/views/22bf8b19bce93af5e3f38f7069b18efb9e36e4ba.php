@@ -51,7 +51,7 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </table>
 
-<?php echo $roles->render(); ?>
+<?php echo $roles->links("pagination::bootstrap-5"); ?>
 
 </div>
 <?php $__env->stopSection(); ?>

@@ -94,14 +94,17 @@
            
                 <td>
                     <button wire:click="edit(<?php echo e($issues->issueNo); ?>)" class="btn btn-primary ">Edit</button>
+                    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Admin|EMT|SuperAdmin')): ?>
                     <button wire:click="deleteConfirm(<?php echo e($issues->issueNo); ?>)" class="btn btn-danger mt-1">Delete</button>
+                    <?php endif; ?>
                 </td>
 
                
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
-        
+        <?php echo e($all_maintainence ->links("pagination::bootstrap-5")); ?>
+
     </div>
 
     <div wire:ignore.self class="modal fade" id="newMaintainence" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">

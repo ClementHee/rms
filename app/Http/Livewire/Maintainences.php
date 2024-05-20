@@ -13,6 +13,7 @@ use App\Events\NewMaterialRequest;
 class Maintainences extends Component
 {
     public $issue, $location, $reported_by, $reported_at,$remarks,$fixed;
+    public $all_maintainences;
     public $updateMode = false;
     public $filters = 'reset';
     protected $listeners = ['delete'];
@@ -28,14 +29,15 @@ class Maintainences extends Component
  
     
         if($this->filters=='unfixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',0)->orderBy('reported_at','DESC')->get();
+            $all_maintainences = Maintainence::where('fixed','=',0)->orderBy('reported_at','DESC')->paginate(10);
         }elseif($this->filters=='fixed'){
-            $this->all_maintainence = Maintainence::where('fixed','=',1)->orderBy('reported_at','DESC')->get();
+            $all_maintainences = Maintainence::where('fixed','=',1)->orderBy('reported_at','DESC')->paginate(10);
         }else{
-            $this->all_maintainence = Maintainence::orderBy('reported_at','DESC')->get();
+            $all_maintainences = Maintainence::orderBy('reported_at','DESC')->paginate(10);
         }
 
-        return view ('livewire.maintainence.show_maintainence')->layout('livewire.maintainence_dashboard');
+        return view ('livewire.maintainence.show_maintainence',['all_maintainence' => $all_maintainences])->layout('livewire.maintainence_dashboard');
+        
     }
   
     /**

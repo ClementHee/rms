@@ -93,14 +93,16 @@
            
                 <td>
                     <button wire:click="edit({{ $issues->issueNo }})" class="btn btn-primary ">Edit</button>
+                    @role('Admin|EMT|SuperAdmin')
                     <button wire:click="deleteConfirm({{ $issues->issueNo }})" class="btn btn-danger mt-1">Delete</button>
+                    @endrole
                 </td>
 
                
             </tr>
             @endforeach
         </table>
-        
+        {{$all_maintainence ->links("pagination::bootstrap-5")}}
     </div>
 
     <div wire:ignore.self class="modal fade" id="newMaintainence" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
