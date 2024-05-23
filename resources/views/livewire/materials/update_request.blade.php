@@ -27,6 +27,12 @@
             </div>
 
             <div class="mb-3 form-group">
+                <label for="item2">Item:</label>
+                <input type="text" id="item2" name="item2" required class="form-control" placeholder="Enter Items (Row 2 Optional)" wire:model="item2"> 
+                @error('item2') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group">
                 <label for="needed">Date Needed</label>
                 <input type="date" id="needed" name="needed" required class="form-control" wire:model="needed">
                 @error('needed') <span class="text-danger">{{ $message }}</span>@enderror

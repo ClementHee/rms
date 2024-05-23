@@ -18,6 +18,7 @@ class MaterialRequest extends Model
         'class',
         'purpose',
         'item',
+        'item2',
         'needed',
         'fulfilled'
 

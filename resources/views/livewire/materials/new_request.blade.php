@@ -21,8 +21,14 @@
             
             <div class="mb-3 form-group">
                 <label for="item">Item:</label>
-                <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Items" wire:model="item"> 
+                <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Items (Row 1)" wire:model="item" maxlength="254"> 
                 @error('item') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="mb-3 form-group">
+                <label for="item2">Item:</label>
+                <input type="text" id="item2" name="item2" required class="form-control" placeholder="Enter Items (Row 2 Optional)" wire:model="item2"> 
+                @error('item2') <span class="text-danger">{{ $message }}</span>@enderror
             </div>
 
             <div class="mb-3 form-group">

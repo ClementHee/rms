@@ -11,7 +11,7 @@ class MaterialRequests extends Component
 {
     
 
-    public $date, $requested_by, $class, $purpose,$item,$needed,$fulfilled;
+    public $date, $requested_by, $class, $purpose,$item,$item2,$needed,$fulfilled;
     public $updateMode = false;
     public $all_requests;
     public $filters = 'reset';
@@ -30,6 +30,7 @@ class MaterialRequests extends Component
         $this->class = '';
         $this->purpose = '';
         $this->item='';
+        $this->item2='';
         $this->needed='';
     }
     
@@ -63,12 +64,11 @@ class MaterialRequests extends Component
     {
 
         $new_request=$this ->validate([
-        'requested_by' => 'required',
-        'class' => 'required',
-        'purpose' => 'required',
-        'item' => 'required',
-        'needed' => 'required',
-
+            'requested_by' => 'required',
+            'class' => 'required',
+            'purpose' => 'required',
+            'item' => 'required',
+            'needed' => 'required',
         ]);
         
         MaterialRequest::create([
@@ -77,6 +77,7 @@ class MaterialRequests extends Component
             'class' => $this->class,
             'purpose' => $this->purpose,
             'item' => $this->item,
+            'item2' => $this->item2,
             'needed'=>$this->needed
         ]);
         //$data=$this;
@@ -105,6 +106,7 @@ class MaterialRequests extends Component
         $requests = MaterialRequest::findOrFail($id);
         $this->request_id = $id;
         $this->item = $requests->item;
+        $this->item2 = $requests->item2;
         $this->requested_by = $requests->requested_by;
         $this->class = $requests->class;
         $this->purpose = $requests->purpose;
@@ -138,6 +140,7 @@ class MaterialRequests extends Component
                 'class' => $this->class,
                 'purpose' => $this->purpose,
                 'item' => $this->item,
+                'item2' => $this->item2,
                 'needed'=>$this->needed
             ]);
         $this->updateMode = false;
@@ -170,6 +173,7 @@ class MaterialRequests extends Component
             'class' => $request_update->class,
             'purpose' => $request_update->purpose,
             'item' => $request_update->item,
+            'item2' => $request_update->item2,
             'needed'=>$request_update->needed
         ]);
          
@@ -187,6 +191,7 @@ class MaterialRequests extends Component
             'class' => $request_update->class,
             'purpose' => $request_update->purpose,
             'item' => $request_update->item,
+            'item2' => $request_update->item2,
             'needed'=>$request_update->needed
         ]);
          

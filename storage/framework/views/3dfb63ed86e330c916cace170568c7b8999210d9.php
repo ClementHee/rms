@@ -48,7 +48,7 @@
                 <td><?php echo e($request->requested_by); ?></td>
                 <td><?php echo e($request->class); ?></td>
                 <td><?php echo e($request->purpose); ?></td>
-                <td><?php echo e($request->item); ?></td>
+                <td><?php echo e($request->item." ".$request->item2); ?></td>
                 <td><?php echo e($request->needed); ?></td>
                 <td>
                     <?php if($request->fulfilled==false): ?>
@@ -75,7 +75,9 @@
                 <td>
                     <button wire:click="editRequest(<?php echo e($request->request_id); ?>)" class="btn btn-primary">Edit</button>
                     <br>
+                    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Admin|EMT|SuperAdmin')): ?>
                     <button wire:click="deleteRequest(<?php echo e($request->request_id); ?>)" class="btn btn-danger mt-1">Delete</button>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -106,7 +108,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
-
+    
                 <div class="mb-3 form-group">
                     <label for="class">Class:</label>
                     <input type="text" id="class" name="class" required class="form-control" placeholder="Enter Class" wire:model="class"> 
@@ -119,7 +121,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
-
+    
                 <div class="mb-3 form-group">
                     <label for="purpose">Purpose:</label>
                     <input type="text" id="purpose" name="purpose" required class="form-control pb-2" placeholder="Inidcate for what purpose" wire:model="purpose">
@@ -135,7 +137,7 @@ unset($__errorArgs, $__bag); ?>
                 
                 <div class="mb-3 form-group">
                     <label for="item">Item:</label>
-                    <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Title" wire:model="item"> 
+                    <input type="text" id="item" name="item" required class="form-control" placeholder="Enter Items (Row 1)" wire:model="item" maxlength="254"> 
                     <?php $__errorArgs = ['item'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -145,7 +147,20 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
-
+    
+                <div class="mb-3 form-group">
+                    <label for="item2">Item:</label>
+                    <input type="text" id="item2" name="item2" required class="form-control" placeholder="Enter Items (Row 2 Optional)" wire:model="item2"> 
+                    <?php $__errorArgs = ['item2'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                </div>
+    
                 <div class="mb-3 form-group">
                     <label for="needed">Date Needed</label>
                     <input type="date" id="needed" name="needed" required class="form-control" wire:model="needed">
