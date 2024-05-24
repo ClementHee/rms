@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Maintainence;
 use App\Events\NewMaterialRequest;
-
+use Livewire\WithPagination;
 
   
 class Maintainences extends Component

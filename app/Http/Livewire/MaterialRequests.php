@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\MaterialRequest;
 use App\Events\NewMaterialRequest;
-
+use Livewire\WithPagination;
 class MaterialRequests extends Component
 {
     
@@ -43,7 +43,7 @@ class MaterialRequests extends Component
     {
 
         if($this->filters=='unfixed'){
-            $all_requests = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->pagninate(10);
+            $all_requests = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->paginate(10);
         }elseif($this->filters=='fixed'){
             $all_requests = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->paginate(10);
         }else{

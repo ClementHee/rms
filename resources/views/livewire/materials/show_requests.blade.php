@@ -82,7 +82,8 @@
             </tr>
             @endforeach
         </table>
-        {{$all_request ->links("pagination::bootstrap-5")}}
+        {{$all_request -> links("pagination::bootstrap-5")}}
+        
     </div>
 
     <div wire:ignore.self class="modal fade" id="newRequest" tabindex="-1" aria-labelledby="studentModalLabel"

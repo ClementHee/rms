@@ -82,8 +82,9 @@
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
-        <?php echo e($all_request ->links("pagination::bootstrap-5")); ?>
+        <?php echo e($all_request -> links("pagination::bootstrap-5")); ?>
 
+        
     </div>
 
     <div wire:ignore.self class="modal fade" id="newRequest" tabindex="-1" aria-labelledby="studentModalLabel"
