@@ -58,7 +58,7 @@ class ScheduledMaintainences extends Component
         $this->maintainence_no = $id;
         $this->issue = $issues->issue;
         $this->recurrences = $issues->recurrences;
-        $this->days = $issues->days;
+        $this->days =explode(", ",$issues->days);
         $this->scheduled_date = $issues->scheduled_date;
       
    

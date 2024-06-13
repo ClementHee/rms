@@ -76,7 +76,7 @@
                     <button wire:click="editRequest({{ $request->request_id }})" class="btn btn-primary">Edit</button>
                     <br>
                     @role('Admin|EMT|SuperAdmin')
-                    <button wire:click="deleteRequest({{ $request->request_id }})" class="btn btn-danger mt-1">Delete</button>
+                    <button wire:click="deleteConfirm({{ $request->request_id }})" class="btn btn-danger mt-1">Delete</button>
                     @endrole
                 </td>
             </tr>

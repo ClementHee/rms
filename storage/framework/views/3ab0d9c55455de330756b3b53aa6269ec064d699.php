@@ -2,7 +2,14 @@
     <form> <div class="mb-3 form-group">
         <label for="issue">Issue:</label>
         <input type="text" id="issue" name="issue" required class="form-control" placeholder="Enter Maintainences" wire:model="issue"> 
-        @error('issue') <span class="text-danger">{{ $message }}</span>@enderror
+        <?php $__errorArgs = ['issue'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
     </div>
 
     <div class="mb-3 form-group">
@@ -26,7 +33,7 @@
         </div>
     </div>
     
-    @if ($this->recurrences=="Weekly")
+    <?php if($this->recurrences=="Weekly"): ?>
 
     <div class="mb-3 form-group">
         <label class="form-check-label px-3" for="Monday">
@@ -66,12 +73,19 @@
         </label>
 </div>
         
-    @endif
+    <?php endif; ?>
 
     <div class="mb-3 form-group">
         <label for="scheduled_date">Reported By:</label>
         <input type="date" id="scheduled_date" name="scheduled_date" required class="form-control pb-2" wire:model="scheduled_date">
-        @error('scheduled_date') <span class="text-danger">{{ $message }}</span>@enderror
+        <?php $__errorArgs = ['scheduled_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
     </div>
 
     <div class="modal-footer">
@@ -80,4 +94,4 @@
     </div>
 </form>
 
-</div>
+</div><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/scheduled_maintainence/edit_scheduled_maintainence.blade.php ENDPATH**/ ?>

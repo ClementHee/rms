@@ -15,13 +15,8 @@ class MaterialRequests extends Component
     public $updateMode = false;
     public $all_requests;
     public $filters = 'reset';
-    protected $listeners =['getNewRequest'=>'reload'];
+    protected $listeners = ['delete'=>'deleteRequest'];
 
-    public function reload(){
-   
-        $this->all_request = MaterialRequest::all();
-        
-    }
     
     
     private function resetInputFields(){
@@ -85,7 +80,13 @@ class MaterialRequests extends Component
 
         //event(new NewMaterialRequest($data));
 
+        $this->dispatchBrowserEvent('swal:modal',[
+            'type' => 'success',
+            'title' => 'Issue reported',
+            'text' =>'Issue has been reported. Please wait for it to be fixed',
         
+        ]);
+
         session()->flash('message', 'Request has been made Successfully.');
   
         
@@ -145,6 +146,12 @@ class MaterialRequests extends Component
             ]);
         $this->updateMode = false;
   
+        $this->dispatchBrowserEvent('swal:modal',[
+            'type' => 'success',
+            'title' => 'Issue Updated',
+            'text' =>'Issue has been updated.',
+        
+        ]);
         session()->flash('message', 'Request Updated Successfully.');
         $this->resetInputFields();
 
@@ -213,4 +220,16 @@ class MaterialRequests extends Component
         $this->resetInputFields();
         
     }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
+    }
+
 }

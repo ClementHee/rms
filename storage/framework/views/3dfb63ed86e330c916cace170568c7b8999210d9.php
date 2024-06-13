@@ -76,7 +76,7 @@
                     <button wire:click="editRequest(<?php echo e($request->request_id); ?>)" class="btn btn-primary">Edit</button>
                     <br>
                     <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'Admin|EMT|SuperAdmin')): ?>
-                    <button wire:click="deleteRequest(<?php echo e($request->request_id); ?>)" class="btn btn-danger mt-1">Delete</button>
+                    <button wire:click="deleteConfirm(<?php echo e($request->request_id); ?>)" class="btn btn-danger mt-1">Delete</button>
                     <?php endif; ?>
                 </td>
             </tr>
