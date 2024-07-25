@@ -237,7 +237,7 @@ class MaterialRequests extends Component
 
     public function exportData(){
         
-        $all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->paginate(10);
+        $all_request = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->paginate(10);
       
      
         
