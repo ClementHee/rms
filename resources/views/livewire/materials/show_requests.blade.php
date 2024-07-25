@@ -16,7 +16,8 @@
         @include('livewire.materials.update_request')
     @endif
 
-    
+    <button wire:click.prevent="exportData()" class="mt-2 btn btn-info btn-lg" >
+        Export</button>
     <h1 class="text-center">Request book</h1>
 
 
@@ -38,11 +39,8 @@
 
             @foreach ($all_request as $request)
 
-            @if($request->fulfilled==false)
-            <tr class='  bg-opacity-50'>
-            @else
-            <tr class=" bg-opacity-50 ">
-            @endif
+            <tr class='bg-opacity-50'>
+           
             
                 <td>{{ $request->date }}</td>
                 <td>{{ $request->requested_by }}</td>

@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
-use App\Models\MaterialRequest;
-use App\Events\NewMaterialRequest;
+use PDF;
 use Livewire\WithPagination;
+use App\Models\MaterialRequest;
+
+use App\Events\NewMaterialRequest;
+
 class MaterialRequests extends Component
 {
     
@@ -37,9 +40,9 @@ class MaterialRequests extends Component
     public function render()
     {
 
-        if($this->filters=='unfixed'){
+        if($this->filters=='unfulfilled'){
             $all_requests = MaterialRequest::where('fulfilled','=',0)->orderBy('date','DESC')->paginate(10);
-        }elseif($this->filters=='fixed'){
+        }elseif($this->filters=='fulfilled'){
             $all_requests = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->paginate(10);
         }else{
             $all_requests = MaterialRequest::orderBy('date','DESC')->paginate(10);
@@ -206,11 +209,11 @@ class MaterialRequests extends Component
         
     }
     public function filterUnfulfilled(){
-        $this->filters='unfixed';
+        $this->filters='unfulfilled';
     }
 
     public function filterFulfilled(){
-        $this->filters='fixed';
+        $this->filters='fulfilled';
     }
     public function filterReset(){
         $this->filters='reset';
@@ -230,6 +233,22 @@ class MaterialRequests extends Component
             'id'=>$id,
         ]);
 
+    }
+
+    public function exportData(){
+        
+        $all_request = MaterialRequest::where('fulfilled','=',1)->orderBy('date','DESC')->paginate(10);
+      
+     
+        
+        $pdf = PDF::loadView('livewire.materials.export_request', ['all_request'=>$all_request])->setPaper('a4', 'potrait')->output(); //
+        
+       
+        return response()->streamDownload(
+            fn() => print($pdf), 'Material Requests.pdf'
+        ); 
+            
+    
     }
 
 }

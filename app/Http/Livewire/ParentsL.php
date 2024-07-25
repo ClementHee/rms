@@ -10,7 +10,6 @@ class ParentsL extends Component
 {
     public $name, $ic_no, $occupation,$gender, $company_name, $company_add, $email, $tel;
     public $search = '';
-    public $updateMode = false;
     public $mode = 'view';
 
     use WithPagination;
@@ -41,7 +40,7 @@ class ParentsL extends Component
 
     public function view_only(){
         
-        $this->mode = 'single';
+        $this->mode = 'view_single';
    
     }
 
@@ -85,7 +84,7 @@ class ParentsL extends Component
         $this->email = $parents->email;
         $this->tel = $parents->tel;
       
-        $this->mode = 'single';
+        $this->mode = 'view_single';
     }
 
     public function editParent($id)

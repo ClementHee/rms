@@ -22,23 +22,21 @@ class Staffs extends Component
 
     public function list_all(){
         $this->mode = 'view';
+        return redirect(request()->header('Referer'));
     }
 
     public function viewStaff($id){
         $this->getStaff($id);
-        $this->mode = 'single';
+        $this->mode = 'view_single';
+        
     }
 
     public function editStaff($id){
+        $this->mode = 'update';
         $this->getStaff($id);
-        $this->mode = 'edit';
+        
     }
 
-    public function cancel()
-    {
-        $this->mode = 'view';
-        $this->resetInputFields();
-    }
 
     public function render()
     {
@@ -97,6 +95,7 @@ class Staffs extends Component
 
         $this->resetInputFields();
         $this->mode = 'view';
+        return redirect(request()->header('Referer'));
     }
 
     public function getStaff($id){

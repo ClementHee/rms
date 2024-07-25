@@ -18,7 +18,6 @@ class Maintainences extends Component
     public $filters = 'reset';
     protected $listeners = ['delete'];
     
-
     /**
      * The attributes that are mass assignable.
      *
@@ -69,24 +68,14 @@ class Maintainences extends Component
             'reported_at' => Carbon::now(),
         ]);
 
-     
-
-        //$data=$this;
-        
-
-        //event(new NewMaterialRequest($data));
-
-
         $this->dispatchBrowserEvent('swal:modal',[
             'type' => 'success',
             'title' => 'Issue reported',
             'text' =>'Issue has been reported. Please wait for it to be fixed',
-        
         ]);
 
         session()->flash('message', 'Issue has been lodged Successfully.');
-       
-  
+
         $this->resetInputFields();
         $this->dispatchBrowserEvent('close-modal');
     }
@@ -216,8 +205,6 @@ class Maintainences extends Component
         ]);
 
     }
-
-
 
     public function closeModal(){
         $this->resetInputFields();

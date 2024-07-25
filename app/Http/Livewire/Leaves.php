@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class Leaves extends Component
-{
-    public $category, $position,$class_name,$leave_type,$no_days,$dates,$reasons,$days_entitled,$days_available,$days_left;
+{   //Variables for the forms
+    public $category,$position,$class_name,$leave_type,$no_days,$dates,$reasons,$days_entitled,$days_available,$days_left;
     public $staff,$record_staff,$all_staff;
+    public $form_no_days,$form_dates,$form_reasons,$form_days_entitled,$form_days_available,$form_days_left,$link_to_file;
+   
     public $showStaff = false;
     public $empty_staff =true;
-    public $mode = 'view';
-    public $form_no_days,$form_dates,$form_reasons,$form_days_entitled,$form_days_available,$form_days_left,$link_to_file;
     public $filled=false;
+
+    //Variable to set the content being displayed
+    public $mode = 'view';
+
     protected $listeners = ['delete'];
 
     public function applyNew(){
@@ -29,16 +33,15 @@ class Leaves extends Component
     public function cancel()
     {
         $this->mode = 'view';
-        $this->resetInputFields();
+        return redirect(request()->header('Referer'));
     }
 
     public function render()
     {
-
         $leaves =  DB::table('staffs')
         ->join('leaves', 'staffs.staff_id', '=', 'leaves.staff_id')
         ->get();
-     
+  
         return view('livewire.leaves.leaves',['leaves'=>$leaves])->layout('livewire.leaves_dashboard');
     }
   
@@ -119,7 +122,7 @@ class Leaves extends Component
 
         $this->getLeave($id);
         $this->staff= Staff::where('staff_id','=',$this->staff_id)->get('fullname')->first()->fullname;
-        $this->mode='single';
+        $this->mode='view_single';
         
 
     }

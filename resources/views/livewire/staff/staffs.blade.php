@@ -1,21 +1,19 @@
 <div>
-    @if($mode=="view")
-    <h1 class="px-2">Staff Dashboard</h1>
-        @include('livewire.staff.list_staff')
-
-    @elseif ($mode=='create')
-        <h1 class="px-2">Add New Staff</h1>
-        @include('livewire.staff.add_staff')
-  
-    @elseif ($mode=='single')
-        <h1 class="px-2">View Staff Details</h1>
-        @include('livewire.staff.view_staff')
-
-    @elseif ($mode=='edit')
-        <h1 class="px-2">Update Staff Details</h1>
-        @include('livewire.staff.update_staff')
-    @endif
-    
-    
-    
+    <div>
+        @if($mode=="view")
+            <h1>Staff Dashboard</h1>
+            @include('livewire.staff.list_staff')
+        @else    
+      
+            @if($mode=="view_single")
+                <h1>View Staff</h1>
+            @elseif($mode=="update")
+                <h1>Update Staff</h1>
+            @else
+                <h1>Create Staff</h1>
+            @endif
+        
+            @include('livewire.staff.staff_form')   
+        @endif
+    </div>
  </div>

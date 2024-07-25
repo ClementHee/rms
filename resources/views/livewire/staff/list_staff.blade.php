@@ -1,6 +1,5 @@
 <div>
     <div>
-   
         <div class="row">
             <div class="col-md-12">
                 @if (session()->has('message'))
@@ -18,22 +17,15 @@
                         <table class="table table-borderd table-striped">
                             <thead>
                                 <tr>
-                              
                                     <th>Name</th>
-                                    
                                     <th width='250px'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($staffs as $staff)
                                     <tr>
-                                   
-                                    
                                         <td wire:click="viewStaff('{{$staff->staff_id}}')" onMouseOver="this.style.color='Blue'; this.style.cursor='pointer'" onMouseOut="this.style.color='Black'" >{{ $staff->fullname}}</td>
-                          
-                                        
                                         <td>
-                                            
                                             <button type="button"  wire:click="editStaff('{{$staff->staff_id}}')" class="btn btn-primary">
                                                 Edit
                                             </button>
@@ -45,14 +37,11 @@
                                         <td colspan="2">No Record Found</td>
                                     </tr>
                                 @endforelse
-                             
                             </tbody>
                         </table>
-                        
                     </div>
                     {{$staffs ->links()}}
                 </div>
-                
             </div>
         </div>
     </div>

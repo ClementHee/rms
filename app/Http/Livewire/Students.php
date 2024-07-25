@@ -44,28 +44,21 @@ class Students extends Component
         return view('livewire.student.students', ['students' => $students])->layout('livewire.student_dashboard');
     }
 
-   public function updatingSearch()
-   {
-       $this->resetPage();
-   }    
+
     public function create_new(){
-        
-        $this->mode = 'create';
         $this->resetInputFields();
+        $this->mode = 'create';
+        
     }
 
     public function list_all(){
         $this->mode = 'view';
+        
+        return redirect(request()->header('Referer'));
     }
 
     public function view_only(){
-        $this->mode = 'single';
-    }
-
-    public function cancel()
-    {
-        $this->mode = 'view';
-        $this->resetInputFields();
+        $this->mode = 'view_single';
     }
     
     public function storeStudent() {  

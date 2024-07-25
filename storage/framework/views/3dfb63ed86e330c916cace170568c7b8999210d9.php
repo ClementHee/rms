@@ -16,7 +16,8 @@
         <?php echo $__env->make('livewire.materials.update_request', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
 
-    
+    <button wire:click.prevent="exportData()" class="mt-2 btn btn-info btn-lg" >
+        Export</button>
     <h1 class="text-center">Request book</h1>
 
 
@@ -38,11 +39,8 @@
 
             <?php $__currentLoopData = $all_request; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-            <?php if($request->fulfilled==false): ?>
-            <tr class='  bg-opacity-50'>
-            <?php else: ?>
-            <tr class=" bg-opacity-50 ">
-            <?php endif; ?>
+            <tr class='bg-opacity-50'>
+           
             
                 <td><?php echo e($request->date); ?></td>
                 <td><?php echo e($request->requested_by); ?></td>
