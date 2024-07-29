@@ -14,15 +14,15 @@
                         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('students')->html();
-} elseif ($_instance->childHasBeenRendered('1DdAuxj')) {
-    $componentId = $_instance->getRenderedChildComponentId('1DdAuxj');
-    $componentTag = $_instance->getRenderedChildComponentTagName('1DdAuxj');
+} elseif ($_instance->childHasBeenRendered('r7kvQlw')) {
+    $componentId = $_instance->getRenderedChildComponentId('r7kvQlw');
+    $componentTag = $_instance->getRenderedChildComponentTagName('r7kvQlw');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('1DdAuxj');
+    $_instance->preserveRenderedChild('r7kvQlw');
 } else {
     $response = \Livewire\Livewire::mount('students');
     $html = $response->html();
-    $_instance->logRenderedChild('1DdAuxj', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('r7kvQlw', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -42,6 +42,8 @@ echo $html;
         
     })
 
+
+   
 
 </script>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student_dashboard.blade.php ENDPATH**/ ?>

@@ -1,8 +1,36 @@
 <div>
 
-    <form class=" p-4 shadow-lg  bg-white border border-secondary rounded" >
-        <h2><u>Student Details</u></h2>   
+    <form id="form2" class=" p-4 shadow-lg  bg-white border border-secondary rounded" <?php echo e($mode=="view_single"?'readonly':''); ?> >
+        <h2><u>Student Details</u></h2>  
+         
         <?php echo csrf_field(); ?>
+
+        <div >
+            <p class='d-inline px-1'>Status:</p>
+      
+                <div class="form-check form-check-inline mb-3">
+                    
+                    <label class="form-check-label pr-2">Active</label>
+                    <input  <?php echo e($mode=="view_single"?'disabled':''); ?> class="form-check-input" wire:model='status' type="radio" name="status" value="active" >
+
+                </div>
+
+                <div class="form-check form-check-inline mb-3">
+                    
+                    <label class="form-check-label pr-2">Withdrawn</label>
+                    <input <?php echo e($mode=="view_single"?'disabled':''); ?>class="form-check-input" wire:model='status' type="radio" name="status" value="withdrawn">
+
+                </div>
+
+                <div class="form-check form-check-inline mb-3">
+                    
+                    <label class="form-check-label pr-2">Graduated</label>
+                    <input <?php echo e($mode=="view_single"?'disabled':''); ?> class="form-check-input" wire:model='status' type="radio" name="status" value="graduated">
+
+                </div>
+            
+        </div>
+       
         <div class="row">
             <div class="mb-3  col">
                 <label for="entry_year">Year:</label>
@@ -12,9 +40,9 @@
             <div class="mb-3 form-group col">
                 <label for="type">Type:</label>
                 <select class="form-select" wire:model="type" name="type" id="type">
-                    <option value="">Select an option</option>
-                    <option value="Half Day">Half Day</option>
-                    <option value="Full Day">Full Day</option>
+                    <option value="" <?php echo e($mode=="view_single"?'disabled':''); ?>>Select an option</option>
+                    <option value="Half Day" <?php echo e($mode=="view_single"?'disabled':''); ?>>Half Day</option>
+                    <option value="Full Day"<?php echo e($mode=="view_single"?'disabled':''); ?>>Full Day</option>
                 </select>
             </div>   
 
@@ -82,17 +110,17 @@ unset($__errorArgs, $__bag); ?>
                 <div class="form-check form-check-inline mb-3">
                     
                     <label class="form-check-label pr-2">Male</label>
-                    <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="M">
+                    <input <?php echo e($mode=="view_single"?'disabled':''); ?> class="form-check-input" wire:model='gender' type="radio" name="gender" value="M">
 
                 </div>
 
                 <div class="form-check form-check-inline  mb-3">
                     
                     <label class="form-check-label pr-2">Female</label>
-                    <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
+                    <input <?php echo e($mode=="view_single"?'disabled':''); ?> class="form-check-input" wire:model='gender' type="radio" name="gender" value="F">
                 </div>
             
-            </div>
+        </div>
        
 
         <div class='row'>
@@ -259,11 +287,11 @@ unset($__errorArgs, $__bag); ?>
             <div class="mb-3 col form-group">
                 <label for="time_to_sch">Time to reach School: </label>
                 <select class="form-select" wire:model="time_to_sch" name="time_to_sch" id="time_to_sch">
-                    <option value="">Select an option</option>
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="45">45</option>
-                    <option value="45+">More than 45</option>
+                    <option value="" <?php echo e($mode=="view_single"?'disabled':''); ?>>Select an option</option>
+                    <option value="15" <?php echo e($mode=="view_single"?'disabled':''); ?>>15</option>
+                    <option value="30" <?php echo e($mode=="view_single"?'disabled':''); ?>>30</option>
+                    <option value="45" <?php echo e($mode=="view_single"?'disabled':''); ?>>45</option>
+                    <option value="45+"<?php echo e($mode=="view_single"?'disabled':''); ?>>More than 45</option>
                 </select>
             </div>
 
@@ -327,33 +355,33 @@ unset($__errorArgs, $__bag); ?>
                 <p>Why Rhema:</p>
               
                     <label class="form-check-label px-3" for="Reading">
-                        <input type="checkbox" id="Reading" wire:model="reasons" value="Reading"/>
+                        <input type="checkbox" id="Reading" wire:model="reasons" value="Reading" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         Reading
                     </label>
                
                     <label class="form-check-label px-3" for="SEL">
-                        <input type="checkbox" id="SEL" wire:model="reasons" value="SEL"/>
+                        <input type="checkbox" id="SEL" wire:model="reasons" value="SEL" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         SEL
                     </label>
          
                     <label class="form-check-label px-3" for="Play">
-                        <input type="checkbox" id="Play"wire:model="reasons" value="Play"/>
+                        <input type="checkbox" id="Play"wire:model="reasons" value="Play"<?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         Play
                     </label>
               
                    
                     <label class="form-check-label px-3" for="Cost">
-                        <input type="checkbox" id="Cost" wire:model="reasons" value="Cost"/>
+                        <input type="checkbox" id="Cost" wire:model="reasons" value="Cost" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         Cost
                     </label>
        
                     <label class="form-check-label px-3" for="Locality">
-                        <input type="checkbox" id="Locality" wire:model="reasons" value="Locality"/>
+                        <input type="checkbox" id="Locality" wire:model="reasons" value="Locality" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         Locality
                     </label>
       
                     <label class="form-check-label px-3" for="RSS">
-                        <input type="checkbox" id="RSS"  wire:model="reasons" value="RSS"/>
+                        <input type="checkbox" id="RSS"  wire:model="reasons" value="RSS" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                         RSS
                     </label>
            
@@ -363,23 +391,23 @@ unset($__errorArgs, $__bag); ?>
                 <p>Preferred Primary School:</p>
           
                 <label class="form-check-label px-3" for="Chung Hua">
-                    <input type="checkbox" id="Chung Hua" wire:model="pref_pri_sch" value="Chung Hua"/>
+                    <input type="checkbox" id="Chung Hua" wire:model="pref_pri_sch" value="Chung Hua" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                     Chung Hua
                 </label>
            
                 <label class="form-check-label px-3" for="Private">
-                    <input type="checkbox" id="Private" wire:model="pref_pri_sch" value="Private"/>
+                    <input type="checkbox" id="Private" wire:model="pref_pri_sch" value="Private" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                     Private
                 </label>
      
                 <label class="form-check-label px-3" for="National">
-                    <input type="checkbox" id="National"wire:model="pref_pri_sch" value="National"/>
+                    <input type="checkbox" id="National"wire:model="pref_pri_sch" value="National" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                     National
                 </label>
           
                
                 <label class="form-check-label px-3" for="Others">
-                    <input type="checkbox" id="Others" wire:model="pref_pri_sch" value="Others"/>
+                    <input type="checkbox" id="Others" wire:model="pref_pri_sch" value="Others" <?php echo e($mode=="view_single"?'disabled':''); ?>/>
                     Others
                 </label>
    
@@ -391,16 +419,16 @@ unset($__errorArgs, $__bag); ?>
             <div class="mb-3 col form-group">
                 <label for="referral">How did you hear about Tadika Rhema:</label>
                 <select class="form-select" wire:model="referral" name="referral" id="referral">
-                    <option value="">Select an option</option>
-                    <option value="Family & Friends">Family & Friends</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Street Banner">Street Banner</option>
-                    <option value="Family & Friends">Open Day</option>
-                    <option value="Radio">Radio</option>
-                    <option value="Emails">Emails</option>
-                    <option value="Website">Website</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Other">Other</option>
+                    <option value="" <?php echo e($mode=="view_single"?'disabled':''); ?>>Select an option</option>
+                    <option value="Family & Friends" <?php echo e($mode=="view_single"?'disabled':''); ?>>Family & Friends</option>
+                    <option value="Social Media" <?php echo e($mode=="view_single"?'disabled':''); ?>>Social Media</option>
+                    <option value="Street Banner" <?php echo e($mode=="view_single"?'disabled':''); ?>>Street Banner</option>
+                    <option value="Family & Friends" <?php echo e($mode=="view_single"?'disabled':''); ?>>Open Day</option>
+                    <option value="Radio" <?php echo e($mode=="view_single"?'disabled':''); ?>>Radio</option>
+                    <option value="Emails" <?php echo e($mode=="view_single"?'disabled':''); ?>>Emails</option>
+                    <option value="Website" <?php echo e($mode=="view_single"?'disabled':''); ?>>Website</option>
+                    <option value="Social Media" <?php echo e($mode=="view_single"?'disabled':''); ?>>Social Media</option>
+                    <option value="Other" <?php echo e($mode=="view_single"?'disabled':''); ?>>Other</option>
                 </select>
             </div>
             
@@ -710,18 +738,19 @@ unset($__errorArgs, $__bag); ?>
 
         </div>
 
-        <?php if($this->mode!="view_single"): ?>
+        <?php if($mode!="view_single"): ?>
+        
             <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
+         
+            <?php if($mode=="update"): ?>
+                <button wire:click.prevent="updateStudent()" class="btn btn-primary pt-1">Update</button>
+            <?php else: ?>
 
-        <?php if($this->mode=="update"): ?>
-            <button wire:click.prevent="updateStudent()" class="btn btn-primary pt-1">Update</button>
-        <?php else: ?>
-
-            <button wire:click.prevent="storeStudent()" class="btn btn-primary">Submit</button>
-        <?php endif; ?>
+                <button wire:click.prevent="storeStudent()" class="btn btn-primary">Submit</button>
+            <?php endif; ?>
         
         <?php else: ?>
-            <button wire:click="list_all()" class="btn btn-danger">Cancel</button>
+            <button wire:click="list_all()" class="btn btn-danger">Cancl</button>
         <?php endif; ?>
 
     </form>
@@ -852,4 +881,6 @@ unset($__errorArgs, $__bag); ?>
     </div>
 </div>
 
-<?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student/student_form.blade.php ENDPATH**/ ?>
+<script>
+    $('#form2 :input').attr('readonly','readonly');
+</script><?php /**PATH C:\xampp\htdocs\rms\resources\views/livewire/student/student_form.blade.php ENDPATH**/ ?>

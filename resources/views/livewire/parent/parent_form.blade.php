@@ -1,6 +1,6 @@
 <div>
     <button wire:click="list_all()" class="btn btn-primary">Back</button><br>
-    <form>
+    <form {{$mode=="view_single"?'readonly':''}} >
         <h2>
             <u>Parent Details</u>
         </h2>   
@@ -28,12 +28,12 @@
                   
                 <div class="form-check form-check-inline mb-3">  
                     <label class="form-check-label pr-2">Male</label>
-                    <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
+                    <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Male">
                 </div>
             
                 <div class="form-check form-check-inline  mb-3">      
                     <label class="form-check-label pr-2">Female</label>
-                    <input  class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
+                    <input disabled class="form-check-input" wire:model='gender' type="radio" name="gender" value="Female">
                 </div>     
             </div>
 

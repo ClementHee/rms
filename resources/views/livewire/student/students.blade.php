@@ -9,6 +9,7 @@
       
             @if($mode=="view_single")
                 <h1>View Student</h1>
+        
             @elseif($mode=="update")
                 <h1>Update Student</h1>
             @else

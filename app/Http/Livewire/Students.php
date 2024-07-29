@@ -87,7 +87,7 @@ class Students extends Component
    
         Student::create([
             'fullname' =>$this->first_name." ".$this->last_name,
-            'status'=>'active',
+            'status'=>$this->status,
             'chinese_name'=>$this->chinese_name,
             'carplate'=>$this->carplate,
             'entry_year'=> $this->entry_year,
@@ -146,6 +146,7 @@ class Students extends Component
         session()->flash('message', 'Student Added Successfully.');
         $this->resetInputFields();
         $this->mode = 'view';
+        return redirect(request()->header('Referer'));
         
     }
 
@@ -206,7 +207,7 @@ class Students extends Component
         $this->time_to_sch=$students->time_to_sch;
  
         
-        $this->mode = 'single';
+        $this->mode = 'view_single';
     }
 
     public function editStudent($id)
