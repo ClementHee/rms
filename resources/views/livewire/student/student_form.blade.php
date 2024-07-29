@@ -18,7 +18,7 @@
                 <div class="form-check form-check-inline mb-3">
                     
                     <label class="form-check-label pr-2">Withdrawn</label>
-                    <input {{$mode=="view_single"?'disabled':''}}class="form-check-input" wire:model='status' type="radio" name="status" value="withdrawn">
+                    <input {{$mode=="view_single"?'disabled':''}} class="form-check-input" wire:model='status' type="radio" name="status" value="withdrawn">
 
                 </div>
 
