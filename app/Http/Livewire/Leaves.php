@@ -23,6 +23,7 @@ class Leaves extends Component
     //Variable to set the content being displayed
     public $mode = 'view';
 
+    //Listener for ntofication pop up
     protected $listeners = ['delete'];
 
     public function applyNew(){
@@ -66,9 +67,7 @@ class Leaves extends Component
         $edit_staff = Staff::findOrFail(Staff::where('fullname','=',$this->staff)->get('staff_id')->first()->staff_id);
         $edit_staff->update([
             'days_left' =>$after_apply,
-
         ]);
-
 
         $this->resetInputFields();
         $this->mode = 'view';
@@ -80,11 +79,7 @@ class Leaves extends Component
                       ->where('fullname','like','%'.$this->staff.'%')
                       ->limit(5)
                       ->get();
-     
-   
-                $this->showStaff = true;
-              
-            
+                $this->showStaff = true;         
         }else{
             $this->showStaff = false;
         }
@@ -92,18 +87,22 @@ class Leaves extends Component
     }
 
     public function fetchStaff($id){
-
         $record_staff = Staff::select('*')
                     ->where('staff_id',$id)
                     ->first();
-
         $this->staff = $record_staff->fullname;
         
         $this->showStaff = false;
         
     }
-    public function getLeave($id){
-    
+
+    public function viewLeave($id){
+        $this->getLeave($id);
+        $this->staff= Staff::where('staff_id','=',$this->staff_id)->get('fullname')->first()->fullname;
+        $this->mode='view_single';
+    }
+
+   public function getLeave($id){
         $leave = Leave::findOrFail($id);
         $this->staff_id = $leave->staff_id;
         $this->position = $leave->position;
@@ -114,21 +113,7 @@ class Leaves extends Component
         $this->date_start = $leave->date_start;
         $this->date_end = $leave->date_end;
         $this->reasons = $leave->reasons;
-        
-        
     }
-
-    public function viewLeave($id){
-
-        $this->getLeave($id);
-        $this->staff= Staff::where('staff_id','=',$this->staff_id)->get('fullname')->first()->fullname;
-        $this->mode='view_single';
-        
-
-    }
-
-   
-
 
     public function resetInputFields(){
         $this->staff='';
@@ -148,7 +133,6 @@ class Leaves extends Component
     }
 
     public function deleteConfirm($id){
-
         $this->dispatchBrowserEvent('swal:confirm',[
             'type' => 'warning',
             'title' => 'Are you sure?',
@@ -161,17 +145,12 @@ class Leaves extends Component
     public function delete($id)
     {
         Leave::find($id)->delete();
-        
     }
 
     public function fillPDF(){
-        
-        
         $this->days_available = Staff::where('staff_id','=',$this->staff_id)->get('days_available')->first()->days_available;        
         $this->days_entitled = Staff::where('staff_id','=',$this->staff_id)->get('days_entitled')->first()->days_entitled;
         $this->days_left = Staff::where('staff_id','=',$this->staff_id)->get('days_left')->first()->days_left;
-
-        
 
         if($this->category=="Office"){
 

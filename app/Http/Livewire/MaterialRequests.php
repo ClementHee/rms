@@ -12,7 +12,7 @@ use App\Events\NewMaterialRequest;
 
 class MaterialRequests extends Component
 {
-    
+    use WithPagination;
 
     public $date, $requested_by, $class, $purpose,$item,$item2,$needed,$fulfilled;
     public $updateMode = false;
