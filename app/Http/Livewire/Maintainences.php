@@ -13,6 +13,7 @@ use Livewire\WithPagination;
 class Maintainences extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $issue, $location, $reported_by, $reported_at,$remarks,$fixed;
     public $all_maintainences;
     public $updateMode = false;
