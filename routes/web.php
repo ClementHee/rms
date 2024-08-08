@@ -6,6 +6,7 @@ use App\Http\Livewire\Leaves;
 use App\Http\Livewire\Staffs;
 use App\Http\Livewire\ParentsL;
 use App\Http\Livewire\Students;
+use App\Http\Livewire\Inventory;
 use App\Http\Livewire\ToDoLists;
 use App\Http\Livewire\AllDetails;
 use App\Events\NewMaterialRequest;
@@ -72,6 +73,7 @@ Route::group(['middleware' => ['auth','admin']], function() {
     Route::get('/student',App\Http\Livewire\Students::class)->name('student');
  
     Route::get('/parent',ParentsL::class)->name('parent');
+    Route::get('/inventory',Inventory::class)->name('inventory');
     
 });
 

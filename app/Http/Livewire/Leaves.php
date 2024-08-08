@@ -34,7 +34,7 @@ class Leaves extends Component
     public function cancel()
     {
         $this->mode = 'view';
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     public function render()

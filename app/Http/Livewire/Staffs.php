@@ -22,7 +22,7 @@ class Staffs extends Component
 
     public function list_all(){
         $this->mode = 'view';
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     public function viewStaff($id){
@@ -95,7 +95,7 @@ class Staffs extends Component
 
         $this->resetInputFields();
         $this->mode = 'view';
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     public function getStaff($id){

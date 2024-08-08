@@ -111,6 +111,10 @@
                 <li>
                   <a class="nav-link" href="<?php echo e(route('siblingslist')); ?>">Siblings List</a>
                 </li>
+
+                <li>
+                  <a class="nav-link" href="<?php echo e(route('inventory')); ?>">Inventory</a>
+                </li>
                 <?php endif; ?>
 
                 <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>

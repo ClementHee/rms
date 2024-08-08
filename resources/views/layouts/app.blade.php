@@ -110,6 +110,10 @@
                 <li>
                   <a class="nav-link" href="{{ route('siblingslist') }}">Siblings List</a>
                 </li>
+
+                <li>
+                  <a class="nav-link" href="{{ route('inventory') }}">Inventory</a>
+                </li>
                 @endrole
 
                 @role('SuperAdmin')

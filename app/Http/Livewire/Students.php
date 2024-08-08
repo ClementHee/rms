@@ -52,9 +52,10 @@ class Students extends Component
     }
 
     public function list_all(){
+        $this->resetInputFields();
         $this->mode = 'view';
-        
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
+  
     }
 
     public function view_only(){
@@ -146,7 +147,7 @@ class Students extends Component
         session()->flash('message', 'Student Added Successfully.');
         $this->resetInputFields();
         $this->mode = 'view';
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
         
     }
 
@@ -360,7 +361,7 @@ class Students extends Component
         session()->flash('message', 'Student Updated Successfully.');
         $this->resetInputFields();
         
-        return redirect(request()->header('Referer'));
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     public function deleteStudent($id)
