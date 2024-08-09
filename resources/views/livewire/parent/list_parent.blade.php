@@ -35,7 +35,7 @@
                                             <button type="button"  wire:click="editParent({{$parent->parent_id}})" class="btn btn-primary">
                                                 Edit
                                             </button>
-                                            <button type="button"  wire:click="deleteParent({{$parent->parent_id}})" class="btn btn-danger">Delete</button>
+                                            <button type="button"  wire:click="deleteConfirm({{$parent->parent_id}})" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
                                     @empty

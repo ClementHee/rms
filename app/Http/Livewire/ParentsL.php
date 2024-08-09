@@ -11,7 +11,7 @@ class ParentsL extends Component
     public $name, $ic_no, $occupation,$gender, $company_name, $company_add, $email, $tel;
     public $search = '';
     public $mode = 'view';
-
+    protected $listeners = ['delete'=>'deleteParent'];
     use WithPagination;
     protected $paginationTheme ='bootstrap';
 
@@ -24,6 +24,8 @@ class ParentsL extends Component
         $this->company_add= '';
         $this->email= '';
         $this->tel= '';
+
+        return redirect(request()->header('Referer','no-referrer'));
    
     }
 
@@ -65,9 +67,9 @@ class ParentsL extends Component
         ]);
         
         session()->flash('message', 'Parent added Successfully.');
-  
-        $this->resetInputFields();
         $this->mode = 'view';
+        $this->resetInputFields();
+      
     }
     public function viewParent($id)
     {
@@ -143,7 +145,18 @@ class ParentsL extends Component
     {
         Parents::find($id)->delete();
         session()->flash('message', 'Record Deleted Successfully.');
-        $this->mode = 'view';
+       
+    }
+
+    public function deleteConfirm($id){
+
+        $this->dispatchBrowserEvent('swal:confirm',[
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' =>'The action cannot be undone',
+            'id'=>$id,
+        ]);
+
     }
     
 }

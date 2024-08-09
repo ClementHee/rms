@@ -93,9 +93,9 @@ class Staffs extends Component
             'days_available' =>trim ($this->days_available)
         ]);
 
-        $this->resetInputFields();
+        
         $this->mode = 'view';
-        return redirect(request()->header('Referer','no-referrer'));
+        $this->resetInputFields();
     }
 
     public function getStaff($id){
@@ -213,6 +213,8 @@ class Staffs extends Component
         $this->spouse_office_no = '';
         $this->qualification = '';
         $this->other = '';
+
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     public function deleteConfirm($id){

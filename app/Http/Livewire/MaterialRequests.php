@@ -30,6 +30,8 @@ class MaterialRequests extends Component
         $this->item='';
         $this->item2='';
         $this->needed='';
+
+        return redirect(request()->header('Referer','no-referrer'));
     }
     
     /**

@@ -137,6 +137,8 @@ class ScheduledMaintainences extends Component
         $this->recurrences='';
         $this->scheduled_date='';
         $this->days = '';
+
+        return redirect(request()->header('Referer','no-referrer'));
     }
 
     
