@@ -8,23 +8,32 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: 230px" />
-                        <button wire:click="create_new()" class="btn btn-primary float-end">Add New Student</button>
+                        
+                        <input type="search" wire:model="search" class="form-control float-end mt-2 mx-2" placeholder="Search..." style="width: auto;" />
+   
+                            <select class="form-select form-select float-end mt-2 mx-2" wire:model="searchType" name="searchType" id="searchType" style="width:auto;">
+                                <option value="fullname">Name</option>
+                                <option value="carplate">CarPlate No.</option>
+                            </select>
+                            <h6 class="float-end mt-3 mx-2">Search By:</h6>
+          
+                        <button wire:click="create_new()" class="btn btn-primary mt-2 float-end">Add New Student</button>
+                      
                         @if ($this->filters=='reset')
-                            <button wire:click.prevent="filterActive()" class="btn btn-success float-end" >
+                            <button wire:click.prevent="filterActive()" class="btn btn-success mt-2  float-end" >
                                 Show active
                             </button> 
 
                         @elseif($this->filters=='active')
-                            <button wire:click.prevent="filterWithdrawn()" class="btn btn-danger float-end" >
+                            <button wire:click.prevent="filterWithdrawn()" class="btn btn-danger mt-2  float-end" >
                                 Show Withdrawn
                             </button>
                         @elseif($this->filters=='withdrawn')
-                            <button wire:click.prevent="filterGraduated()" class="btn btn-info float-end" >
+                            <button wire:click.prevent="filterGraduated()" class="btn btn-info mt-2  float-end" >
                                 Show Graduated
                             </button>
                         @else
-                            <button wire:click.prevent="filterReset()" class="btn btn-secondary float-end" >
+                            <button wire:click.prevent="filterReset()" class="btn btn-secondary mt-2  float-end" >
                                 Reset Filter
                             </button>
                         @endif
