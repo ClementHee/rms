@@ -14,6 +14,8 @@
                             <select class="form-select form-select float-end mt-2 mx-2" wire:model="searchType" name="searchType" id="searchType" style="width:auto;">
                                 <option value="fullname">Name</option>
                                 <option value="carplate">CarPlate No.</option>
+                                <option value="father_tel">Father's Hp NO.</option>
+                                <option value="mother_tel">Mother's Hp NO.</option>
                             </select>
                             <h6 class="float-end mt-3 mx-2">Search By:</h6>
           

@@ -73,6 +73,9 @@ class Students extends Component
        
        $father_id = Parents::where('name',($this->father))->get('parent_id')->first();
        $mother_id = Parents::where('name',($this->mother))->get('parent_id')->first();
+       $father_tel = Parents::where('name',($this->father))->get('tel')->first();
+       $mother_tel = Parents::where('name',($this->mother))->get('tel')->first();
+
        
         if($father_id==NULL){
         $father_id = Parents::where('parent_id',1)->get('parent_id')->first();
@@ -133,6 +136,8 @@ class Students extends Component
             'potential'=> trim($this->potential),
             'father'=> $father_id->parent_id,
             'mother'=> $mother_id->parent_id,
+            'father_tel'=> $father_tel->tel,
+            'mother_tel'=> $mother_tel->tel,
             'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
             'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
             'j3_class'=>trim(ucwords(strtolower($this->j3_class))),

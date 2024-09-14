@@ -40,6 +40,8 @@ class Student extends Model
             'home_tel',
             'father',
             'mother',
+            'father_tel',
+            'mother_tel',
             'e_contact',
             'e_contact_hp',
             'e_contact2',
