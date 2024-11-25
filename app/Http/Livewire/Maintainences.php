@@ -78,8 +78,7 @@ class Maintainences extends Component
         $reported_at_to_Mail = Carbon::now()->format('Y-m-d');
         $remarks_to_Mail = $this->remarks;
 
-        Mail::to('clement.hee.wy.2001@gmail.com')->send(new MaintainenceReportedMail($issue_to_Mail,$location_to_Mail,$reported_by_to_Mail,$reported_at_to_Mail,$remarks_to_Mail));
-        Mail::to('tadikarhema@gmail.com')->send(new MaintainenceReportedMail($issue_to_Mail,$location_to_Mail,$reported_by_to_Mail,$reported_at_to_Mail,$remarks_to_Mail));
+        Mail::to('clement.hwy@gmail.com')->send(new MaintainenceReportedMail($issue_to_Mail,$location_to_Mail,$reported_by_to_Mail,$reported_at_to_Mail,$remarks_to_Mail));
 
         $this->dispatchBrowserEvent('swal:modal',[
             'type' => 'success',
