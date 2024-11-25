@@ -103,7 +103,7 @@
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
-        <?php echo e($all_maintainence ->links("pagination::bootstrap-5")); ?>
+        <?php echo e($all_maintainence ->links()); ?>
 
     </div>
 

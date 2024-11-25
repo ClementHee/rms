@@ -7,7 +7,7 @@
                 
 
                 <div class="card-body">
-                    <h1>Total students enrolled 2023</h1>
+                    <h1>Total students enrolled 2024</h1>
                     <p>Count of current enrolment: <?php echo e($count_students); ?></p>
 
                     <h2>Total students by class</h2>

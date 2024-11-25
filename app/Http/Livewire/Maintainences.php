@@ -6,8 +6,10 @@ namespace App\Http\Livewire;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Maintainence;
-use App\Events\NewMaterialRequest;
 use Livewire\WithPagination;
+use App\Events\NewMaterialRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MaintainenceReportedMail;
 
   
 class Maintainences extends Component
@@ -69,6 +71,15 @@ class Maintainences extends Component
             'remarks' => $this->remarks,
             'reported_at' => Carbon::now(),
         ]);
+
+        $issue_to_Mail = $this->issue;
+        $location_to_Mail = $this->location;
+        $reported_by_to_Mail = $this->reported_by;
+        $reported_at_to_Mail = Carbon::now()->format('Y-m-d');
+        $remarks_to_Mail = $this->remarks;
+
+        Mail::to('clement.hee.wy.2001@gmail.com')->send(new MaintainenceReportedMail($issue_to_Mail,$location_to_Mail,$reported_by_to_Mail,$reported_at_to_Mail,$remarks_to_Mail));
+        Mail::to('tadikarhema@gmail.com')->send(new MaintainenceReportedMail($issue_to_Mail,$location_to_Mail,$reported_by_to_Mail,$reported_at_to_Mail,$remarks_to_Mail));
 
         $this->dispatchBrowserEvent('swal:modal',[
             'type' => 'success',
