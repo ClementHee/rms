@@ -136,8 +136,6 @@ class Students extends Component
             'potential'=> trim($this->potential),
             'father'=> $father_id->parent_id,
             'mother'=> $mother_id->parent_id,
-            'father_tel'=> $father_tel->tel,
-            'mother_tel'=> $mother_tel->tel,
             'j1_class'=>trim(ucwords(strtolower($this->j1_class))),
             'j2_class'=>trim(ucwords(strtolower($this->j2_class))),
             'j3_class'=>trim(ucwords(strtolower($this->j3_class))),
